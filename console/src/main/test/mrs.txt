@@ -1,0 +1,20 @@
+CN=SERVICE_NAVITA,OU=Admins&Schedules&Services,OU=Informatica,OU=DD,OU=JF,DC=com,DC=br
+http://directory.apache.org/studio/update/1.x
+
+w2kcl01.mrs.com.br
+
+service_navita
+131540
+
+CT000246 
+CT000612
+
+prop.setGroupAttribute("memberOf");
+prop.setIp("192.168.10.9");
+prop.setDomainName("NVT");
+prop.setName("Domínio NVT");
+prop.setPassword("navita");
+prop.setSearchBase("DC=navita,DC=corp");
+prop.setSearchFilter("(&(objectClass=user)(sAMAccountName={0}))");
+prop.setUrl("ldap://192.168.10.9:389");
+prop.setUser("CN=ldap,OU=Contas de Serviços,OU=Usuários,OU=SP,OU=NAVITA,DC=navita,DC=corp");

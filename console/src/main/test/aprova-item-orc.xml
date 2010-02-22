@@ -1,0 +1,40 @@
+<sapExec>
+	<functionName>YYPCL_APROVAR_GRUPO_GASTOS</functionName>
+	<inputTableList>
+		<table>
+			<tableName>T_GRUPO_APR</tableName>
+			<rows>
+				<row>
+					<rowEnvelop>
+						<sapParam>
+							<name>USUARIO</name>
+							<value>$usuario</value>
+						</sapParam>
+						<sapParam>
+							<name>CENTRO</name>
+							<value>$centro</value>
+						</sapParam>
+						<sapParam>
+							<name>EXERCICIO</name>
+							<value>$exercicio</value>
+						</sapParam>
+						<sapParam>
+							<name>CD_ORCAMENTO</name>
+							<value>$codigoOrcamento</value>
+						</sapParam>
+						<sapParam>
+							<name>GR_GASTOS</name>
+							<value>$grupoGastos</value>
+						</sapParam>
+					</rowEnvelop>
+				</row>
+			</rows>
+		</table>
+	</inputTableList>
+	<outputTableList>
+		<table>
+			<tableName>T_RETORNO</tableName>
+			<rows />
+		</table>
+	</outputTableList>
+</sapExec>
