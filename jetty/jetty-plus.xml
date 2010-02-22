@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+<Configure id="Server" class="org.mortbay.jetty.Server">
+
+	<!-- =========================================================== -->
+	<!-- Example JAAS realm setup.                                   -->
+	<!-- The LoginModuleName must be exactly the same as in the      -->
+	<!-- login.conf file, and the realm Name must be the same as in  -->
+	<!-- the web.xml file.                                           -->
+	<!-- =========================================================== -->
+	<!--
+		<Call name="addUserRealm"> <Arg> <New
+		class="org.mortbay.jetty.plus.jaas.JAASUserRealm"> <Set
+		name="name">xyzrealm</Set> <Set name="LoginModuleName">xyz</Set>
+		</New> </Arg> </Call>
+	-->
+
+	<!-- =========================================================== -->
+	<!-- Configurations for WebAppContexts                           -->
+	<!-- Sequence of configurations to enable Plus features.         -->
+	<!-- =========================================================== -->
+	<Array id="plusConfig" type="java.lang.String">
+		<Item>org.mortbay.jetty.webapp.WebInfConfiguration
+		</Item>
+		<Item>org.mortbay.jetty.plus.webapp.EnvConfiguration
+		</Item>
+		<Item>org.mortbay.jetty.plus.webapp.Configuration
+		</Item>
+		<Item>org.mortbay.jetty.webapp.JettyWebXmlConfiguration
+		</Item>
+		<Item>org.mortbay.jetty.webapp.TagLibConfiguration
+		</Item>
+	</Array>
+
+	<New id="tx" class="org.mortbay.jetty.plus.naming.Transaction">
+		<Arg>
+			<New class="com.atomikos.icatch.jta.UserTransactionImp" />
+		</Arg>
+	</New>
+
+	<New id="myDS" class="org.mortbay.jetty.plus.naming.Resource">
+		<Arg>jdbc/navitaMobileDataSource</Arg>
+		<Arg>
+			<New class="com.atomikos.jdbc.nonxa.NonXADataSourceBean">
+				<Set name="Url">jdbc:derby:mobiledb;create=true</Set>
+				<Set name="driverClassName">org.apache.derby.jdbc.EmbeddedDriver</Set>
+			</New>
+		</Arg>
+	</New>
+
+	<New id="msSqlWashburn" class="org.mortbay.jetty.plus.naming.Resource">
+		<Arg>jdbc/sportsDataSource</Arg>
+		<Arg>
+			<New class="com.atomikos.jdbc.nonxa.NonXADataSourceBean">
+				<Set name="Url">jdbc:jtds:sqlserver://washburn:1433</Set>
+				<Set name="driverClassName">net.sourceforge.jtds.jdbc.Driver</Set>
+				<Set name="user">futebol</Set>
+				<Set name="password">navita</Set>
+			</New>
+		</Arg>
+	</New>
+
+
+
+</Configure>
+
