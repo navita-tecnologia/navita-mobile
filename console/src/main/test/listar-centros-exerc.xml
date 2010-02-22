@@ -1,0 +1,17 @@
+<sapExec>
+  <functionName>YYPCL_LISTAR_CC_EXERC</functionName>
+  <inputParameterList>
+    <sapParam>
+      <name>USUARIO</name>
+      <value>$usuario</value>
+    </sapParam>    
+  </inputParameterList>
+  <outputTableList>
+    <table>
+      <tableName>T_CENTROS</tableName>
+    </table>
+    <table>
+      <tableName>T_EXERC</tableName>
+    </table>
+  </outputTableList>
+</sapExec>
