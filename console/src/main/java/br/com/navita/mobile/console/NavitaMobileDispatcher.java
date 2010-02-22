@@ -107,9 +107,10 @@ public class NavitaMobileDispatcher {
 			resultBean.setResultCode(1);
 			String message = e.getMessage();
 			if(null == message){
-				message = e.getClass().getName();
+				message = e.toString();
 			}
 			resultBean.setMessage(message);
+			resultBean.setObject(e.toString());
 			return resultBean;
 		}		
 		

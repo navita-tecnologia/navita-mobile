@@ -1,6 +1,7 @@
 package br.com.navita.mobile.console.deployable;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Level;
@@ -9,7 +10,7 @@ import java.util.logging.Logger;
 
 public class DynamicExecutorLookupServiceImpl implements DynamicExecutorLookupService {
 	private static final Logger LOG = Logger.getLogger(DynamicExecutorLookupServiceImpl.class.getName());
-	public static final Map<String,DynamicExecutor> DEPLOY_MAP = new TreeMap<String, DynamicExecutor>(); 
+	public static final Map<String,DynamicExecutor> DEPLOY_MAP =Collections.synchronizedMap( new TreeMap<String, DynamicExecutor>()); 
 	
 			
 	@Override
