@@ -197,7 +197,7 @@ public class FileDecorator {
 	}
 
 	public URL toURL() throws MalformedURLException {
-		return file.toURL();
+		return file.toURI().toURL();
 	}
 	
 	public Date getLastModified(){
