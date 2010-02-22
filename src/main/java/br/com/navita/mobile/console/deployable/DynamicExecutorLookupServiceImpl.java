@@ -11,12 +11,7 @@ public class DynamicExecutorLookupServiceImpl implements DynamicExecutorLookupSe
 	private static final Logger LOG = Logger.getLogger(DynamicExecutorLookupServiceImpl.class.getName());
 	public static final Map<String,DynamicExecutor> DEPLOY_MAP = new TreeMap<String, DynamicExecutor>(); 
 	
-	private DeployListener deployListener;
-	
-	public void setDeployListener(DeployListener deployListener) {
-		this.deployListener = deployListener;
-	}
-	
+			
 	@Override
 	public DynamicExecutor findInstance(String jarName, String className) throws ClassNotFoundException, IOException, InstantiationException, IllegalAccessException {
 		LOG.log(Level.WARNING,"Looking up " + className);					
@@ -31,7 +26,6 @@ public class DynamicExecutorLookupServiceImpl implements DynamicExecutorLookupSe
 			return o;
 		}		
 		o = load(jarName, className);		
-		deployListener.register(jarName, className);
 		return o;
 		
 	}
