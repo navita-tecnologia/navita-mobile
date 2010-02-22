@@ -1,0 +1,93 @@
+﻿<html >
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+		<title>Template Browser</title>
+		<link rel="shortcut icon" href="images/favicon.ico" />
+		<link rel="icon" href="images/favicon.ico" />
+
+		<link type="text/css" rel="stylesheet" href="css/administrador.css" />
+
+		<!--[if IE 6]><link rel="stylesheet" type="text/css" href="css/administrador_ie.css" /><![endif]-->
+		
+				
+	</head>
+	<body>
+		<div id="mainHeader">
+			<a href="home.action" title="Acessar o Dashboard" class="logo">&nbsp;</a>
+		</div>
+		
+		<div id="mainMenu">
+			<ul>
+				<li class="sites">
+					<form name="box_sites" id="box_sites">
+			     		<select id="portalSelect" name="portal">
+			     			<option value="" selected="selected">Aplicativos Blackberry</option>
+			     			<option value="/master/portal/siteBrowser.action?siteId=93d1d3b6f14e465088de29b3e0c571c9&menuActive=1" >aplicativosblackBerry</option>
+			     			<option value="/master/portal/siteBrowser.action?siteId=d024acf99d354661a571d98d6d28e48d&menuActive=1" >BlackBerry</option>
+			     			<option value="#">--------------</option><option value="0">Novo site</option>
+			     		</select>
+			     	</form>
+			     </li>
+	        	<li class="group" id="group1"><a href="#" onclick="MenuActive(1); return false;" title="Gerenciar Portal">Gerenciar Portal</a></li>
+		        <li class="group" id="group2"><a href="#" onclick="MenuActive(2); return false;" title="Templates e Temas">Templates e Temas</a></li>
+		        
+		  </ul>
+		</div>
+		
+		
+		<div id="mainContent">
+		<h1>Configurações</h1>
+		<br clear="all" />
+	    <div class="contentArea">
+	
+	    	<div class="content" id="contentFull">
+				<b class="bt"><b></b></b>
+				<div class="body">
+		            <strong>Domínios cadastrados</strong>
+					<table class="gridContent">
+						<tr>
+							<th class="left">Nome&nbsp;&nbsp;<a href="#" title="Criar Domínio" onclick="showModal('Criação de template', '', '/master/layout/template.action', true); return false;">&nbsp;<img src="images/ico_add.gif" alt="Adicionar" border="0" /></a></th>
+							<th width="20%">Propriedade 1</th>
+							<th width="20%">Propriedade 2</th>
+							<th width="70px">Ações</th>
+						</tr>
+							<tr valign="middle">
+								<td>
+									<a href="#" title="Editar propriedades do template" onclick="showModal('Edição de template', 'BB Trans', '/master/layout/template.action?templateId=e116aadddbee4012a624e174c5b65b22'); return false;">
+	
+										BB Trans
+									</a>
+								</td>
+								<td align="center">Lalalalalalal</td>
+	
+								<td align="center">Leleleleleleel</td>
+								<td align="center">
+									<a href="#" onclick="return removeDialog('/master/layout/template!doRemove.action?templateId=e116aadddbee4012a624e174c5b65b22', 'BB Trans');">remover</a>
+								</td>
+							</tr>
+							<tr class="active" valign="middle">
+								<td>
+									<a href="#" title="Editar propriedades do template" onclick="showModal('Edição de template', 'BB Trans Internas', '/master/layout/template.action?templateId=c04c7f95e4904c90961fda60df3fd665'); return false;">
+	
+										BB Trans Internas
+									</a>
+								</td>
+								<td align="center">Lelelelelelellele</td>
+	
+								<td align="center">Lililililiiililiil</td>
+								<td align="center">
+									<a href="#" onclick="return removeDialog('/master/layout/template!doRemove.action?templateId=c04c7f95e4904c90961fda60df3fd665', 'BB Trans Internas');">remover</a>
+								</td>
+							</tr>
+					</table>
+	        	</div>
+				<b class="bb"><b></b></b>
+	
+			</div>
+		</div>
+		</div>
+	<br clear="all" />
+		<div id="mainFooter">Copyright &copy; 2008 Navita. Todos os direitos reservados.</div>
+	</body>
+</html>
+
