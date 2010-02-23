@@ -2,23 +2,18 @@ package br.com.navita.mobile.console.listener;
 
 import java.util.logging.Logger;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import br.com.navita.mobile.console.bizz.SetupBusiness;
 
 public class SetupListener implements ServletContextListener{
 	private SetupBusiness setupBusiness;
 	private static final Logger LOG = Logger.getLogger(SetupListener.class.getName());
-
-	public SetupListener() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");		
-		setSetupBusiness((SetupBusiness) context.getBean("setupBusiness"));
-	}
-
 
 	public void setSetupBusiness(SetupBusiness setupBusiness) {
 		this.setupBusiness = setupBusiness;
@@ -32,6 +27,9 @@ public class SetupListener implements ServletContextListener{
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
+		ServletContext ctx = sce.getServletContext();
+		WebApplicationContext springContext = WebApplicationContextUtils.getWebApplicationContext(ctx);
+		setSetupBusiness((SetupBusiness) springContext.getBean("setupBusiness"));		
 
 		if(!setupBusiness.usersExists()){
 			LOG.warning("Criando tabela users...");

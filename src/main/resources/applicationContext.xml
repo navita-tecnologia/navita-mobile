@@ -62,10 +62,6 @@
 	<bean id="deployableProcessor" class="br.com.navita.mobile.console.deployable.DeployableProcessor" />
 	
 	
-	
-	
-	
-
 
 	<security:http>
 		<security:intercept-url pattern="/**" access="ROLE_USER" />
@@ -128,34 +124,15 @@
 		</security:user-service> </security:authentication-provider>
 	-->
 
-
-
-	<!-- WS -->
-
-	<bean id="dynaClient" scope="prototype"
-		class="br.com.navita.mobile.ws.client.DynamicClient" init-method="createService">
-		<constructor-arg>
-			<bean class="java.net.URL"></bean>
-		</constructor-arg>
-		<property name="namespaceUri" value="http://ws.mobile.navita.com.br/" />
-		<property name="serviceName" value="singlePointService" />
-		<property name="portName" value="singlePointPort" />
-		<property name="lookupServiceOnStartup" value="false" />
-	</bean>
-
-
-
-	<!-- SAP Sessions -->
-
-	<bean id="checkOldSapSession"
-		class="br.com.navita.mobile.console.listener.SapTimeoutScheduler"></bean>
+	<bean id="checkOldSession"
+		class="br.com.navita.mobile.console.listener.MobileSessionTimeoutScheduler"></bean>
 
 	<bean id="scheduledTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
 		<!-- wait 10 seconds before starting repeated execution -->
 		<property name="delay" value="10000" />
 		<!-- run every 30 seconds -->
 		<property name="period" value="30000" />
-		<property name="timerTask" ref="checkOldSapSession" />
+		<property name="timerTask" ref="checkOldSession" />
 	</bean>
 
 	<bean id="timerFactory" class="org.springframework.scheduling.timer.TimerFactoryBean">
@@ -167,10 +144,4 @@
 		</property>
 	</bean>
 
-	<!--<bean id="client" class="org.apache.servicemix.client.RemoteServiceMixClient"
-		init-method="start" destroy-method="shutDown">
-		<constructor-arg value="tcp://localhost:61616" />
-	</bean>
-
-
---></beans>
+	</beans>
