@@ -11,7 +11,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import br.com.navita.mobile.console.domain.MobileBean;
-import br.com.navita.mobile.console.sap.wrap.SapParameter;
 import br.com.navita.mobile.console.sap.wrap.SapRow;
 import br.com.navita.mobile.console.sap.wrap.SapTable;
 

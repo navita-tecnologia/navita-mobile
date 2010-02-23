@@ -12,6 +12,7 @@ import br.com.navita.mobile.console.domain.LdapConfig;
 import br.com.navita.mobile.console.domain.LoginResult;
 import br.com.navita.mobile.console.domain.MobileApplication;
 import br.com.navita.mobile.console.domain.MobileBean;
+import br.com.navita.mobile.console.exception.InvalidMobileUrlException;
 import br.com.navita.mobile.console.jdbc.DataSourceAppProcessor;
 import br.com.navita.mobile.console.jdbc.JdbcAppProcessor;
 import br.com.navita.mobile.console.sap.SapMobileProcessor;
@@ -27,8 +28,7 @@ public class NavitaMobileDispatcher {
 	private LoginService msLoginService;
 	
 	private SapMobileProcessor sapMobileProcessor;
-	private StaticProcessor staticProcessor;
-	private GenericWsProcessor genericWsProcessor;
+	private StaticProcessor staticProcessor;	
 	private DataSourceAppProcessor dsAppProcessor;
 	private JdbcAppProcessor jdbcAppProcessor;
 	private DeployableProcessor deployableProcessor;
@@ -52,9 +52,7 @@ public class NavitaMobileDispatcher {
 	public void setStaticProcessor(StaticProcessor staticProcessor) {
 		this.staticProcessor = staticProcessor;
 	}
-	public void setGenericWsProcessor(GenericWsProcessor genericWsProcessor) {
-		this.genericWsProcessor = genericWsProcessor;
-	}
+	
 	
 	public void setMsLoginService(LoginService msLoginService) {
 		this.msLoginService = msLoginService;
@@ -145,7 +143,7 @@ public class NavitaMobileDispatcher {
 			return deployableProcessor.processApplication(mobApp, operation, processedParams);
 		}
 		
-		return genericWsProcessor.processApplication(mobApp, operation, processedParams);
+		throw new InvalidMobileUrlException(url);
 	}
 
 	
