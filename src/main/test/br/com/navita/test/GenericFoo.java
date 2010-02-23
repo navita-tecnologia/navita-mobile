@@ -33,11 +33,11 @@ public class GenericFoo {
 
 		JSONObject genericBean = new JSONObject(jsonText);
 		JSONArray array = genericBean.getJSONArray("list");
-		Vector ret = new Vector();
+		Vector<Hashtable<String, String>> ret = new Vector<Hashtable<String, String>>();
 		for(int i=0;i<array.length();i++){
 			JSONObject item = array.getJSONObject(i);
 			JSONArray values = item.getJSONArray("item");
-			Hashtable bean = new Hashtable();
+			Hashtable<String, String> bean = new Hashtable<String,String>();
 			for(int j = 0;j < values.length();j++){
 				JSONObject pair = values.getJSONObject(j);				
 				bean.put(pair.getString("name"), pair.getString("value"));	

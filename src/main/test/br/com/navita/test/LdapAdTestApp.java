@@ -6,7 +6,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import br.com.navita.mobile.console.bizz.LdapService;
-import br.com.navita.mobile.console.dao.LdapConfigDAO;
 import br.com.navita.mobile.console.domain.LdapConfig;
 
 public class LdapAdTestApp {

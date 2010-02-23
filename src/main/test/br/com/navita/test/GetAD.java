@@ -12,6 +12,7 @@ import javax.naming.directory.InitialDirContext;
 
 public class GetAD {
 
+	@SuppressWarnings("unchecked")
 	public static void main( String args[] )
 	{
 		String domainController    = null;
@@ -51,7 +52,7 @@ public class GetAD {
 			{
 				Attribute rr = (Attribute)dnsRR.next();
 
-				String attrId = rr.getID();
+				//String attrId = rr.getID();
 				for (Enumeration vals =		rr.getAll();vals.hasMoreElements();)	{
 					domainController =
 						vals.nextElement().toString();

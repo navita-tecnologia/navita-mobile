@@ -55,8 +55,7 @@
 	
 
 	<bean id="sapMobileProcessor" class="br.com.navita.mobile.console.sap.SapMobileProcessor" />
-	<bean id="staticProcessor" class="br.com.navita.mobile.console.stat.StaticProcessor" />
-	<bean id="genericWsProcessor" class="br.com.navita.mobile.console.GenericWsProcessor" />
+	<bean id="staticProcessor" class="br.com.navita.mobile.console.stat.StaticProcessor" />	
 	<bean id="dsAppProcessor" class="br.com.navita.mobile.console.jdbc.DataSourceAppProcessor" />
 	<bean id="jdbcAppProcessor" class="br.com.navita.mobile.console.jdbc.JdbcAppProcessor" />
 	<bean id="deployableProcessor" class="br.com.navita.mobile.console.deployable.DeployableProcessor" />
