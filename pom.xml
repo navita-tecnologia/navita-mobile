@@ -17,15 +17,38 @@
 
 	<developers>		
 		<developer>
-			<id>victor.sens</id>
-			<name>Victor Teixeira Sens</name>
-			<email>victor.sens@navita.com.br</email>
+			<id>marcio.guedes</id>
+			<name>Marcio Guedes</name>
+			<email>marcio.guedes@navita.com.br</email>
 			<roles>
 				<role>Developer</role>
 			</roles>
 		</developer>
 	</developers>
 
-	
+	<repositories>
+		<repository>
+			<id>archiva.internal</id>
+			<name>Archiva Managed Internal Repository</name>
+			<url>http://janine.navita.com.br/archiva/repository/internal</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>archiva.snapshots</id>
+			<name>Archiva Managed Snapshot Repository</name>
+			<url>http://janine.navita.com.br/archiva/repository/snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
 </project>
