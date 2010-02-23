@@ -1,10 +1,11 @@
 package br.com.navita.mobile.console.sap;
 
-import java.io.Serializable;
+import br.com.navita.mobile.console.session.MobileSession;
+import br.com.navita.mobile.console.session.SessionPool;
 
 import com.sap.mw.jco.JCO;
 
-public class SapSession implements Serializable {
+public class SapSession implements MobileSession {
 
 	/**
 	 * 
@@ -51,6 +52,21 @@ public class SapSession implements Serializable {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+
+
+	@Override
+	public void release() {
+		JCO.removeClientPool(token);
+		SessionPool.remove(token);		
+	}
+
+
+
+	@Override
+	public long getTimeout() {		
+		return QUINZE_MINUTOS;
 	}
 
 
