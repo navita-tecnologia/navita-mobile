@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public class DynamicExecutorLookupServiceImpl implements DynamicExecutorLookupService {
 	private static final Logger LOG = Logger.getLogger(DynamicExecutorLookupServiceImpl.class.getName());
-	public static final Map<String,DynamicExecutor> DEPLOY_MAP =Collections.synchronizedMap( new TreeMap<String, DynamicExecutor>()); 
+	public static final Map<String,Class<?>> DEPLOY_MAP =Collections.synchronizedMap( new TreeMap<String, Class<?>>()); 
 	
 			
 	@Override
@@ -21,24 +21,24 @@ public class DynamicExecutorLookupServiceImpl implements DynamicExecutorLookupSe
 	
 	private DynamicExecutor lookup(String jarName, String className) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		String key = jarName + className;
-		DynamicExecutor o = DEPLOY_MAP.get(key);
-		if(o != null){
-			LOG.log(Level.WARNING,"Cache found " + className);
-			return o;
-		}		
-		o = load(jarName, className);		
-		return o;
+		Class<?> clazz = DEPLOY_MAP.get(key);
+		if(clazz != null){
+			LOG.log(Level.WARNING,"Class cache found " + className);			
+		} else{		
+			clazz = load(jarName, className);
+		}
+		
+		return (DynamicExecutor) clazz.newInstance();
 		
 	}
 	
-	public static DynamicExecutor load(String jarName, String className) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+	public static Class<?> load(String jarName, String className) throws IOException, ClassNotFoundException {
 		LOG.log(Level.WARNING,"Loading " + className + " from " + jarName);
 		String key = jarName + className;
 		ZipClassLoader loader = new ZipClassLoader(jarName,Thread.currentThread().getContextClassLoader()); 
 		Class<?> cls = loader.findClass(className);		
-		DynamicExecutor o = (DynamicExecutor) cls.newInstance();
-		DEPLOY_MAP.put(key, o);
-		return o;
+		DEPLOY_MAP.put(key, cls);
+		return cls;
 	}
 
 }

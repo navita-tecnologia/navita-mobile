@@ -102,7 +102,7 @@ public class NavitaMobileDispatcher {
 		try {
 			LOG.info("Dispatching "+operation[0]);			
 			return processApplication( mobApp,operation[0],params);
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			MobileBean resultBean = new MobileBean();
 			resultBean.setResultCode(1);
 			String message = e.getMessage();
