@@ -15,7 +15,7 @@ public class DynamicExecutorLookupServiceImpl implements DynamicExecutorLookupSe
 			
 	@Override
 	public DynamicExecutor findInstance(String jarName, String className) throws ClassNotFoundException, IOException, InstantiationException, IllegalAccessException {
-		LOG.log(Level.WARNING,"Looking up " + className);					
+		LOG.log(Level.INFO,"Looking up " + className);					
 		return lookup(jarName, className);
 	}
 	
@@ -23,7 +23,7 @@ public class DynamicExecutorLookupServiceImpl implements DynamicExecutorLookupSe
 		String key = jarName + className;
 		Class<?> clazz = DEPLOY_MAP.get(key);
 		if(clazz != null){
-			LOG.log(Level.WARNING,"Class cache found " + className);			
+			LOG.log(Level.INFO,"Class cache found " + className);			
 		} else{		
 			clazz = load(jarName, className);
 		}
@@ -33,7 +33,7 @@ public class DynamicExecutorLookupServiceImpl implements DynamicExecutorLookupSe
 	}
 	
 	public static Class<?> load(String jarName, String className) throws IOException, ClassNotFoundException {
-		LOG.log(Level.WARNING,"Loading " + className + " from " + jarName);
+		LOG.log(Level.INFO,"Loading " + className + " from " + jarName);
 		String key = jarName + className;
 		ZipClassLoader loader = new ZipClassLoader(jarName,Thread.currentThread().getContextClassLoader()); 
 		Class<?> cls = loader.findClass(className);		

@@ -107,7 +107,7 @@ public class DeployAction extends DefaultActionSupport{
 	private void flushClassCache(String name) {
 		for(String key : DynamicExecutorLookupServiceImpl.DEPLOY_MAP.keySet() ){
 			if(key.startsWith(name.replace("\\", "/"))){
-				LOG.log(Level.WARNING,"Removing cache " + key);
+				LOG.log(Level.INFO,"Removing cache " + key);
 				DynamicExecutorLookupServiceImpl.DEPLOY_MAP.remove(key);
 			}
 		}
