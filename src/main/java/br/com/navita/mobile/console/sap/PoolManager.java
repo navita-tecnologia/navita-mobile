@@ -1,8 +1,5 @@
 package br.com.navita.mobile.console.sap;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -10,7 +7,7 @@ import java.util.logging.Logger;
 
 import br.com.navita.mobile.console.exception.InvalidTokenSapGatewayException;
 import br.com.navita.mobile.console.exception.SapGatewayException;
-
+import br.com.navita.mobile.console.session.SessionPool;
 
 import com.sap.mw.jco.JCO;
 import com.sap.mw.jco.JCO.Function;
@@ -19,7 +16,7 @@ public class PoolManager {
 	
 	private static final Logger LOG = Logger.getLogger(PoolManager.class.getName());
 
-	public static final Map<String, SapSession> REPOSITORY_POOL = Collections.synchronizedMap( new HashMap<String, SapSession>());
+	
 		
 	public static SapSession createSession(String login, String passwd,String url) throws SapGatewayException {
 		String token = login+"-"+UUID.randomUUID();
@@ -42,13 +39,13 @@ public class PoolManager {
 		JCO.releaseClient(client);
 		SapSession session = new SapSession(repo,token);
 		session.setTimestamp(System.currentTimeMillis());
-		REPOSITORY_POOL.put(token, session);
+		SessionPool.put(token, session);
 		LOG.log(Level.WARNING,"Session criada para "+login+" em "+url);
 		return session;
 	}
 
 	private static SapSession getSession(String token) throws SapGatewayException{
-		SapSession session = REPOSITORY_POOL.get(token);
+		SapSession session = (SapSession) SessionPool.get(token);
 		if(session==null){
 			throw new InvalidTokenSapGatewayException("Invalid token "+token);
 		}
