@@ -22,7 +22,7 @@ public final class ZipClassLoader extends ClassLoader {
 		try {
 			file = new ZipFile(fileName);
 		} catch (IOException e1) {
-			throw new ClassNotFoundException(fileName + "open error");
+			throw new ClassNotFoundException(e1.getMessage());
 		}
 		ZipEntry entry = file.getEntry(name.replace('.', '/') + ".class");
 		if (entry == null) {
