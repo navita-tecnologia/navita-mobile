@@ -17,17 +17,17 @@ public class SapTimeoutScheduler extends TimerTask {
 
 	@Override
 	public void run() {
-		LOG.log(Level.FINE,"Timeout scheduler fired");
+		LOG.log(Level.INFO,"Timeout scheduler fired");
 		
 		for(String token: PoolManager.REPOSITORY_POOL.keySet()){
 			SapSession session = PoolManager.REPOSITORY_POOL.get(token);
-			LOG.log(Level.FINE,"Timeout scheduler checking "+token);
+			LOG.log(Level.INFO,"Timeout scheduler checking "+token);
 			if(System.currentTimeMillis() - session.getTimestamp() > QUINZE_MINUTOS){
 				LOG.log(Level.WARNING,"Removendo sessao SAP por timeout token = "+token);
 				JCO.removeClientPool(token);
 				PoolManager.REPOSITORY_POOL.remove(token);
 			}else{
-				LOG.log(Level.FINE,"Timeout for token "+token+" not reached");
+				LOG.log(Level.INFO,"Timeout for token "+token+" not reached");
 			}
 		}
 

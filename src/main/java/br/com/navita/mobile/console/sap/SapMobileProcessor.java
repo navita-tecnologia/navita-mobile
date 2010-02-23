@@ -45,7 +45,7 @@ public class SapMobileProcessor implements MobileAppProcessor{
 		}
 		
 		try {
-			LOG.log(Level.WARNING,"Carregando instancia de "+className);
+			LOG.log(Level.INFO,"Carregando instancia de "+className);
 			SapExecution execution = (SapExecution) Class.forName(className).newInstance();
 			execution.setConfig(loadConfig(config));
 			return execution;
