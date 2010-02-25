@@ -38,7 +38,7 @@ public class PoolManager {
 		client.execute(f);
 		JCO.releaseClient(client);
 		SapSession session = new SapSession(repo,token);
-		session.setTimestamp(System.currentTimeMillis());
+		session.setTimeStamp(System.currentTimeMillis());
 		SessionPool.put(token, session);
 		LOG.log(Level.WARNING,"Session criada para "+login+" em "+url);
 		return session;
@@ -49,7 +49,7 @@ public class PoolManager {
 		if(session==null){
 			throw new InvalidTokenSapGatewayException("Invalid token "+token);
 		}
-		session.setTimestamp(System.currentTimeMillis());
+		session.setTimeStamp(System.currentTimeMillis());
 		return session;
 	}
 	public static JCO.Function createFunction(String name,String token) throws SapGatewayException{
