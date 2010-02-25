@@ -28,6 +28,7 @@
 	</dependencies>
 
 	<build>
+	<finalName>navita-ps</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -47,14 +48,7 @@
 				</configuration>
 				<version>2.5.1</version>
 			</plugin>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<configuration>					
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-				</configuration>
-			</plugin>
+			
 
 
 

@@ -249,11 +249,19 @@
 			<artifactId>jcifs</artifactId>
 			<version>1.2.19</version>
 		</dependency>
+	
+		<!-- ERP's -->
 		<dependency>
 			<groupId>com.sap</groupId>
 			<artifactId>jco</artifactId>
 			<version>2.1.8</version>
 		</dependency>
+		<dependency>
+			<groupId>com.peoplesoft</groupId>
+			<artifactId>psjoa</artifactId>
+			<version>8.0.0.0</version>
+		</dependency>
+	<!--  END ERP's -->
 
 		<dependency>
 			<groupId>com.sun.xml.ws</groupId>

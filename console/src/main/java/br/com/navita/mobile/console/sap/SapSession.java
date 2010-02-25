@@ -5,14 +5,13 @@ import br.com.navita.mobile.console.session.SessionPool;
 
 import com.sap.mw.jco.JCO;
 
-public class SapSession implements MobileSession {
+public class SapSession extends MobileSession {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String token ;	
-	private long timestamp;
+	
 	private JCO.Repository repository;
 
 
@@ -34,26 +33,6 @@ public class SapSession implements MobileSession {
 		this.repository = repository;
 		this.token = token;
 	}
-
-
-
-	public long getTimestamp() {
-		return timestamp;
-	}
-
-	public void setTimestamp(long timestamp) {
-		this.timestamp = timestamp;
-	}
-	
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
 
 
 	@Override

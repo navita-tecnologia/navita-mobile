@@ -59,36 +59,4 @@ public abstract class NavitaMobileParamsUtil {
 		return result;
 	}
 
-	
-	
-//	public static void fillList(GenericBean bean, List<?> listParam) {		
-//		List<NameValueArray> list = bean.getList();
-//		for(Object g : listParam){
-//			NameValueArray item = new NameValueArray();
-//			item.getItem().addAll(Arrays.asList( extractNameValueArray(g)));
-//			list.add(item);
-//		}
-//		
-//	}
-//	
-//	public static NameValue[] extractNameValueArray(Object bean){
-//		Map<?,?> props =null;
-//		try {
-//			props = PropertyUtils.describe(bean);
-//		} catch (Exception e) {
-//			return null;
-//		}
-//		NameValue[] ret = new NameValue[props.size()];
-//
-//		int i=0;
-//		for(Object key:props.keySet()){
-//			NameValue temp = new NameValue();
-//			temp.setName(key.toString());
-//			temp.setValue(props.get(key));			
-//			ret[i++] = temp;
-//		}
-//
-//		return ret;
-//	}
-
 }
