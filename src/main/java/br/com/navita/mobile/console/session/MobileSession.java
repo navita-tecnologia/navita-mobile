@@ -15,7 +15,10 @@ public abstract class MobileSession implements Serializable {
 	protected long timeStamp;
 	protected Object innerSession;
 	
-	
+	protected enum Type{
+		SAP_SESSION,
+		PEOPLE_SOFT_SESSION
+	}
 	
 	public Object getInnerSession() {
 		return innerSession;
