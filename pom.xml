@@ -300,32 +300,7 @@
 		</dependency>
 
 
-		<!--
-			<dependency> <groupId>org.apache.servicemix</groupId>
-			<artifactId>servicemix-core</artifactId>
-			<version>${servicemix-version}</version> <scope>provided</scope>
-			<exclusions> <exclusion> <groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId> </exclusion> <exclusion>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-support</artifactId> </exclusion> <exclusion>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId> </exclusion> <exclusion>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId> </exclusion> <exclusion>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId> </exclusion> <exclusion>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId> </exclusion> <exclusion>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-dao</artifactId> </exclusion> <exclusion>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId> </exclusion> <exclusion>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jms</artifactId> </exclusion> <exclusion>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jmx</artifactId> </exclusion> </exclusions>
-			</dependency>
-		-->
+		
 
 	</dependencies>
 	<build>
@@ -358,12 +333,7 @@
 			<id>jetty</id>
 			<build>
 				<plugins>
-					<!--
-						<plugin> <groupId>org.apache.camel</groupId>
-						<artifactId>camel-maven-plugin</artifactId> <configuration>
-						<applicationContextUri>applicationContext.xml</applicationContextUri>
-						</configuration> </plugin>
-					-->
+					
 					<plugin>
 						<groupId>org.mortbay.jetty</groupId>
 						<artifactId>maven-jetty-plugin</artifactId>

@@ -11,7 +11,7 @@ import br.com.navita.mobile.console.dao.LdapConfigDAO;
 import br.com.navita.mobile.console.domain.LdapConfig;
 import br.com.navita.mobile.console.domain.LoginResult;
 import br.com.navita.mobile.console.domain.UserGroup;
-import br.com.navita.mobile.console.exception.NavitaConsoleError;
+import br.com.navita.mobile.exception.NavitaMobileError;
 
 
 public class DomainsAction extends DefaultActionSupport {
@@ -95,7 +95,7 @@ public class DomainsAction extends DefaultActionSupport {
 
 	}
 
-	public String save() throws NavitaConsoleError {		
+	public String save() throws NavitaMobileError {		
 		ldapConfigDAO.saveService(ldapConfig, ldapConfig.getId());
 		if(ldapConfig.getPassword()!=null && ! ldapConfig.getPassword().isEmpty()){
 			addActionMessage("Senha alterada com sucesso");
@@ -115,7 +115,7 @@ public class DomainsAction extends DefaultActionSupport {
 	public String createPrepare() {
 		return "createPrepare";
 	}
-	public String create() throws NavitaConsoleError {
+	public String create() throws NavitaMobileError {
 		ldapConfigDAO.saveService(ldapConfig, null);
 		dominios = ldapConfigDAO.listServices();
 		addActionMessage("Criado com sucesso");

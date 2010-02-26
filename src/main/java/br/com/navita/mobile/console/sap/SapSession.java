@@ -37,8 +37,7 @@ public class SapSession extends MobileSession {
 
 	@Override
 	public void release() {
-		JCO.removeClientPool(token);
-		SessionPool.remove(token);		
+		JCO.removeClientPool(token);				
 	}
 
 
