@@ -5,51 +5,49 @@ import java.util.List;
 import java.util.Map;
 
 import psft.pt8.joa.JOAException;
-
 import PeopleSoft.Generated.CompIntfc.IDAsmAprov;
 import PeopleSoft.Generated.CompIntfc.IDAsmAprovDExApresVw3;
 import PeopleSoft.Generated.CompIntfc.IDAsmAprovDExApresVw3Collection;
 import br.com.navita.mobile.console.deployable.DynamicExecutor;
 import br.com.navita.mobile.console.domain.MobileBean;
+import br.com.navita.mobile.erp.people.PeopleSoftException;
+import br.com.navita.mobile.erp.people.PeopleSoftUtil;
 
-public class TestePeople extends AbstractPeopleSoftExecutor implements DynamicExecutor {
+public class TestePeople implements DynamicExecutor {
 
 	public MobileBean execute(Map<String, Object> paramMap) {
 		MobileBean bean = new MobileBean();
 		String token = (String) paramMap.get("token");
-		
 
+		
 		try {
-			retrieveConnection(token);//pega a conexao do pool
-			if(oSession == null){
-				throw new PeopleSoftException("Not conected");
-			}
+			
 
 			//***** Get Component Interface *****
 			IDAsmAprov oDAsmAprov;
 			String ciName;
 			ciName = "D_ASM_APROV";
-			oDAsmAprov = (IDAsmAprov) oSession.getCompIntfc(ciName);
+			oDAsmAprov = (IDAsmAprov) PeopleSoftUtil.getComponentInterface(ciName, token);
 			if (oDAsmAprov == null) {			
-				errorHandler("Unable to Get Component Interface " + ciName);			
+				PeopleSoftUtil.errorHandler("Unable to Get Component Interface " + ciName, token);			
 			}
-			
+
 			//***** Set the Component Interface Mode *****
 			oDAsmAprov.setInteractiveMode(false);
 			oDAsmAprov.setGetHistoryItems(true);
 			oDAsmAprov.setEditHistoryItems(false);
-			
+
 			//***** Execute Get *****
 			if (!oDAsmAprov.get()) {				
-				errorHandler("\nNo rows exist for the specified keys.\nFailed to get the Component Interface.");				
+				PeopleSoftUtil.errorHandler("\nNo rows exist for the specified keys.\nFailed to get the Component Interface.",token);				
 			}
-			
+
 			Aprovacao w1 = new Aprovacao();
 			w1.setCreationDt(oDAsmAprov.getCreationDt());
 			bean.setObject(w1);
-			
+
 			List<Supervisor> list = new ArrayList<Supervisor>();
-			
+
 			IDAsmAprovDExApresVw3Collection oDExApresVw3Collection;
 			IDAsmAprovDExApresVw3 oDExApresVw3;
 			oDExApresVw3Collection = oDAsmAprov.getDExApresVw3();
@@ -60,10 +58,10 @@ public class TestePeople extends AbstractPeopleSoftExecutor implements DynamicEx
 				s.setSupervisorId(oDExApresVw3.getSupervisorId());
 				list.add(s);
 			}
-			
+
 			bean.setList(list);			
-			
-			
+
+
 		} catch (PeopleSoftException e) {
 			bean.setMessage(e.getMessage());
 			bean.setResultCode(1);
@@ -77,6 +75,6 @@ public class TestePeople extends AbstractPeopleSoftExecutor implements DynamicEx
 		return bean;
 	}
 
-	
+
 
 }

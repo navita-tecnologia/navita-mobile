@@ -1,6 +1,10 @@
 package br.com.navita.mobile.console.exception;
 
-public class PushException extends NavitaConsoleError {
+import br.com.navita.mobile.exception.NavitaMobileError;
+
+
+
+public class PushException extends NavitaMobileError {
 
 	/**
 	 * 

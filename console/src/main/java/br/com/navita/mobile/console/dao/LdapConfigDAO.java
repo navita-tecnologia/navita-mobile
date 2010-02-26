@@ -9,8 +9,8 @@ import org.apache.commons.configuration.AbstractConfiguration;
 import org.apache.commons.configuration.Configuration;
 
 import br.com.navita.mobile.console.domain.LdapConfig;
-import br.com.navita.mobile.console.exception.NavitaConsoleError;
 import br.com.navita.mobile.console.util.Encryptor;
+import br.com.navita.mobile.exception.NavitaMobileError;
 
 
 public class LdapConfigDAO {
@@ -21,7 +21,7 @@ public class LdapConfigDAO {
 	}
 	private static final String KEY = "RrSe916DqrdQANfFKaQkgQ==";
 
-	public void saveService(LdapConfig properties ,String seedId) throws NavitaConsoleError{
+	public void saveService(LdapConfig properties ,String seedId) throws NavitaMobileError{
 		String id = seedId;
 		if(id == null){
 			id = UUID.randomUUID().toString();
@@ -38,7 +38,7 @@ public class LdapConfigDAO {
 				password = Encryptor.encrypt(properties.getPassword(), KEY);
 				commonConfiguration.setProperty(LdapConfig.PASSWORD_PREFIX + id, password);
 			} catch (Exception e) {
-				throw new NavitaConsoleError(e);
+				throw new NavitaMobileError(e);
 			}
 		}
 

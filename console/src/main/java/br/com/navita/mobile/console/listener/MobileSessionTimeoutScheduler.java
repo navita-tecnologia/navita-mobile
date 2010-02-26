@@ -21,6 +21,7 @@ public class MobileSessionTimeoutScheduler extends TimerTask {
 			if(System.currentTimeMillis() - session.getTimeStamp() > session.getTimeout()){
 				LOG.log(Level.WARNING,"Removendo sessao por timeout token = "+token);
 				session.release();
+				SessionPool.remove(token);
 			}else{
 				LOG.log(Level.INFO,"Timeout for token "+token+" not reached");
 			}

@@ -1,9 +1,8 @@
-package br.com.navita.mobile.ps;
+package br.com.navita.mobile.console.session;
 
 import java.util.UUID;
 
 import psft.pt8.joa.ISession;
-import br.com.navita.mobile.console.session.MobileSession;
 
 
 public class PeopleSoftSession extends MobileSession{

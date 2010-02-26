@@ -5,7 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import br.com.navita.mobile.console.dao.LdapConfigDAO;
 import br.com.navita.mobile.console.domain.LdapConfig;
-import br.com.navita.mobile.console.exception.NavitaConsoleError;
+import br.com.navita.mobile.exception.NavitaMobileError;
 
 
 
@@ -13,9 +13,9 @@ public class ConfigTestApp {
 
 	/**
 	 * @param args
-	 * @throws NavitaConsoleError 
+	 * @throws NavitaMobileError 
 	 */
-	public static void main(String[] args) throws NavitaConsoleError {
+	public static void main(String[] args) throws NavitaMobileError {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		LdapConfigDAO ldapDAO = (LdapConfigDAO) ctx.getBean("ldapConfigDAO");
 		LdapConfig prop = new LdapConfig();
