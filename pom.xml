@@ -7,18 +7,12 @@
 		<version>1.0</version>
 	</parent>
 	<groupId>br.com.navita</groupId>
-	<artifactId>navita-mobile-core</artifactId>
+	<artifactId>navita-mobile-common</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0</version>
 	<name>Navita Mobile Core</name>
 	<url>http://m.navita.com.br</url>
-	<dependencies>
-		<dependency>
-			<groupId>com.peoplesoft</groupId>
-			<artifactId>psjoa</artifactId>
-			<version>8.0.0.0</version>
-		</dependency>
-	</dependencies>
+	
 
 	<build>
 		<plugins>
