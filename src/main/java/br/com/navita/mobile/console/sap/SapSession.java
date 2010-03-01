@@ -1,7 +1,6 @@
 package br.com.navita.mobile.console.sap;
 
 import br.com.navita.mobile.console.session.MobileSession;
-import br.com.navita.mobile.console.session.SessionPool;
 
 import com.sap.mw.jco.JCO;
 

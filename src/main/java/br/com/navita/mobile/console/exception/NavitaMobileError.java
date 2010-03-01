@@ -1,31 +1,28 @@
 package br.com.navita.mobile.console.exception;
 
-
-
-
-public class PushException extends NavitaMobileError {
+public class NavitaMobileError extends Exception {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public PushException() {
+	public NavitaMobileError() {
 		super();
 		
 	}
 
-	public PushException(String message, Throwable cause) {
+	public NavitaMobileError(String message, Throwable cause) {
 		super(message, cause);
 		
 	}
 
-	public PushException(String message) {
+	public NavitaMobileError(String message) {
 		super(message);
 		
 	}
 
-	public PushException(Throwable cause) {
+	public NavitaMobileError(Throwable cause) {
 		super(cause);
 		
 	}
