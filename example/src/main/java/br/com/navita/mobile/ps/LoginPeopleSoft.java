@@ -9,6 +9,10 @@ import br.com.navita.mobile.console.domain.MobileBean;
 
 public class LoginPeopleSoft  implements DynamicExecutor{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Override
 	public MobileBean execute(Map<String, Object> paramMap) {
 		MobileBean bean = new MobileBean();
