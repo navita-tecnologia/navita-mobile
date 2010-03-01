@@ -10,7 +10,7 @@
 	<url>http://m.navita.com.br</url>
 
 	<modules>
-		<module>core</module>
+		<module>common</module>
 		<module>console</module>
 		<module>deployable-example</module>
 	</modules>
