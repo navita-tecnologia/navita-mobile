@@ -1,4 +1,4 @@
-package br.com.navita.mobile.erp.people;
+package br.com.navita.mobile.ps;
 
 public class PeopleSoftException extends Exception {
 

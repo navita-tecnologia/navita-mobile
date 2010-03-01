@@ -13,7 +13,7 @@ import br.com.navita.mobile.console.session.SessionPool;
 public abstract class PeopleSoftUtil {
 	
 	
-	public static final PeopleSoftSession getConnectedSession(String serverPath, String user, String passwd) throws PeopleSoftException{
+	public static final PeopleSoftSession getConnectedSession(String serverPath, String user, String passwd) throws JOAException{
 		ISession oSession = API.createSession();
 
 		boolean result = oSession.connect(1, serverPath, user, passwd, null); 
@@ -30,7 +30,7 @@ public abstract class PeopleSoftUtil {
 	}
 	
 	
-	public static final void errorHandler(String baseMessage, String token) throws PeopleSoftException{
+	public static final void errorHandler(String baseMessage, String token) throws JOAException{
 		MobileSession ms = SessionPool.get(token);
 		if(ms != null){
 			errorHandler(baseMessage, (ISession) ms.getInnerSession());
@@ -38,7 +38,7 @@ public abstract class PeopleSoftUtil {
 		
 	}
 	
-	public static final void errorHandler(String baseMessage, ISession oSession) throws PeopleSoftException{
+	public static final void errorHandler(String baseMessage, ISession oSession) throws JOAException{
 		if(oSession == null){
 			return;
 		}
@@ -61,21 +61,21 @@ public abstract class PeopleSoftUtil {
 			}
 			//***** Done processing messages in the collection; OK to delete *****
 			oPSMessageCollection.deleteAll();
-			throw new PeopleSoftException(message.toString());
+			throw new JOAException(message.toString());
 		}
 	}
 	
 	
-	public static Object getComponentInterface(String name, String token) throws PeopleSoftException, JOAException{
+	public static Object getComponentInterface(String name, String token) throws JOAException{
 		MobileSession ms = SessionPool.get(token);
 		if(ms == null){
-			throw new PeopleSoftException(token + " is not a valid token");
+			throw new JOAException(token + " is not a valid token");
 		}
 		ms.setTimeStamp(System.currentTimeMillis());
 		ISession oSession = (ISession)ms.getInnerSession();
 
 		if(oSession == null){
-			throw new PeopleSoftException("Not conected");
+			throw new JOAException("Not conected");
 		}
 		
 		return oSession.getCompIntfc(name);

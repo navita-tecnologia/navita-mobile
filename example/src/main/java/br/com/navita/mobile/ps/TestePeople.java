@@ -10,8 +10,7 @@ import PeopleSoft.Generated.CompIntfc.IDAsmAprovDExApresVw3;
 import PeopleSoft.Generated.CompIntfc.IDAsmAprovDExApresVw3Collection;
 import br.com.navita.mobile.console.deployable.DynamicExecutor;
 import br.com.navita.mobile.console.domain.MobileBean;
-import br.com.navita.mobile.erp.people.PeopleSoftException;
-import br.com.navita.mobile.erp.people.PeopleSoftUtil;
+
 
 public class TestePeople implements DynamicExecutor {
 
@@ -24,13 +23,13 @@ public class TestePeople implements DynamicExecutor {
 			
 
 			//***** Get Component Interface *****
-			IDAsmAprov oDAsmAprov;
+			IDAsmAprov oDAsmAprov = null;
 			String ciName;
 			ciName = "D_ASM_APROV";
-			oDAsmAprov = (IDAsmAprov) PeopleSoftUtil.getComponentInterface(ciName, token);
-			if (oDAsmAprov == null) {			
-				PeopleSoftUtil.errorHandler("Unable to Get Component Interface " + ciName, token);			
-			}
+//			oDAsmAprov = (IDAsmAprov) PeopleSoftUtil.getComponentInterface(ciName, token);
+//			if (oDAsmAprov == null) {			
+//				PeopleSoftUtil.errorHandler("Unable to Get Component Interface " + ciName, token);			
+//			}
 
 			//***** Set the Component Interface Mode *****
 			oDAsmAprov.setInteractiveMode(false);
@@ -39,7 +38,7 @@ public class TestePeople implements DynamicExecutor {
 
 			//***** Execute Get *****
 			if (!oDAsmAprov.get()) {				
-				PeopleSoftUtil.errorHandler("\nNo rows exist for the specified keys.\nFailed to get the Component Interface.",token);				
+				//PeopleSoftUtil.errorHandler("\nNo rows exist for the specified keys.\nFailed to get the Component Interface.",token);				
 			}
 
 			Aprovacao w1 = new Aprovacao();
@@ -62,11 +61,11 @@ public class TestePeople implements DynamicExecutor {
 			bean.setList(list);			
 
 
-		} catch (PeopleSoftException e) {
+		} catch (JOAException e) {
 			bean.setMessage(e.getMessage());
 			bean.setResultCode(1);
 			return bean;
-		} catch (JOAException e) {
+		} catch (Exception e) {
 			bean.setMessage(e.getMessage());
 			bean.setResultCode(1);
 			return bean;

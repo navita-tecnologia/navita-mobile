@@ -7,7 +7,7 @@
 		<version>1.0</version>
 	</parent>
 	<groupId>br.com.navita</groupId>
-	<artifactId>navita-mobile-deployable-example</artifactId>
+	<artifactId>deployable-example</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0</version>
 	<name>Navita Mobile Deploy Example</name>
