@@ -7,14 +7,15 @@ import br.com.navita.mobile.console.bizz.LoginService;
 import br.com.navita.mobile.console.bizz.MSWindowsLoginService;
 import br.com.navita.mobile.console.dao.LdapConfigDAO;
 import br.com.navita.mobile.console.dao.MobileApplicationDAO;
-import br.com.navita.mobile.console.deployable.DeployableProcessor;
 import br.com.navita.mobile.console.domain.LdapConfig;
 import br.com.navita.mobile.console.domain.LoginResult;
 import br.com.navita.mobile.console.domain.MobileApplication;
 import br.com.navita.mobile.domain.MobileBean;
 import br.com.navita.mobile.console.exception.InvalidMobileUrlException;
+import br.com.navita.mobile.console.jar.DeployableProcessor;
 import br.com.navita.mobile.console.jdbc.DataSourceAppProcessor;
 import br.com.navita.mobile.console.jdbc.JdbcAppProcessor;
+import br.com.navita.mobile.console.remote.RmiProcessor;
 import br.com.navita.mobile.console.sap.SapMobileProcessor;
 import br.com.navita.mobile.console.stat.StaticProcessor;
 import br.com.navita.mobile.console.util.NavitaMobileParamsUtil;
@@ -32,6 +33,11 @@ public class NavitaMobileDispatcher {
 	private DataSourceAppProcessor dsAppProcessor;
 	private JdbcAppProcessor jdbcAppProcessor;
 	private DeployableProcessor deployableProcessor;
+	private RmiProcessor rmiProcessor;
+	
+	public void setRmiProcessor(RmiProcessor rmiProcessor) {
+		this.rmiProcessor = rmiProcessor;
+	}
 	
 	public void setDeployableProcessor(DeployableProcessor deployableProcessor) {
 		this.deployableProcessor = deployableProcessor;
@@ -141,6 +147,9 @@ public class NavitaMobileDispatcher {
 		}
 		if( url.startsWith("jar://")){
 			return deployableProcessor.processApplication(mobApp, operation, processedParams);
+		}
+		if( url.startsWith("rmi://")){
+			return rmiProcessor.processApplication(mobApp, operation, processedParams);
 		}
 		
 		throw new InvalidMobileUrlException(url);
