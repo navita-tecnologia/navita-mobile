@@ -4,10 +4,15 @@ package br.com.foo;
 import java.util.Arrays;
 import java.util.Map;
 
-import br.com.navita.mobile.console.deployable.DynamicExecutor;
-import br.com.navita.mobile.console.domain.MobileBean;
+import br.com.navita.mobile.domain.MobileBean;
+import br.com.navita.mobile.remote.MobileService;
 
-public class PeopleImpl implements DynamicExecutor {
+public class PeopleImpl implements MobileService {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public MobileBean execute(Map<String, Object> params) {

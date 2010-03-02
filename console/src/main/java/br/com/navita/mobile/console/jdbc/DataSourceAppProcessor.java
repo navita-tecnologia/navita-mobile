@@ -12,7 +12,7 @@ import org.springframework.jndi.JndiObjectFactoryBean;
 import br.com.navita.mobile.console.BaseMobileAppProcessor;
 import br.com.navita.mobile.console.domain.MobileApplication;
 import br.com.navita.mobile.console.domain.MobileApplicationExecutor;
-import br.com.navita.mobile.console.domain.MobileBean;
+import br.com.navita.mobile.domain.MobileBean;
 
 public class DataSourceAppProcessor extends BaseMobileAppProcessor  {
 	@Override

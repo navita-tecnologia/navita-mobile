@@ -7,6 +7,8 @@ import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import br.com.navita.mobile.remote.MobileService;
+
 
 public class DynamicExecutorLookupServiceImpl implements DynamicExecutorLookupService {
 	private static final Logger LOG = Logger.getLogger(DynamicExecutorLookupServiceImpl.class.getName());
@@ -14,12 +16,12 @@ public class DynamicExecutorLookupServiceImpl implements DynamicExecutorLookupSe
 	
 			
 	@Override
-	public DynamicExecutor findInstance(String jarName, String className) throws ClassNotFoundException, IOException, InstantiationException, IllegalAccessException {
+	public MobileService findInstance(String jarName, String className) throws ClassNotFoundException, IOException, InstantiationException, IllegalAccessException {
 		LOG.log(Level.INFO,"Looking up " + className);					
 		return lookup(jarName, className);
 	}
 	
-	private DynamicExecutor lookup(String jarName, String className) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+	private MobileService lookup(String jarName, String className) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		String key = jarName + className;
 		Class<?> clazz = DEPLOY_MAP.get(key);
 		if(clazz != null){
@@ -28,7 +30,7 @@ public class DynamicExecutorLookupServiceImpl implements DynamicExecutorLookupSe
 			clazz = load(jarName, className);
 		}
 		
-		return (DynamicExecutor) clazz.newInstance();
+		return (MobileService) clazz.newInstance();
 		
 	}
 	

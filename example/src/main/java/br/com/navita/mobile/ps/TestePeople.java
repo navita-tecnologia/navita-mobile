@@ -8,38 +8,26 @@ import psft.pt8.joa.JOAException;
 import PeopleSoft.Generated.CompIntfc.IDAsmAprov;
 import PeopleSoft.Generated.CompIntfc.IDAsmAprovDExApresVw3;
 import PeopleSoft.Generated.CompIntfc.IDAsmAprovDExApresVw3Collection;
-import br.com.navita.mobile.console.deployable.DynamicExecutor;
-import br.com.navita.mobile.console.domain.MobileBean;
+import br.com.navita.mobile.domain.MobileBean;
+import br.com.navita.mobile.remote.MobileService;
 
 
-public class TestePeople implements DynamicExecutor {
+public class TestePeople extends AbstractPeoplesoftService implements MobileService {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public MobileBean execute(Map<String, Object> paramMap) {
 		MobileBean bean = new MobileBean();
-		String token = (String) paramMap.get("token");
-
-		
+		String token = (String) paramMap.get("token");		
 		try {
-			
-
 			//***** Get Component Interface *****
 			IDAsmAprov oDAsmAprov = null;
 			String ciName;
 			ciName = "D_ASM_APROV";
-//			oDAsmAprov = (IDAsmAprov) PeopleSoftUtil.getComponentInterface(ciName, token);
-//			if (oDAsmAprov == null) {			
-//				PeopleSoftUtil.errorHandler("Unable to Get Component Interface " + ciName, token);			
-//			}
-
-			//***** Set the Component Interface Mode *****
-			oDAsmAprov.setInteractiveMode(false);
-			oDAsmAprov.setGetHistoryItems(true);
-			oDAsmAprov.setEditHistoryItems(false);
-
-			//***** Execute Get *****
-			if (!oDAsmAprov.get()) {				
-				//PeopleSoftUtil.errorHandler("\nNo rows exist for the specified keys.\nFailed to get the Component Interface.",token);				
-			}
+			oDAsmAprov = (IDAsmAprov) getComponentInterface(ciName, token, true);
 
 			Aprovacao w1 = new Aprovacao();
 			w1.setCreationDt(oDAsmAprov.getCreationDt());
@@ -74,6 +62,7 @@ public class TestePeople implements DynamicExecutor {
 		return bean;
 	}
 
+	
 
 
 }

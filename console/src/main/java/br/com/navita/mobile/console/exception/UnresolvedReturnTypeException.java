@@ -1,6 +1,10 @@
 package br.com.navita.mobile.console.exception;
 
-public class UnresolvedReturnTypeException extends Exception {
+import br.com.navita.mobile.exception.NavitaMobileError;
+
+
+
+public class UnresolvedReturnTypeException extends NavitaMobileError {
 
 	/**
 	 * 

@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import br.com.navita.mobile.console.MobileAppProcessor;
 import br.com.navita.mobile.console.domain.MobileApplication;
 import br.com.navita.mobile.console.domain.MobileApplicationExecutor;
-import br.com.navita.mobile.console.domain.MobileBean;
+import br.com.navita.mobile.domain.MobileBean;
 import br.com.navita.mobile.console.exception.OperationNotFoundException;
 import br.com.navita.mobile.console.exception.SapGatewayException;
 import br.com.navita.mobile.console.sap.wrap.SapParameter;

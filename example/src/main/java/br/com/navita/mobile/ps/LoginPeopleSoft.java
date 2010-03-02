@@ -2,12 +2,16 @@ package br.com.navita.mobile.ps;
 
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
-import br.com.navita.mobile.console.deployable.DynamicExecutor;
-import br.com.navita.mobile.console.domain.MobileBean;
+import psft.pt8.joa.API;
+import psft.pt8.joa.ISession;
+
+import br.com.navita.mobile.domain.MobileBean;
+import br.com.navita.mobile.remote.MobileService;
 
 
-public class LoginPeopleSoft  implements DynamicExecutor{
+public class LoginPeopleSoft extends AbstractPeoplesoftService  implements MobileService{
 
 	/**
 	 * 
@@ -19,7 +23,14 @@ public class LoginPeopleSoft  implements DynamicExecutor{
 		String user = (String) paramMap.get("login");
 		String passwd = (String) paramMap.get("passwd");
 		try {
-						
+				ISession session = API.createSession();
+				if(!session.connect(1, getServerPath(), user, passwd, null)){
+					errorHandler(session);
+				}
+				String token = UUID.randomUUID().toString();
+				SESSION_POOL.put(token, session);			
+				bean.setToken(token);
+				
 		} catch (Exception e) {
 			bean.setMessage(e.getMessage());
 			bean.setResultCode(1);

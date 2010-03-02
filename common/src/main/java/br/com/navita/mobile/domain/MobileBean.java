@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.domain;
+package br.com.navita.mobile.domain;
 
 import java.io.Serializable;
 import java.util.List;

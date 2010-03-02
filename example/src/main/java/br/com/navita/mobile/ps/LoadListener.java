@@ -52,7 +52,7 @@ public class LoadListener implements ServletContextListener{
 				//do nothing too
 			}
 
-			initialContext.bind(contextName + "/psLogin", new LoginPeopleSoft());
+			initialContext.bind(contextName + "/psLogin", LoginPeopleSoft.class);
 			log.log(Level.INFO,contextName + "/psLogin" + " BINDED");
 		} catch (NamingException e1) {
 			log.log(Level.SEVERE,"Erro ao executar o bind de " + contextName, e1);

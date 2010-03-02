@@ -11,7 +11,7 @@ import br.com.navita.mobile.console.deployable.DeployableProcessor;
 import br.com.navita.mobile.console.domain.LdapConfig;
 import br.com.navita.mobile.console.domain.LoginResult;
 import br.com.navita.mobile.console.domain.MobileApplication;
-import br.com.navita.mobile.console.domain.MobileBean;
+import br.com.navita.mobile.domain.MobileBean;
 import br.com.navita.mobile.console.exception.InvalidMobileUrlException;
 import br.com.navita.mobile.console.jdbc.DataSourceAppProcessor;
 import br.com.navita.mobile.console.jdbc.JdbcAppProcessor;

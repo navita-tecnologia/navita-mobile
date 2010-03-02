@@ -5,8 +5,9 @@ import java.util.Map;
 import br.com.navita.mobile.console.BaseMobileAppProcessor;
 import br.com.navita.mobile.console.domain.MobileApplication;
 import br.com.navita.mobile.console.domain.MobileApplicationExecutor;
-import br.com.navita.mobile.console.domain.MobileBean;
+import br.com.navita.mobile.domain.MobileBean;
 import br.com.navita.mobile.console.exception.OperationNotFoundException;
+import br.com.navita.mobile.remote.MobileService;
 
 public class DeployableProcessor extends BaseMobileAppProcessor {
 	private DynamicExecutorLookupService dynamicExecutorLookupService;
@@ -28,7 +29,7 @@ public class DeployableProcessor extends BaseMobileAppProcessor {
 		}
 		String jarName = mobApp.getUrl().substring("jar://".length());
 		String className = exec.getClassName();
-		DynamicExecutor executor = dynamicExecutorLookupService.findInstance(jarName, className);
+		MobileService executor = dynamicExecutorLookupService.findInstance(jarName, className);
 		if(executor == null){
 			throw new OperationNotFoundException(jarName + " : "+className);
 		}

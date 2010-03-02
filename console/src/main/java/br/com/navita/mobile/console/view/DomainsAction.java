@@ -11,7 +11,7 @@ import br.com.navita.mobile.console.dao.LdapConfigDAO;
 import br.com.navita.mobile.console.domain.LdapConfig;
 import br.com.navita.mobile.console.domain.LoginResult;
 import br.com.navita.mobile.console.domain.UserGroup;
-import br.com.navita.mobile.console.exception.NavitaMobileError;
+import br.com.navita.mobile.exception.NavitaMobileError;
 
 
 public class DomainsAction extends DefaultActionSupport {

@@ -10,7 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import br.com.navita.mobile.console.BaseMobileAppProcessor;
-import br.com.navita.mobile.console.domain.MobileBean;
+import br.com.navita.mobile.domain.MobileBean;
 import br.com.navita.mobile.console.domain.MobileApplication;
 import br.com.navita.mobile.console.domain.MobileApplicationExecutor;
 

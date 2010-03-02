@@ -6,11 +6,16 @@ import psft.pt8.joa.IPSMessage;
 import psft.pt8.joa.IPSMessageCollection;
 import psft.pt8.joa.ISession;
 
-import br.com.navita.mobile.console.deployable.DynamicExecutor;
-import br.com.navita.mobile.console.domain.MobileBean;
+import br.com.navita.mobile.domain.MobileBean;
+import br.com.navita.mobile.remote.MobileService;
 
 
-public class ClasseQualquer implements DynamicExecutor {
+public class ClasseQualquer implements MobileService {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public MobileBean execute(Map<String, Object> params) {

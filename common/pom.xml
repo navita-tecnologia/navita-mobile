@@ -10,7 +10,7 @@
 	<artifactId>navita-mobile-common</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0</version>
-	<name>Navita Mobile Core</name>
+	<name>Navita Mobile Common</name>
 	<url>http://m.navita.com.br</url>
 	
 

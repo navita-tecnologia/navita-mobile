@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.exception;
+package br.com.navita.mobile.exception;
 
 public class NavitaMobileError extends Exception {
 

@@ -4,7 +4,7 @@ import java.util.Map;
 
 import br.com.navita.mobile.console.BaseMobileAppProcessor;
 import br.com.navita.mobile.console.domain.MobileApplication;
-import br.com.navita.mobile.console.domain.MobileBean;
+import br.com.navita.mobile.domain.MobileBean;
 
 public class JdbcAppProcessor extends BaseMobileAppProcessor {
 

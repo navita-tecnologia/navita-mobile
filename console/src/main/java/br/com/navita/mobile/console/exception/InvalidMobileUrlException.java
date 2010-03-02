@@ -1,5 +1,7 @@
 package br.com.navita.mobile.console.exception;
 
+import br.com.navita.mobile.exception.NavitaMobileError;
+
 public class InvalidMobileUrlException extends NavitaMobileError {
 
 	/**
