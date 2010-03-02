@@ -3,6 +3,8 @@ package br.com.navita.mobile.ps;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import psft.pt8.joa.JOAException;
 import PeopleSoft.Generated.CompIntfc.IDAsmAprov;
@@ -14,14 +16,16 @@ import br.com.navita.mobile.remote.MobileService;
 
 public class TestePeople extends AbstractPeoplesoftService implements MobileService {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
+	private static final Logger log = Logger.getLogger(TestePeople.class.getName());
+	
+	
 
 	public MobileBean execute(Map<String, Object> paramMap) {
 		MobileBean bean = new MobileBean();
-		String token = (String) paramMap.get("token");		
+		String token = (String) paramMap.get("token");	
+		log.log(Level.INFO,"Buscando sessao com token " + token);
 		try {
 			//***** Get Component Interface *****
 			IDAsmAprov oDAsmAprov = null;
@@ -50,10 +54,12 @@ public class TestePeople extends AbstractPeoplesoftService implements MobileServ
 
 
 		} catch (JOAException e) {
+			log.log(Level.SEVERE,"Erro ao executar ci",e);
 			bean.setMessage(e.getMessage());
 			bean.setResultCode(1);
 			return bean;
 		} catch (Exception e) {
+			log.log(Level.SEVERE,"Erro ao executar ci",e);
 			bean.setMessage(e.getMessage());
 			bean.setResultCode(1);
 			return bean;

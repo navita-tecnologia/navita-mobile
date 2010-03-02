@@ -4,6 +4,8 @@ import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import psft.pt8.joa.IPSMessage;
 import psft.pt8.joa.IPSMessageCollection;
@@ -12,6 +14,8 @@ import psft.pt8.joa.JOAException;
 
 
 public abstract class AbstractPeoplesoftService {
+
+	private static final Logger log = Logger.getLogger(AbstractPeoplesoftService.class.getName());
 
 	protected static final Map<String, Object> SESSION_POOL = Collections.synchronizedMap(new LinkedHashMap<String, Object>());
 
@@ -41,20 +45,21 @@ public abstract class AbstractPeoplesoftService {
 
 
 		oPSMessageCollection.deleteAll();
-
+		log.log(Level.SEVERE,buf.toString());
 		throw new PeopleSoftException(buf.toString());
 
 	}
 
 	protected Object getComponentInterface(String ciName, String token, boolean initialize) throws PeopleSoftException {
+		log.log(Level.INFO,"Buscando CI: " + ciName + " para session " + token);
 		ISession session = (ISession) SESSION_POOL.get(token);
-		if(session == null){
+		if(session == null){			
 			throw new PeopleSoftException("Null Session");
 		}
 		Object component = null;
 		try {
 			component = session.getCompIntfc(ciName);			
-		} catch (JOAException e) {
+		} catch (JOAException e) {			
 			throw new PeopleSoftException(e);
 		}
 
@@ -63,7 +68,9 @@ public abstract class AbstractPeoplesoftService {
 		}
 
 		setModes(session,component, initialize);
-
+		if(component != null){
+			log.log(Level.INFO,"CI: " + ciName + " para session " + token + " retornou " + component.getClass().getName());
+		}
 
 		return component;
 	}
