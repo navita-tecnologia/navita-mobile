@@ -8,8 +8,8 @@ import java.util.logging.Logger;
 
 import org.apache.struts2.dispatcher.DefaultActionSupport;
 
-import br.com.navita.mobile.console.deployable.DeployPathBean;
-import br.com.navita.mobile.console.deployable.DynamicExecutorLookupServiceImpl;
+import br.com.navita.mobile.console.jar.DeployPathBean;
+import br.com.navita.mobile.console.jar.DynamicExecutorLookupServiceImpl;
 
 public class DeployAction extends DefaultActionSupport{
 
