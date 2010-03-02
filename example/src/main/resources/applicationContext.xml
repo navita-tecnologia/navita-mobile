@@ -19,7 +19,7 @@
 	<bean id="factoryService" class="br.com.navita.mobile.ps.ServiceFactoryImpl"></bean>
 
 	<bean class="org.springframework.remoting.rmi.RmiServiceExporter">		
-		<property name="serviceName" value="FactoryService" />
+		<property name="serviceName" value="PeopleSoftFactoryService" />
 		<property name="service" ref="factoryService" />
 		<property name="serviceInterface" value="br.com.navita.mobile.remote.ServiceFactory" />		
 		<property name="registryPort" value="1199" />
