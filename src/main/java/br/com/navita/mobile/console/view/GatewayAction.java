@@ -10,7 +10,7 @@ import org.apache.struts2.dispatcher.DefaultActionSupport;
 import org.apache.struts2.interceptor.ParameterAware;
 
 import br.com.navita.mobile.console.NavitaMobileDispatcher;
-import br.com.navita.mobile.console.domain.MobileBean;
+import br.com.navita.mobile.domain.MobileBean;
 import br.com.navita.mobile.console.exception.UnresolvedReturnTypeException;
 
 public class GatewayAction extends DefaultActionSupport implements ParameterAware {

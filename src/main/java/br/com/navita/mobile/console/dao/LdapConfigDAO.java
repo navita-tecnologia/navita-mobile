@@ -9,8 +9,8 @@ import org.apache.commons.configuration.AbstractConfiguration;
 import org.apache.commons.configuration.Configuration;
 
 import br.com.navita.mobile.console.domain.LdapConfig;
-import br.com.navita.mobile.console.exception.NavitaMobileError;
 import br.com.navita.mobile.console.util.Encryptor;
+import br.com.navita.mobile.exception.NavitaMobileError;
 
 
 public class LdapConfigDAO {

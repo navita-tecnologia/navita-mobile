@@ -18,13 +18,11 @@
 		<springframework.version>2.5.6</springframework.version>
 		<struts.version>2.0.9</struts.version>
 		<springframework.security.version>2.0.5.RELEASE</springframework.security.version>
-		<servicemix-version>3.2.3</servicemix-version>
-		<camel-version>1.4.0</camel-version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>br.com.navita</groupId>
-			<artifactId>navita-mobile-core</artifactId>
+			<artifactId>navita-mobile-common</artifactId>
 			<version>1.0</version>
 		</dependency>
 		<dependency>

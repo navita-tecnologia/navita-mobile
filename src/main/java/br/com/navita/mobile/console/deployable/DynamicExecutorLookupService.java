@@ -2,7 +2,9 @@ package br.com.navita.mobile.console.deployable;
 
 import java.io.IOException;
 
+import br.com.navita.mobile.remote.MobileService;
+
 public interface DynamicExecutorLookupService {
 
-	DynamicExecutor findInstance(String jarName, String className) throws ClassNotFoundException, IOException, InstantiationException, IllegalAccessException;
+	MobileService findInstance(String jarName, String className) throws ClassNotFoundException, IOException, InstantiationException, IllegalAccessException;
 }

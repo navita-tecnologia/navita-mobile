@@ -2,7 +2,7 @@ package br.com.navita.mobile.console.sap;
 
 import java.util.Map;
 
-import br.com.navita.mobile.console.domain.MobileBean;
+import br.com.navita.mobile.domain.MobileBean;
 import br.com.navita.mobile.console.exception.SapGatewayException;
 
 public abstract class SapExecution {

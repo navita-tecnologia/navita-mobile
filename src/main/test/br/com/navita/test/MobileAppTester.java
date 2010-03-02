@@ -5,8 +5,9 @@ import java.io.IOException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import br.com.navita.mobile.console.deployable.DynamicExecutor;
+
 import br.com.navita.mobile.console.deployable.DynamicExecutorLookupService;
+import br.com.navita.mobile.remote.MobileService;
 
 public class MobileAppTester {
 
@@ -20,7 +21,7 @@ public class MobileAppTester {
 	public static void main(String[] args) throws Exception {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		DynamicExecutorLookupService service = (DynamicExecutorLookupService) ctx.getBean("dynamicExecutorLookupService");
-		DynamicExecutor ex =  service.findInstance("c:/temp/dina.jar", "br.com.foo.TesteMobileExecutor");
+		MobileService ex =  service.findInstance("c:/temp/dina.jar", "br.com.foo.TesteMobileExecutor");
 		System.out.println(ex.execute(null).getMessage());
 		System.exit(0);
 	}

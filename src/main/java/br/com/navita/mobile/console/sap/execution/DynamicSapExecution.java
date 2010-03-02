@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import br.com.navita.mobile.console.domain.MobileBean;
+import br.com.navita.mobile.domain.MobileBean;
 import br.com.navita.mobile.console.exception.SapGatewayException;
 import br.com.navita.mobile.console.sap.PoolManager;
 import br.com.navita.mobile.console.sap.SapExecution;

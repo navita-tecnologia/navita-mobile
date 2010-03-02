@@ -2,34 +2,33 @@ package br.com.navita.mobile.console.exception;
 
 import br.com.navita.mobile.exception.NavitaMobileError;
 
-
-
-
-public class PushException extends NavitaMobileError {
+public class InvalidResultBeanException extends NavitaMobileError{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public PushException() {
+	public InvalidResultBeanException() {
 		super();
 		
 	}
 
-	public PushException(String message, Throwable cause) {
+	public InvalidResultBeanException(String message, Throwable cause) {
 		super(message, cause);
 		
 	}
 
-	public PushException(String message) {
+	public InvalidResultBeanException(String message) {
 		super(message);
 		
 	}
 
-	public PushException(Throwable cause) {
+	public InvalidResultBeanException(Throwable cause) {
 		super(cause);
 		
 	}
+	
+	
 
 }

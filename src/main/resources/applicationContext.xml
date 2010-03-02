@@ -30,9 +30,9 @@
 		<property name="password" value="" />
 	</bean>
 
-<bean id="deployPathBean" class="br.com.navita.mobile.console.deployable.DeployPathBean" >
-	<property name="deployPath" value="${deploy.bean.path}"/>
-</bean>
+	<bean id="deployPathBean" class="br.com.navita.mobile.console.deployable.DeployPathBean">
+		<property name="deployPath" value="${deploy.bean.path}" />
+	</bean>
 
 
 	<bean id="commonConfiguration"
@@ -51,16 +51,19 @@
 	<bean id="ldapService" class="br.com.navita.mobile.console.bizz.LdapServiceImpl" />
 	<bean id="msLoginService" class="br.com.navita.mobile.console.bizz.MSWindowsLoginService" />
 	<bean id="ldapConfigDAO" class="br.com.navita.mobile.console.dao.LdapConfigDAO" />
-	<bean id="dynamicExecutorLookupService" class="br.com.navita.mobile.console.deployable.DynamicExecutorLookupServiceImpl" />
-	
+	<bean id="dynamicExecutorLookupService"
+		class="br.com.navita.mobile.console.deployable.DynamicExecutorLookupServiceImpl" />
+
 
 	<bean id="sapMobileProcessor" class="br.com.navita.mobile.console.sap.SapMobileProcessor" />
-	<bean id="staticProcessor" class="br.com.navita.mobile.console.stat.StaticProcessor" />	
-	<bean id="dsAppProcessor" class="br.com.navita.mobile.console.jdbc.DataSourceAppProcessor" />
+	<bean id="staticProcessor" class="br.com.navita.mobile.console.stat.StaticProcessor" />
+	<bean id="dsAppProcessor"
+		class="br.com.navita.mobile.console.jdbc.DataSourceAppProcessor" />
 	<bean id="jdbcAppProcessor" class="br.com.navita.mobile.console.jdbc.JdbcAppProcessor" />
-	<bean id="deployableProcessor" class="br.com.navita.mobile.console.deployable.DeployableProcessor" />
-	
-	
+	<bean id="deployableProcessor"
+		class="br.com.navita.mobile.console.deployable.DeployableProcessor" />
+
+
 
 	<security:http>
 		<security:intercept-url pattern="/**" access="ROLE_USER" />
@@ -94,7 +97,7 @@
 	</security:authentication-provider>
 
 	<bean id="setupBusiness" class="br.com.navita.mobile.console.bizz.SetupBusinessImpl"></bean>
-	<bean id="setupDAO" class="br.com.navita.mobile.console.dao.SetupDAOImpl" >
+	<bean id="setupDAO" class="br.com.navita.mobile.console.dao.SetupDAOImpl">
 		<property name="sqlUserExists" value="${sql.exists.users}"></property>
 		<property name="sqlAuthExists" value="${sql.exists.authorities}" />
 		<property name="sqlAdminExists" value="${sql.exists.admin}" />
@@ -143,4 +146,17 @@
 		</property>
 	</bean>
 
-	</beans>
+
+	<!-- RMI -->
+
+	<bean id="testeRmi" class="br.com.navita.mobile.console.remote.TesteRemote">
+		<property name="serviceFactory" ref="serviceFactory" />
+	</bean>
+
+	<bean id="serviceFactory" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="rmi://127.0.0.1:1199/FactoryService" />
+		<property name="serviceInterface" value="br.com.navita.mobile.remote.ServiceFactory" />
+	</bean>
+
+
+</beans>
