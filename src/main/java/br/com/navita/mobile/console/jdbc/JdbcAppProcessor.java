@@ -12,7 +12,7 @@ public class JdbcAppProcessor extends BaseMobileAppProcessor {
 	public MobileBean processApplication(MobileApplication mobApp,
 			String operation, Map<String, Object> processedParams)
 			throws Exception {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
-import br.com.navita.mobile.console.deployable.DynamicExecutorLookupService;
+import br.com.navita.mobile.console.jar.DynamicExecutorLookupService;
 import br.com.navita.mobile.remote.MobileService;
 
 public class MobileAppTester {
