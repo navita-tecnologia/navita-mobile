@@ -17,7 +17,11 @@ public abstract class AbstractPeoplesoftService {
 
 	private static final Logger log = Logger.getLogger(AbstractPeoplesoftService.class.getName());
 
-	protected static final Map<String, Object> SESSION_POOL = Collections.synchronizedMap(new LinkedHashMap<String, Object>());
+	protected static final Map<String, Object> SESSION_POOL ;
+	static{
+		log.log(Level.SEVERE,"Inicializando Session Pool");
+	 SESSION_POOL = Collections.synchronizedMap(new LinkedHashMap<String, Object>());
+	}
 
 	protected void errorHandler(ISession session) throws Exception{
 		if(session == null || ( !session.getErrorPending() && !session.getWarningPending())){
@@ -52,6 +56,7 @@ public abstract class AbstractPeoplesoftService {
 
 	protected Object getComponentInterface(String ciName, String token, boolean initialize) throws PeopleSoftException {
 		log.log(Level.INFO,"Buscando CI: " + ciName + " para session " + token);
+		log.log(Level.INFO,"SessionPool possui " + SESSION_POOL.size() + " entradas salvas");
 		ISession session = (ISession) SESSION_POOL.get(token);
 		if(session == null){			
 			throw new PeopleSoftException("Null Session");
