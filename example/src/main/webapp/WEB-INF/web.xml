@@ -7,11 +7,19 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml</param-value>
 	</context-param>
-	
+
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	
+	<servlet>
+		<servlet-name>factoryExporter</servlet-name>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>factoryExporter</servlet-name>
+		<url-pattern>/remoting/FactoryService</url-pattern>
+	</servlet-mapping>
 
 </web-app>

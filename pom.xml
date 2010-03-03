@@ -14,6 +14,8 @@
 		<module>common</module>
 		<module>console</module>
 		<module>example</module>
+		<module>ejb-example</module>
+		<module>ejb-client</module>
 	</modules>
 
 	<developers>
