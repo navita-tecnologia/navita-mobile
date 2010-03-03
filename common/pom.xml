@@ -12,7 +12,15 @@
 	<version>1.0</version>
 	<name>Navita Mobile Common</name>
 	<url>http://m.navita.com.br</url>
-	
+
+	<dependencies>
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>ejb</artifactId>
+			<version>3.0</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
