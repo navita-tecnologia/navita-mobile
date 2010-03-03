@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ctx="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:security="http://www.springframework.org/schema/security"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+						http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd 
+						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd 
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd"
+	default-autowire="autodetect">
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:navita-mobile.properties"></property>
+	</bean>
+
+	<!--
+		<bean class="org.springframework.jndi.JndiObjectFactoryBean"
+		name="dataSource" autowire="byName"> <property name="jndiName"
+		value="jdbc/navitaMobileDataSource" /> </bean>
+	-->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver" />
+		<property name="url" value="jdbc:derby:mobiledb;create=true" />
+		<property name="username" value="" />
+		<property name="password" value="" />
+	</bean>
+
+	<bean id="deployPathBean" class="br.com.navita.mobile.console.jar.DeployPathBean">
+		<property name="deployPath" value="${deploy.bean.path}" />
+	</bean>
+
+
+	<bean id="commonConfiguration"
+		class="br.com.navita.mobile.console.dao.NavitaMobileConfiguration"
+		init-method="setDelimiterParsingDisabled">
+		<constructor-arg index="0" ref="dataSource"></constructor-arg>
+		<constructor-arg index="1" type="java.lang.String"
+			value="mobileconfig"></constructor-arg>
+		<constructor-arg index="2" type="java.lang.String"
+			value="id"></constructor-arg>
+		<constructor-arg index="3" type="java.lang.String"
+			value="value"></constructor-arg>
+
+	</bean>
+
+	<bean id="ldapService" class="br.com.navita.mobile.console.bizz.LdapServiceImpl" />
+	<bean id="msLoginService" class="br.com.navita.mobile.console.bizz.MSWindowsLoginService" />
+	<bean id="ldapConfigDAO" class="br.com.navita.mobile.console.dao.LdapConfigDAO" />
+	<bean id="dynamicExecutorLookupService"
+		class="br.com.navita.mobile.console.jar.DynamicExecutorLookupServiceImpl" />
+
+
+	<bean id="sapMobileProcessor" class="br.com.navita.mobile.console.sap.SapMobileProcessor" />
+	<bean id="staticProcessor" class="br.com.navita.mobile.console.stat.StaticProcessor" />
+	<bean id="dsAppProcessor"
+		class="br.com.navita.mobile.console.jdbc.DataSourceAppProcessor" />
+	<bean id="jdbcAppProcessor" class="br.com.navita.mobile.console.jdbc.JdbcAppProcessor" />
+	<bean id="deployableProcessor"
+		class="br.com.navita.mobile.console.jar.DeployableProcessor" />
+		<bean id="rmiProcessor"
+		class="br.com.navita.mobile.console.remote.RmiProcessor" />
+
+
+
+	<security:http>
+		<security:intercept-url pattern="/**" access="ROLE_USER" />
+		<security:intercept-url pattern="/css/**"
+			filters='none' />
+		<security:intercept-url pattern="/images/**"
+			filters='none' />
+		<security:intercept-url pattern="/login.action*"
+			filters='none' />
+		<security:intercept-url pattern="/gateway.action*"
+			filters='none' />
+		<security:intercept-url pattern="/push*/**"
+			filters='none' />
+		<security:intercept-url pattern="/teste/**"
+			filters='none' />
+		<security:intercept-url pattern="/assets/**"
+			filters='none' />
+
+		<security:form-login login-page="/login.action"
+			default-target-url="/index.action" />
+		<security:anonymous />
+		<security:http-basic />
+		<security:logout />
+		<security:remember-me />
+	</security:http>
+
+	<security:authentication-provider>
+		<security:password-encoder hash="md5" />
+		<security:jdbc-user-service
+			data-source-ref="dataSource" />
+	</security:authentication-provider>
+
+	<bean id="setupBusiness" class="br.com.navita.mobile.console.bizz.SetupBusinessImpl"></bean>
+	<bean id="setupDAO" class="br.com.navita.mobile.console.dao.SetupDAOImpl">
+		<property name="sqlUserExists" value="${sql.exists.users}"></property>
+		<property name="sqlAuthExists" value="${sql.exists.authorities}" />
+		<property name="sqlAdminExists" value="${sql.exists.admin}" />
+		<property name="sqlCreateUsers" value="${sql.create.users}" />
+		<property name="sqlCreateAuth" value="${sql.create.auth}" />
+
+		<property name="sqlAppExists" value="${sql.exists.apps}" />
+		<property name="sqlAppExecExists" value="${sql.exists.apps.exec}" />
+		<property name="sqlConfigExists" value="${sql.exists.config}" />
+		<property name="sqlCreateApp" value="${sql.create.apps}" />
+		<property name="sqlCreateAppExec" value="${sql.create.apps.exec}" />
+		<property name="sqlCreateConfig" value="${sql.create.config}" />
+
+	</bean>
+
+	<bean id="mobileApplicationDAO"
+		class="br.com.navita.mobile.console.dao.MobileApplicationDAOImpl"></bean>
+
+	<bean id="gatewayDispatcher" class="br.com.navita.mobile.console.NavitaMobileDispatcher" />
+
+
+	<!--
+		<security:authentication-provider> <security:password-encoder
+		hash="md5" /> <security:user-service> <security:user name="admin"
+		password="navita" authorities="ROLE_ADMINISTRATOR, ROLE_USER" />
+		</security:user-service> </security:authentication-provider>
+	-->
+
+	<bean id="checkOldSession"
+		class="br.com.navita.mobile.console.listener.MobileSessionTimeoutScheduler"></bean>
+
+	<bean id="scheduledTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<!-- wait 10 seconds before starting repeated execution -->
+		<property name="delay" value="10000" />
+		<!-- run every 30 seconds -->
+		<property name="period" value="30000" />
+		<property name="timerTask" ref="checkOldSession" />
+	</bean>
+
+	<bean id="timerFactory" class="org.springframework.scheduling.timer.TimerFactoryBean">
+		<property name="scheduledTimerTasks">
+			<list>
+				<!-- see the example above -->
+				<ref bean="scheduledTask" />
+			</list>
+		</property>
+	</bean>
+
+
+	
+
+</beans>
