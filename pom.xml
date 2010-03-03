@@ -247,6 +247,13 @@
 			<artifactId>jcifs</artifactId>
 			<version>1.2.19</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>ejb</artifactId>
+			<version>3.0</version>
+			<scope>provided</scope>
+		</dependency>
 	
 		<!-- ERP's -->
 		<dependency>
