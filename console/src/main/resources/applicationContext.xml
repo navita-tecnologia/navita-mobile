@@ -149,16 +149,6 @@
 	</bean>
 
 
-	<!-- RMI -->
-
-	<bean id="testeRmi" class="br.com.navita.mobile.console.remote.TesteRemote">
-		<property name="serviceFactory" ref="serviceFactory" />
-	</bean>
-
-	<bean id="serviceFactory" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
-		<property name="serviceUrl" value="rmi://127.0.0.1:1199/FactoryService" />
-		<property name="serviceInterface" value="br.com.navita.mobile.remote.ServiceFactory" />
-	</bean>
-
+	
 
 </beans>
