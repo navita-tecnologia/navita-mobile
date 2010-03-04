@@ -9,7 +9,7 @@
 	<version>1.0</version>
 	<name>Navita Mobile</name>
 	<url>http://m.navita.com.br</url>
-
+ 
 	<modules>
 		<module>common</module>
 		<module>console</module>
