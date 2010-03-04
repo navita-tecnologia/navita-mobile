@@ -14,7 +14,7 @@ public class ClasseQualquer implements MobileService {
 	public MobileBean execute(Map<String, Object> params) {
 		MobileBean bean = new MobileBean();
 		bean.setObject(new Object[]{"v1","v2",234});		
-		bean.setMessage("Simple Fake Message");
+		bean.setMessage("Simple Fake Message teste de redeploy");
 		return bean;
 	}
 	
