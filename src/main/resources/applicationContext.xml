@@ -60,11 +60,9 @@
 	<bean id="dsAppProcessor"
 		class="br.com.navita.mobile.console.jdbc.DataSourceAppProcessor" />
 	<bean id="jdbcAppProcessor" class="br.com.navita.mobile.console.jdbc.JdbcAppProcessor" />
-	<bean id="deployableProcessor"
-		class="br.com.navita.mobile.console.jar.DeployableProcessor" />
-		<bean id="rmiProcessor"
-		class="br.com.navita.mobile.console.remote.RmiProcessor" />
-
+	<bean id="deployableProcessor" class="br.com.navita.mobile.console.jar.DeployableProcessor" />
+	<bean id="rmiProcessor" class="br.com.navita.mobile.console.remote.RmiProcessor" />
+	<bean id="ejbProcessor" class="br.com.navita.mobile.console.remote.EjbProcessor" />
 
 
 	<security:http>
@@ -149,6 +147,6 @@
 	</bean>
 
 
-	
+
 
 </beans>
