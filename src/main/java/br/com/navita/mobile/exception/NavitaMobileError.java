@@ -1,5 +1,10 @@
 package br.com.navita.mobile.exception;
 
+/**
+ * 
+ * @author mpguedes
+ *
+ */
 public class NavitaMobileError extends Exception {
 
 	/**
