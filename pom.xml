@@ -13,12 +13,10 @@
 	<modules>
 		<module>common</module>
 		<module>console</module>
-		<module>simple-client</module>		
-		<module>ejb-client</module>			
+		<module>simple-client</module>
+				
+		<module>ejb-duke</module>
 		
-		
-		<module>ejb-ps-duke</module>
-		<module>ejb-automidia-duke</module>
 			
 	</modules>
 
