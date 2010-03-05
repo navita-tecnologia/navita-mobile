@@ -16,7 +16,6 @@ import br.com.navita.mobile.console.jar.DeployableProcessor;
 import br.com.navita.mobile.console.jdbc.DataSourceAppProcessor;
 import br.com.navita.mobile.console.jdbc.JdbcAppProcessor;
 import br.com.navita.mobile.console.remote.EjbProcessor;
-import br.com.navita.mobile.console.remote.RmiProcessor;
 import br.com.navita.mobile.console.sap.SapMobileProcessor;
 import br.com.navita.mobile.console.stat.StaticProcessor;
 import br.com.navita.mobile.console.util.NavitaMobileParamsUtil;
@@ -33,16 +32,11 @@ public class NavitaMobileDispatcher {
 	private StaticProcessor staticProcessor;	
 	private DataSourceAppProcessor dsAppProcessor;
 	private JdbcAppProcessor jdbcAppProcessor;
-	private DeployableProcessor deployableProcessor;
-	private RmiProcessor rmiProcessor;
+	private DeployableProcessor deployableProcessor;	
 	private EjbProcessor ejbProcessor;
 
 	public void setEjbProcessor(EjbProcessor ejbProcessor) {
 		this.ejbProcessor = ejbProcessor;
-	}
-
-	public void setRmiProcessor(RmiProcessor rmiProcessor) {
-		this.rmiProcessor = rmiProcessor;
 	}
 
 	public void setDeployableProcessor(DeployableProcessor deployableProcessor) {
@@ -158,11 +152,7 @@ public class NavitaMobileDispatcher {
 		if( url.startsWith("jar://")){
 			processor = deployableProcessor;
 		}
-
-		if( url.startsWith("rmi://")){
-			processor = rmiProcessor;
-		}
-
+		
 		if( url.startsWith("ejb://")){
 			processor = ejbProcessor;
 		}
