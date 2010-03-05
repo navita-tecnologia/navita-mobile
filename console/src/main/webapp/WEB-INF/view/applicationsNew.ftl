@@ -51,7 +51,14 @@
 								<td>Private Key *</td>
 								<td align="center"><@s.textfield name="mobileApplication.privateKey" theme="simple" value="" readonly="true"/></td>
 							</tr>
-							
+							<tr valign="middle" class="active">
+								<td>Url Token Login nativo</td>
+								<td align="center"><@s.textfield name="mobileApplication.tokenGeneratorUrl" theme="simple"/></td>
+							</tr>
+							<tr valign="middle">
+								<td>&nbsp;</td>
+								<td align="left">&nbsp;</td>
+							</tr>
 							<tr class="active" valign="middle">
 								
 								<td>* digite a nova chave para alterar.</td>

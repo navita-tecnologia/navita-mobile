@@ -19,6 +19,7 @@ public class MobileApplication implements Serializable{
 	private boolean enabled;
 	private boolean usingNativeLoginService;
 	private String loginServiceId;
+	private String tokenGeneratorUrl;
 	private String privateKey;
 	private Map<String,Object> extendedProperty;
 	private List<MobileApplicationExecutor> executors;
@@ -105,4 +106,14 @@ public class MobileApplication implements Serializable{
 	public void setInternal(boolean internal) {
 		this.internal = internal;
 	}
+
+	public String getTokenGeneratorUrl() {
+		return tokenGeneratorUrl;
+	}
+
+	public void setTokenGeneratorUrl(String tokenGeneratorUrl) {
+		this.tokenGeneratorUrl = tokenGeneratorUrl;
+	}
+	
+	
 }
