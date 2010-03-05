@@ -10,10 +10,8 @@ import psft.pt8.joa.API;
 import psft.pt8.joa.ISession;
 
 import br.com.navita.mobile.domain.MobileBean;
-import br.com.navita.mobile.remote.MobileService;
 
-
-public class LoginPeopleSoft extends AbstractPeoplesoftService  implements MobileService{
+public class LoginPeopleSoft extends AbstractPeoplesoftService {
 
 	private static final long serialVersionUID = 1L;
 	

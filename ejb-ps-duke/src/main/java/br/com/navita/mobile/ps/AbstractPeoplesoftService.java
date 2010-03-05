@@ -7,13 +7,20 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import br.com.navita.mobile.remote.MobileService;
+
 import psft.pt8.joa.IPSMessage;
 import psft.pt8.joa.IPSMessageCollection;
 import psft.pt8.joa.ISession;
 import psft.pt8.joa.JOAException;
 
 
-public abstract class AbstractPeoplesoftService {
+public abstract class AbstractPeoplesoftService implements MobileService{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private static final Logger log = Logger.getLogger(AbstractPeoplesoftService.class.getName());
 

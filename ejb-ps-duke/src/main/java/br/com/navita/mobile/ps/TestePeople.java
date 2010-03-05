@@ -11,10 +11,9 @@ import PeopleSoft.Generated.CompIntfc.IDAsmAprov;
 import PeopleSoft.Generated.CompIntfc.IDAsmAprovDExApresVw3;
 import PeopleSoft.Generated.CompIntfc.IDAsmAprovDExApresVw3Collection;
 import br.com.navita.mobile.domain.MobileBean;
-import br.com.navita.mobile.remote.MobileService;
 
 
-public class TestePeople extends AbstractPeoplesoftService implements MobileService {
+public class TestePeople extends AbstractPeoplesoftService{
 
 	private static final long serialVersionUID = 1L;
 	

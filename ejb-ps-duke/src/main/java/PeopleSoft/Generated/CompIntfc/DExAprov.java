@@ -11,7 +11,6 @@
 
 package PeopleSoft.Generated.CompIntfc;
 
-import java.math.*;
 import psft.pt8.joa.*;
 
 public class DExAprov implements IDExAprov 

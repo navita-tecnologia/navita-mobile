@@ -4,16 +4,17 @@ import javax.ejb.Stateless;
 
 import br.com.lele.ClasseQualquer;
 import br.com.navita.mobile.exception.ServiceNotFoundException;
-import br.com.navita.mobile.remote.EjbServiceFactory;
-import br.com.navita.mobile.remote.EjbServiceFactoryLocal;
+import br.com.navita.mobile.remote.EjbServiceFactorySupport;
 import br.com.navita.mobile.remote.MobileService;
 
 @Stateless(mappedName="ejb/FakeFactory")
-public class EjbFakeServiceFactoryImpl implements EjbServiceFactory, EjbServiceFactoryLocal{
+public class EjbFakeServiceFactoryImpl extends EjbServiceFactorySupport{
 
 	@Override
-	public MobileService getServiceByName(String name)
-			throws ServiceNotFoundException {
+	public MobileService getServiceByName(String name) throws ServiceNotFoundException {
+		if("super".equals(name)){
+			return super.getServiceByName(name);
+		}
 		
 		return new ClasseQualquer();
 	}
