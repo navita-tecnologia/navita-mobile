@@ -33,7 +33,7 @@ public class MobileApplicationDAOImpl implements MobileApplicationDAO {
 		app.setLoginServiceId(rs.getString("loginServiceId"));
 		app.setUsingNativeLoginService(rs.getBoolean("usingNativeLoginService"));
 		app.setPrivateKey(rs.getString("privateKey"));
-
+		app.setTokenGeneratorUrl(rs.getString("tokenGeneratorUrl"));
 		return app;
 	}
 
@@ -77,7 +77,7 @@ public class MobileApplicationDAOImpl implements MobileApplicationDAO {
 		final MobileApplication model = mobileApplication;
 		final String mobileId = (model.getId() == null || model.getId().isEmpty()) ? UUID.randomUUID().toString() : model.getId();
 		jdbcTemplate.update("insert into mobileapp values(" +
-				"?,?,1,?,0,?,?,'RrSe916DqrdQANfFKaQkgQ==')", new PreparedStatementSetter(){
+				"?,?,1,?,0,?,?,'RrSe916DqrdQANfFKaQkgQ==',?)", new PreparedStatementSetter(){
 			@Override
 			public void setValues(PreparedStatement ps)
 			throws SQLException {				
@@ -85,7 +85,8 @@ public class MobileApplicationDAOImpl implements MobileApplicationDAO {
 				ps.setString(2, model.getName());
 				ps.setString(3, model.getUrl());
 				ps.setBoolean(4, model.isUsingNativeLoginService());				
-				ps.setString(5, model.getLoginServiceId());				
+				ps.setString(5, model.getLoginServiceId());	
+				ps.setString(6, model.getTokenGeneratorUrl());
 			}
 		});	
 		
@@ -99,7 +100,8 @@ public class MobileApplicationDAOImpl implements MobileApplicationDAO {
 				"name = ?," +
 				"enabled = ?," +
 				"usingNativeLoginService = ?," +
-				"loginServiceId = ? " +
+				"loginServiceId = ?, " +
+				"tokenGeneratorUrl = ? " +
 				"where id = ?", new PreparedStatementSetter(){
 			@Override
 			public void setValues(PreparedStatement ps)
@@ -109,7 +111,8 @@ public class MobileApplicationDAOImpl implements MobileApplicationDAO {
 				ps.setBoolean(3, model.isEnabled());
 				ps.setBoolean(4, model.isUsingNativeLoginService());
 				ps.setString(5, model.getLoginServiceId());
-				ps.setString(6, model.getId());
+				ps.setString(6, model.getTokenGeneratorUrl());
+				ps.setString(7, model.getId());
 			}
 		});
 
