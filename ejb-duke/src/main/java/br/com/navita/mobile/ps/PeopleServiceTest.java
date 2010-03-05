@@ -11,13 +11,15 @@ import PeopleSoft.Generated.CompIntfc.IDAsmAprov;
 import PeopleSoft.Generated.CompIntfc.IDAsmAprovDExApresVw3;
 import PeopleSoft.Generated.CompIntfc.IDAsmAprovDExApresVw3Collection;
 import br.com.navita.mobile.domain.MobileBean;
+import br.com.navita.mobile.duke.domain.Aprovacao;
+import br.com.navita.mobile.duke.domain.Supervisor;
 
 
-public class TestePeople extends AbstractPeoplesoftService{
+public class PeopleServiceTest extends AbstractPeoplesoftService{
 
 	private static final long serialVersionUID = 1L;
 	
-	private static final Logger log = Logger.getLogger(TestePeople.class.getName());
+	private static final Logger log = Logger.getLogger(PeopleServiceTest.class.getName());
 	
 	
 

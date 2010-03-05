@@ -1,4 +1,4 @@
-package br.com.navita.mobile.ps;
+package br.com.navita.mobile.duke.domain;
 
 public class Supervisor {
 	private String supervisorId;

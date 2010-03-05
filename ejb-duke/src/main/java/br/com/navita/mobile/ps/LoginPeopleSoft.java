@@ -15,7 +15,6 @@ public class LoginPeopleSoft extends AbstractPeoplesoftService {
 
 	private static final long serialVersionUID = 1L;
 	
-	
 	private static final Logger log = Logger.getLogger(LoginPeopleSoft.class.getName());
 	
 	
