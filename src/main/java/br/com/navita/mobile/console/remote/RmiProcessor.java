@@ -11,7 +11,7 @@ import br.com.navita.mobile.domain.MobileBean;
 import br.com.navita.mobile.exception.ServiceNotFoundException;
 
 import br.com.navita.mobile.remote.MobileService;
-import br.com.navita.mobile.remote.ServiceFactory;
+import br.com.navita.mobile.remote.RmiServiceFactory;
 
 public class RmiProcessor extends BaseMobileAppProcessor{
 
@@ -27,10 +27,10 @@ public class RmiProcessor extends BaseMobileAppProcessor{
 		MobileBean bean = new MobileBean();
 		try{
 			RmiProxyFactoryBean rmiProxyFactoryBean = new RmiProxyFactoryBean();
-			rmiProxyFactoryBean.setServiceInterface(ServiceFactory.class);
+			rmiProxyFactoryBean.setServiceInterface(RmiServiceFactory.class);
 			rmiProxyFactoryBean.setServiceUrl(mobApp.getUrl());
 			rmiProxyFactoryBean.afterPropertiesSet();
-			ServiceFactory factory = (ServiceFactory)rmiProxyFactoryBean.getObject();
+			RmiServiceFactory factory = (RmiServiceFactory)rmiProxyFactoryBean.getObject();
 			if(factory == null){
 				bean.setResultCode(1);
 				bean.setMessage(mobApp.getUrl() + " nao encontrado");

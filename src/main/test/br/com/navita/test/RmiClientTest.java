@@ -6,7 +6,7 @@ import java.security.Permission;
 import org.springframework.remoting.rmi.RmiProxyFactoryBean;
 
 import br.com.navita.mobile.exception.ServiceNotFoundException;
-import br.com.navita.mobile.remote.ServiceFactory;
+import br.com.navita.mobile.remote.RmiServiceFactory;
 
 
 public class RmiClientTest {
@@ -22,10 +22,10 @@ public class RmiClientTest {
 			public void checkPermission(Permission perm, Object context) {} 
 		});
 		RmiProxyFactoryBean rmiProxyFactoryBean = new RmiProxyFactoryBean();
-		rmiProxyFactoryBean.setServiceInterface(ServiceFactory.class);
+		rmiProxyFactoryBean.setServiceInterface(RmiServiceFactory.class);
 		rmiProxyFactoryBean.setServiceUrl("rmi://127.0.0.1:1199/FactoryService");
 		rmiProxyFactoryBean.afterPropertiesSet();
-		System.out.println(((ServiceFactory)rmiProxyFactoryBean.getObject()).getServiceByName("login"));
+		System.out.println(((RmiServiceFactory)rmiProxyFactoryBean.getObject()).getServiceByName("login"));
 		
 	}
 
