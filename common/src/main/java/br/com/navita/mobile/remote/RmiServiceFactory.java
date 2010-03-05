@@ -7,6 +7,18 @@ import br.com.navita.mobile.exception.ServiceNotFoundException;
 
 
 
-public interface ServiceFactory extends Remote{
+/**
+ * 
+ * @author mpguedes
+ *
+ */
+public interface RmiServiceFactory extends Remote{
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 * @throws ServiceNotFoundException
+	 * @throws RemoteException
+	 */
 	MobileService getServiceByName(String name) throws ServiceNotFoundException,RemoteException;
 }
