@@ -162,7 +162,7 @@ public class NavitaMobileDispatcher {
 		if( url.startsWith("jar://")){
 			processor = deployableProcessor;
 		}
-		
+
 		if( url.startsWith("ejb://")){
 			processor = ejbProcessor;
 		}
@@ -173,47 +173,66 @@ public class NavitaMobileDispatcher {
 
 	private MobileBean processMSWindowsLoginOperation(MobileApplication mobApp,	Map<String, Object> params) {	
 		MobileBean bean = new MobileBean();
-		
+
 		LdapConfig serviceProperties = ldapConfigDAO.getServiceProperties(mobApp.getLoginServiceId());
 		String ip = serviceProperties.getIp();
 		String domainName = serviceProperties.getName(); 
 
 		((MSWindowsLoginService) msLoginService).setConfig(serviceProperties);		
-		String login = params.get("user").toString();
+		String login = (String) params.get("login");
+		if(null == login){
+			//tenta usar 'user'
+			login = (String) params.get("user");
+		}
 		LOG.info("Login in "+login +" on "+domainName+" using server "+ip);
-		LoginResult result = msLoginService.login(login, params.get("password").toString());
+		String passwd = (String) params.get("passwd");
+		if(null == passwd){
+			//tenta usar 'password'
+			passwd = (String) params.get("password");
+		}
+		LoginResult result = msLoginService.login(login, passwd);
 		String token = "";
 		if(result.isLogged() && ! "none".equalsIgnoreCase(mobApp.getTokenGeneratorUrl())){
 			try {
-				token = callTokenGenerator(mobApp, params);
+				MobileBean tokenBean = callTokenGenerator(mobApp, params);
+				token = tokenBean.getToken();
+				if(tokenBean.getResultCode() != 0){
+					bean.setObject(tokenBean);
+				}
+
 			} catch (Exception e) {
-				bean.setResultCode(1);
-				bean.setMessage(e.getMessage());
-				bean.setObject(e);
-				return bean;
+				return getFailedBean(1, e);
 			}
 		}
-		
+
 		bean.setMessage(result.getMessage());
 		bean.setResultCode(result.isLogged()?0:1);
 		bean.setList(result.getGroups());
+
 		bean.setToken(token);
 
 		LOG.info("Login in operation for "+login+" done.");
 		return bean;
 	}
 
-	private String callTokenGenerator(MobileApplication mobApp,	Map<String, Object> params) throws Exception {
+	private MobileBean callTokenGenerator(MobileApplication mobApp,	Map<String, Object> params) throws Exception {
 		MobileAppProcessor proc = lookupProcessor(mobApp.getTokenGeneratorUrl());
 		MobileBean b = null;
 		if(proc != null){
 			b = proc.processApplication(mobApp, "getToken", params);
 		}
-		
-		return b.getToken();
+
+		return b;
 	}
 
 
+	private MobileBean getFailedBean(int code, Throwable t) {		
+		MobileBean bean = new MobileBean();
+		bean.setResultCode(code);		
+		bean.setMessage(t.getMessage() == null ? t.toString():t.getMessage());
+		bean.setObject(t);
+		return bean;
+	}
 
 
 
