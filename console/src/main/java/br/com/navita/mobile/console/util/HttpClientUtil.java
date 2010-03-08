@@ -31,6 +31,7 @@ public class HttpClientUtil {
 	
 	private boolean auth=false;
 	private String domainController = null;
+	
 	public HttpClientUtil(){
 		client = new HttpClient(new MultiThreadedHttpConnectionManager());
 		client.getHttpConnectionManager().getParams().setConnectionTimeout(30000);
@@ -53,8 +54,7 @@ public class HttpClientUtil {
 	 * @throws HttpException
 	 * @throws IOException
 	 */
-	public  String post(String url, NameValuePair[] params, NameValuePair[] headers)
-	throws HttpException, IOException {
+	public  String post(String url, NameValuePair[] params, NameValuePair[] headers) throws HttpException, IOException {
 		LOG.info("Remote POST: "+url);
 		checkAuth();
 		PostMethod method = new PostMethod(url);
