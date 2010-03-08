@@ -13,7 +13,7 @@ import br.com.navita.mobile.remote.EjbServiceFactory;
 import br.com.navita.mobile.remote.EjbServiceFactoryLocal;
 import br.com.navita.mobile.remote.MobileService;
 
-@Stateless(mappedName="ejb/PeopleSoftFactory")
+@Stateless(mappedName="ejb/DukeEnergyFactory")
 public class EjbServiceFactoryImpl implements EjbServiceFactory, EjbServiceFactoryLocal, Serializable{
 
 	/**
