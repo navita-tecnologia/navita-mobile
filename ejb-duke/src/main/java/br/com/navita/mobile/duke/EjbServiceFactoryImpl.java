@@ -24,7 +24,9 @@ public class EjbServiceFactoryImpl implements EjbServiceFactory, EjbServiceFacto
 	@Override
 	public MobileService getServiceByName(String name)	throws ServiceNotFoundException {
 
+		
 		if("getToken".equals(name)){
+			//Chamado pelo login AD integrado com PS e Automidia
 			return new LoginIntegradoService();
 		}
 
