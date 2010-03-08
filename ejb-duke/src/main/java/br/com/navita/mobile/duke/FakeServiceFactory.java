@@ -2,6 +2,7 @@ package br.com.navita.mobile.duke;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.ejb.Stateless;
 
@@ -33,6 +34,7 @@ public class FakeServiceFactory implements EjbServiceFactory, EjbServiceFactoryL
 			public MobileBean execute(Map<String, Object> params) {
 				MobileBean bean = new MobileBean();
 				bean.setMessage("Fake message");
+				bean.setToken(UUID.randomUUID().toString());
 				return bean;
 			}
 		};
