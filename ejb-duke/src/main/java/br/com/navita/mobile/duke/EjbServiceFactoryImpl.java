@@ -1,14 +1,14 @@
 package br.com.navita.mobile.duke;
 
 import java.io.Serializable;
-import java.util.Map;
 
 import javax.ejb.Stateless;
 
-import br.com.navita.mobile.domain.MobileBean;
+import br.com.navita.mobile.duke.automidia.AprovaChamadoAutomidia;
+import br.com.navita.mobile.duke.automidia.DetalhaChamadoAutomidia;
+import br.com.navita.mobile.duke.automidia.ListaChamadosAutomidia;
+import br.com.navita.mobile.duke.ps.PeopleServiceTest;
 import br.com.navita.mobile.exception.ServiceNotFoundException;
-import br.com.navita.mobile.ps.LoginPeopleSoft;
-import br.com.navita.mobile.ps.PeopleServiceTest;
 import br.com.navita.mobile.remote.EjbServiceFactory;
 import br.com.navita.mobile.remote.EjbServiceFactoryLocal;
 import br.com.navita.mobile.remote.MobileService;
@@ -23,32 +23,34 @@ public class EjbServiceFactoryImpl implements EjbServiceFactory, EjbServiceFacto
 
 	@Override
 	public MobileService getServiceByName(String name)	throws ServiceNotFoundException {
-		
-		if("login".equals(name)){
-			return new LoginPeopleSoft();
+
+		if("getToken".equals(name)){
+			return new LoginIntegradoService();
+		}
+
+		if("automidia.listaChamados".equals(name)){
+			return new ListaChamadosAutomidia();
+		}
+
+		if("automidia.detalhaChamado".equals(name)){
+			return new DetalhaChamadoAutomidia();
 		}
 		
-		if("teste".equals(name)){
+		if("automidia.aprovaChamado".equals(name)){
+			return new AprovaChamadoAutomidia();
+		}
+
+		if("ps.teste".equals(name)){
 			return new PeopleServiceTest();
 		}
-		if("foo".equals(name)){
-			return new MobileService(){
-				/**
-				 * 
-				 */
-				private static final long serialVersionUID = 1L;
-
-				@Override
-				public MobileBean execute(Map<String, Object> params) {
-					MobileBean bean = new MobileBean();
-					bean.setMessage("Foo Fake message");
-					return bean;
-				}
-			};
-		}
 		
+		if("ps.xxx".equals(name)){
+			//return operation xxx
+		}
+
+
 		throw new ServiceNotFoundException(name + " nao existe neste servico");
-	
+
 	}
 
 }
