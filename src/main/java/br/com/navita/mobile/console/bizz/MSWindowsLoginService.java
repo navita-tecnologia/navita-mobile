@@ -18,14 +18,14 @@ import br.com.navita.mobile.console.domain.LoginResult;
 
 public class MSWindowsLoginService implements LoginService {
 	private static final Logger LOG = Logger.getLogger(MSWindowsLoginService.class.getName());
-	
+
 	private LdapService ldapService;
 	private LdapConfig config;
-	
+
 	public MSWindowsLoginService() {
-		
+
 	}
-	
+
 	public void setConfig(LdapConfig config) {
 		this.config = config;
 	}
@@ -33,19 +33,19 @@ public class MSWindowsLoginService implements LoginService {
 	public void setLdapService(LdapService ldapService) {
 		this.ldapService = ldapService;
 	}
-	
+
 	@Override
 	public LoginResult login(String user, String passwd) {		
-		
+
 		LoginResult result = new LoginResult();
 		UniAddress dcUniAddress = null;
 		String hostName = null;
 		if(config.isAutoIp()){
-			 try {
-				 DomainControler dc = DcResolver.resolveDomainControler(config.getDomainName());
-				 if(dc == null){
-					 throw new NullPointerException("Invalid domain controller");
-				 }
+			try {
+				DomainControler dc = DcResolver.resolveDomainControler(config.getDomainName());
+				if(dc == null){
+					throw new NullPointerException("Invalid domain controller");
+				}
 				hostName = dc.getHostName();
 			} catch (Exception e) {
 				LOG.log(Level.SEVERE,"Error getting auto uniaddress using "+config.getDomainName(),e);
@@ -72,23 +72,24 @@ public class MSWindowsLoginService implements LoginService {
 			result.setMessage(e.getMessage());
 			return result;
 		}
-		
-		try {
-			LOG.info("Getting groups from user "+config.getDomainName()+"\\"+user+" against "+hostName);
-			result.setGroups(ldapService.getUserGroups(user, config));
-			LOG.info("Groups successfully retrieved for user "+config.getDomainName()+"\\"+user+" against "+hostName);
-		} catch (NamingException e) {
-			LOG.log(Level.SEVERE,"Error getting groups for "+config.getDomainName()+"\\"+user,e);
-			result.setMessage(e.getMessage());
-			return result;
+		if(null != config.getUser() && !config.getUser().isEmpty()){//FIXME: incluir flag para buscar grupos ou nao!
+			try {
+				LOG.info("Getting groups from user "+config.getDomainName()+"\\"+user+" against "+hostName);
+				result.setGroups(ldapService.getUserGroups(user, config));
+				LOG.info("Groups successfully retrieved for user "+config.getDomainName()+"\\"+user+" against "+hostName);
+			} catch (NamingException e) {
+				LOG.log(Level.SEVERE,"Error getting groups for "+config.getDomainName()+"\\"+user,e);
+				result.setMessage(e.getMessage());
+				return result;
+			}
 		}
-		
+
 		result.setLogged(true);
 		result.setToken(UUID.randomUUID().toString());
-		
+
 		return result;
 	}
-	
-	
+
+
 
 }

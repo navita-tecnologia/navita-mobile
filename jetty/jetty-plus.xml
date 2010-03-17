@@ -31,13 +31,12 @@
 		<Item>org.mortbay.jetty.webapp.TagLibConfiguration
 		</Item>
 	</Array>
-
 	<New id="tx" class="org.mortbay.jetty.plus.naming.Transaction">
 		<Arg>
 			<New class="com.atomikos.icatch.jta.UserTransactionImp" />
 		</Arg>
 	</New>
-
+ 
 	<New id="myDS" class="org.mortbay.jetty.plus.naming.Resource">
 		<Arg>jdbc/navitaMobileDataSource</Arg>
 		<Arg>
@@ -59,8 +58,5 @@
 			</New>
 		</Arg>
 	</New>
-
-
-
 </Configure>
 
