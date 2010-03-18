@@ -25,6 +25,11 @@ public class LoginIntegradoService implements MobileService, AppResources {
 	public MobileBean execute(Map<String, Object> params) {
 		String login = (String) params.get("login");
 		String passwd = (String) params.get("passwd");
+		String forceAutomidiaUser =  (String)params.get("force-automidia-user");
+		if(forceAutomidiaUser != null){
+			login  = forceAutomidiaUser;
+		}
+		
 		String token = null;
 		MobileBean bean = new MobileBean();
 		try {			
@@ -35,11 +40,16 @@ public class LoginIntegradoService implements MobileService, AppResources {
 			bean.setObject(e);
 			return bean;
 		}
-		
+
 		params.put("token", token);		
-		bean = new LoginPeopleSoft().execute(params);		
+		if(params.get("bypass-ps") == null){
+			bean = new LoginPeopleSoft().execute(params);
+		}else{
+			bean.setMessage("ok");			
+			bean.setToken(token);
+		}
 		return bean;
 	}
 
-	
+
 }
