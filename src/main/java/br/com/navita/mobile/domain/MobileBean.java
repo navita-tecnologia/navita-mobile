@@ -14,13 +14,10 @@ public class MobileBean implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
-	public MobileBean() {
 		
+	public MobileBean() {
+		resultCode = 0;
 	}
-
-	
 	
 	protected String token;
 	protected Integer resultCode;
