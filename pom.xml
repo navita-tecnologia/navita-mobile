@@ -13,9 +13,8 @@
 	<modules>
 		<module>common</module>
 		<module>console</module>
-		<module>simple-client</module>
-				
-		<module>ejb-duke</module>
+		<module>simple-client</module>				
+		<module>../ejb-duke</module>
 		
 			
 	</modules>
