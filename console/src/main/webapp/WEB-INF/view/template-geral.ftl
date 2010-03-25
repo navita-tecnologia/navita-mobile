@@ -8,7 +8,7 @@
 
 		<link type="text/css" rel="stylesheet" href="css/administrador.css" />
 
-		<!--[if IE 8]><link rel="stylesheet" type="text/css" href="css/administrador_ie.css" /><![endif]-->
+		<!--[if gte IE 6]><link rel="stylesheet" type="text/css" href="css/administrador_ie.css" /><![endif]-->
 		
 				
 	</head>
