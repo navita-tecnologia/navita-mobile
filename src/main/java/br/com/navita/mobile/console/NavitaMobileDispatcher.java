@@ -193,6 +193,7 @@ public class NavitaMobileDispatcher {
 		LoginResult result = msLoginService.login(login, passwd);
 		String token = "";
 		if(result.isLogged() && ! "none".equalsIgnoreCase(mobApp.getTokenGeneratorUrl())){
+			LOG.info("Searching token on " + mobApp.getTokenGeneratorUrl());
 			try {
 				MobileBean tokenBean = callTokenGenerator(mobApp, params);
 				token = tokenBean.getToken();
@@ -217,7 +218,7 @@ public class NavitaMobileDispatcher {
 
 	private MobileBean callTokenGenerator(MobileApplication mobApp,	Map<String, Object> params) throws Exception {
 		MobileAppProcessor proc = lookupProcessor(mobApp.getTokenGeneratorUrl());
-		MobileBean b = null;
+		MobileBean b = new MobileBean();
 		if(proc != null){
 			b = proc.processApplication(mobApp, "getToken", params);
 		}
