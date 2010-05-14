@@ -20,12 +20,13 @@ public class EjbProcessor extends BaseMobileAppProcessor{
 			throws Exception {
 		SecurityManager oldSecurityManager = System.getSecurityManager();
 
-		System.setSecurityManager(new SecurityManager(){			
-			public void checkPermission(Permission perm) {}
-			public void checkPermission(Permission perm, Object context) {} 
-		});
+		
 		MobileBean bean = new MobileBean();		
 		try{
+			System.setSecurityManager(new SecurityManager(){			
+				public void checkPermission(Permission perm) {}
+				public void checkPermission(Permission perm, Object context) {} 
+			});
 			
 			//ejb://name
 			String mappedName = mobApp.getUrl().substring("ejb://".length());

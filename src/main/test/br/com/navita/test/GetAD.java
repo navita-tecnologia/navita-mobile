@@ -20,11 +20,11 @@ public class GetAD {
 		//Specifies a Global Catalog server
 		String aDSite              = "";
 		//The Active Directory SITE to look
-		String dnsDomain           = "navita.corp";
+		String dnsDomain           = "NVT";
 		//The DNS base Zone to look
 		String aDDomain            = aDSite +	"._sites.dc._msdcs." +
 		dnsDomain;    //The DNS Zone to look
-		String dnsNameServer       = "navita.corp";
+		String dnsNameServer       = "NVT";
 		//The DNS server to query
 		String dnsQueryType[]      = {"SRV"};
 		//DNS record type to query

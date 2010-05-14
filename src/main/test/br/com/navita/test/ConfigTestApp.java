@@ -19,15 +19,16 @@ public class ConfigTestApp {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		LdapConfigDAO ldapDAO = (LdapConfigDAO) ctx.getBean("ldapConfigDAO");
 		LdapConfig prop = new LdapConfig();
+		prop.setAutoIp(true);
 		prop.setGroupAttribute("memberOf");
-		prop.setIp("192.168.10.9");
+		//prop.setIp("192.168.10.9");
 		prop.setDomainName("NVT");
-		prop.setName("Dom√≠nio NVT");
+		prop.setName("DomÌnio NVT");
 		prop.setPassword("navita");
 		prop.setSearchBase("DC=navita,DC=corp");
 		prop.setSearchFilter("(&(objectClass=user)(sAMAccountName={0}))");
-		prop.setUrl("ldap://192.168.10.9:389");
-		prop.setUser("CN=ldap,OU=Contas de Servi√ßos,OU=Usu√°rios,OU=SP,OU=NAVITA,DC=navita,DC=corp");
+		//prop.setUrl("ldap://192.168.10.9:389");
+		prop.setUser("CN=ldap,OU=Contas de ServiÁos,OU=Usu·rios,OU=SP,OU=NAVITA,DC=navita,DC=corp");
 		ldapDAO.saveService(prop, "0d67b458-d99c-4d07-bb8f-1c3888a52cfc");
 		System.out.println(ldapDAO.getServiceProperties("0d67b458-d99c-4d07-bb8f-1c3888a52cfc"));
 	}
