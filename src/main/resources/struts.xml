@@ -47,14 +47,9 @@
 		<action name="domains" class="br.com.navita.mobile.console.view.DomainsAction">
 			<result name="success" type="freemarker">/WEB-INF/view/domains.ftl</result>
 			<result name="input" type="freemarker">/WEB-INF/view/domainsEdit.ftl</result>
-			<result name="createPrepare" type="freemarker">/WEB-INF/view/domainsNew.ftl</result>
-			
-		</action>
-		
-		<action name="deployable" class="br.com.navita.mobile.console.view.DeployAction">
-		<result name="success" type="freemarker">/WEB-INF/view/deploy.ftl</result>
-		<result name="input" type="freemarker">/WEB-INF/view/deploy.ftl</result>
-		</action>
+			<result name="createPrepare" type="freemarker">/WEB-INF/view/domainsNew.ftl</result>			
+		</action>		
+	
 	</package>
 
 </struts>

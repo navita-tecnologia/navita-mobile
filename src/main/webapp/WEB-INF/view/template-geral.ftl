@@ -8,7 +8,7 @@
 
 		<link type="text/css" rel="stylesheet" href="css/administrador.css" />
 
-		<!--[if IE 8]><link rel="stylesheet" type="text/css" href="css/administrador_ie.css" /><![endif]-->
+		<!--[if gte IE 6]><link rel="stylesheet" type="text/css" href="css/administrador_ie.css" /><![endif]-->
 		
 				
 	</head>
@@ -29,9 +29,9 @@
 			     	</form>
 			     </li>
 	        	<li class="group" id="group1"><a href="applications.action"  title="Aplica&ccedil;&otilde;es">Aplica&ccedil;&otilde;es</a></li>
-		        <li class="group" id="group1"><a href="deployable.action"  title="Deployables">Deployables</a></li>
 		        <li class="group" id="group2"><a href="domains.action" title="Dom&iacute;nios">Dom&iacute;nios</a></li>
-		        <li class="group" id="group3"><a href="admin.action" title="Senha Admin">Senha Admin</a></li>
+		        <li class="group" id="group3"><a href="license.action" title="Licen&ccedil;as">Licen&ccedil;as</a></li>
+		        <li class="group" id="group4"><a href="admin.action" title="Senha Admin">Senha Admin</a></li>
 		  </ul>
 		</div>
 		
