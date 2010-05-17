@@ -2,7 +2,7 @@ package br.com.navita.mobile.console.view;
 
 import org.apache.struts2.dispatcher.DefaultActionSupport;
 
-import br.com.navita.mobile.console.dao.SetupDAO;
+import br.com.navita.mobile.console.bizz.SecurityService;
 
 
 public class AdminAction extends DefaultActionSupport {
@@ -14,10 +14,10 @@ public class AdminAction extends DefaultActionSupport {
 	
 	private String password;
 	
-	private SetupDAO setupDAO;
+	private SecurityService securityService;
 	
-	public void setSetupDAO(SetupDAO setupDAO) {
-		this.setupDAO = setupDAO;
+	public void setSecurityService(SecurityService securityService) {
+		this.securityService = securityService;
 	}
 	
 	public void setPassword(String password) {
@@ -36,7 +36,7 @@ public class AdminAction extends DefaultActionSupport {
 	
 	
 	public String changeAdminPassword() throws Exception {
-		setupDAO.updateAdminPasswd(password);
+		securityService.updatePassword("admin", password);
 		addActionMessage("Senha alterada com sucesso");
 		return SUCCESS;
 	}

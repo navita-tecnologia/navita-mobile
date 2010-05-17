@@ -12,28 +12,21 @@
 						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd"
 	default-autowire="autodetect">
 
-	<bean
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:navita-mobile.properties"></property>
+
+	<bean class="org.springframework.jndi.JndiObjectFactoryBean" name="dataSource"
+		autowire="byName">
+		<property name="jndiName" value="jdbc/navitaMobileDataSource" />
 	</bean>
 
 	<!--
-		<bean class="org.springframework.jndi.JndiObjectFactoryBean"
-		name="dataSource" autowire="byName"> <property name="jndiName"
-		value="jdbc/navitaMobileDataSource" /> </bean>
-	-->
-	<bean id="dataSource"
+		<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver" />
-		<property name="url" value="jdbc:derby:mobiledb;create=true" />
-		<property name="username" value="" />
-		<property name="password" value="" />
-	</bean>
-
-	<bean id="deployPathBean" class="br.com.navita.mobile.console.jar.DeployPathBean">
-		<property name="deployPath" value="${deploy.bean.path}" />
-	</bean>
-
+		<property name="driverClassName"
+		value="org.apache.derby.jdbc.EmbeddedDriver" /> <property name="url"
+		value="jdbc:derby:mobiledb;create=true" /> <property name="username"
+		value="" /> <property name="password" value="" /> </bean>
+	-->
+	
 
 	<bean id="commonConfiguration"
 		class="br.com.navita.mobile.console.dao.NavitaMobileConfiguration"
@@ -60,7 +53,7 @@
 	<bean id="dsAppProcessor"
 		class="br.com.navita.mobile.console.jdbc.DataSourceAppProcessor" />
 	<bean id="jdbcAppProcessor" class="br.com.navita.mobile.console.jdbc.JdbcAppProcessor" />
-	<bean id="deployableProcessor" class="br.com.navita.mobile.console.jar.DeployableProcessor" />	
+	<bean id="deployableProcessor" class="br.com.navita.mobile.console.jar.DeployableProcessor" />
 	<bean id="ejbProcessor" class="br.com.navita.mobile.console.remote.EjbProcessor" />
 
 
@@ -94,23 +87,6 @@
 		<security:jdbc-user-service
 			data-source-ref="dataSource" />
 	</security:authentication-provider>
-
-	<bean id="setupBusiness" class="br.com.navita.mobile.console.bizz.SetupBusinessImpl"></bean>
-	<bean id="setupDAO" class="br.com.navita.mobile.console.dao.SetupDAOImpl">
-		<property name="sqlUserExists" value="${sql.exists.users}"></property>
-		<property name="sqlAuthExists" value="${sql.exists.authorities}" />
-		<property name="sqlAdminExists" value="${sql.exists.admin}" />
-		<property name="sqlCreateUsers" value="${sql.create.users}" />
-		<property name="sqlCreateAuth" value="${sql.create.auth}" />
-
-		<property name="sqlAppExists" value="${sql.exists.apps}" />
-		<property name="sqlAppExecExists" value="${sql.exists.apps.exec}" />
-		<property name="sqlConfigExists" value="${sql.exists.config}" />
-		<property name="sqlCreateApp" value="${sql.create.apps}" />
-		<property name="sqlCreateAppExec" value="${sql.create.apps.exec}" />
-		<property name="sqlCreateConfig" value="${sql.create.config}" />
-
-	</bean>
 
 	<bean id="mobileApplicationDAO"
 		class="br.com.navita.mobile.console.dao.MobileApplicationDAOImpl"></bean>

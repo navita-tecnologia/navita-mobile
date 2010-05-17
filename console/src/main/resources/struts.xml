@@ -51,9 +51,9 @@
 			
 		</action>
 		
-		<action name="deployable" class="br.com.navita.mobile.console.view.DeployAction">
-		<result name="success" type="freemarker">/WEB-INF/view/deploy.ftl</result>
-		<result name="input" type="freemarker">/WEB-INF/view/deploy.ftl</result>
+		<action name="licenses" class="br.com.navita.mobile.console.view.LicenseAction">
+		<result name="success" type="freemarker">/WEB-INF/view/license.ftl</result>
+		<result name="input" type="freemarker">/WEB-INF/view/license.ftl</result>
 		</action>
 	</package>
 
