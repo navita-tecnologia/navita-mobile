@@ -11,18 +11,6 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	<listener>
-		<listener-class>br.com.navita.mobile.console.listener.SetupListener</listener-class>
-	</listener>
-	
-	<!--
-	
-	<listener>
-		<listener-class>
-			com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
-	</listener>
-	
-	-->
 	
 	<filter>
 		<filter-name>struts</filter-name>

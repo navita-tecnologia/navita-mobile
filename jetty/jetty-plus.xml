@@ -36,6 +36,8 @@
 			<New class="com.atomikos.icatch.jta.UserTransactionImp" />
 		</Arg>
 	</New>
+	
+	<!--
  
 	<New id="myDS" class="org.mortbay.jetty.plus.naming.Resource">
 		<Arg>jdbc/navitaMobileDataSource</Arg>
@@ -43,6 +45,20 @@
 			<New class="com.atomikos.jdbc.nonxa.NonXADataSourceBean">
 				<Set name="Url">jdbc:derby:mobiledb;create=true</Set>
 				<Set name="driverClassName">org.apache.derby.jdbc.EmbeddedDriver</Set>
+			</New>
+		</Arg>
+	</New>
+	
+	-->
+	
+	<New id="navitaMobileDataSourceId" class="org.mortbay.jetty.plus.naming.Resource">
+		<Arg>jdbc/navitaMobileDataSource</Arg>
+		<Arg>
+			<New class="com.atomikos.jdbc.nonxa.NonXADataSourceBean">
+				<Set name="Url">jdbc:jtds:sqlserver://nvtweb01.navita.com.br:1433</Set>
+				<Set name="driverClassName">net.sourceforge.jtds.jdbc.Driver</Set>
+				<Set name="user">nvt-mobile</Set>
+				<Set name="password">banana01</Set>
 			</New>
 		</Arg>
 	</New>
