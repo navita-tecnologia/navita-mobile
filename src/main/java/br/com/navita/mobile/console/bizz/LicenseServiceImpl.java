@@ -4,10 +4,15 @@ import java.util.List;
 
 import br.com.navita.mobile.console.dao.LicenseDAO;
 import br.com.navita.mobile.console.domain.LicenseBundle;
+import br.com.navita.mobile.console.domain.LicenseBundleType;
 
 public class LicenseServiceImpl implements LicenseService {
 	
 	private LicenseDAO licenseDAO;
+	
+	public void setLicenseDAO(LicenseDAO licenseDAO) {
+		this.licenseDAO = licenseDAO;
+	}
 
 	@Override
 	public void deleteBundle(LicenseBundle bundle) {
@@ -36,6 +41,11 @@ public class LicenseServiceImpl implements LicenseService {
 	public void updateBundle(LicenseBundle bundle) {
 		licenseDAO.updateBundle(bundle);
 
+	}
+
+	@Override
+	public List<LicenseBundleType> listBundleTypes() {		
+		return licenseDAO.listBundleTypes();
 	}
 
 }

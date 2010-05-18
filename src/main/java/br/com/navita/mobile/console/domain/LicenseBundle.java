@@ -4,23 +4,19 @@ import java.io.Serializable;
 
 public class LicenseBundle implements Serializable{
 
-	private String name;
-	private int typeId;
+	private String name;	
 	private boolean enabled;
 	private int defaultPeriodInDays;
 	private int id;
+	private LicenseBundleType licenseBundleType;
+	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getTypeId() {
-		return typeId;
-	}
-	public void setTypeId(int typeId) {
-		this.typeId = typeId;
-	}
+	
 	public boolean isEnabled() {
 		return enabled;
 	}
@@ -39,6 +35,22 @@ public class LicenseBundle implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public String getDefaultPeriodInDaysLabel(){
+		if(-1 == defaultPeriodInDays){
+			return "Ilimitado";
+		}else{
+			return defaultPeriodInDays + " dia[s]";
+		}
+	}
+	public LicenseBundleType getLicenseBundleType() {
+		return licenseBundleType;
+	}
+	public void setLicenseBundleType(LicenseBundleType licenseBundleType) {
+		this.licenseBundleType = licenseBundleType;
+	}
+	
+	
 	
 	
 }

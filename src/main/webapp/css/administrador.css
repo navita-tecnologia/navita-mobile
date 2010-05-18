@@ -532,7 +532,7 @@ div.successIframeMessage span {
 }
 
 #mainMenu ul li.sites {
-	width: 140px;
+	width: 118px;
 	height: 27px;
 	padding: 5px 0 0px 10px;
 	background: url(../images/menu_bg_sites.png) 0 0 no-repeat;
@@ -564,7 +564,7 @@ div.successIframeMessage span {
 	{
 	font: 11px Arial, Helvetica, sans-serif;
 	border: none;
-	width: 140px;
+	width: 108px;
 	margin: 0;
 	background: #FFFFFF;
 }

@@ -3,6 +3,7 @@ package br.com.navita.mobile.console.bizz;
 import java.util.List;
 
 import br.com.navita.mobile.console.domain.LicenseBundle;
+import br.com.navita.mobile.console.domain.LicenseBundleType;
 
 public interface LicenseService {
 	
@@ -38,5 +39,7 @@ public interface LicenseService {
 	 * @param model
 	 */
 	void updateBundle(LicenseBundle bundle);
+
+	List<LicenseBundleType> listBundleTypes();
 
 }
