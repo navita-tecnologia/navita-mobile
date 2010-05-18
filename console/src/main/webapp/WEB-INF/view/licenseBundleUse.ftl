@@ -11,19 +11,19 @@
 					<table class="gridContent">
 						<tr>
 							<th class="left">Nome&nbsp;&nbsp;<a href='licenses!createBundlePrepare.action' title="Cadastrar Pacote" >&nbsp;<img src="images/ico_add.gif" alt="Adicionar" border="0" /></a></th>
-							<th class="left" width="20%">Tipo</th>
-							<th  width="20%">Per&iacute;odo padr&atilde;o em dias</th>							
+							<th width="20%">Tipo</th>
+							<th width="20%">Per&iacute;odo padr&atilde;o em dias</th>							
 							<th width="70px">Ação</th>
 							<th width="70px">Ação</th>
 						</tr>
 						<#list bundles as bundle>
 							<tr valign="middle">
 								<td>
-									<a href='licenses!viewLicenseBundleUse.action?bundle.id=${bundle.id}'title="Lista utilizações do pacote ${bundle.name}" >${bundle.name}</a>
+									<a href='licenses!viewLicenseUse.action?bundle.id=${bundle.id}'title="Lista utilizações do pacote ${bundle.name}" >${bundle.name}</a>
 								</td>
-								<td class="left">${bundle.licenseBundleType.name}</td>	
+								<td align="center">${bundle.licenseBundleType.name}</td>	
 								<td align="center">${bundle.defaultPeriodInDaysLabel!}</td>	
-								<td >
+								<td align="center">
 									<a href='licenses!viewBundle.action?bundle.id=${bundle.id}'title="Editar" >editar</a>
 								</td>							
 								<td align="center">

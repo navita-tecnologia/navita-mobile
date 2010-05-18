@@ -23,7 +23,7 @@
 					<form name="box_sites" id="box_sites">
 			     		<select id="applicationSelect" name="applicationSelect" onchange="window.location=this.options[this.options.selectedIndex].value">
 			     			<option value="#">Navegue...</option>
-			     			<option value="applications.action">Aplicativos Blackberry</option>
+			     			<option value="applications.action">Aplica&ccedil;&atilde;es</option>
 			     			<option value="domains.action" >Dom&iacute;nios</option> 
 			     		</select>
 			     	</form>
