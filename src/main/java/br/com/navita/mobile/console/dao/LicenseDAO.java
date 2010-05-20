@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.navita.mobile.console.domain.LicenseBundle;
 import br.com.navita.mobile.console.domain.LicenseBundleType;
+import br.com.navita.mobile.console.domain.LicenseUse;
 
 public interface LicenseDAO {
 	/**
@@ -43,6 +44,14 @@ public interface LicenseDAO {
 	 * 
 	 * @return
 	 */
-	List<LicenseBundleType> listBundleTypes();	
+	List<LicenseBundleType> listBundleTypes();
+
+	/**
+	 * 
+	 * @param bundle
+	 * @param offset
+	 * @return
+	 */
+	Page<LicenseUse> listLicenseUses(LicenseBundle bundle, int pageNumber, int offset);	
 
 }

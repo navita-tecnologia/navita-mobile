@@ -2,8 +2,10 @@ package br.com.navita.mobile.console.bizz;
 
 import java.util.List;
 
+import br.com.navita.mobile.console.dao.Page;
 import br.com.navita.mobile.console.domain.LicenseBundle;
 import br.com.navita.mobile.console.domain.LicenseBundleType;
+import br.com.navita.mobile.console.domain.LicenseUse;
 
 public interface LicenseService {
 	
@@ -40,6 +42,18 @@ public interface LicenseService {
 	 */
 	void updateBundle(LicenseBundle bundle);
 
+	/**
+	 * 
+	 * @return
+	 */
 	List<LicenseBundleType> listBundleTypes();
+
+	/**
+	 * 
+	 * @param bundle
+	 * @param offset
+	 * @return
+	 */
+	Page<LicenseUse> listLicenseUses(LicenseBundle bundle, int pageNumber, int offset);
 
 }

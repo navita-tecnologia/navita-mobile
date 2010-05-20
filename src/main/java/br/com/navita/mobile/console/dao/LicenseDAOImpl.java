@@ -12,11 +12,13 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import br.com.navita.mobile.console.domain.LicenseBundle;
 import br.com.navita.mobile.console.domain.LicenseBundleType;
+import br.com.navita.mobile.console.domain.LicenseUse;
 
 public class LicenseDAOImpl implements LicenseDAO{
 
@@ -54,8 +56,8 @@ public class LicenseDAOImpl implements LicenseDAO{
 		};
 
 	}
-	
-	
+
+
 	@Override
 	public void deleteBundle(LicenseBundle bundle) {
 		jdbcTemplate.update("delete from licenseBundle where id = ?", new Object[]{bundle.getId()});
@@ -74,7 +76,7 @@ public class LicenseDAOImpl implements LicenseDAO{
 		PreparedStatementCreator psc = new PreparedStatementCreator() {			
 			@Override
 			public PreparedStatement createPreparedStatement(Connection con)
-					throws SQLException {
+			throws SQLException {
 				PreparedStatement ps = con.prepareStatement("insert into licenseBundle " +
 						"(name, typeId, enabled, defaultPeriodInDays) " +
 						"values(?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
@@ -130,6 +132,54 @@ public class LicenseDAOImpl implements LicenseDAO{
 		});
 	}
 
-	
+
+
+	@Override
+	public Page<LicenseUse> listLicenseUses(LicenseBundle bundle, int pageNumber, int offset) {
+		String sqlFetchRows = "select top 30 " +
+		"activationdate," +
+		"periodindays, " +
+		"u.pin as pin, " +
+		"email, " +
+		"brand, " +
+		"model, " +
+		"lastCarrier, " +
+		"licensekey, " +
+		"bundleId, " +
+		"id " +
+		"from licenseuse u, devicedata d " +
+		"where u.pin = d.pin and id > " + offset + " " +
+		"and bundleId = ? order by id asc";
+		
+		String sqlCountRows = "select count(*) " +
+		"from licenseuse u " +
+		"where bundleId = ?";
+
+		PaginationHelper<LicenseUse> ph = new PaginationHelper<LicenseUse>();		
+		return ph.fetchPage(jdbcTemplate,sqlCountRows, sqlFetchRows, new Object[]{bundle.getId()}, pageNumber, 30, getLicenseUseMapper());
+	}
+
+
+	private ParameterizedRowMapper<LicenseUse> getLicenseUseMapper(){
+		return new ParameterizedRowMapper<LicenseUse>() {			
+			@Override
+			public LicenseUse mapRow(ResultSet rs, int rowNum) throws SQLException {				
+				LicenseUse use = new LicenseUse();
+				use.setActivationDate(rs.getTimestamp("activationdate"));
+				use.setPeriodInDays(rs.getInt("periodindays"));
+				use.setPin(rs.getString("pin"));
+				use.setEmail(rs.getString("email"));
+				use.setDeviceBrand(rs.getString("brand"));
+				use.setDeviceModel(rs.getString("model"));
+				use.setCarrier(rs.getString("lastCarrier"));
+				use.setLicenseKey(rs.getString("licenseKey"));
+				use.setId(rs.getInt("id"));
+				use.setBundleId(rs.getInt("bundleId"));
+				return use;
+			}
+		};
+	}
+
+
 
 }
