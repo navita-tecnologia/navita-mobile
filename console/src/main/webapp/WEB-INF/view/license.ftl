@@ -19,7 +19,7 @@
 						<#list bundles as bundle>
 							<tr valign="middle">
 								<td>
-									<a href='licenses!viewLicenseBundleUse.action?bundle.id=${bundle.id}'title="Lista utilizações do pacote ${bundle.name}" >${bundle.name}</a>
+									<a href='licenses!viewLicenseBundleUse.action?bundle.id=${bundle.id}&pageNumber=1'title="Lista utilizações do pacote ${bundle.name}" >${bundle.name}</a>
 								</td>
 								<td class="left">${bundle.licenseBundleType.name}</td>	
 								<td align="center">${bundle.defaultPeriodInDaysLabel!}</td>	

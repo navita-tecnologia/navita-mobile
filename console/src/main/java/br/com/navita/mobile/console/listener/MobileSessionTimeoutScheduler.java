@@ -11,9 +11,13 @@ public class MobileSessionTimeoutScheduler extends TimerTask {
 	
 	private static final Logger LOG = Logger.getLogger(MobileSessionTimeoutScheduler.class.getName());	
 
+	public MobileSessionTimeoutScheduler() {
+		LOG.log(Level.INFO,"Timeout scheduler started");
+	}
+	
 	@Override
 	public void run() {
-		LOG.log(Level.INFO,"Timeout scheduler fired");
+		//
 		
 		for(String token: SessionPool.keySet()){
 			MobileSession session =  SessionPool.get(token);

@@ -5,17 +5,60 @@ import java.util.List;
 import org.apache.struts2.dispatcher.DefaultActionSupport;
 
 import br.com.navita.mobile.console.bizz.LicenseService;
-import br.com.navita.mobile.console.domain.LicenceUse;
+import br.com.navita.mobile.console.dao.Page;
+import br.com.navita.mobile.console.domain.LicenseUse;
 import br.com.navita.mobile.console.domain.LicenseBundle;
 import br.com.navita.mobile.console.domain.LicenseBundleType;
 
 public class LicenseAction extends DefaultActionSupport {
 	
 	private LicenseBundle bundle;
-	private LicenceUse licenceUse;
+	private LicenseUse licenceUse;
+	private Page<LicenseUse> licenseUses;
 	private List<LicenseBundle> bundles;
 	private LicenseService licenseService;
 	private String acao;
+	private int pageNumber = 1;
+	private int lastOffset;
+	private int currentOffset;
+	private int nextOffset;
+	
+	
+	
+	public int getLastOffset() {
+		return lastOffset;
+	}
+
+	public void setLastOffset(int lastOffset) {
+		this.lastOffset = lastOffset;
+	}
+
+	public int getCurrentOffset() {
+		return currentOffset;
+	}
+
+	public void setCurrentOffset(int currentOffset) {
+		this.currentOffset = currentOffset;
+	}
+
+	public int getNextOffset() {
+		return nextOffset;
+	}
+
+	public void setNextOffset(int nextOffset) {
+		this.nextOffset = nextOffset;
+	}
+
+	public void setPageNumber(int pageNumber) {
+		this.pageNumber = pageNumber;
+	}
+	
+	public int getPageNumber() {
+		return pageNumber;
+	}
+	
+	
+	
 	
 	public String getAcao() {
 		return acao;
@@ -34,18 +77,21 @@ public class LicenseAction extends DefaultActionSupport {
 		return bundle;
 	}
 
+	public Page<LicenseUse> getLicenseUses() {
+		return licenseUses;
+	}
 
 	public void setBundle(LicenseBundle bundle) {
 		this.bundle = bundle;
 	}
 
 
-	public LicenceUse getLicenceUse() {
+	public LicenseUse getLicenceUse() {
 		return licenceUse;
 	}
 
 
-	public void setLicenceUse(LicenceUse licenceUse) {
+	public void setLicenceUse(LicenseUse licenceUse) {
 		this.licenceUse = licenceUse;
 	}
 
@@ -100,7 +146,13 @@ public class LicenseAction extends DefaultActionSupport {
 	}
 	
 	public String viewLicenseBundleUse() throws Exception{
-
+		bundle = licenseService.getBundle(bundle);	
+		licenseUses = licenseService.listLicenseUses(bundle, pageNumber, currentOffset);
+		
+		
+		if(licenseUses != null && licenseUses.getPageItems() != null ){
+			nextOffset = licenseUses.getPageItems().get(licenseUses.getPageItems().size()-1).getId();
+		}
 		return "usage";
 	}
 

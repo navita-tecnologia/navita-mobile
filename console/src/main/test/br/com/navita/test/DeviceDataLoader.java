@@ -3,26 +3,19 @@ package br.com.navita.test;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.sql.DataSource;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-
-
-public class TestApp {
+public class DeviceDataLoader {
 
 	/**
 	 * @param args
 	 * @throws Throwable 
-	 * @throws FileNotFoundException 
 	 */
-	public static void main(String[] args) throws Throwable  {
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-		DataSource ds = (DataSource) ctx.getBean("dataSource");
-		Connection cn = ds.getConnection();
+	public static void main(String[] args) throws Throwable {
+		Class.forName("net.sourceforge.jtds.jdbc.Driver");
+		Connection cn = DriverManager.getConnection("jdbc:jtds:sqlserver://nvtweb01.navita.com.br:1433","nvt-mobile","banana01");
 		Statement st = cn.createStatement();
 		BufferedReader r = new BufferedReader(new FileReader("C:\\temp\\insert.register.translator.sql"));
 		String linha = "";
@@ -32,7 +25,7 @@ public class TestApp {
 		}
 		cn.close();
 		r.close();
-		
+
 	}
 
 }

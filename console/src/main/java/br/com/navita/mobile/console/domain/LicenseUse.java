@@ -3,7 +3,7 @@ package br.com.navita.mobile.console.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-public class LicenceUse implements Serializable{
+public class LicenseUse implements Serializable{
 	private int bundleId;
 	private int id;
 	private String licenseKey;
@@ -12,7 +12,7 @@ public class LicenceUse implements Serializable{
 	private int periodInDays;
 	private String email;
 	private String deviceModel;
-	private String deviceMaker;
+	private String deviceBrand;
 	private String carrier;
 	private int displayWidth;
 	public int getBundleId() {
@@ -63,11 +63,11 @@ public class LicenceUse implements Serializable{
 	public void setDeviceModel(String deviceModel) {
 		this.deviceModel = deviceModel;
 	}
-	public String getDeviceMaker() {
-		return deviceMaker;
+	public String getDeviceBrand() {
+		return deviceBrand;
 	}
-	public void setDeviceMaker(String deviceMaker) {
-		this.deviceMaker = deviceMaker;
+	public void setDeviceBrand(String deviceBrand) {
+		this.deviceBrand = deviceBrand;
 	}
 	public String getCarrier() {
 		return carrier;
