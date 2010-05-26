@@ -4,17 +4,17 @@
 <br clear="all" />
 <div class="contentArea">
 <@s.actionmessage/>
-<div class="content" id="contentFull">
-	<b class="bt"><b></b></b>
-	<div class="body">lastoffset: ${lastOffset} currentOffset: ${currentOffset} nextOffset: ${nextOffset}
-        <span align="left" style="border-bottom: 1px dashed #cccccc; margin-bottom: 15px;">
+ <span align="left" style="border-bottom: 1px dashed #cccccc; margin-bottom: 15px;">
         <#if licenseUses.pageNumber != 1>
-        <a href=''>Anterior</a> 
+        <a href='licenses!viewLicenseBundleUse.action?bundle.id=${bundle.id}&pageNumber=${pageNumber-1}'>Anterior</a> 
         </#if>
         <#if licenseUses.pageNumber lt licenseUses.pagesAvailable>
-        <a href='licenses!viewLicenseBundleUse.action?bundle.id=${bundle.id}&pageNumber=${pageNumber+1}&currentOffset=${nextOffset?string("#")}&lastOffset=${currentOffset?string("#")}'>Próximo</a>
+        <a href='licenses!viewLicenseBundleUse.action?bundle.id=${bundle.id}&pageNumber=${pageNumber+1}'>Próximo</a>
         </#if>
         </span> 
+<div class="content" id="contentFull">
+	<b class="bt"><b></b></b>
+	<div class="body">       
 		<table class="gridContent">
 			<tr>
 				<th>Data Ativação</th>
@@ -35,7 +35,7 @@
 				<td align="center">${lic.deviceBrand!}</td>
 				<td align="center">${lic.deviceModel!}</td>
 				<td align="center">${lic.carrier!}</td>				
-				<td align="center" style="font-family: monospace;">${lic.licenseKey!} - ${lic.id}</td>					
+				<td align="center" style="font-family: monospace;">${lic.licenseKey!}</td>					
 			</tr>				
 			</#list>
 		</table>

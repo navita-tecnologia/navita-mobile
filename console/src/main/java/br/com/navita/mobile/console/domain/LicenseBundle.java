@@ -8,7 +8,16 @@ public class LicenseBundle implements Serializable{
 	private boolean enabled;
 	private int defaultPeriodInDays;
 	private int id;
+	private long usageNumber;
 	private LicenseBundleType licenseBundleType;
+	
+	public long getUsageNumber() {
+		return usageNumber;
+	}
+	
+	public void setUsageNumber(long usageNumber) {
+		this.usageNumber = usageNumber;
+	}
 	
 	public String getName() {
 		return name;
