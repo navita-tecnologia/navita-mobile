@@ -51,8 +51,8 @@ public class LicenseServiceImpl implements LicenseService {
 	}
 
 	@Override
-	public Page<LicenseUse> listLicenseUses(LicenseBundle bundle, int pageNumber, int offset) {		
-		return licenseDAO.listLicenseUses(bundle,pageNumber,offset);
+	public Page<LicenseUse> listLicenseUses(LicenseBundle bundle, int pageNumber) {		
+		return licenseDAO.listLicenseUses(bundle,pageNumber);
 	}
 
 }

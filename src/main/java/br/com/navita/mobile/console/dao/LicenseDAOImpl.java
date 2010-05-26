@@ -65,9 +65,15 @@ public class LicenseDAOImpl implements LicenseDAO{
 	}
 
 	@Override
-	public LicenseBundle getBundle(LicenseBundle bundle) {
-
-		return (LicenseBundle) jdbcTemplate.queryForObject(sql + " and b.id = ?",new Object[]{bundle.getId()},getBundleMapper());
+	public LicenseBundle getBundle(LicenseBundle bundle) {		
+		LicenseBundle bd = (LicenseBundle) jdbcTemplate.queryForObject(sql + " and b.id = ?",new Object[]{bundle.getId()},getBundleMapper());
+		populateNumber(bd);
+		return bd;
+	}
+	
+	private void populateNumber(LicenseBundle bundle){
+		int usageNumber = jdbcTemplate.queryForInt("select count(0) from licenseuse where bundleId = ?",new Object[]{bundle.getId()});
+		bundle.setUsageNumber(usageNumber);
 	}
 
 	@Override
@@ -96,8 +102,11 @@ public class LicenseDAOImpl implements LicenseDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<LicenseBundle> listBundle(LicenseBundle bundle) {
-
-		return jdbcTemplate.query(sql,getBundleMapper());
+		List<LicenseBundle> list = jdbcTemplate.query(sql,getBundleMapper());
+		for(LicenseBundle bd: list){
+			populateNumber(bd);
+		}
+		return list;
 	}
 
 	@Override
@@ -135,28 +144,31 @@ public class LicenseDAOImpl implements LicenseDAO{
 
 
 	@Override
-	public Page<LicenseUse> listLicenseUses(LicenseBundle bundle, int pageNumber, int offset) {
-		String sqlFetchRows = "select top 30 " +
-		"activationdate," +
-		"periodindays, " +
-		"u.pin as pin, " +
-		"email, " +
-		"brand, " +
-		"model, " +
-		"lastCarrier, " +
-		"licensekey, " +
-		"bundleId, " +
-		"id " +
-		"from licenseuse u, devicedata d " +
-		"where u.pin = d.pin and id > " + offset + " " +
-		"and bundleId = ? order by id asc";
-		
+	public Page<LicenseUse> listLicenseUses(LicenseBundle bundle, int pageNumber) {
+		String sqlFetchRows = "select * from ( " +
+				"select (select count(*) from licenseuse t2, devicedata d1 " +
+				"where t2.id <= t1.id and t2.pin = d1.pin and bundleid = ?) as rownum, " +
+				"activationdate,periodindays,t1.pin as pin, " +
+				"email,licensekey,bundleId,id,brand,model,lastCarrier " +
+				"from licenseuse t1, devicedata d2 " +
+				"where t1.pin =  d2.pin and bundleid = ? " +
+				") resultset " +
+				"where rownum >= ? and rownum < ? order by id asc";
+
 		String sqlCountRows = "select count(*) " +
 		"from licenseuse u " +
 		"where bundleId = ?";
 
-		PaginationHelper<LicenseUse> ph = new PaginationHelper<LicenseUse>();		
-		return ph.fetchPage(jdbcTemplate,sqlCountRows, sqlFetchRows, new Object[]{bundle.getId()}, pageNumber, 30, getLicenseUseMapper());
+		PaginationHelper<LicenseUse> ph = new PaginationHelper<LicenseUse>();	
+		int firstRow = ((pageNumber - 1) * 30) + 1;
+		int lastRow = ((pageNumber - 1) * 30) + 31;
+		
+		
+		return ph.fetchPage(
+				jdbcTemplate,
+				sqlCountRows,new Object[]{bundle.getId()}, 
+				sqlFetchRows, new Object[]{bundle.getId(),bundle.getId(),firstRow,lastRow}, 
+				pageNumber, 30, getLicenseUseMapper());
 	}
 
 

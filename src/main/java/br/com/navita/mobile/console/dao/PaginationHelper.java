@@ -14,14 +14,15 @@ public class PaginationHelper<E> {
     public Page<E> fetchPage(
             final JdbcTemplate jt,
             final String sqlCountRows,
+            final Object countArgs[],
             final String sqlFetchRows,
-            final Object args[],
+            final Object fetchArgs[],
             final int pageNo,
             final int pageSize,
             final ParameterizedRowMapper<E> rowMapper) {
 
         // determine how many rows are available
-        final int rowCount = jt.queryForInt(sqlCountRows, args);
+        final int rowCount = jt.queryForInt(sqlCountRows, countArgs);
 
         // calculate the number of pages
         int pageCount = rowCount / pageSize;
@@ -38,7 +39,7 @@ public class PaginationHelper<E> {
        
         jt.query(
                 sqlFetchRows,
-                args,
+                fetchArgs,
                 new ResultSetExtractor() {
                     public Object extractData(ResultSet rs) throws SQLException, DataAccessException {
                         final List<E> pageItems = page.getPageItems();

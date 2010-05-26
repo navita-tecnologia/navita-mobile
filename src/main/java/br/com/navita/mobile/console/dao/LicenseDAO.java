@@ -52,6 +52,6 @@ public interface LicenseDAO {
 	 * @param offset
 	 * @return
 	 */
-	Page<LicenseUse> listLicenseUses(LicenseBundle bundle, int pageNumber, int offset);	
+	Page<LicenseUse> listLicenseUses(LicenseBundle bundle, int pageNumber);	
 
 }

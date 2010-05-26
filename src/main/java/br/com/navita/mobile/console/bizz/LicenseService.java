@@ -54,6 +54,6 @@ public interface LicenseService {
 	 * @param offset
 	 * @return
 	 */
-	Page<LicenseUse> listLicenseUses(LicenseBundle bundle, int pageNumber, int offset);
+	Page<LicenseUse> listLicenseUses(LicenseBundle bundle, int pageNumber);
 
 }

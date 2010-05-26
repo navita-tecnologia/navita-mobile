@@ -19,36 +19,8 @@ public class LicenseAction extends DefaultActionSupport {
 	private LicenseService licenseService;
 	private String acao;
 	private int pageNumber = 1;
-	private int lastOffset;
-	private int currentOffset;
-	private int nextOffset;
 	
 	
-	
-	public int getLastOffset() {
-		return lastOffset;
-	}
-
-	public void setLastOffset(int lastOffset) {
-		this.lastOffset = lastOffset;
-	}
-
-	public int getCurrentOffset() {
-		return currentOffset;
-	}
-
-	public void setCurrentOffset(int currentOffset) {
-		this.currentOffset = currentOffset;
-	}
-
-	public int getNextOffset() {
-		return nextOffset;
-	}
-
-	public void setNextOffset(int nextOffset) {
-		this.nextOffset = nextOffset;
-	}
-
 	public void setPageNumber(int pageNumber) {
 		this.pageNumber = pageNumber;
 	}
@@ -147,12 +119,7 @@ public class LicenseAction extends DefaultActionSupport {
 	
 	public String viewLicenseBundleUse() throws Exception{
 		bundle = licenseService.getBundle(bundle);	
-		licenseUses = licenseService.listLicenseUses(bundle, pageNumber, currentOffset);
-		
-		
-		if(licenseUses != null && licenseUses.getPageItems() != null ){
-			nextOffset = licenseUses.getPageItems().get(licenseUses.getPageItems().size()-1).getId();
-		}
+		licenseUses = licenseService.listLicenseUses(bundle, pageNumber);		
 		return "usage";
 	}
 
