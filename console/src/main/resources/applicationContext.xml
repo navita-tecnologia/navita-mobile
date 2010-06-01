@@ -13,30 +13,7 @@
 	default-autowire="autodetect">
 
 
-
-	<bean class="org.springframework.jndi.JndiObjectFactoryBean" name="dataSource"
-		autowire="byName">
-		<property name="jndiName" value="jdbc/navitaMobileDataSource" />
-	</bean>
-
-	<!--
-		<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName"
-		value="net.sourceforge.jtds.jdbc.Driver" /> <property name="url"
-		value="jdbc:jtds:sqlserver://nvtweb01.navita.com.br:1433" /> <property
-		name="username" value="nvt-mobile" /> <property name="password"
-		value="banana01" /> </bean>
-	-->
-	<!--
-		<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName"
-		value="org.apache.derby.jdbc.EmbeddedDriver" /> <property name="url"
-		value="jdbc:derby:mobiledb;create=true" /> <property name="username"
-		value="" /> <property name="password" value="" /> </bean>
-	-->
-
+	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/navitaMobileDataSource" />
 
 	<bean id="commonConfiguration"
 		class="br.com.navita.mobile.console.dao.NavitaMobileConfiguration"
