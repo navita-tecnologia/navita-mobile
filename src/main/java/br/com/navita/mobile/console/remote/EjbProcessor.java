@@ -1,7 +1,9 @@
 package br.com.navita.mobile.console.remote;
 
 import java.security.Permission;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.naming.InitialContext;
 
@@ -29,10 +31,30 @@ public class EjbProcessor extends BaseMobileAppProcessor{
 			});
 			
 			//ejb://name
+			
 			String mappedName = mobApp.getUrl().substring("ejb://".length());
+			int queryStringStart = mappedName.indexOf('?');
+			Map<String, String> props = new HashMap<String, String>();
+			if(queryStringStart> -1 ){
+				String[] pairs = mappedName.substring(queryStringStart + 1).split("&");
+				for(String pair:pairs){
+					String[] values = pair.split("=");
+					props.put(values[0], values[1]);
+				}
+				mappedName = mappedName.substring(0,queryStringStart);				 
+			}
 			
 			EjbServiceFactory factory = null;
-			InitialContext ctx = new InitialContext();
+			
+			InitialContext ctx = null;
+			if(props.size() == 0){
+				ctx = new InitialContext();
+			}else{
+				Properties p = new Properties();
+				p.putAll(props);
+				ctx = new InitialContext(p);
+				
+			}
 			factory = (EjbServiceFactory) ctx.lookup(mappedName);
 			if(factory == null){
 				bean.setResultCode(1);

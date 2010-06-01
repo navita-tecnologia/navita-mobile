@@ -1,0 +1,16 @@
+<Context path="mobile-console">
+	<Resource name="jdbc/navitaMobileDataSource" auth="Container"
+		type="javax.sql.DataSource" 
+		driverClassName="net.sourceforge.jtds.jdbc.Driver"
+		url="jdbc:jtds:sqlserver://nvtweb01.navita.com.br:1433"
+		username="nvt-mobile" password="banana01" maxActive="20" maxIdle="10"
+		maxWait="-1" />
+		
+	<Resource name="jdbc/sportsDataSource" auth="Container"
+		type="javax.sql.DataSource" 
+		driverClassName="net.sourceforge.jtds.jdbc.Driver"
+		url="jdbc:jtds:sqlserver://nvtweb01.navita.com.br:1433"
+		username="futebol" password="n@v1t@" maxActive="20" maxIdle="10"
+		maxWait="-1" />	
+		
+</Context>
