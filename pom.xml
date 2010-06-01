@@ -12,8 +12,7 @@
  
 	<modules>
 		<module>common</module>
-		<module>console</module>
-		<module>simple-client</module>	
+		<module>console</module>		
 	</modules>
 
 	<developers>
