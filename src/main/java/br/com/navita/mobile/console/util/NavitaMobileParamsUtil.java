@@ -1,5 +1,7 @@
 package br.com.navita.mobile.console.util;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -53,7 +55,12 @@ public abstract class NavitaMobileParamsUtil {
 			String token = tk.nextToken();
 			if(token.indexOf("=")>0){
 				String pair[] = token.split("=");
-				result.put(pair[0], pair[1]);
+				try {
+					result.put(pair[0],URLDecoder.decode( pair[1],"utf-8"));
+				} catch (Exception e) {
+					LOG.log(Level.SEVERE,"Error decripting encoded parameter " + pair[0],e);
+					result.put(pair[0], pair[1]);
+				}
 			}
 		}
 		return result;
