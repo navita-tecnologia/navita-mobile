@@ -11,6 +11,7 @@ import br.com.navita.mobile.console.domain.LdapConfig;
 import br.com.navita.mobile.console.domain.LoginResult;
 import br.com.navita.mobile.console.domain.MobileApplication;
 import br.com.navita.mobile.domain.MobileBean;
+import br.com.navita.mobile.ws.processor.GenericWsProcessor;
 import br.com.navita.mobile.console.exception.InvalidMobileUrlException;
 import br.com.navita.mobile.console.jar.DeployableProcessor;
 import br.com.navita.mobile.console.jdbc.DataSourceAppProcessor;
@@ -34,6 +35,11 @@ public class NavitaMobileDispatcher {
 	private JdbcAppProcessor jdbcAppProcessor;
 	private DeployableProcessor deployableProcessor;	
 	private EjbProcessor ejbProcessor;
+	private GenericWsProcessor genericWsProcessor;
+	
+	public void setGenericWsProcessor(GenericWsProcessor genericWsProcessor) {
+		this.genericWsProcessor = genericWsProcessor;
+	}
 
 	public void setEjbProcessor(EjbProcessor ejbProcessor) {
 		this.ejbProcessor = ejbProcessor;
@@ -166,6 +172,11 @@ public class NavitaMobileDispatcher {
 		if( url.startsWith("ejb://")){
 			processor = ejbProcessor;
 		}
+		
+		if(url.startsWith("ws://")){
+			processor = genericWsProcessor;
+		}
+		
 		return processor;
 	}
 

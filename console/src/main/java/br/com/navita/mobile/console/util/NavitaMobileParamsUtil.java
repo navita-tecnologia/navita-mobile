@@ -1,6 +1,5 @@
 package br.com.navita.mobile.console.util;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Iterator;
