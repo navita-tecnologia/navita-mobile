@@ -35,4 +35,9 @@ public class DataSourceAppProcessor extends BaseMobileAppProcessor  {
 		return bean;
 	}
 
+	@Override
+	protected String getProcessorUrlPrefix() {		
+		return "ds";
+	}
+
 }

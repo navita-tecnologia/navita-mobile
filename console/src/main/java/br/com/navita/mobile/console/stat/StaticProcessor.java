@@ -49,6 +49,12 @@ public class StaticProcessor extends BaseMobileAppProcessor {
 		return bean;
 
 
+	}
+
+	@Override
+	protected String getProcessorUrlPrefix() {
+		
+		return "static";
 	}	
 
 }

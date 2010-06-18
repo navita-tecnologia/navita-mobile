@@ -44,4 +44,10 @@ public class GenericWsProcessor extends BaseMobileAppProcessor {
 		
 		return bean;
 	}
+
+	@Override
+	protected String getProcessorUrlPrefix() {
+		
+		return "ws";
+	}
 }
