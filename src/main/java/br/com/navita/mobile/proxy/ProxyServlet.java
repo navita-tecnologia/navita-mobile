@@ -15,7 +15,7 @@ import br.com.navita.mobile.domain.MobileBean;
 public abstract class ProxyServlet extends HttpServlet {
 	
 	@Override
-	protected final void doPost(HttpServletRequest req, HttpServletResponse resp)	throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)	throws ServletException, IOException {
 		resp.setContentType("application/json");
 		MobileBean result = proccessParameters(prepareParameters(req));
 		resp.getWriter().print(JSONSerializer.toJSON(result));
@@ -23,7 +23,7 @@ public abstract class ProxyServlet extends HttpServlet {
 	}
 	
 	@Override
-	protected final void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
 		doPost(req, resp);
 	}
 
@@ -36,6 +36,6 @@ public abstract class ProxyServlet extends HttpServlet {
 	 */
 	protected Map<?, ?> prepareParameters(HttpServletRequest req) {		
 		return req.getParameterMap();
-	}
-
+	}	
+	
 }
