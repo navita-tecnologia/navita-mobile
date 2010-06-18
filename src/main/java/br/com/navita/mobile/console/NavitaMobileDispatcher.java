@@ -16,6 +16,7 @@ import br.com.navita.mobile.console.exception.InvalidMobileUrlException;
 import br.com.navita.mobile.console.jar.DeployableProcessor;
 import br.com.navita.mobile.console.jdbc.DataSourceAppProcessor;
 import br.com.navita.mobile.console.jdbc.JdbcAppProcessor;
+import br.com.navita.mobile.console.proxy.ProxyServletProcessor;
 import br.com.navita.mobile.console.remote.EjbProcessor;
 import br.com.navita.mobile.console.sap.SapMobileProcessor;
 import br.com.navita.mobile.console.stat.StaticProcessor;
@@ -36,6 +37,12 @@ public class NavitaMobileDispatcher {
 	private DeployableProcessor deployableProcessor;	
 	private EjbProcessor ejbProcessor;
 	private GenericWsProcessor genericWsProcessor;
+	private ProxyServletProcessor proxyServletProcessor;
+	
+	public void setProxyServletProcessor(
+			ProxyServletProcessor proxyServletProcessor) {
+		this.proxyServletProcessor = proxyServletProcessor;
+	}
 	
 	public void setGenericWsProcessor(GenericWsProcessor genericWsProcessor) {
 		this.genericWsProcessor = genericWsProcessor;
@@ -175,6 +182,10 @@ public class NavitaMobileDispatcher {
 		
 		if(url.startsWith("ws://")){
 			processor = genericWsProcessor;
+		}
+		
+		if(url.startsWith("proxy://")){
+			processor = proxyServletProcessor;
 		}
 		
 		return processor;

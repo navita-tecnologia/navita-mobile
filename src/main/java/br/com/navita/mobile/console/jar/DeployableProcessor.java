@@ -36,4 +36,11 @@ public class DeployableProcessor extends BaseMobileAppProcessor {
 		return executor.execute(processedParams);
 	}
 
+
+	@Override
+	protected String getProcessorUrlPrefix() {
+		
+		return "jar";
+	}
+
 }

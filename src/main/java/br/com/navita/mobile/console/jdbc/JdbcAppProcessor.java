@@ -16,4 +16,10 @@ public class JdbcAppProcessor extends BaseMobileAppProcessor {
 		return null;
 	}
 
+	@Override
+	protected String getProcessorUrlPrefix() {
+		
+		return "jdbc";
+	}
+
 }

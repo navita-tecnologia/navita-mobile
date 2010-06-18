@@ -1,9 +1,10 @@
 package br.com.navita.mobile.console.remote;
 
 import java.security.Permission;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.naming.InitialContext;
 
@@ -16,10 +17,13 @@ import br.com.navita.mobile.remote.MobileService;
 
 public class EjbProcessor extends BaseMobileAppProcessor{
 
+	private static final Logger LOGGER = Logger.getLogger(EjbProcessor.class.getName());
+	
 	@Override
 	public MobileBean processApplication(MobileApplication mobApp,
-			String operation, Map<String, Object> processedParams)
-			throws Exception {
+			String operation, Map<String, Object> processedParams) throws Exception {
+		
+		
 		SecurityManager oldSecurityManager = System.getSecurityManager();
 
 		
@@ -30,28 +34,15 @@ public class EjbProcessor extends BaseMobileAppProcessor{
 				public void checkPermission(Permission perm, Object context) {} 
 			});
 			
-			//ejb://name
-			
-			String mappedName = mobApp.getUrl().substring("ejb://".length());
-			int queryStringStart = mappedName.indexOf('?');
-			Map<String, String> props = new HashMap<String, String>();
-			if(queryStringStart> -1 ){
-				String[] pairs = mappedName.substring(queryStringStart + 1).split("&");
-				for(String pair:pairs){
-					String[] values = pair.split("=");
-					props.put(values[0], values[1]);
-				}
-				mappedName = mappedName.substring(0,queryStringStart);				 
-			}
 			
 			EjbServiceFactory factory = null;
 			
 			InitialContext ctx = null;
-			if(props.size() == 0){
+			if(urlProperties != null &&  urlProperties.size() == 0){
 				ctx = new InitialContext();
 			}else{
 				Properties p = new Properties();
-				p.putAll(props);
+				p.putAll(urlProperties);
 				ctx = new InitialContext(p);
 				
 			}
@@ -65,10 +56,12 @@ public class EjbProcessor extends BaseMobileAppProcessor{
 			try{
 				service = factory.getServiceByName(operation);
 			}catch (ServiceNotFoundException e) {
+				LOGGER.log(Level.SEVERE,"ServiceNotFoundException",e);
 				bean.setResultCode(1);
 				bean.setMessage(operation + ": operacao nao encontrada");
 				return bean;
 			}catch (Exception e) {
+				LOGGER.log(Level.SEVERE,"Exception",e);
 				bean.setResultCode(1);
 				bean.setMessage(e.getMessage());
 				return bean;
@@ -88,6 +81,12 @@ public class EjbProcessor extends BaseMobileAppProcessor{
 		}
 		
 		return bean;
+	}
+
+	@Override
+	protected String getProcessorUrlPrefix() {
+		
+		return "ejb";
 	}
 
 }
