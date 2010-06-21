@@ -1,6 +1,8 @@
 package br.com.navita.mobile.proxy;
 
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -34,8 +36,15 @@ public abstract class ProxyServlet extends HttpServlet {
 	 * @param req
 	 * @return
 	 */
-	protected Map<?, ?> prepareParameters(HttpServletRequest req) {		
-		return req.getParameterMap();
+	@SuppressWarnings("unchecked")	
+	protected Map<String, Object> prepareParameters(HttpServletRequest req) {
+		//FIXME: dar uma melhoradinha nisso
+		Map<String, Object> map = new HashMap<String, Object>();
+		for(Enumeration  names = req.getParameterNames();names.hasMoreElements();){
+			String keyName =  names.nextElement().toString();
+			map.put(keyName,req.getParameter(keyName));
+		}		
+		return map;	
 	}	
 	
 }
