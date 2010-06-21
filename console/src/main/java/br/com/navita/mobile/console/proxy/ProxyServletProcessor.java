@@ -23,8 +23,7 @@ public class ProxyServletProcessor  extends BaseMobileAppProcessor{
 	@Override
 	public MobileBean processApplication(MobileApplication mobApp, String operation, Map<String, Object> processedParams) throws Exception {
 		this.resolveProperties(mobApp);		
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new NameValuePair("operation",operation));
+		List<NameValuePair> params = new ArrayList<NameValuePair>();		
 		for(String key: processedParams.keySet()){
 			params.add(new NameValuePair(key,processedParams.get(key).toString()));
 		}
