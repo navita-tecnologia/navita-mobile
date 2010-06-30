@@ -23,6 +23,7 @@ public class EjbProcessor extends BaseMobileAppProcessor{
 	public MobileBean processApplication(MobileApplication mobApp,
 			String operation, Map<String, Object> processedParams) throws Exception {
 		
+		super.resolveProperties(mobApp);
 		
 		SecurityManager oldSecurityManager = System.getSecurityManager();
 

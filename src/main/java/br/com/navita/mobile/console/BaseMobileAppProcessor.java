@@ -11,6 +11,10 @@ public abstract class BaseMobileAppProcessor implements MobileAppProcessor{
 	protected String mappedName;
 	protected Map<String, String> urlProperties;
 	
+	public BaseMobileAppProcessor() {
+		
+	}
+	
 	
 	protected final void resolveProperties(MobileApplication mobApp) {
 		mappedName = mobApp.getUrl().substring((getProcessorUrlPrefix()+ "://").length());
