@@ -24,7 +24,10 @@ public class DataSourceAppProcessor extends BaseMobileAppProcessor  {
 		if(exec == null){
 			return bean;
 		}
-		String dsName = mobApp.getUrl().substring("ds://".length());
+		
+		resolveProperties(mobApp);
+		
+		String dsName = mappedName;
 		
 		JndiObjectFactoryBean jndiBean = new JndiObjectFactoryBean();
 		DataSource ds = (DataSource)jndiBean.getJndiTemplate().lookup(dsName);
