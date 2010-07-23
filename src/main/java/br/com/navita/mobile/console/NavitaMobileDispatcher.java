@@ -12,11 +12,10 @@ import br.com.navita.mobile.console.dao.LdapConfigDAO;
 import br.com.navita.mobile.console.dao.MobileApplicationDAO;
 import br.com.navita.mobile.console.domain.DeviceData;
 import br.com.navita.mobile.console.domain.LdapConfig;
+import br.com.navita.mobile.console.domain.LicenseBundle;
 import br.com.navita.mobile.console.domain.LicenseUse;
 import br.com.navita.mobile.console.domain.LoginResult;
 import br.com.navita.mobile.console.domain.MobileApplication;
-import br.com.navita.mobile.domain.MobileBean;
-import br.com.navita.mobile.ws.processor.GenericWsProcessor;
 import br.com.navita.mobile.console.exception.InvalidDeviceDataException;
 import br.com.navita.mobile.console.exception.InvalidLicenseKeyException;
 import br.com.navita.mobile.console.exception.InvalidMobileUrlException;
@@ -30,6 +29,8 @@ import br.com.navita.mobile.console.stat.StaticProcessor;
 import br.com.navita.mobile.console.util.Decryptor;
 import br.com.navita.mobile.console.util.DecryptorException;
 import br.com.navita.mobile.console.util.NavitaMobileParamsUtil;
+import br.com.navita.mobile.domain.MobileBean;
+import br.com.navita.mobile.ws.processor.GenericWsProcessor;
 
 public class NavitaMobileDispatcher {
 
@@ -158,6 +159,11 @@ public class NavitaMobileDispatcher {
 	}
 
 	private boolean hasLicenseToRun(MobileApplication app, String operation, Map<?, ?> params) throws InvalidDeviceDataException, InvalidLicenseKeyException {
+		LicenseBundle bundle = licenseService.getBundle(new LicenseBundle(app.getLicenseBundleId()));
+		if(bundle == null || !bundle.isEnabled()){
+			throw new InvalidLicenseKeyException("Disabled License Bundle");
+		}
+		
 		String licenseKey = app.getLicenseActivationKey();
 		String plain = null;
 		try {
@@ -185,7 +191,11 @@ public class NavitaMobileDispatcher {
 
 		LOG.log(Level.INFO,"Key valid until " + new Date(max));
 
-		registerLicenseUse(app,params);
+		try{
+			registerLicenseUse(app,params);
+		}catch (Throwable t) {
+			throw new InvalidLicenseKeyException(t);
+		}
 
 		return true;
 	}
@@ -350,7 +360,7 @@ public class NavitaMobileDispatcher {
 		MobileBean bean = new MobileBean();
 		bean.setResultCode(code);		
 		bean.setMessage(t.getMessage() == null ? t.toString():t.getMessage());
-		bean.setObject(t);
+		bean.setObject(t.getClass().getName());
 		return bean;
 	}
 
