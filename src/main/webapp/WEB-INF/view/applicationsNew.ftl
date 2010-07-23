@@ -25,20 +25,15 @@
 							</tr>
 							<tr valign="middle">
 								<td>Habilitada</td>
-								<td align="center"><@s.select value="mobileApplication.enabled"  name="mobileApplication.enabled" 
+								<td align="middle"><@s.select value="mobileApplication.enabled"  name="mobileApplication.enabled" 
 								theme="simple" list="# {'true':'Sim','false':'Não'}"/></td>
 							</tr>
 							<tr class="active" valign="middle">
-								<td>Interna</td>
-								<td align="center"><@s.select value="mobileApplication.internal" name="mobileApplication.internal" 
-								theme="simple" list="# {'true':'Sim','false':'Não'}"/></td>	
-							</tr>
-							<tr valign="middle">
 								<td>Usa login nativo</td>
 								<td align="center"><@s.select value="mobileApplication.usingNativeLoginService" 
 								name="mobileApplication.usingNativeLoginService" theme="simple" list="# {'true':'Sim','false':'Não'}"/></td>
 							</tr>
-							<tr class="active" valign="middle">
+							<tr valign="middle">
 								<td>Servico Login Nativo</td>
 								<td align="center">
 								<@s.select headerKey="none" headerValue="---" name="mobileApplication.loginServiceId" theme="simple" list="ldapConfig" listKey="id" listValue="name" >
@@ -47,11 +42,17 @@
 								
 								</td>	
 							</tr>
-							<tr valign="middle">
-								<td>Private Key *</td>
-								<td align="center"><@s.textfield name="mobileApplication.privateKey" theme="simple" value="" readonly="true"/></td>
+							<tr class="active" valign="middle">
+								<td>Pacote de Licen&ccedil;a</td>
+								<td align="middle"><@s.select value="mobileApplication.licenseBundleId" name="mobileApplication.licenseBundleId" 
+								theme="simple" headerKey="none" headerValue="---" theme="simple" list="licenseBundles" listKey="id" listValue="name"/></td>	
 							</tr>
-							<tr valign="middle" class="active">
+							<tr valign="middle">
+								<td>Chave ativa&ccedil;&atilde;o licen&ccedil;a</td>
+								<td align="middle"><@s.textfield name="mobileApplication.licenseActivationKey" theme="simple"/></td>
+							</tr>		
+							
+							<tr class="active" valign="middle">
 								<td>Url Token Login nativo</td>
 								<td align="center"><@s.textfield name="mobileApplication.tokenGeneratorUrl" theme="simple"/></td>
 							</tr>

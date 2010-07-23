@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -16,6 +17,7 @@ import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
+import br.com.navita.mobile.console.domain.DeviceData;
 import br.com.navita.mobile.console.domain.LicenseBundle;
 import br.com.navita.mobile.console.domain.LicenseBundleType;
 import br.com.navita.mobile.console.domain.LicenseUse;
@@ -70,7 +72,7 @@ public class LicenseDAOImpl implements LicenseDAO{
 		populateNumber(bd);
 		return bd;
 	}
-	
+
 	private void populateNumber(LicenseBundle bundle){
 		int usageNumber = jdbcTemplate.queryForInt("select count(0) from licenseuse where bundleId = ?",new Object[]{bundle.getId()});
 		bundle.setUsageNumber(usageNumber);
@@ -146,14 +148,14 @@ public class LicenseDAOImpl implements LicenseDAO{
 	@Override
 	public Page<LicenseUse> listLicenseUses(LicenseBundle bundle, int pageNumber) {
 		String sqlFetchRows = "select * from ( " +
-				"select (select count(*) from licenseuse t2, devicedata d1 " +
-				"where t2.id <= t1.id and t2.pin = d1.pin and bundleid = ?) as rownum, " +
-				"activationdate,periodindays,t1.pin as pin, " +
-				"email,licensekey,bundleId,id,brand,model,lastCarrier " +
-				"from licenseuse t1, devicedata d2 " +
-				"where t1.pin =  d2.pin and bundleid = ? " +
-				") resultset " +
-				"where rownum >= ? and rownum < ? order by id asc";
+		"select (select count(*) from licenseuse t2, devicedata d1 " +
+		"where t2.id <= t1.id and t2.pin = d1.pin and bundleid = ?) as rownum, " +
+		"activationdate,periodindays,t1.pin as pin, " +
+		"lastEmail as email,licensekey,bundleId,id,brand,model,lastCarrier " +
+		"from licenseuse t1, devicedata d2 " +
+		"where t1.pin =  d2.pin and bundleid = ? " +
+		") resultset " +
+		"where rownum >= ? and rownum < ? order by id asc";
 
 		String sqlCountRows = "select count(*) " +
 		"from licenseuse u " +
@@ -162,8 +164,8 @@ public class LicenseDAOImpl implements LicenseDAO{
 		PaginationHelper<LicenseUse> ph = new PaginationHelper<LicenseUse>();	
 		int firstRow = ((pageNumber - 1) * 30) + 1;
 		int lastRow = ((pageNumber - 1) * 30) + 31;
-		
-		
+
+
 		return ph.fetchPage(
 				jdbcTemplate,
 				sqlCountRows,new Object[]{bundle.getId()}, 
@@ -190,6 +192,46 @@ public class LicenseDAOImpl implements LicenseDAO{
 				return use;
 			}
 		};
+	}
+
+
+	@Override
+	public void insertLicenseUse(LicenseUse use, DeviceData device) {
+		boolean deviceInserted = jdbcTemplate.queryForInt("select count(0) from devicedata where pin = ?",new Object[]{use.getPin()}) > 0;
+		if(!deviceInserted){
+			jdbcTemplate.update("insert into devicedata " +
+					"(pin,model,brand,lastEmail,lastCarrier) values (?,?,?,?,?)",
+					new Object[]{
+					use.getPin(),
+					device.getModel(),
+					device.getBrand(),
+					use.getEmail(),
+					use.getCarrier()
+					});
+		}else{
+			jdbcTemplate.update("update devicedata set lastEmail = ?, lastCarrier = ? where pin = ?",
+					new Object[]{use.getEmail(), use.getCarrier(), use.getPin()});
+		}
+
+		if(jdbcTemplate.queryForInt("select count(0) from licenseuse where pin = ?  and bundleid = ?",
+				new Object[]{
+				use.getPin(),
+				use.getBundleId()
+		})==0){
+			jdbcTemplate.update(
+					"insert into licenseuse " +
+					"(pin,bundleid,activationdate,periodindays,email) "
+					+ "values(?,?,?,?,?)",new Object[]{
+							use.getPin(),
+							use.getBundleId(),
+							new Date(),
+							use.getPeriodInDays(),
+							use.getEmail()
+							});
+		}
+
+
+
 	}
 
 

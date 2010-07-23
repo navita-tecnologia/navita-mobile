@@ -29,27 +29,28 @@
 								<td align="left"><@s.select value="mobileApplication.enabled"  name="mobileApplication.enabled" 
 								theme="simple" list="# {'true':'Sim','false':'Não'}"/></td>
 							</tr>
-							<tr class="active" valign="middle">
-								<td>Interna</td>
-								<td align="left"><@s.select value="mobileApplication.internal" name="mobileApplication.internal" 
-								theme="simple" list="# {'true':'Sim','false':'Não'}"/></td>	
-							</tr>
-							<tr valign="middle">
+							<tr valign="middle" class="active">
 								<td>Usa login nativo</td>
 								<td align="left"><@s.select value="mobileApplication.usingNativeLoginService" 
 								name="mobileApplication.usingNativeLoginService" theme="simple" list="# {'true':'Sim','false':'Não'}"/></td>
 							</tr>
-							<tr class="active" valign="middle">
+							<tr valign="middle">
 								<td>Servico Login Nativo</td>
 								<td align="left">
 								<@s.select name="mobileApplication.loginServiceId" headerKey="none" headerValue="---" theme="simple" list="ldapConfig" listKey="id" listValue="name"/>
 								
 								</td>	
 							</tr>
-							<tr valign="middle">
-								<td>Private Key *</td>
-								<td align="left"><@s.textfield name="mobileApplication.privateKey" theme="simple" value="" readonly="true"/></td>
+							<tr class="active" valign="middle">
+								<td>Pacote de Licen&ccedil;a</td>
+								<td align="left"><@s.select value="mobileApplication.licenseBundleId" name="mobileApplication.licenseBundleId" 
+								theme="simple" headerKey="none" headerValue="---" theme="simple" list="licenseBundles" listKey="id" listValue="name"/></td>	
 							</tr>
+							<tr valign="middle">
+								<td>Chave ativa&ccedil;&atilde;o licen&ccedil;a</td>
+								<td align="left"><@s.textfield name="mobileApplication.licenseActivationKey" theme="simple"/></td>
+							</tr>							
+							
 							<tr valign="middle" class="active">
 								<td>Url Token Login nativo</td>
 								<td align="left"><@s.textfield name="mobileApplication.tokenGeneratorUrl" theme="simple"/></td>
@@ -59,7 +60,7 @@
 								<td align="left">&nbsp;</td>
 							</tr>
 							
-							<tr class="active" valign="middle">
+							<tr valign="middle" class="active">
 								<td>Execu&ccedil;&otilde;es</td>
 								<td align="left">								
 									<table>
@@ -101,9 +102,8 @@
 								<td align="left">&nbsp;</td>
 							</tr>
 							
-							<tr class="active" valign="middle">
-								
-								<td>* digite a nova chave para alterar.</td>
+							<tr valign="middle"  class="active">								
+								<td>&nbsp;</td>
 								<td align="left"><input type="submit" value="Salvar" style="width: 150px;"/></td>
 							</tr>
 							

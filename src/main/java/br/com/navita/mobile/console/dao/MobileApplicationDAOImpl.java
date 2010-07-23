@@ -26,14 +26,15 @@ public class MobileApplicationDAOImpl implements MobileApplicationDAO {
 	private final MobileApplication mapApplicationRow(ResultSet rs) throws SQLException {
 		MobileApplication app = new MobileApplication();
 		app.setEnabled(rs.getBoolean("enabled"));
-		app.setId(rs.getString("id"));
-		app.setInternal(rs.getBoolean("internal"));
+		app.setId(rs.getString("id"));		
 		app.setName(rs.getString("name"));
 		app.setUrl(rs.getString("url"));
 		app.setLoginServiceId(rs.getString("loginServiceId"));
-		app.setUsingNativeLoginService(rs.getBoolean("usingNativeLoginService"));
-		app.setPrivateKey(rs.getString("privateKey"));
-		app.setTokenGeneratorUrl(rs.getString("tokenGeneratorUrl"));
+		app.setUsingNativeLoginService(rs.getBoolean("usingNativeLoginService"));		
+		app.setTokenGeneratorUrl(rs.getString("tokenGeneratorUrl"));		
+		app.setLicenseActivationKey(rs.getString("licenseActivationKey"));
+		app.setLicenseBundleId(rs.getInt("licenseBundleId"));
+		
 		return app;
 	}
 
@@ -76,8 +77,11 @@ public class MobileApplicationDAOImpl implements MobileApplicationDAO {
 	public void create(MobileApplication mobileApplication) {
 		final MobileApplication model = mobileApplication;
 		final String mobileId = (model.getId() == null || model.getId().isEmpty()) ? UUID.randomUUID().toString() : model.getId();
-		jdbcTemplate.update("insert into mobileapp values(" +
-				"?,?,1,?,0,?,?,'RrSe916DqrdQANfFKaQkgQ==',?)", new PreparedStatementSetter(){
+		jdbcTemplate.update("insert into mobileapp" +
+				"(id,name,enabled,url,usingNativeLoginService," +
+				"loginServiceId,tokenGeneratorUrl," +
+				"licenseBundleId,licenseActivationKey) values(" +
+				"?,?,1,?,?,?,?,?,?)", new PreparedStatementSetter(){
 			@Override
 			public void setValues(PreparedStatement ps)
 			throws SQLException {				
@@ -86,7 +90,10 @@ public class MobileApplicationDAOImpl implements MobileApplicationDAO {
 				ps.setString(3, model.getUrl());
 				ps.setBoolean(4, model.isUsingNativeLoginService());				
 				ps.setString(5, model.getLoginServiceId());	
-				ps.setString(6, model.getTokenGeneratorUrl());
+				
+				ps.setString(6, model.getTokenGeneratorUrl());				
+				ps.setInt(7, model.getLicenseBundleId());
+				ps.setString(8, model.getLicenseActivationKey());
 			}
 		});	
 		
@@ -101,7 +108,9 @@ public class MobileApplicationDAOImpl implements MobileApplicationDAO {
 				"enabled = ?," +
 				"usingNativeLoginService = ?," +
 				"loginServiceId = ?, " +
-				"tokenGeneratorUrl = ? " +
+				"tokenGeneratorUrl = ?," +				
+				"licenseBundleId = ?," +
+				"licenseActivationKey = ? " +
 				"where id = ?", new PreparedStatementSetter(){
 			@Override
 			public void setValues(PreparedStatement ps)
@@ -111,8 +120,10 @@ public class MobileApplicationDAOImpl implements MobileApplicationDAO {
 				ps.setBoolean(3, model.isEnabled());
 				ps.setBoolean(4, model.isUsingNativeLoginService());
 				ps.setString(5, model.getLoginServiceId());
-				ps.setString(6, model.getTokenGeneratorUrl());
-				ps.setString(7, model.getId());
+				ps.setString(6, model.getTokenGeneratorUrl());								
+				ps.setInt(7, model.getLicenseBundleId());
+				ps.setString(8, model.getLicenseActivationKey());
+				ps.setString(9, model.getId());
 			}
 		});
 

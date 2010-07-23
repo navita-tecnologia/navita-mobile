@@ -13,6 +13,7 @@ import br.com.navita.mobile.console.domain.MobileApplication;
 
 
 public abstract class NavitaMobileParamsUtil {
+	private static String PRIVATE_KEY = "RrSe916DqrdQANfFKaQkgQ==";
 	private static final Logger LOG = Logger.getLogger(NavitaMobileParamsUtil.class.getName());
 	public static Map<String, Object> extractFromRequestMap(MobileApplication app, Map<?, ?> params) {
 		LOG.log(Level.INFO,"Extracting parameters for "+app.getId());
@@ -24,7 +25,7 @@ public abstract class NavitaMobileParamsUtil {
 			
 			if("raw".equals(key)){
 				if(!"plain".equals(values[0])){
-					result.putAll(decodeParams(app.getPrivateKey(),((String[]) params.get(key))[0]));
+					result.putAll(decodeParams(PRIVATE_KEY,((String[]) params.get(key))[0]));
 					continue;
 				}
 			}
