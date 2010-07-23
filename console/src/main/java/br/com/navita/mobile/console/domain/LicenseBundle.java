@@ -11,6 +11,14 @@ public class LicenseBundle implements Serializable{
 	private long usageNumber;
 	private LicenseBundleType licenseBundleType;
 	
+	public LicenseBundle() {
+		
+	}
+	
+	public LicenseBundle(int licenseBundleId) {
+		this.id = licenseBundleId;
+	}
+
 	public long getUsageNumber() {
 		return usageNumber;
 	}

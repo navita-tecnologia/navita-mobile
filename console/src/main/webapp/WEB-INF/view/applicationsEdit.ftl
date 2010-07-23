@@ -37,14 +37,14 @@
 							<tr valign="middle">
 								<td>Servico Login Nativo</td>
 								<td align="left">
-								<@s.select name="mobileApplication.loginServiceId" headerKey="none" headerValue="---" theme="simple" list="ldapConfig" listKey="id" listValue="name"/>
+								<@s.select name="mobileApplication.loginServiceId" headerKey="" headerValue="---" theme="simple" list="ldapConfig" listKey="id" listValue="name"/>
 								
 								</td>	
 							</tr>
 							<tr class="active" valign="middle">
 								<td>Pacote de Licen&ccedil;a</td>
 								<td align="left"><@s.select value="mobileApplication.licenseBundleId" name="mobileApplication.licenseBundleId" 
-								theme="simple" headerKey="none" headerValue="---" theme="simple" list="licenseBundles" listKey="id" listValue="name"/></td>	
+								theme="simple" headerKey="" headerValue="---" theme="simple" list="licenseBundles" listKey="id" listValue="name"/></td>	
 							</tr>
 							<tr valign="middle">
 								<td>Chave ativa&ccedil;&atilde;o licen&ccedil;a</td>

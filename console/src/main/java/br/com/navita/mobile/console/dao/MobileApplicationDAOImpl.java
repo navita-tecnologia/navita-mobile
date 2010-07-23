@@ -34,7 +34,7 @@ public class MobileApplicationDAOImpl implements MobileApplicationDAO {
 		app.setTokenGeneratorUrl(rs.getString("tokenGeneratorUrl"));		
 		app.setLicenseActivationKey(rs.getString("licenseActivationKey"));
 		app.setLicenseBundleId(rs.getInt("licenseBundleId"));
-		
+
 		return app;
 	}
 
@@ -90,13 +90,13 @@ public class MobileApplicationDAOImpl implements MobileApplicationDAO {
 				ps.setString(3, model.getUrl());
 				ps.setBoolean(4, model.isUsingNativeLoginService());				
 				ps.setString(5, model.getLoginServiceId());	
-				
+
 				ps.setString(6, model.getTokenGeneratorUrl());				
 				ps.setInt(7, model.getLicenseBundleId());
 				ps.setString(8, model.getLicenseActivationKey());
 			}
 		});	
-		
+
 	}
 
 	@Override
@@ -194,7 +194,7 @@ public class MobileApplicationDAOImpl implements MobileApplicationDAO {
 				throw e;
 			}
 		}
-		
+
 		return ret;
 
 	}
@@ -210,11 +210,11 @@ public class MobileApplicationDAOImpl implements MobileApplicationDAO {
 				ps.setString(2, configuration);
 				ps.setString(3, name);
 				ps.setString(4, mobileId);
-				
+
 			}
 		});
-		
+
 	}
 
-	
+
 }
