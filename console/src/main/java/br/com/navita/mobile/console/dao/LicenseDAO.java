@@ -2,6 +2,7 @@ package br.com.navita.mobile.console.dao;
 
 import java.util.List;
 
+import br.com.navita.mobile.console.domain.DeviceData;
 import br.com.navita.mobile.console.domain.LicenseBundle;
 import br.com.navita.mobile.console.domain.LicenseBundleType;
 import br.com.navita.mobile.console.domain.LicenseUse;
@@ -54,4 +55,6 @@ public interface LicenseDAO {
 	 */
 	Page<LicenseUse> listLicenseUses(LicenseBundle bundle, int pageNumber);	
 
+	
+	void insertLicenseUse(LicenseUse use, DeviceData device);
 }

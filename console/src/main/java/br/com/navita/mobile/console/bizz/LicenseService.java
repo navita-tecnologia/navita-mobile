@@ -3,6 +3,7 @@ package br.com.navita.mobile.console.bizz;
 import java.util.List;
 
 import br.com.navita.mobile.console.dao.Page;
+import br.com.navita.mobile.console.domain.DeviceData;
 import br.com.navita.mobile.console.domain.LicenseBundle;
 import br.com.navita.mobile.console.domain.LicenseBundleType;
 import br.com.navita.mobile.console.domain.LicenseUse;
@@ -55,5 +56,11 @@ public interface LicenseService {
 	 * @return
 	 */
 	Page<LicenseUse> listLicenseUses(LicenseBundle bundle, int pageNumber);
+	
+	/**
+	 * 
+	 * @param use
+	 */
+	void insertLicenseUse(LicenseUse use, DeviceData device);
 
 }

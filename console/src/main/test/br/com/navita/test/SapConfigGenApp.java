@@ -24,6 +24,15 @@ public class SapConfigGenApp {
 		importParams.add(new SapParameter("EXERCICIO","{3}"));
 		config.setInputParameterList(importParams);
 		
+		List<SapTable> inputTableList = new ArrayList<SapTable>();
+		SapTable inTable = new SapTable();
+		inTable.setTableName("T_CENTRO_APR");		
+		SapRow row = new SapRow();
+		row.add(new SapParameter("USUARIO", "{1}"));
+		inTable.add(row);
+		inputTableList.add(inTable);
+		
+		config.setInputTableList(inputTableList);
 		
 		
 		
@@ -37,15 +46,7 @@ public class SapConfigGenApp {
 		config.setOutputTableList(outputTableList);
 		
 		
-		List<SapTable> inputTableList = new ArrayList<SapTable>();
-		SapTable inTable = new SapTable();
-		inTable.setTableName("T_CENTRO_APR");		
-		SapRow row = new SapRow();
-		row.add(new SapParameter("USUARIO", "{1}"));
-		inTable.add(row);
-		inputTableList.add(inTable);
 		
-		config.setInputTableList(inputTableList);
 		
 		
 		XStream xs  = new XStream();

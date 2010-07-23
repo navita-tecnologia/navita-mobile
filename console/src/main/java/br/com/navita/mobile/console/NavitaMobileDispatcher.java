@@ -1,17 +1,24 @@
 package br.com.navita.mobile.console;
 
+import java.util.Date;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import br.com.navita.mobile.console.bizz.LicenseService;
 import br.com.navita.mobile.console.bizz.LoginService;
 import br.com.navita.mobile.console.bizz.MSWindowsLoginService;
 import br.com.navita.mobile.console.dao.LdapConfigDAO;
 import br.com.navita.mobile.console.dao.MobileApplicationDAO;
+import br.com.navita.mobile.console.domain.DeviceData;
 import br.com.navita.mobile.console.domain.LdapConfig;
+import br.com.navita.mobile.console.domain.LicenseUse;
 import br.com.navita.mobile.console.domain.LoginResult;
 import br.com.navita.mobile.console.domain.MobileApplication;
 import br.com.navita.mobile.domain.MobileBean;
 import br.com.navita.mobile.ws.processor.GenericWsProcessor;
+import br.com.navita.mobile.console.exception.InvalidDeviceDataException;
+import br.com.navita.mobile.console.exception.InvalidLicenseKeyException;
 import br.com.navita.mobile.console.exception.InvalidMobileUrlException;
 import br.com.navita.mobile.console.jar.DeployableProcessor;
 import br.com.navita.mobile.console.jdbc.DataSourceAppProcessor;
@@ -20,11 +27,16 @@ import br.com.navita.mobile.console.proxy.ProxyServletProcessor;
 import br.com.navita.mobile.console.remote.EjbProcessor;
 import br.com.navita.mobile.console.sap.SapMobileProcessor;
 import br.com.navita.mobile.console.stat.StaticProcessor;
+import br.com.navita.mobile.console.util.Decryptor;
+import br.com.navita.mobile.console.util.DecryptorException;
 import br.com.navita.mobile.console.util.NavitaMobileParamsUtil;
 
 public class NavitaMobileDispatcher {
 
 	private static final Logger LOG = Logger.getLogger(NavitaMobileDispatcher.class.getName());
+	private static String PRIVATE_KEY = "RrSe916DqrdQANfFKaQkgQ==";
+
+	private LicenseService licenseService;
 
 	private MobileApplicationDAO mobileApplicationDAO;
 	private LdapConfigDAO ldapConfigDAO;
@@ -38,12 +50,17 @@ public class NavitaMobileDispatcher {
 	private EjbProcessor ejbProcessor;
 	private GenericWsProcessor genericWsProcessor;
 	private ProxyServletProcessor proxyServletProcessor;
-	
+
+
+	public void setLicenseService(LicenseService licenseService) {
+		this.licenseService = licenseService;
+	}
+
 	public void setProxyServletProcessor(
 			ProxyServletProcessor proxyServletProcessor) {
 		this.proxyServletProcessor = proxyServletProcessor;
 	}
-	
+
 	public void setGenericWsProcessor(GenericWsProcessor genericWsProcessor) {
 		this.genericWsProcessor = genericWsProcessor;
 	}
@@ -117,20 +134,100 @@ public class NavitaMobileDispatcher {
 		}
 
 		try {
+			if(! hasLicenseToRun(mobApp,operation[0],params)){
+				MobileBean resultBean = new MobileBean();
+				resultBean.setResultCode(1);
+				resultBean.setMessage("Invalid/Expired License");
+				return resultBean;
+			}
+		} catch (InvalidLicenseKeyException e1) {
+			return getFailedBean(1,e1);			
+		} catch (InvalidDeviceDataException e) {
+			return getFailedBean(1,e);		
+		}
+
+		try {
 			LOG.info("Dispatching "+operation[0]);			
 			return processApplication( mobApp,operation[0],params);
 		} catch (Throwable e) {
-			MobileBean resultBean = new MobileBean();
-			resultBean.setResultCode(1);
-			String message = e.getMessage();
-			if(null == message){
-				message = e.toString();
-			}
-			resultBean.setMessage(message);
-			resultBean.setObject(e.toString());
-			return resultBean;
+			return getFailedBean(1,e);
 		}		
 
+
+
+	}
+
+	private boolean hasLicenseToRun(MobileApplication app, String operation, Map<?, ?> params) throws InvalidDeviceDataException, InvalidLicenseKeyException {
+		String licenseKey = app.getLicenseActivationKey();
+		String plain = null;
+		try {
+			plain = Decryptor.decrypt(licenseKey, PRIVATE_KEY);
+		} catch (DecryptorException e) {
+			throw new InvalidLicenseKeyException(e.getMessage());
+		}
+		//NOME|EXPIREDATE
+		if(plain == null || plain.indexOf("|") == -1){
+			LOG.log(Level.WARNING,"Invalid key " + licenseKey);
+			return false;
+		}
+
+		String[] values = plain.split("\\|");
+		if(!app.getName().equals(values[0])){
+			LOG.log(Level.WARNING,"Invalid key " + licenseKey);
+			return false;
+		}
+
+		long max  = Long.parseLong(values[1]);
+		if(max < System.currentTimeMillis()){
+			LOG.log(Level.WARNING,"Key " + licenseKey + " expired since " + new Date(max));
+			return false;
+		}
+
+		LOG.log(Level.INFO,"Key valid until " + new Date(max));
+
+		registerLicenseUse(app,params);
+
+		return true;
+	}
+
+	private void registerLicenseUse(MobileApplication app, Map<?, ?> params) throws InvalidDeviceDataException {
+		String[] pin = (String[]) params.get("pin");
+		if(pin == null){
+			throw new InvalidDeviceDataException("PIN parameter not found");
+		}
+
+		String[] email = (String[]) params.get("email");
+		if(email == null){
+			throw new InvalidDeviceDataException("EMAIL parameter not found");
+		}
+
+		String[] device = (String[]) params.get("device");
+		if(device == null){
+			throw new InvalidDeviceDataException("DEVICE model parameter not found");
+		}
+
+		String[] brand = (String[]) params.get("brand");
+		if(brand == null){
+			throw new InvalidDeviceDataException("BRAND parameter not found");
+		}
+
+		String[] carrier = (String[]) params.get("carrier");
+		if(carrier == null){
+			throw new InvalidDeviceDataException("CARRIER parameter not found");
+		}
+
+		LicenseUse use = new LicenseUse();
+		use.setBundleId(app.getLicenseBundleId());
+		use.setActivationDate(new Date());
+		use.setCarrier(carrier[0]);
+		use.setDeviceModel(device[0]);
+		use.setEmail(email[0]);
+		use.setPin(pin[0]);
+		DeviceData deviceData = new DeviceData();
+		deviceData.setModel(device[0]);
+		deviceData.setBrand(brand[0]);
+
+		licenseService.insertLicenseUse(use,deviceData);
 
 
 	}
@@ -179,15 +276,15 @@ public class NavitaMobileDispatcher {
 		if( url.startsWith("ejb://")){
 			processor = ejbProcessor;
 		}
-		
+
 		if(url.startsWith("ws://")){
 			processor = genericWsProcessor;
 		}
-		
+
 		if(url.startsWith("proxy://")){
 			processor = proxyServletProcessor;
 		}
-		
+
 		return processor;
 	}
 

@@ -19,10 +19,11 @@ public class MobileApplication implements Serializable{
 	private boolean enabled;
 	private boolean usingNativeLoginService;
 	private String loginServiceId;
-	private String tokenGeneratorUrl;
-	private String privateKey;
+	private String tokenGeneratorUrl;	
 	private Map<String,Object> extendedProperty;
 	private List<MobileApplicationExecutor> executors;
+	private int licenseBundleId;
+	private String licenseActivationKey;
 	
 	
 	public MobileApplicationExecutor getExecutorByName(String execName){
@@ -37,18 +38,39 @@ public class MobileApplication implements Serializable{
 		return null;
 	}
 	
+	
+	
+	public int getLicenseBundleId() {
+		return licenseBundleId;
+	}
+
+
+
+	public void setLicenseBundleId(int licenseBundleId) {
+		this.licenseBundleId = licenseBundleId;
+	}
+
+
+
+	public String getLicenseActivationKey() {
+		return licenseActivationKey;
+	}
+
+
+
+	public void setLicenseActivationKey(String licenseActivationKey) {
+		this.licenseActivationKey = licenseActivationKey;
+	}
+
+
+
 	public List<MobileApplicationExecutor> getExecutors() {
 		return executors;
 	}
 	public void setExecutors(List<MobileApplicationExecutor> executors) {
 		this.executors = executors;
 	}
-	public String getPrivateKey() {
-		return privateKey;
-	}
-	public void setPrivateKey(String privateKey) {
-		this.privateKey = privateKey;
-	}
+	
 	public boolean isUsingNativeLoginService() {
 		return usingNativeLoginService;
 	}
@@ -89,23 +111,14 @@ public class MobileApplication implements Serializable{
 		this.enabled = enabled;
 	}
 	private String url;
-	
-	private boolean internal;
-	
-	
-	
+		
 	public String getUrl() {
 		return url;
 	}
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public boolean isInternal() {
-		return internal;
-	}
-	public void setInternal(boolean internal) {
-		this.internal = internal;
-	}
+	
 
 	public String getTokenGeneratorUrl() {
 		return tokenGeneratorUrl;

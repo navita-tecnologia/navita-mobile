@@ -17,8 +17,7 @@
 	<div class="body">       
 		<table class="gridContent">
 			<tr>
-				<th>Data Ativação</th>
-				<th>Período</th>
+				<th>Data Ativação</th>				
 				<th align="left">Email</th>
 				<th>PIN</th>
 				<th>Fabricante</th>
@@ -28,8 +27,7 @@
 			</tr>	
 			<#list licenseUses.pageItems as lic>		
 			<tr valign="middle">
-				<td align="center">${lic.activationDate?string("dd/MM/yyyy kk:mm")}</td>
-				<td align="center" nowrap="nowrap"><#if lic.periodInDays == -1>Ilimitado<#else>${lic.periodInDays} dia[s]</#if></td>
+				<td align="center">${lic.activationDate?string("dd/MM/yyyy kk:mm")}</td>				
 				<td align="left">${lic.email!}</td>
 				<td align="center" style="font-family: monospace;text-transform: uppercase;">${lic.pin}</td>
 				<td align="center">${lic.deviceBrand!}</td>

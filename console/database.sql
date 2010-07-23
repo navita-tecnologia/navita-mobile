@@ -15,12 +15,13 @@ CREATE TABLE mobileapp(
 	id varchar(255) NOT NULL PRIMARY KEY,
 	name varchar(100) NOT NULL,
 	enabled int NOT NULL,
-	url varchar(255) ,
-	internal int NOT NULL,
+	url varchar(255) ,	
 	usingNativeLoginService int NOT NULL,
 	loginServiceId varchar(100) ,
 	privateKey varchar(255) ,
-	tokenGeneratorUrl varchar(255) 
+	tokenGeneratorUrl varchar(255),
+	licenseBundleId int,
+	licenseActivationKey varchar(500)
 ); 
 
 CREATE TABLE mobileappexecutor(
@@ -77,5 +78,17 @@ REFERENCES licenseBundle (id);
 INSERT INTO USERS VALUES('admin','972bfefb9b804dedbb79c02caf7d818a',1);
 INSERT INTO AUTHORITIES VALUES('admin','ROLE_USER');
 INSERT INTO AUTHORITIES VALUES('admin','ROLE_ADMINISTRATOR');
+
+insert into licenseBundleType values (default,'Consumer Free');
+insert into licenseBundleType values (default,'Consumer Payed by PIN');
+insert into licenseBundleType values (default,'Consumer Payed by PIN Bundle');
+insert into licenseBundleType values (default,'Consumer Free by PIN');
+insert into licenseBundleType values (default,'Entreprise Free');
+insert into licenseBundleType values (default,'Entreprise by Application');
+insert into licenseBundleType values (default,'Enterprise by Operation');
+insert into licenseBundleType values (default,'Entreprise by Application and PIN');
+insert into licenseBundleType values (default,'Entreprise by Operation and PIN');
+insert into licenseBundleType values (default,'Entreprise by Connector');
+insert into licenseBundleType values (default,'Entreprise by Connector and PIN');
 
 

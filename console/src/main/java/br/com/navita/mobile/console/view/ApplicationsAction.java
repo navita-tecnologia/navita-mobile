@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.apache.struts2.dispatcher.DefaultActionSupport;
 
+import br.com.navita.mobile.console.bizz.LicenseService;
 import br.com.navita.mobile.console.dao.LdapConfigDAO;
 import br.com.navita.mobile.console.dao.MobileApplicationDAO;
 import br.com.navita.mobile.console.domain.LdapConfig;
+import br.com.navita.mobile.console.domain.LicenseBundle;
 import br.com.navita.mobile.console.domain.MobileApplication;
 import br.com.navita.mobile.console.domain.MobileApplicationExecutor;
 
@@ -22,11 +24,18 @@ public class ApplicationsAction extends DefaultActionSupport {
 	private MobileApplication mobileApplication;
 	private String id;
 	private List<LdapConfig> ldapConfig;
-	
+	private LicenseService licenseService;
 	private MobileApplicationExecutor executor;
 	
 	
+	public void setLicenseService(LicenseService licenseService) {
+		this.licenseService = licenseService;
+	}
 	
+	
+	public List<LicenseBundle> getLicenseBundles(){
+		return licenseService.listBundle(null);
+	}
 	
 	public MobileApplicationExecutor getExecutor() {
 		return executor;
