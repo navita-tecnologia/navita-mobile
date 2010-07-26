@@ -19,6 +19,7 @@ import br.com.navita.mobile.console.domain.MobileApplication;
 import br.com.navita.mobile.console.exception.InvalidDeviceDataException;
 import br.com.navita.mobile.console.exception.InvalidLicenseKeyException;
 import br.com.navita.mobile.console.exception.InvalidMobileUrlException;
+import br.com.navita.mobile.console.exception.MobileApplictionNotFoundException;
 import br.com.navita.mobile.console.jar.DeployableProcessor;
 import br.com.navita.mobile.console.jdbc.DataSourceAppProcessor;
 import br.com.navita.mobile.console.jdbc.JdbcAppProcessor;
@@ -115,8 +116,16 @@ public class NavitaMobileDispatcher {
 			resultBean.setMessage("Invalid Aplication parameter");
 			return resultBean;
 		}
+		
+		if(operation == null || operation.length != 1){
+			MobileBean resultBean = new MobileBean();
+			resultBean.setResultCode(1);
+			resultBean.setMessage("Invalid operation parameter");
+			return resultBean;
+		}
 
 		MobileApplication mobApp;
+		
 		try {
 			mobApp = mobileApplicationDAO.findById(app[0]);
 		} catch (Exception e) {
@@ -125,14 +134,11 @@ public class NavitaMobileDispatcher {
 			resultBean.setMessage("Aplication not found "+app[0]);
 			return resultBean;
 		}
-
-
-		if(operation == null || operation.length != 1){
-			MobileBean resultBean = new MobileBean();
-			resultBean.setResultCode(1);
-			resultBean.setMessage("Invalid operation parameter");
-			return resultBean;
+		
+		if(mobApp == null){
+			return getFailedBean(1, new MobileApplictionNotFoundException("Application not found: " + app[0] ));
 		}
+		
 
 		try {
 			if(! hasLicenseToRun(mobApp,operation[0],params)){

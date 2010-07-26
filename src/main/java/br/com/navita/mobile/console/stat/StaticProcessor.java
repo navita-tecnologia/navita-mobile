@@ -22,6 +22,8 @@ public class StaticProcessor extends BaseMobileAppProcessor {
 		MobileBean bean = new MobileBean();
 		MobileApplicationExecutor exec = findOperationExecutor(mobApp, operation);
 		if(exec == null){
+			bean.setMessage("Empty xecution for operation " + operation);
+			bean.setResultCode(1);
 			return bean;
 		}		
 		JSONObject j = new JSONObject(exec.getConfiguration());
