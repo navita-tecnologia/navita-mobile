@@ -1,6 +1,6 @@
 package br.com.navita.test;
 
-import org.springframework.security.providers.encoding.Md5PasswordEncoder;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 
 public class FooTest1 {
 

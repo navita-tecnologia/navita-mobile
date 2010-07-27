@@ -18,7 +18,7 @@ public class GenericJpaDAO<T> implements GenericRepository<T> {
 	/** Entidade associada a este DAO */
 	protected Class<T> persistentClass;
 
-	@PersistenceContext(unitName = "masterPersistenceUnit")
+	@PersistenceContext(unitName = "mobilePersistenceUnit")
 	protected EntityManager entityManager;
 
 	/**

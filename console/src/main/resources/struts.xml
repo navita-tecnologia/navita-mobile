@@ -15,13 +15,15 @@
 			<result name="success" type="freemarker">/WEB-INF/view/login.ftl
 			</result>
 		</action>
-		<action name="index" class="br.com.navita.mobile.console.view.ApplicationsAction">
-			<result name="success" type="freemarker">/WEB-INF/view/applications.ftl</result>
+		<action name="index"
+			class="br.com.navita.mobile.console.view.ApplicationsAction">
+			<result name="success" type="freemarker">/WEB-INF/view/applications.ftl
+			</result>
 		</action>
 		<action name="admin" class="br.com.navita.mobile.console.view.AdminAction">
 			<result name="success" type="freemarker">/WEB-INF/view/admin.ftl</result>
 		</action>
-		
+
 		<action name="gateway" class="br.com.navita.mobile.console.view.GatewayAction">
 			<result name="json" type="stream">
 				<param name="contentType">application/json</param>
@@ -38,24 +40,37 @@
 				<param name="bufferSize">1024</param>
 			</result>
 		</action>
-		
-		<action name="applications" class="br.com.navita.mobile.console.view.ApplicationsAction">
-			<result name="success" type="freemarker">/WEB-INF/view/applications.ftl</result>
-			<result name="input" type="freemarker">/WEB-INF/view/applicationsEdit.ftl</result>
-			<result name="prepareCreate" type="freemarker">/WEB-INF/view/applicationsNew.ftl</result>
+
+		<action name="applications"
+			class="br.com.navita.mobile.console.view.ApplicationsAction">
+			<result name="success" type="freemarker">/WEB-INF/view/applications.ftl
+			</result>
+			<result name="input" type="freemarker">/WEB-INF/view/applicationsEdit.ftl
+			</result>
+			<result name="prepareCreate" type="freemarker">/WEB-INF/view/applicationsNew.ftl
+			</result>
 		</action>
 		<action name="domains" class="br.com.navita.mobile.console.view.DomainsAction">
 			<result name="success" type="freemarker">/WEB-INF/view/domains.ftl</result>
-			<result name="input" type="freemarker">/WEB-INF/view/domainsEdit.ftl</result>
-			<result name="createPrepare" type="freemarker">/WEB-INF/view/domainsNew.ftl</result>
-			
+			<result name="input" type="freemarker">/WEB-INF/view/domainsEdit.ftl
+			</result>
+			<result name="createPrepare" type="freemarker">/WEB-INF/view/domainsNew.ftl
+			</result>
+
 		</action>
-		
+
 		<action name="licenses" class="br.com.navita.mobile.console.view.LicenseAction">
-		<result name="success" type="freemarker">/WEB-INF/view/license.ftl</result>
-		<result name="input" type="freemarker">/WEB-INF/view/licenseBundle.ftl</result>
-		<result name="usage" type="freemarker">/WEB-INF/view/licenseBundleUse.ftl</result>
+			<result name="success" type="freemarker">/WEB-INF/view/license.ftl</result>
+			<result name="input" type="freemarker">/WEB-INF/view/licenseBundle.ftl
+			</result>
+			<result name="usage" type="freemarker">/WEB-INF/view/licenseBundleUse.ftl
+			</result>
 		</action>
+
+		<action name="teste" class="br.com.navita.mobile.console.view.TesteAction">
+		<result name="success" type="freemarker">/WEB-INF/view/teste.ftl</result>
+		</action>
+
 	</package>
 
 </struts>

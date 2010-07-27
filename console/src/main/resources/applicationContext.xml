@@ -1,44 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ctx="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee"
-	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+			http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd"
+	default-autowire="byName">
 
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
-						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
-						http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd 
-						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd 
-						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd"
-	default-autowire="autodetect">
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="mobileEntityManagerFactory" />
+	</bean>
+
+
+
+	<tx:annotation-driven />
+	<ctx:annotation-config />
+	<aop:aspectj-autoproxy />
+
+
+
+
+	<!--
+		<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" /> </bean>
+	-->
 
 
 	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/navitaMobileDataSource" />
-	
-	<bean id="dataSource2"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver" />
-		<property name="url" value="jdbc:derby:mobiledb2" />
-		<property name="username" value="" />
-		<property name="password" value="" />
+
+	<bean id="mobileEntityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="mobilePersistenceUnit" />
+		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-    	<property name="dataSource" ref="dataSource2"/>
-	</bean>
-	
-	<!-- DAOs genéricos -->
-	<bean id="staticConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO" lazy-init="true">
+
+	<bean id="staticConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+		lazy-init="true">
 		<constructor-arg value="br.com.navita.mobile.console.model.StaticConnector" />
 	</bean>
-	
-	<!--<bean id="masterEntityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
-<property name="persistenceUnitName" value="masterPersistenceUnit"/>
-</bean>
-	
-	
 
-	--><bean id="commonConfiguration"
+
+	<bean id="commonConfiguration"
 		class="br.com.navita.mobile.console.dao.NavitaMobileConfiguration"
 		init-method="setDelimiterParsingDisabled">
 		<constructor-arg index="0" ref="dataSource"></constructor-arg>
@@ -67,7 +75,8 @@
 	<bean id="deployableProcessor" class="br.com.navita.mobile.console.jar.DeployableProcessor" />
 	<bean id="ejbProcessor" class="br.com.navita.mobile.console.remote.EjbProcessor" />
 	<bean id="genericWsProcessor" class="br.com.navita.mobile.ws.processor.GenericWsProcessor" />
-	<bean id="proxyServletProcessor" class="br.com.navita.mobile.console.proxy.ProxyServletProcessor"/>
+	<bean id="proxyServletProcessor"
+		class="br.com.navita.mobile.console.proxy.ProxyServletProcessor" />
 
 	<security:http>
 		<security:intercept-url pattern="/**" access="ROLE_USER" />
@@ -94,11 +103,13 @@
 		<security:remember-me />
 	</security:http>
 
-	<security:authentication-provider>
-		<security:password-encoder hash="md5" />
-		<security:jdbc-user-service
-			data-source-ref="dataSource" />
-	</security:authentication-provider>
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:password-encoder hash="md5" />
+			<security:jdbc-user-service
+				data-source-ref="dataSource" />
+		</security:authentication-provider>
+	</security:authentication-manager>
 
 	<bean id="mobileApplicationDAO"
 		class="br.com.navita.mobile.console.dao.MobileApplicationDAOImpl"></bean>
@@ -145,9 +156,9 @@
 		<property name="portName" value="singlePointPort" />
 		<property name="lookupServiceOnStartup" value="false" />
 	</bean>
-	
-	
-	<bean id="httpClient" class="br.com.navita.mobile.console.util.HttpClientUtil"/>
+
+
+	<bean id="httpClient" class="br.com.navita.mobile.console.util.HttpClientUtil" />
 
 
 </beans>

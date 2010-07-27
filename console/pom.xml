@@ -15,13 +15,13 @@
 	<url>http://m.navita.com.br</url>
 
 	<properties>
-		<springframework.version>2.5.6</springframework.version>
+		<springframework.version>3.0.2.RELEASE</springframework.version>
 		<struts.version>2.0.9</struts.version>
-		<springframework.security.version>2.0.5.RELEASE</springframework.security.version>
 		<derby.version>10.4.2.0</derby.version>
 		<hibernate-version>3.5.1-Final</hibernate-version>
 		<hibernate.tools.version>3.2.0.ga</hibernate.tools.version>
 		<hibernate.em.version>3.3.1.ga</hibernate.em.version>
+		<atomikos.version>3.6.4</atomikos.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -61,127 +61,49 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring</artifactId>
+			<artifactId>spring-core</artifactId>
+			<version>${springframework.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${springframework.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${springframework.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${springframework.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
 			<version>${springframework.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
-			<version>${springframework.security.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-aop</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-support</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-beans</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-context</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-web</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-dao</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-jdbc</artifactId>
-				</exclusion>
-			</exclusions>
+			<version>${springframework.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core-tiger</artifactId>
-			<version>${springframework.security.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-aop</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-support</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-beans</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-context</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-web</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-dao</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-jdbc</artifactId>
-				</exclusion>
-
-			</exclusions>
+			<artifactId>spring-security-config</artifactId>
+			<version>${springframework.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
-			<version>${springframework.security.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-aop</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-support</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-beans</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-context</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-web</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-dao</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-jdbc</artifactId>
-				</exclusion>
-			</exclusions>
+			<version>${springframework.version}</version>
 		</dependency>
 
 
@@ -190,28 +112,6 @@
 			<artifactId>struts2-spring-plugin</artifactId>
 			<version>${struts.version}</version>
 			<scope>runtime</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-beans</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-context</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-web</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-mock</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 
@@ -278,15 +178,42 @@
 		<!--  START Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
+			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-jdk14</artifactId>
+			<version>1.5.8</version>
+		</dependency>
+		<!--  END Hibernate -->
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.6.8</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.6.8</version>
+			<scope>runtime</scope>
 		</dependency>
 
 
-
-
-		<!--  END Hibernate -->
-
+		<!-- DERBY TEMP -->
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>${derby.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derbyclient</artifactId>
+			<version>${derby.version}</version>
+		</dependency>
+		<!-- END DERBY TEMP -->
 
 
 		<dependency>
@@ -408,27 +335,28 @@
 							<dependency>
 								<groupId>com.atomikos</groupId>
 								<artifactId>transactions</artifactId>
-								<version>3.2.3</version>
+								<version>${atomikos.version}</version>
 							</dependency>
 							<dependency>
 								<groupId>com.atomikos</groupId>
 								<artifactId>
 									transactions-api
 								</artifactId>
-								<version>3.2.3</version>
+								<version>${atomikos.version}</version>
 							</dependency>
 							<dependency>
 								<groupId>com.atomikos</groupId>
 								<artifactId>
 									transactions-jta
 								</artifactId>
-								<version>3.2.3</version>
+								<version>${atomikos.version}</version>
 							</dependency>
 							<dependency>
 								<groupId>com.atomikos</groupId>
 								<artifactId>atomikos-util</artifactId>
-								<version>3.2.3</version>
+								<version>${atomikos.version}</version>
 							</dependency>
+
 							<dependency>
 								<groupId>org.apache.derby</groupId>
 								<artifactId>derby</artifactId>
@@ -444,6 +372,7 @@
 								<artifactId>jtds</artifactId>
 								<version>1.2.2</version>
 							</dependency>
+
 						</dependencies>
 					</plugin>
 				</plugins>
@@ -508,4 +437,13 @@
 			</build>
 		</profile>
 	</profiles>
+	<repositories>
+		<repository>
+			<id>maven2-repository.dev.java.net</id>
+			<name>Java.net Repository for Maven</name>
+			<url>http://download.java.net/maven/2/</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+
 </project>

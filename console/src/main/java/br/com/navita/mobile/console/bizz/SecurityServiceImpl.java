@@ -2,7 +2,7 @@ package br.com.navita.mobile.console.bizz;
 
 import java.sql.SQLException;
 
-import org.springframework.security.providers.encoding.Md5PasswordEncoder;
+import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 
 import br.com.navita.mobile.console.dao.SecurityDAO;
 import br.com.navita.mobile.console.exception.MobileConsoleException;
@@ -10,13 +10,13 @@ import br.com.navita.mobile.console.exception.MobileConsoleException;
 public class SecurityServiceImpl implements SecurityService {
 	
 	private SecurityDAO securityDAO;
-	private Md5PasswordEncoder md5PasswordEncoder;
+	private MessageDigestPasswordEncoder md5PasswordEncoder;
 	
 	public void setSecurityDAO(SecurityDAO securityDAO) {
 		this.securityDAO = securityDAO;
 	}
 	
-	public void setMd5PasswordEncoder(Md5PasswordEncoder md5PasswordEncoder) {
+	public void setMd5PasswordEncoder(MessageDigestPasswordEncoder md5PasswordEncoder) {
 		this.md5PasswordEncoder = md5PasswordEncoder;
 	}
 
