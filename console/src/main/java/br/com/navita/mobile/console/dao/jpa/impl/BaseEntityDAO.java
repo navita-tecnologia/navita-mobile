@@ -83,7 +83,7 @@ public class BaseEntityDAO<T extends BaseEntity> extends GenericJpaDAO<T> implem
 	public List<T> findAll() {
 		String ql = "SELECT e FROM " + persistentClass.getSimpleName() + " e  ORDER BY upper(e.name)";
 		Query query = entityManager.createQuery(ql);
-		query.setParameter("removed", false);
+		//query.setParameter("removed", false);
 		return query.getResultList();
 	}
 

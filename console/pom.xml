@@ -192,13 +192,13 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>1.6.8</version>
-			<scope>compile</scope>
+			
 		</dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.6.8</version>
-			<scope>runtime</scope>
+			
 		</dependency>
 
 
@@ -291,9 +291,8 @@
 						antrun:run
 						-Dhibernate.dialect=org.hibernate.dialect.Oracle10gDialect mvn
 						compile antrun:run
-						-Dhibernate.dialect=org.hibernate.dialect.SQLServerDialect mvn
-						compile antrun:run
-						-Dhibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+						-Dhibernate.dialect=org.hibernate.dialect.SQLServerDialect 
+						mvn	compile antrun:run -Dhibernate.dialect=org.hibernate.dialect.DerbyDialect
 					-->
 					<tasks>
 						<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" />

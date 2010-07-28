@@ -40,6 +40,7 @@ public class LicenseDAOImpl implements LicenseDAO{
 		"from licenseBundle b, licenseBundleType bt " +
 		"where b.typeId = bt.id ";
 
+	@SuppressWarnings("unchecked")
 	private RowMapper getBundleMapper(){
 		return new RowMapper() {		
 			@Override
@@ -66,6 +67,7 @@ public class LicenseDAOImpl implements LicenseDAO{
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public LicenseBundle getBundle(LicenseBundle bundle) {		
 		LicenseBundle bd = (LicenseBundle) jdbcTemplate.queryForObject(sql + " and b.id = ?",new Object[]{bundle.getId()},getBundleMapper());

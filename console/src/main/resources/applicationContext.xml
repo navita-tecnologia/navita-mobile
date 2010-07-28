@@ -23,21 +23,31 @@
 	<aop:aspectj-autoproxy />
 
 
+	
+		<!--
+		<jee:jndi-lookup id="dataSource"
+		jndi-name="jdbc/navitaMobileDataSource" /> -->
+	
 
-
-	<!--
-		<bean id="txManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" /> </bean>
-	-->
-
-
-	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/navitaMobileDataSource" />
-
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver" />
+		<property name="url" value="jdbc:derby://127.0.0.1:1527/mobiledb2" />
+		<property name="username" value="APP" />
+		<property name="password" value="APP" />
+	</bean>
+	
+	
 	<bean id="mobileEntityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="mobilePersistenceUnit" />
 		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+
+	<bean id="licenseBundleTypeRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+		lazy-init="true">
+		<constructor-arg value="br.com.navita.mobile.console.model.LicenseBundleType" />
 	</bean>
 
 	<bean id="staticConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"

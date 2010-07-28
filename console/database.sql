@@ -79,16 +79,16 @@ INSERT INTO USERS VALUES('admin','972bfefb9b804dedbb79c02caf7d818a',1);
 INSERT INTO AUTHORITIES VALUES('admin','ROLE_USER');
 INSERT INTO AUTHORITIES VALUES('admin','ROLE_ADMINISTRATOR');
 
-insert into licenseBundleType values (default,'Consumer Free');
-insert into licenseBundleType values (default,'Consumer Payed by PIN');
-insert into licenseBundleType values (default,'Consumer Payed by PIN Bundle');
-insert into licenseBundleType values (default,'Consumer Free by PIN');
-insert into licenseBundleType values (default,'Entreprise Free');
-insert into licenseBundleType values (default,'Entreprise by Application');
-insert into licenseBundleType values (default,'Enterprise by Operation');
-insert into licenseBundleType values (default,'Entreprise by Application and PIN');
-insert into licenseBundleType values (default,'Entreprise by Operation and PIN');
-insert into licenseBundleType values (default,'Entreprise by Connector');
-insert into licenseBundleType values (default,'Entreprise by Connector and PIN');
+insert into LicenseBundleType values (default,'Consumer Free',0);
+insert into LicenseBundleType values (default,'Consumer Payed by PIN',0);
+insert into LicenseBundleType values (default,'Consumer Payed by PIN Bundle',0);
+insert into LicenseBundleType values (default,'Consumer Free by PIN',0);
+insert into LicenseBundleType values (default,'Entreprise Free',0);
+insert into LicenseBundleType values (default,'Entreprise by Application',0);
+insert into LicenseBundleType values (default,'Enterprise by Operation');
+insert into LicenseBundleType values (default,'Entreprise by Application and PIN',0);
+insert into LicenseBundleType values (default,'Entreprise by Operation and PIN',0);
+insert into LicenseBundleType values (default,'Entreprise by Connector',0);
+insert into LicenseBundleType values (default,'Entreprise by Connector and PIN',0);
 
 

@@ -62,5 +62,7 @@ public interface LicenseService {
 	 * @param use
 	 */
 	void insertLicenseUse(LicenseUse use, DeviceData device);
+	
+	void persistBundleType(br.com.navita.mobile.console.model.LicenseBundleType type);
 
 }
