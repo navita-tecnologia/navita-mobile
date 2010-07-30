@@ -22,7 +22,7 @@ public class MobileApplication implements Serializable{
 	private String tokenGeneratorUrl;	
 	private Map<String,Object> extendedProperty;
 	private List<MobileApplicationExecutor> executors;
-	private int licenseBundleId;
+	private String licenseBundleId;
 	private String licenseActivationKey;
 	
 	
@@ -40,13 +40,13 @@ public class MobileApplication implements Serializable{
 	
 	
 	
-	public int getLicenseBundleId() {
+	public String getLicenseBundleId() {
 		return licenseBundleId;
 	}
 
 
 
-	public void setLicenseBundleId(int licenseBundleId) {
+	public void setLicenseBundleId(String licenseBundleId) {
 		this.licenseBundleId = licenseBundleId;
 	}
 

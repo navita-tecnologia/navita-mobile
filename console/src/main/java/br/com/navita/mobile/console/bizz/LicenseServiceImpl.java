@@ -4,81 +4,89 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.navita.mobile.console.dao.LicenseDAO;
-import br.com.navita.mobile.console.dao.Page;
 import br.com.navita.mobile.console.dao.jpa.GenericRepository;
-import br.com.navita.mobile.console.domain.DeviceData;
-import br.com.navita.mobile.console.domain.LicenseBundle;
-import br.com.navita.mobile.console.domain.LicenseBundleType;
-import br.com.navita.mobile.console.domain.LicenseUse;
+import br.com.navita.mobile.console.exception.EntityNotFoundException;
+import br.com.navita.mobile.console.model.LicenseBundle;
+import br.com.navita.mobile.console.model.LicenseBundleType;
+import br.com.navita.mobile.console.model.LicenseActivation;
 
 
 @Transactional
 public class LicenseServiceImpl implements LicenseService {
 	
-	private GenericRepository<br.com.navita.mobile.console.model.LicenseBundleType> licenseBundleTypeRepository;
+	private GenericRepository<LicenseBundleType> licenseBundleTypeRepository;
+	private GenericRepository<LicenseBundle> licenseBundleRepository;
+	private GenericRepository<LicenseActivation> licenseActivationRepository;
 	
 	public void setLicenseBundleTypeRepository(
 			GenericRepository<br.com.navita.mobile.console.model.LicenseBundleType> licenseBundleTypeRepository) {
 		this.licenseBundleTypeRepository = licenseBundleTypeRepository;
 	}
 	
-	private LicenseDAO licenseDAO;
+	public void setLicenseBundleRepository(
+			GenericRepository<LicenseBundle> licenseBundleRepository) {
+		this.licenseBundleRepository = licenseBundleRepository;
+	}
 	
-	public void setLicenseDAO(LicenseDAO licenseDAO) {
-		this.licenseDAO = licenseDAO;
+	public void setLicenseActivationRepository(
+			GenericRepository<LicenseActivation> licenseActivationRepository) {
+		this.licenseActivationRepository = licenseActivationRepository;
 	}
 
 	@Override
 	public void deleteBundle(LicenseBundle bundle) {
-		licenseDAO.deleteBundle(bundle);
-
-	}
-
-	@Override
-	public LicenseBundle getBundle(LicenseBundle bundle) {
+		licenseBundleRepository.remove(bundle);
 		
-		return licenseDAO.getBundle(bundle);
 	}
 
+	
 	@Override
 	public LicenseBundle insertBundle(LicenseBundle bundle) {
+		licenseBundleRepository.persist(bundle);
+		return bundle;
+	}
+
+	@Override
+	public void insertLicenseUse(LicenseActivation licenseActivation, String bundleId) throws EntityNotFoundException {
+		LicenseBundle bundle = licenseBundleRepository.findById(bundleId);
+		licenseActivation.setLicenseBundle(bundle);
+		licenseActivationRepository.persist(licenseActivation);
 		
-		return licenseDAO.insertBundle(bundle);
 	}
 
 	@Override
-	public List<LicenseBundle> listBundle(LicenseBundle bundle) {		
-		return licenseDAO.listBundle(bundle);
-	}
-
-	@Override
-	public void updateBundle(LicenseBundle bundle) {
-		licenseDAO.updateBundle(bundle);
-
+	public List<LicenseBundle> listBundle() {		
+		return licenseBundleRepository.findAll();
 	}
 
 	@Override
 	public List<LicenseBundleType> listBundleTypes() {		
-		return licenseDAO.listBundleTypes();
+		return licenseBundleTypeRepository.findAll();
 	}
 
+	
 	@Override
-	public Page<LicenseUse> listLicenseUses(LicenseBundle bundle, int pageNumber) {		
-		return licenseDAO.listLicenseUses(bundle,pageNumber);
-	}
-
-	@Override
-	public void insertLicenseUse(LicenseUse use,DeviceData device) {
-		licenseDAO.insertLicenseUse(use,device);
-		
-	}
-
-	@Override
-	public void persistBundleType(
-			br.com.navita.mobile.console.model.LicenseBundleType type) {
+	public void persistBundleType(LicenseBundleType type) {
 		licenseBundleTypeRepository.persist(type);
 		
 	}
+
+	@Override
+	public void updateBundle(LicenseBundle bundle) {
+		licenseBundleRepository.persist(bundle);
+		
+	}
+
+	@Override
+	public void deleteBundleType(LicenseBundleType type) {
+		licenseBundleTypeRepository.remove(type);		
+	}
+
+	@Override
+	public LicenseBundle getBundle(String id) throws EntityNotFoundException {		
+		return licenseBundleRepository.findById(id);
+	}
+	
+	
 
 }

@@ -5,16 +5,15 @@ import java.util.List;
 import org.apache.struts2.dispatcher.DefaultActionSupport;
 
 import br.com.navita.mobile.console.bizz.LicenseService;
-import br.com.navita.mobile.console.dao.Page;
-import br.com.navita.mobile.console.domain.LicenseUse;
-import br.com.navita.mobile.console.domain.LicenseBundle;
-import br.com.navita.mobile.console.domain.LicenseBundleType;
+import br.com.navita.mobile.console.model.LicenseBundle;
+import br.com.navita.mobile.console.model.LicenseBundleType;
+import br.com.navita.mobile.console.model.LicenseActivation;
+
 
 public class LicenseAction extends DefaultActionSupport {
 	
 	private LicenseBundle bundle;
-	private LicenseUse licenceUse;
-	private Page<LicenseUse> licenseUses;
+	private LicenseActivation licenceUse;
 	private List<LicenseBundle> bundles;
 	private LicenseService licenseService;
 	private String acao;
@@ -49,21 +48,17 @@ public class LicenseAction extends DefaultActionSupport {
 		return bundle;
 	}
 
-	public Page<LicenseUse> getLicenseUses() {
-		return licenseUses;
-	}
-
 	public void setBundle(LicenseBundle bundle) {
 		this.bundle = bundle;
 	}
 
 
-	public LicenseUse getLicenceUse() {
+	public LicenseActivation getLicenceUse() {
 		return licenceUse;
 	}
 
 
-	public void setLicenceUse(LicenseUse licenceUse) {
+	public void setLicenceUse(LicenseActivation licenceUse) {
 		this.licenceUse = licenceUse;
 	}
 
@@ -82,12 +77,12 @@ public class LicenseAction extends DefaultActionSupport {
 
 	@Override
 	public String execute() throws Exception {
-		bundles = licenseService.listBundle(bundle);		
+		bundles = licenseService.listBundle();		
 		return SUCCESS;
 	}
 	
 	public String viewBundle() throws Exception{
-		bundle = licenseService.getBundle(bundle);	
+		bundle = licenseService.getBundle(bundle.getId());	
 		acao = "save";
 		return INPUT;		
 	}
@@ -118,8 +113,7 @@ public class LicenseAction extends DefaultActionSupport {
 	}
 	
 	public String viewLicenseBundleUse() throws Exception{
-		bundle = licenseService.getBundle(bundle);	
-		licenseUses = licenseService.listLicenseUses(bundle, pageNumber);		
+		bundle = licenseService.getBundle(bundle.getId());					
 		return "usage";
 	}
 

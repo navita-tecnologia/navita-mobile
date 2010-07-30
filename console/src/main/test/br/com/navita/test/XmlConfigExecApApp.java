@@ -31,10 +31,10 @@ public class XmlConfigExecApApp {
 		xs.alias("sapParam", SapParameter.class);
 		xs.alias("table", SapTable.class);
 		xs.alias("row", SapRow.class);
-		SapExecutionConfig config =	(SapExecutionConfig) xs.fromXML(XmlConfigExecApApp.class.getResourceAsStream("/listar-centros-exerc.xml"));
+		SapExecutionConfig config =	(SapExecutionConfig) xs.fromXML(XmlConfigExecApApp.class.getResourceAsStream("/tbg.xml"));
 		//SapExecutionConfig config =	(SapExecutionConfig) xs.fromXML(XmlConfigExecApApp.class.getResourceAsStream("/aprova-item-orc.xml"));
 
-		String cli = "400", sysnr="01";
+		String cli = "100", sysnr="D01";
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("usuario", "NAVITA");
 		//params.put("centro", "0051");		
@@ -42,9 +42,9 @@ public class XmlConfigExecApApp {
 		params.put("cdOrcamento", "1234");
 		params.put("grGastos", "NENHUM");*/
 
+//sap://172.16.18.145?client=100&sysnr=D01
 
-
-		SapSession session = PoolManager.createSession("navita", "navita123","sap:///H/200.169.222.140/H/192.168.0.13?client="+cli+"&sysnr="+sysnr+"&lang=PT_BR");
+		SapSession session = PoolManager.createSession("mguedes", "navita","sap://172.16.18.145?client="+cli+"&sysnr="+sysnr+"&lang=PT_BR");
 
 		String token = session.getToken();
 		Client client = JCO.getClient(token);
@@ -66,6 +66,7 @@ public class XmlConfigExecApApp {
 
 		if(config.getInputTableList()!=null){
 			for(SapTable paramTable: config.getInputTableList()){
+				tList.getTable(0);
 				Table table = tList.getTable(paramTable.getTableName());
 				int paramIndex = 0;
 				for(SapRow row:paramTable.getRows()){

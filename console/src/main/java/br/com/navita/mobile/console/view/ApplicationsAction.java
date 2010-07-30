@@ -8,9 +8,9 @@ import br.com.navita.mobile.console.bizz.LicenseService;
 import br.com.navita.mobile.console.dao.LdapConfigDAO;
 import br.com.navita.mobile.console.dao.MobileApplicationDAO;
 import br.com.navita.mobile.console.domain.LdapConfig;
-import br.com.navita.mobile.console.domain.LicenseBundle;
 import br.com.navita.mobile.console.domain.MobileApplication;
 import br.com.navita.mobile.console.domain.MobileApplicationExecutor;
+import br.com.navita.mobile.console.model.LicenseBundle;
 
 public class ApplicationsAction extends DefaultActionSupport {
 
@@ -34,7 +34,7 @@ public class ApplicationsAction extends DefaultActionSupport {
 	
 	
 	public List<LicenseBundle> getLicenseBundles(){
-		return licenseService.listBundle(null);
+		return licenseService.listBundle();
 	}
 	
 	public MobileApplicationExecutor getExecutor() {

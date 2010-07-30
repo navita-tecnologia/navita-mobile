@@ -1,0 +1,52 @@
+<sapExec>
+  <functionName>SAP_WAPI_CREATE_WORKLIST</functionName>
+  <inputParameterList>
+    <sapParam>
+      <name>LANGUAGE</name>
+      <value>PT</value>
+    </sapParam>
+    <sapParam>
+      <name>USER</name>
+      <value>MGUEDES</value>
+    </sapParam>
+  </inputParameterList>
+  <inputTableList>
+    <table>
+      <tableName>TASK_FILTER</tableName>
+      <rows>
+        <row serialization="custom">
+          <unserializable-parents/>
+          <map>
+            <default>
+              <loadFactor>0.75</loadFactor>
+              <threshold>12</threshold>
+            </default>
+            <int>16</int>
+            <int>1</int>
+            <string>WI_RH_TASK</string>
+            <string>TS90000025</string>
+          </map>
+        </row>
+        <row serialization="custom">
+          <unserializable-parents/>
+          <map>
+            <default>
+              <loadFactor>0.75</loadFactor>
+              <threshold>12</threshold>
+            </default>
+            <int>16</int>
+            <int>1</int>
+            <string>WI_RH_TASK</string>
+            <string>TS20000131</string>
+          </map>
+        </row>
+      </rows>
+    </table>
+  </inputTableList>
+  <outputTableList>
+    <table>
+      <tableName>WORKLIST</tableName>
+      <rows/>
+    </table>
+  </outputTableList>
+</sapExec>

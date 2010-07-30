@@ -55,7 +55,8 @@ public class GenericJpaDAO<T> implements GenericRepository<T> {
 		Query query = entityManager.createQuery(ql);
 		return query.getResultList();
 	}
-
+	
+	
 	/**
 	 * @see com.navita.portal.master.dao.GenericRepository#persist(java.lang.Object)
 	 */

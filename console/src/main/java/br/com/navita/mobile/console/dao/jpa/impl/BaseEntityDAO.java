@@ -38,7 +38,7 @@ public class BaseEntityDAO<T extends BaseEntity> extends GenericJpaDAO<T> implem
 		String ql = "SELECT e FROM " + persistentClass.getSimpleName() + " e WHERE (e.id = :id)";
 		Query query = entityManager.createQuery(ql);
 		query.setParameter("id", id);
-		query.setParameter("removed", false);
+		//query.setParameter("removed", false);
 		try {
 			return (T) query.getSingleResult();
 		} catch(NoResultException e) {

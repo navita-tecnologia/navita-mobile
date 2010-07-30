@@ -10,12 +10,10 @@ import br.com.navita.mobile.console.bizz.LoginService;
 import br.com.navita.mobile.console.bizz.MSWindowsLoginService;
 import br.com.navita.mobile.console.dao.LdapConfigDAO;
 import br.com.navita.mobile.console.dao.MobileApplicationDAO;
-import br.com.navita.mobile.console.domain.DeviceData;
 import br.com.navita.mobile.console.domain.LdapConfig;
-import br.com.navita.mobile.console.domain.LicenseBundle;
-import br.com.navita.mobile.console.domain.LicenseUse;
 import br.com.navita.mobile.console.domain.LoginResult;
 import br.com.navita.mobile.console.domain.MobileApplication;
+import br.com.navita.mobile.console.exception.EntityNotFoundException;
 import br.com.navita.mobile.console.exception.InvalidDeviceDataException;
 import br.com.navita.mobile.console.exception.InvalidLicenseKeyException;
 import br.com.navita.mobile.console.exception.InvalidMobileUrlException;
@@ -23,6 +21,8 @@ import br.com.navita.mobile.console.exception.MobileApplictionNotFoundException;
 import br.com.navita.mobile.console.jar.DeployableProcessor;
 import br.com.navita.mobile.console.jdbc.DataSourceAppProcessor;
 import br.com.navita.mobile.console.jdbc.JdbcAppProcessor;
+import br.com.navita.mobile.console.model.LicenseBundle;
+import br.com.navita.mobile.console.model.LicenseActivation;
 import br.com.navita.mobile.console.proxy.ProxyServletProcessor;
 import br.com.navita.mobile.console.remote.EjbProcessor;
 import br.com.navita.mobile.console.sap.SapMobileProcessor;
@@ -165,7 +165,12 @@ public class NavitaMobileDispatcher {
 	}
 
 	private boolean hasLicenseToRun(MobileApplication app, String operation, Map<?, ?> params) throws InvalidDeviceDataException, InvalidLicenseKeyException {
-		LicenseBundle bundle = licenseService.getBundle(new LicenseBundle(app.getLicenseBundleId()));
+		LicenseBundle bundle = null;
+		try {
+			bundle = licenseService.getBundle(app.getLicenseBundleId());
+		} catch (EntityNotFoundException e1) {
+			throw new InvalidLicenseKeyException("License Bundle not found");
+		}
 		if(bundle == null || !bundle.isEnabled()){
 			throw new InvalidLicenseKeyException("Disabled License Bundle");
 		}
@@ -232,18 +237,19 @@ public class NavitaMobileDispatcher {
 			throw new InvalidDeviceDataException("CARRIER parameter not found");
 		}
 
-		LicenseUse use = new LicenseUse();
-		use.setBundleId(app.getLicenseBundleId());
+		LicenseActivation use = new LicenseActivation();
 		use.setActivationDate(new Date());
 		use.setCarrier(carrier[0]);
-		use.setDeviceModel(device[0]);
+		use.setModel(device[0]);
 		use.setEmail(email[0]);
 		use.setPin(pin[0]);
-		DeviceData deviceData = new DeviceData();
-		deviceData.setModel(device[0]);
-		deviceData.setBrand(brand[0]);
+		use.setBrand(brand[0]);
 
-		licenseService.insertLicenseUse(use,deviceData);
+		try {
+			licenseService.insertLicenseUse(use,app.getLicenseBundleId());
+		} catch (EntityNotFoundException e) {
+			throw new InvalidDeviceDataException("Invalid license configuration");
+		}
 
 
 	}

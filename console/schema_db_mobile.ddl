@@ -1,4 +1,6 @@
-
+drop database mobiledb;
+create database mobiledb;
+use mobiledb;
     alter table AdLoginService 
         drop constraint FKF24106EFC144AB30;
 
@@ -16,6 +18,9 @@
 
     alter table Connector_Operation 
         drop constraint FKA9E46FB5A82EF51D;
+
+    alter table LicenseActivation 
+        drop constraint FKF36D841737BD6462;
 
     alter table LicenseBundle 
         drop constraint FKA1D5DC03B014242;
@@ -36,6 +41,8 @@
     drop table Connector;
 
     drop table Connector_Operation;
+
+    drop table LicenseActivation;
 
     drop table LicenseBundle;
 
@@ -66,9 +73,9 @@
         enabled smallint not null,
         licenseKey varchar(255) not null,
         tag varchar(255) not null,
-        loginService_id varchar(32),
         tokenConnector_id varchar(32),
         licenseBundle_id varchar(32),
+        loginService_id varchar(32),
         primary key (id)
     );
 
@@ -79,10 +86,25 @@
         unique (operations_id)
     );
 
+    create table LicenseActivation (
+        id varchar(32) not null,
+        name varchar(255) not null,
+        removed smallint not null,
+        activationDate timestamp,
+        brand varchar(255),
+        carrier varchar(255),
+        email varchar(255),
+        model varchar(255),
+        pin varchar(255),
+        licenseBundle_id varchar(32),
+        primary key (id)
+    );
+
     create table LicenseBundle (
         id varchar(32) not null,
         name varchar(255) not null,
         removed smallint not null,
+        enabled smallint not null,
         period integer not null,
         licenseBundleType_id varchar(32),
         primary key (id)
@@ -149,6 +171,11 @@
         add constraint FKA9E46FB5A82EF51D 
         foreign key (operations_id) 
         references Operation;
+
+    alter table LicenseActivation 
+        add constraint FKF36D841737BD6462 
+        foreign key (licenseBundle_id) 
+        references LicenseBundle;
 
     alter table LicenseBundle 
         add constraint FKA1D5DC03B014242 

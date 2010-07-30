@@ -28,3 +28,32 @@ insert into LicenseBundleType values ('cdf2b0011b0b4fc39490baa776d61446','Entrep
 insert into LicenseBundleType values ('cdf2b0011b0b4fc39490baa776d61447','Entreprise by Operation and PIN',0);
 insert into LicenseBundleType values ('cdf2b0011b0b4fc39490baa776d61448','Entreprise by Connector',0);
 insert into LicenseBundleType values ('cdf2b0011b0b4fc39490baa776d61449','Entreprise by Connector and PIN',0);
+
+
+--legacy
+CREATE TABLE mobileapp(
+	id varchar(255) NOT NULL PRIMARY KEY,
+	name varchar(100) NOT NULL,
+	enabled int NOT NULL,
+	url varchar(255) ,	
+	usingNativeLoginService int NOT NULL,
+	loginServiceId varchar(100) ,
+	privateKey varchar(255) ,
+	tokenGeneratorUrl varchar(255),
+	licenseBundleId int,
+	licenseActivationKey varchar(500)
+); 
+
+CREATE TABLE mobileappexecutor(
+	name varchar(255) ,
+	classname varchar(255) ,
+	configuration varchar(5000) ,
+	mobileid varchar(255) 
+); 
+
+CREATE TABLE mobileconfig(
+	id varchar(255) NOT NULL PRIMARY KEY,
+	value varchar(255) 
+);
+
+--end legacy

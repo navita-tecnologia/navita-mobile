@@ -10,11 +10,22 @@ public class LicenseBundle extends BaseEntity {
 	@Column(nullable = false)
 	private int period;
 	
+	@Column(nullable = false)
+	private boolean enabled;
+	
 	
 	@OneToOne
 	private LicenseBundleType licenseBundleType;
 
 
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	
+	public boolean isEnabled() {
+		return enabled;
+	}
+	
 	public int getPeriod() {
 		return period;
 	}

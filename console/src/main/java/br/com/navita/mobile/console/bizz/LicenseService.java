@@ -2,11 +2,10 @@ package br.com.navita.mobile.console.bizz;
 
 import java.util.List;
 
-import br.com.navita.mobile.console.dao.Page;
-import br.com.navita.mobile.console.domain.DeviceData;
-import br.com.navita.mobile.console.domain.LicenseBundle;
-import br.com.navita.mobile.console.domain.LicenseBundleType;
-import br.com.navita.mobile.console.domain.LicenseUse;
+import br.com.navita.mobile.console.exception.EntityNotFoundException;
+import br.com.navita.mobile.console.model.LicenseBundle;
+import br.com.navita.mobile.console.model.LicenseBundleType;
+import br.com.navita.mobile.console.model.LicenseActivation;
 
 public interface LicenseService {
 	
@@ -15,14 +14,15 @@ public interface LicenseService {
 	 * @param model
 	 * @return
 	 */
-	List<LicenseBundle> listBundle(LicenseBundle bundle);
+	List<LicenseBundle> listBundle();
 	
 	/**
 	 * 
 	 * @param model
 	 * @return
+	 * @throws EntityNotFoundException 
 	 */
-	LicenseBundle getBundle(LicenseBundle bundle);
+	LicenseBundle getBundle(String id) throws EntityNotFoundException;
 	
 	/**
 	 * 
@@ -51,18 +51,21 @@ public interface LicenseService {
 
 	/**
 	 * 
-	 * @param bundle
-	 * @param offset
-	 * @return
+	 * @param use
+	 * @throws EntityNotFoundException 
 	 */
-	Page<LicenseUse> listLicenseUses(LicenseBundle bundle, int pageNumber);
+	void insertLicenseUse(LicenseActivation use,String bundleId) throws EntityNotFoundException;	
 	
 	/**
 	 * 
-	 * @param use
+	 * @param type
 	 */
-	void insertLicenseUse(LicenseUse use, DeviceData device);
+	void persistBundleType(LicenseBundleType type);
 	
-	void persistBundleType(br.com.navita.mobile.console.model.LicenseBundleType type);
+	/**
+	 * 
+	 * @param type
+	 */
+	void deleteBundleType(LicenseBundleType type);
 
 }

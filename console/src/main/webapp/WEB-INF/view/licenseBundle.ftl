@@ -22,7 +22,7 @@
 							</tr>
 							<tr valign="middle" >
 								<td width="350">Período padrão em dias (-1 para Ilimitado)</td>
-								<td align="left"><@s.textfield name="bundle.defaultPeriodInDays" theme="simple"/></td>	
+								<td align="left"><@s.textfield name="bundle.period" theme="simple"/></td>	
 							</tr>							
 							<tr valign="middle" >
 								<td width="350">Habilitado</td>

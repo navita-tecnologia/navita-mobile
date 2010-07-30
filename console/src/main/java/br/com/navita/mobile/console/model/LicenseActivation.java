@@ -1,0 +1,79 @@
+package br.com.navita.mobile.console.model;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+
+@Entity
+public class LicenseActivation extends BaseEntity {
+	
+	@Column
+	private Date activationDate;
+	
+	@Column
+	private String pin;
+	
+	@Column
+	private String model;
+	
+	@Column
+	private String brand;
+	
+	@Column
+	private String email;
+	
+	@Column
+	private String carrier;
+	
+	@OneToOne
+	private LicenseBundle licenseBundle;
+	
+	public void setActivationDate(Date activationDate) {
+		this.activationDate = activationDate;
+	}
+	
+	public Date getActivationDate() {
+		return activationDate;
+	}
+	
+	public LicenseBundle getLicenseBundle() {
+		return licenseBundle;
+	}
+	public void setLicenseBundle(LicenseBundle licenseBundle) {
+		this.licenseBundle = licenseBundle;
+	}
+	public String getPin() {
+		return pin;
+	}
+	public void setPin(String pin) {
+		this.pin = pin;
+	}
+	public String getModel() {
+		return model;
+	}
+	public void setModel(String model) {
+		this.model = model;
+	}
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getCarrier() {
+		return carrier;
+	}
+	public void setCarrier(String carrier) {
+		this.carrier = carrier;
+	}
+	
+	
+}
