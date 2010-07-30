@@ -12,7 +12,7 @@ import br.com.navita.mobile.console.model.LicenseActivation;
 
 public class LicenseAction extends DefaultActionSupport {
 	
-	private LicenseBundle bundle;
+	private LicenseBundle bundle = new LicenseBundle();
 	private LicenseActivation licenceUse;
 	private List<LicenseBundle> bundles;
 	private LicenseService licenseService;

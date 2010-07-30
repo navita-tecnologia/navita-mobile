@@ -28,8 +28,9 @@ public interface LicenseService {
 	 * 
 	 * @param model
 	 * @return
+	 * @throws EntityNotFoundException 
 	 */
-	LicenseBundle insertBundle(LicenseBundle bundle);
+	LicenseBundle insertBundle(LicenseBundle bundle) throws EntityNotFoundException;
 	
 	/**
 	 * 

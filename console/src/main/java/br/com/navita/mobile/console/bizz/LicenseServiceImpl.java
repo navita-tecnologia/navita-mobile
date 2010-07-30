@@ -41,7 +41,9 @@ public class LicenseServiceImpl implements LicenseService {
 
 	
 	@Override
-	public LicenseBundle insertBundle(LicenseBundle bundle) {
+	public LicenseBundle insertBundle(LicenseBundle bundle) throws EntityNotFoundException {
+		LicenseBundleType type = licenseBundleTypeRepository.findById(bundle.getLicenseBundleType().getId());
+		bundle.setLicenseBundleType(type);
 		licenseBundleRepository.persist(bundle);
 		return bundle;
 	}
