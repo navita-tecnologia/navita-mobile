@@ -292,7 +292,7 @@
 						-Dhibernate.dialect=org.hibernate.dialect.Oracle10gDialect mvn
 						compile antrun:run
 						-Dhibernate.dialect=org.hibernate.dialect.SQLServerDialect 
-						mvn	compile antrun:run -Dhibernate.dialect=org.hibernate.dialect.DerbyDialect
+						mvn compile antrun:run -Dhibernate.dialect=org.hibernate.dialect.DerbyDialect
 					-->
 					<tasks>
 						<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" />

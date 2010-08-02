@@ -9,24 +9,24 @@
 				<div class="body">
 		            <strong>Pacotes de Licen&ccedil;as</strong>
 		            <@s.form action="licenses!${acao}Bundle.action">		            
-		            <@s.hidden name="bundle.id" value="${bundle.id}"/>
+		            <@s.hidden name="id" value="${licenseBundle.id}"/>
 					<table class="gridContent">						
 							<tr valign="middle" >
 								<td width="350">Nome</td>
-								<td align="left"><@s.textfield name="bundle.name" theme="simple"/></td>	
+								<td align="left"><@s.textfield name="name" theme="simple" value="${licenseBundle.name!}"/></td>	
 							</tr>
 							<tr valign="middle" >
 								<td width="350">Tipo</td>
-								<td align="left"><@s.select value="bundle.licenseBundleType.id" name="bundle.licenseBundleType.id" 
+								<td align="left"><@s.select value="licenseBundleTypeId" name="licenseBundleTypeId" 
 								theme="simple" list="licenseBundleTypes" listKey="id" listValue="name"/></td>	
 							</tr>
 							<tr valign="middle" >
 								<td width="350">Período padrão em dias (-1 para Ilimitado)</td>
-								<td align="left"><@s.textfield name="bundle.period" theme="simple"/></td>	
+								<td align="left"><@s.textfield name="period" theme="simple" value="${licenseBundle.period}"/></td>	
 							</tr>							
 							<tr valign="middle" >
 								<td width="350">Habilitado</td>
-								<td align="left"><@s.select value="bundle.enabled" name="bundle.enabled" 
+								<td align="left"><@s.select value="${licenseBundle.enabled?string}" name="enabled" 
 								theme="simple" list="# {'false':'Não','true':'Sim'}" /></td>	
 							</tr>
 							<tr class="active" valign="middle">

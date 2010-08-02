@@ -91,6 +91,7 @@ public class BaseEntityDAO<T extends BaseEntity> extends GenericJpaDAO<T> implem
 	 * @see com.navita.portal.master.dao.impl.GenericJpaDAO#remove(java.lang.Object)
 	 */
 	public void remove(T entity) {
-		entity.remove();
+		//entity.remove();
+		entityManager.remove(entity);
 	}
 }

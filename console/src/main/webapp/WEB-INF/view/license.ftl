@@ -20,13 +20,13 @@
 						<#list bundles as bundle>
 							<tr valign="middle">
 								<td>
-									<a href='licenses!viewLicenseBundleUse.action?bundle.id=${bundle.id}&pageNumber=1'title="Lista utilizações do pacote ${bundle.name}" >${bundle.name}</a>
+									<a href='licenses!viewLicenseBundleUse.action?id=${bundle.id}&pageNumber=1'title="Lista utilizações do pacote ${bundle.name}" >${bundle.name}</a>
 								</td>
 								<td class="left">${bundle.licenseBundleType.name}</td>	
-								<td align="center">${bundle.defaultPeriodInDaysLabel!}</td>	
-								<td align="center">${bundle.usageNumber!}</td>	
+								<td align="center">${bundle.period!}</td>	
+								<td align="center">${bundle.licenseActivations.size()}</td>	
 								<td align="center">
-									<a href='licenses!viewBundle.action?bundle.id=${bundle.id}'title="Editar" >editar</a>
+									<a href='licenses!viewBundle.action?id=${bundle.id}'title="Editar" >editar</a>
 								</td>							
 								<td align="center">
 									<a href="#" onclick='removeBundle("${bundle.name}","${bundle.id}")' >remover</a>
@@ -42,7 +42,7 @@
 			<script>
 		function removeBundle(nome,id){
 			if(confirm('Tem certeza que quer remover o pacote '+nome+'?')){
-				window.location='licenses!removeBundle.action?bundle.id='+id;	
+				window.location='licenses!removeBundle.action?id='+id;	
 			}
 		}
 		</script>

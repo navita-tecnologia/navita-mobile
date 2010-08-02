@@ -5,10 +5,13 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.navita.mobile.console.dao.jpa.GenericRepository;
+import br.com.navita.mobile.console.dao.jpa.LicenseActivationRepository;
 import br.com.navita.mobile.console.exception.EntityNotFoundException;
 import br.com.navita.mobile.console.model.LicenseBundle;
 import br.com.navita.mobile.console.model.LicenseBundleType;
 import br.com.navita.mobile.console.model.LicenseActivation;
+import br.com.navita.mobile.console.view.rawdata.LicenseActivationRaw;
+import br.com.navita.mobile.console.view.rawdata.LicenseBundleRaw;
 
 
 @Transactional
@@ -16,7 +19,7 @@ public class LicenseServiceImpl implements LicenseService {
 	
 	private GenericRepository<LicenseBundleType> licenseBundleTypeRepository;
 	private GenericRepository<LicenseBundle> licenseBundleRepository;
-	private GenericRepository<LicenseActivation> licenseActivationRepository;
+	private LicenseActivationRepository<LicenseActivation> licenseActivationRepository;
 	
 	public void setLicenseBundleTypeRepository(
 			GenericRepository<br.com.navita.mobile.console.model.LicenseBundleType> licenseBundleTypeRepository) {
@@ -29,30 +32,49 @@ public class LicenseServiceImpl implements LicenseService {
 	}
 	
 	public void setLicenseActivationRepository(
-			GenericRepository<LicenseActivation> licenseActivationRepository) {
+			LicenseActivationRepository<LicenseActivation> licenseActivationRepository) {
 		this.licenseActivationRepository = licenseActivationRepository;
 	}
 
 	@Override
-	public void deleteBundle(LicenseBundle bundle) {
+	public void deleteBundle(LicenseBundleRaw bundleRaw) throws EntityNotFoundException {
+		LicenseBundle bundle = licenseBundleRepository.findById(bundleRaw.getId());
 		licenseBundleRepository.remove(bundle);
 		
 	}
 
 	
 	@Override
-	public LicenseBundle insertBundle(LicenseBundle bundle) throws EntityNotFoundException {
-		LicenseBundleType type = licenseBundleTypeRepository.findById(bundle.getLicenseBundleType().getId());
-		bundle.setLicenseBundleType(type);
-		licenseBundleRepository.persist(bundle);
+	public LicenseBundle insertBundle(LicenseBundleRaw bundleRaw) throws EntityNotFoundException {
+		LicenseBundle bundle = new LicenseBundle();
+		persistBundle(bundleRaw, bundle);
 		return bundle;
 	}
 
 	@Override
-	public void insertLicenseUse(LicenseActivation licenseActivation, String bundleId) throws EntityNotFoundException {
-		LicenseBundle bundle = licenseBundleRepository.findById(bundleId);
-		licenseActivation.setLicenseBundle(bundle);
-		licenseActivationRepository.persist(licenseActivation);
+	public void doLicenseActivation(LicenseActivationRaw raw) throws EntityNotFoundException {
+		LicenseBundle bundle = licenseBundleRepository.findById(raw.getBundleId());
+		
+		
+		LicenseActivation savedActivation = licenseActivationRepository.findPinOnBundle(raw);
+		if(savedActivation != null){
+			savedActivation.setCarrier(raw.getCarrier());
+			savedActivation.setEmail(raw.getEmail());
+			licenseActivationRepository.persist(savedActivation);
+		}else{
+			LicenseActivation la = new LicenseActivation();
+			la.setLicenseBundle(bundle);
+			la.setActivationDate(raw.getActivationDate());
+			la.setBrand(raw.getBrand());
+			la.setCarrier(raw.getCarrier());
+			la.setEmail(raw.getEmail());
+			la.setModel(raw.getModel());
+			la.setPin(raw.getPin());
+			la.setName("");
+			licenseActivationRepository.persist(la);
+		}
+		
+		
 		
 	}
 
@@ -74,9 +96,20 @@ public class LicenseServiceImpl implements LicenseService {
 	}
 
 	@Override
-	public void updateBundle(LicenseBundle bundle) {
-		licenseBundleRepository.persist(bundle);
+	public void updateBundle(LicenseBundleRaw bundleRaw) throws EntityNotFoundException {
+		LicenseBundle bundle = licenseBundleRepository.findById(bundleRaw.getId());
+		persistBundle(bundleRaw, bundle);
 		
+	}
+
+	private void persistBundle(LicenseBundleRaw bundleRaw, LicenseBundle bundle)
+			throws EntityNotFoundException {
+		bundle.setName(bundleRaw.getName());
+		bundle.setPeriod(bundleRaw.getPeriod());	
+		bundle.setEnabled(bundleRaw.isEnabled());
+		LicenseBundleType type = licenseBundleTypeRepository.findById(bundleRaw.getLicenseBundleTypeId());
+		bundle.setLicenseBundleType(type);
+		licenseBundleRepository.persist(bundle);
 	}
 
 	@Override

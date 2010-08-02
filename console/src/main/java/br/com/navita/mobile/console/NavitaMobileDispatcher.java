@@ -22,7 +22,6 @@ import br.com.navita.mobile.console.jar.DeployableProcessor;
 import br.com.navita.mobile.console.jdbc.DataSourceAppProcessor;
 import br.com.navita.mobile.console.jdbc.JdbcAppProcessor;
 import br.com.navita.mobile.console.model.LicenseBundle;
-import br.com.navita.mobile.console.model.LicenseActivation;
 import br.com.navita.mobile.console.proxy.ProxyServletProcessor;
 import br.com.navita.mobile.console.remote.EjbProcessor;
 import br.com.navita.mobile.console.sap.SapMobileProcessor;
@@ -30,6 +29,7 @@ import br.com.navita.mobile.console.stat.StaticProcessor;
 import br.com.navita.mobile.console.util.Decryptor;
 import br.com.navita.mobile.console.util.DecryptorException;
 import br.com.navita.mobile.console.util.NavitaMobileParamsUtil;
+import br.com.navita.mobile.console.view.rawdata.LicenseActivationRaw;
 import br.com.navita.mobile.domain.MobileBean;
 import br.com.navita.mobile.ws.processor.GenericWsProcessor;
 
@@ -211,44 +211,82 @@ public class NavitaMobileDispatcher {
 		return true;
 	}
 
-	private void registerLicenseUse(MobileApplication app, Map<?, ?> params) throws InvalidDeviceDataException {
-		String[] pin = (String[]) params.get("pin");
+	private void registerLicenseUse(final MobileApplication app, final Map<?, ?> params) throws InvalidDeviceDataException {
+		final String[] pin = (String[]) params.get("pin");
 		if(pin == null){
 			throw new InvalidDeviceDataException("PIN parameter not found");
 		}
 
-		String[] email = (String[]) params.get("email");
+		final String[] email = (String[]) params.get("email");
 		if(email == null){
 			throw new InvalidDeviceDataException("EMAIL parameter not found");
 		}
 
-		String[] device = (String[]) params.get("device");
+		final String[] device = (String[]) params.get("device");
 		if(device == null){
 			throw new InvalidDeviceDataException("DEVICE model parameter not found");
 		}
 
-		String[] brand = (String[]) params.get("brand");
+		final String[] brand = (String[]) params.get("brand");
 		if(brand == null){
 			throw new InvalidDeviceDataException("BRAND parameter not found");
 		}
 
-		String[] carrier = (String[]) params.get("carrier");
+		final String[] carrier = (String[]) params.get("carrier");
 		if(carrier == null){
 			throw new InvalidDeviceDataException("CARRIER parameter not found");
 		}
 
-		LicenseActivation use = new LicenseActivation();
-		use.setActivationDate(new Date());
-		use.setCarrier(carrier[0]);
-		use.setModel(device[0]);
-		use.setEmail(email[0]);
-		use.setPin(pin[0]);
-		use.setBrand(brand[0]);
+		LicenseActivationRaw activationRaw = new LicenseActivationRaw(){
+			@Override
+			public String getBundleId() {				
+				return app.getLicenseBundleId();
+			}
+			@Override
+			public String getId() {				
+				return null;
+			}
+			public String getName() {
+				return "";
+			}
+			@Override
+			public Date getActivationDate() {
+				
+				return new Date();
+			}
+			@Override
+			public String getBrand() {
+				
+				return brand[0];
+			}
+			@Override
+			public String getCarrier() {
+				
+				return carrier[0];
+			}
+			@Override
+			public String getEmail() {
+				
+				return email[0];
+			}
+			@Override
+			public String getModel() {
+				
+				return device[0];
+			}
+			@Override
+			public String getPin() {
+				
+				return pin[0];
+			};
+			
+		};
+		
 
 		try {
-			licenseService.insertLicenseUse(use,app.getLicenseBundleId());
+			licenseService.doLicenseActivation(activationRaw);
 		} catch (EntityNotFoundException e) {
-			throw new InvalidDeviceDataException("Invalid license configuration");
+			throw new InvalidDeviceDataException("Invalid license configuration",e);
 		}
 
 

@@ -8,16 +8,40 @@ import br.com.navita.mobile.console.bizz.LicenseService;
 import br.com.navita.mobile.console.model.LicenseBundle;
 import br.com.navita.mobile.console.model.LicenseBundleType;
 import br.com.navita.mobile.console.model.LicenseActivation;
+import br.com.navita.mobile.console.view.rawdata.LicenseBundleRaw;
 
 
-public class LicenseAction extends DefaultActionSupport {
+public class LicenseAction extends DefaultActionSupport implements LicenseBundleRaw{
 	
-	private LicenseBundle bundle = new LicenseBundle();
+	private LicenseBundle licenseBundle = new LicenseBundle();
 	private LicenseActivation licenceUse;
 	private List<LicenseBundle> bundles;
 	private LicenseService licenseService;
 	private String acao;
 	private int pageNumber = 1;
+	private String licenseBundleTypeId;
+	private int period;
+	private String name;
+	private String id;
+	private boolean enabled;
+	
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	
+	public boolean isEnabled() {
+		return enabled;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
+	
 	
 	
 	public void setPageNumber(int pageNumber) {
@@ -44,12 +68,12 @@ public class LicenseAction extends DefaultActionSupport {
 	}
 	
 	
-	public LicenseBundle getBundle() {
-		return bundle;
+	public LicenseBundle getLicenseBundle() {
+		return licenseBundle;
 	}
 
-	public void setBundle(LicenseBundle bundle) {
-		this.bundle = bundle;
+	public void setLicenseBundle(LicenseBundle bundle) {
+		this.licenseBundle = bundle;
 	}
 
 
@@ -82,39 +106,66 @@ public class LicenseAction extends DefaultActionSupport {
 	}
 	
 	public String viewBundle() throws Exception{
-		bundle = licenseService.getBundle(bundle.getId());	
+		licenseBundle = licenseService.getBundle(this.getId());		
 		acao = "save";
 		return INPUT;		
 	}
 	
 	public String saveBundle() throws Exception{
-		licenseService.updateBundle(bundle);
+		licenseService.updateBundle(this);
 		addActionMessage("Pacote salvo com sucesso");
 		return viewBundle();
 	}
 	
 	public String removeBundle() throws Exception{
-		licenseService.deleteBundle(bundle);
+		licenseService.deleteBundle(this);
 		addActionMessage("Pacote excluido com sucesso");
 		return this.execute();
 	}
 	
-	public String createBundlePrepare() throws Exception{
-		bundle = new LicenseBundle();	
+	public String createBundlePrepare() throws Exception{		
 		acao = "create";
 		return INPUT;		
 	}
 	
 	public String createBundle() throws Exception{
-		bundle = licenseService.insertBundle(bundle);		
+		licenseBundle = licenseService.insertBundle(this);		
 		addActionMessage("Pacote criado com sucesso");
 		acao = "save";
 		return INPUT;		
 	}
 	
 	public String viewLicenseBundleUse() throws Exception{
-		bundle = licenseService.getBundle(bundle.getId());					
+		licenseBundle = licenseService.getBundle(licenseBundle.getId());					
 		return "usage";
 	}
+
+	@Override
+	public String getLicenseBundleTypeId() {		
+		return licenseBundleTypeId;
+	}
+	
+	public void setLicenseBundleTypeId(String licenseBundleTypeId) {
+		this.licenseBundleTypeId = licenseBundleTypeId;
+	}
+
+	@Override
+	public int getPeriod() {		
+		return period;
+	}
+	
+	public void setPeriod(int period) {
+		this.period = period;
+	}
+
+	@Override
+	public String getName() {		
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 
 }

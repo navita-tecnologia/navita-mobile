@@ -53,9 +53,9 @@
 		lazy-init="true">
 		<constructor-arg value="br.com.navita.mobile.console.model.LicenseBundle" />
 	</bean>
-	<bean id="licenseActivationRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+	<bean id="licenseActivationRepository" class="br.com.navita.mobile.console.dao.jpa.impl.LicenseActivationDAO"
 		lazy-init="true">
-		<constructor-arg value="br.com.navita.mobile.console.model.LicenseActivation" />
+		
 	</bean>
 
 	<bean id="staticConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"

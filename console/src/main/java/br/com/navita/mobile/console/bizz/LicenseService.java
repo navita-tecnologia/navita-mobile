@@ -5,7 +5,8 @@ import java.util.List;
 import br.com.navita.mobile.console.exception.EntityNotFoundException;
 import br.com.navita.mobile.console.model.LicenseBundle;
 import br.com.navita.mobile.console.model.LicenseBundleType;
-import br.com.navita.mobile.console.model.LicenseActivation;
+import br.com.navita.mobile.console.view.rawdata.LicenseActivationRaw;
+import br.com.navita.mobile.console.view.rawdata.LicenseBundleRaw;
 
 public interface LicenseService {
 	
@@ -30,19 +31,21 @@ public interface LicenseService {
 	 * @return
 	 * @throws EntityNotFoundException 
 	 */
-	LicenseBundle insertBundle(LicenseBundle bundle) throws EntityNotFoundException;
+	LicenseBundle insertBundle(LicenseBundleRaw bundleRaw) throws EntityNotFoundException;
 	
 	/**
 	 * 
 	 * @param model
+	 * @throws EntityNotFoundException 
 	 */
-	void deleteBundle(LicenseBundle bundle);
+	void deleteBundle(LicenseBundleRaw rawData) throws EntityNotFoundException;
 	
 	/**
 	 * 
 	 * @param model
+	 * @throws EntityNotFoundException 
 	 */
-	void updateBundle(LicenseBundle bundle);
+	void updateBundle(LicenseBundleRaw bundle) throws EntityNotFoundException;
 
 	/**
 	 * 
@@ -55,7 +58,7 @@ public interface LicenseService {
 	 * @param use
 	 * @throws EntityNotFoundException 
 	 */
-	void insertLicenseUse(LicenseActivation use,String bundleId) throws EntityNotFoundException;	
+	void doLicenseActivation(LicenseActivationRaw activationRaw) throws EntityNotFoundException;	
 	
 	/**
 	 * 

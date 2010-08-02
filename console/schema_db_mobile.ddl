@@ -1,6 +1,4 @@
-drop database mobiledb;
-create database mobiledb;
-use mobiledb;
+
     alter table AdLoginService 
         drop constraint FKF24106EFC144AB30;
 
