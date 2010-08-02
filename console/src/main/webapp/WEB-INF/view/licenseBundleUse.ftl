@@ -1,15 +1,15 @@
 <#import "template-geral.ftl" as t >
 <@t.template>
-<h1>${bundle.name!}</h1>
+<h1>${licenseBundle.name!}</h1>
 <br clear="all" />
 <div class="contentArea">
 <@s.actionmessage/>
  <span align="left" style="border-bottom: 1px dashed #cccccc; margin-bottom: 15px;">
-        <#if licenseUses.pageNumber != 1>
-        <a href='licenses!viewLicenseBundleUse.action?bundle.id=${bundle.id}&pageNumber=${pageNumber-1}'>Anterior</a> 
+        <#if true>
+        <a href='licenses!viewLicenseBundleUse.action?id=${licenseBundle.id}&pageNumber=${pageNumber-1}'>Anterior</a> 
         </#if>
-        <#if licenseUses.pageNumber lt licenseUses.pagesAvailable>
-        <a href='licenses!viewLicenseBundleUse.action?bundle.id=${bundle.id}&pageNumber=${pageNumber+1}'>Próximo</a>
+        <#if true>
+        <a href='licenses!viewLicenseBundleUse.action?id=${licenseBundle.id}&pageNumber=${pageNumber+1}'>Próximo</a>
         </#if>
         </span> 
 <div class="content" id="contentFull">
@@ -25,13 +25,13 @@
 				<th>Operadora</th>				
 				<th>Chave gerada (se houver)</th>				
 			</tr>	
-			<#list licenseUses.pageItems as lic>		
+			<#list licenseBundle.licenseActivations as lic>		
 			<tr valign="middle">
 				<td align="center">${lic.activationDate?string("dd/MM/yyyy kk:mm")}</td>				
 				<td align="left">${lic.email!}</td>
 				<td align="center" style="font-family: monospace;text-transform: uppercase;">${lic.pin}</td>
-				<td align="center">${lic.deviceBrand!}</td>
-				<td align="center">${lic.deviceModel!}</td>
+				<td align="center">${lic.brand!}</td>
+				<td align="center">${lic.model!}</td>
 				<td align="center">${lic.carrier!}</td>				
 				<td align="center" style="font-family: monospace;">${lic.licenseKey!}</td>					
 			</tr>				

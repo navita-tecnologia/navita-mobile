@@ -27,8 +27,20 @@ public class LicenseActivation extends BaseEntity {
 	@Column
 	private String carrier;
 	
+	@Column
+	private String licenseKey;
+	
 	@OneToOne
 	private LicenseBundle licenseBundle;
+	
+	public void setLicenseKey(String licenseKey) {
+		this.licenseKey = licenseKey;
+	}
+	
+	public String getLicenseKey() {
+		return licenseKey;
+	}
+	
 	
 	public void setActivationDate(Date activationDate) {
 		this.activationDate = activationDate;

@@ -136,7 +136,7 @@ public class LicenseAction extends DefaultActionSupport implements LicenseBundle
 	}
 	
 	public String viewLicenseBundleUse() throws Exception{
-		licenseBundle = licenseService.getBundle(licenseBundle.getId());					
+		licenseBundle = licenseService.getBundle(this.getId());					
 		return "usage";
 	}
 

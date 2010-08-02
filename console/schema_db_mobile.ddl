@@ -92,6 +92,7 @@
         brand varchar(255),
         carrier varchar(255),
         email varchar(255),
+        licenseKey varchar(255),
         model varchar(255),
         pin varchar(255),
         licenseBundle_id varchar(32),
