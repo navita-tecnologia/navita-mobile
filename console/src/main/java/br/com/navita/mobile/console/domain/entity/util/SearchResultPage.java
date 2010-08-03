@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.model.util;
+package br.com.navita.mobile.console.domain.entity.util;
 
 import java.util.List;
 

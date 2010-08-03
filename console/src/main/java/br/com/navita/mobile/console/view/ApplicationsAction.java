@@ -10,7 +10,7 @@ import br.com.navita.mobile.console.dao.MobileApplicationDAO;
 import br.com.navita.mobile.console.domain.LdapConfig;
 import br.com.navita.mobile.console.domain.MobileApplication;
 import br.com.navita.mobile.console.domain.MobileApplicationExecutor;
-import br.com.navita.mobile.console.model.LicenseBundle;
+import br.com.navita.mobile.console.domain.entity.LicenseBundle;
 
 public class ApplicationsAction extends DefaultActionSupport {
 

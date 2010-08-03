@@ -2,12 +2,12 @@ package br.com.navita.mobile.console.bizz;
 
 import java.util.List;
 
+import br.com.navita.mobile.console.domain.entity.LicenseActivation;
+import br.com.navita.mobile.console.domain.entity.LicenseBundle;
+import br.com.navita.mobile.console.domain.entity.LicenseBundleType;
+import br.com.navita.mobile.console.domain.entity.util.SearchCriteria;
+import br.com.navita.mobile.console.domain.entity.util.SearchResultPage;
 import br.com.navita.mobile.console.exception.EntityNotFoundException;
-import br.com.navita.mobile.console.model.LicenseActivation;
-import br.com.navita.mobile.console.model.LicenseBundle;
-import br.com.navita.mobile.console.model.LicenseBundleType;
-import br.com.navita.mobile.console.model.util.SearchCriteria;
-import br.com.navita.mobile.console.model.util.SearchResultPage;
 import br.com.navita.mobile.console.view.rawdata.LicenseActivationRaw;
 import br.com.navita.mobile.console.view.rawdata.LicenseBundleRaw;
 

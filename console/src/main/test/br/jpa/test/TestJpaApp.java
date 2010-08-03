@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import br.com.navita.mobile.console.bizz.LicenseService;
-import br.com.navita.mobile.console.model.LicenseBundleType;
+import br.com.navita.mobile.console.domain.entity.LicenseBundleType;
 
 
 public class TestJpaApp {

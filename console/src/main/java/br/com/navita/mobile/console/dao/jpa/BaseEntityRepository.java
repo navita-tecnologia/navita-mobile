@@ -2,7 +2,7 @@ package br.com.navita.mobile.console.dao.jpa;
 
 import java.util.List;
 
-import br.com.navita.mobile.console.model.BaseEntity;
+import br.com.navita.mobile.console.domain.entity.BaseEntity;
 
 /**
  * DAO genérico, utilizado para todas as entidades que não possuem um DAO especializado
