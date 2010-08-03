@@ -1,36 +1,36 @@
 
     alter table AdLoginService 
-        drop constraint FKF24106EFC144AB30;
+        drop constraint FKF24106EF82C77F8C;
 
     alter table Connector 
-        drop constraint FK54EC142D12B51C7B;
+        drop constraint FK54EC142DA338379F;
 
     alter table Connector 
-        drop constraint FK54EC142D4B0B5123;
+        drop constraint FK54EC142DC8E257F;
 
     alter table Connector 
-        drop constraint FK54EC142D37BD6462;
+        drop constraint FK54EC142D4D364D86;
 
     alter table Connector_Operation 
-        drop constraint FKA9E46FB58FFA9002;
+        drop constraint FKA9E46FB5207DAB26;
 
     alter table Connector_Operation 
-        drop constraint FKA9E46FB5A82EF51D;
+        drop constraint FKA9E46FB538B21041;
 
     alter table LicenseActivation 
-        drop constraint FKF36D841737BD6462;
+        drop constraint FKF36D84174D364D86;
 
     alter table LicenseBundle 
-        drop constraint FKA1D5DC03B014242;
+        drop constraint FKA1D5DC0379D8F966;
 
     alter table StaticConnector 
-        drop constraint FK35E7595F1D049ED0;
+        drop constraint FK35E7595FAD87B9F4;
 
     alter table StaticOperation 
-        drop constraint FKBB883A79A2A57FEA;
+        drop constraint FKBB883A7933289B0E;
 
     alter table StaticOperation 
-        drop constraint FKBB883A796F0928A2;
+        drop constraint FKBB883A799EC58C6;
 
     drop table AdLoginService;
 
@@ -54,26 +54,34 @@
 
     create table AdLoginService (
         id varchar(32) not null,
+        dnsResolving smallint,
+        domainName varchar(255),
+        domainUser varchar(255),
+        domainUserPassword varchar(255),
+        groupAttribute varchar(255),
+        groupFilter varchar(255),
+        ip varchar(255),
+        searchBase varchar(255),
+        searchFilter varchar(255),
+        url varchar(255),
         primary key (id)
     );
 
     create table BaseLoginService (
         id varchar(32) not null,
         name varchar(255) not null,
-        removed smallint not null,
         primary key (id)
     );
 
     create table Connector (
         id varchar(32) not null,
         name varchar(255) not null,
-        removed smallint not null,
         enabled smallint not null,
         licenseKey varchar(255) not null,
         tag varchar(255) not null,
+        loginService_id varchar(32),
         tokenConnector_id varchar(32),
         licenseBundle_id varchar(32),
-        loginService_id varchar(32),
         primary key (id)
     );
 
@@ -87,7 +95,6 @@
     create table LicenseActivation (
         id varchar(32) not null,
         name varchar(255) not null,
-        removed smallint not null,
         activationDate timestamp,
         brand varchar(255),
         carrier varchar(255),
@@ -102,7 +109,6 @@
     create table LicenseBundle (
         id varchar(32) not null,
         name varchar(255) not null,
-        removed smallint not null,
         enabled smallint not null,
         period integer not null,
         licenseBundleType_id varchar(32),
@@ -112,14 +118,12 @@
     create table LicenseBundleType (
         id varchar(32) not null,
         name varchar(255) not null,
-        removed smallint not null,
         primary key (id)
     );
 
     create table Operation (
         id varchar(32) not null,
         name varchar(255) not null,
-        removed smallint not null,
         licenseBundle varchar(255) for bit data,
         licenseKey varchar(255),
         primary key (id)
@@ -142,56 +146,56 @@
     );
 
     alter table AdLoginService 
-        add constraint FKF24106EFC144AB30 
+        add constraint FKF24106EF82C77F8C 
         foreign key (id) 
         references BaseLoginService;
 
     alter table Connector 
-        add constraint FK54EC142D12B51C7B 
+        add constraint FK54EC142DA338379F 
         foreign key (tokenConnector_id) 
         references Connector;
 
     alter table Connector 
-        add constraint FK54EC142D4B0B5123 
+        add constraint FK54EC142DC8E257F 
         foreign key (loginService_id) 
         references BaseLoginService;
 
     alter table Connector 
-        add constraint FK54EC142D37BD6462 
+        add constraint FK54EC142D4D364D86 
         foreign key (licenseBundle_id) 
         references LicenseBundle;
 
     alter table Connector_Operation 
-        add constraint FKA9E46FB58FFA9002 
+        add constraint FKA9E46FB5207DAB26 
         foreign key (Connector_id) 
         references Connector;
 
     alter table Connector_Operation 
-        add constraint FKA9E46FB5A82EF51D 
+        add constraint FKA9E46FB538B21041 
         foreign key (operations_id) 
         references Operation;
 
     alter table LicenseActivation 
-        add constraint FKF36D841737BD6462 
+        add constraint FKF36D84174D364D86 
         foreign key (licenseBundle_id) 
         references LicenseBundle;
 
     alter table LicenseBundle 
-        add constraint FKA1D5DC03B014242 
+        add constraint FKA1D5DC0379D8F966 
         foreign key (licenseBundleType_id) 
         references LicenseBundleType;
 
     alter table StaticConnector 
-        add constraint FK35E7595F1D049ED0 
+        add constraint FK35E7595FAD87B9F4 
         foreign key (id) 
         references Connector;
 
     alter table StaticOperation 
-        add constraint FKBB883A79A2A57FEA 
+        add constraint FKBB883A7933289B0E 
         foreign key (id) 
         references Operation;
 
     alter table StaticOperation 
-        add constraint FKBB883A796F0928A2 
+        add constraint FKBB883A799EC58C6 
         foreign key (staticConnector_id) 
         references StaticConnector;
