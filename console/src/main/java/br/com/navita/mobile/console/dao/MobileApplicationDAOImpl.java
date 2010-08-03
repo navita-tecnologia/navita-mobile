@@ -38,6 +38,8 @@ public class MobileApplicationDAOImpl implements MobileApplicationDAO {
 		return app;
 	}
 
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public MobileApplication findById(String id) {
 		String sql = "select * from mobileapp where id = ?"; 

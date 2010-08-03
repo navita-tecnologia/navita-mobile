@@ -2,8 +2,8 @@ package br.com.navita.mobile.console.dao;
 
 import java.sql.SQLException;
 
-import javax.sql.DataSource;
 
+import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class SecurityDAOImpl implements SecurityDAO{
@@ -13,10 +13,10 @@ public class SecurityDAOImpl implements SecurityDAO{
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	@Override
+	@Override	
 	public void updatePassword(String login, String password) throws SQLException {
 		
-		jdbcTemplate.update("update users set password = ? where username = ?", new String[]{password,login});
+		jdbcTemplate.update("update users set password = ? where username = ?", new Object[]{password,login});
 		
 	}
 

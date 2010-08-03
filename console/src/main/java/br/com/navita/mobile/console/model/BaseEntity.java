@@ -36,10 +36,7 @@ public abstract class BaseEntity implements Serializable {
 	@Id @Column(length = 32)
 	private String id;
 
-	/** Flag de remoção da entidade */
-	@Column(nullable = false)
-	private boolean removed;
-
+	
 	/** Nome da entidade */
 	@Column(nullable = false)
 	private String name;
@@ -50,8 +47,7 @@ public abstract class BaseEntity implements Serializable {
 	 * Construtor padrão, seta UUID fresquinho para novas entidades.
 	 */
 	public BaseEntity() {
-		super();
-		removed = false;
+		super();		
 		generateNewId();
 	}
 
@@ -170,31 +166,5 @@ public abstract class BaseEntity implements Serializable {
 		this.name = name;
 	}
 
-	/**
-	 * @return
-	 */
-	public Boolean getRemoved() {
-		return removed;
-	}
 
-	/**
-	 * @return
-	 */
-	public Boolean isRemoved() {
-		return getRemoved();
-	}
-
-	/**
-	 * @param removed
-	 */
-	public void setRemoved(Boolean removed) {
-		this.removed = removed;
-	}
-
-	/**
-	 *
-	 */
-	public void remove() {
-		setRemoved(true);
-	}
 }
