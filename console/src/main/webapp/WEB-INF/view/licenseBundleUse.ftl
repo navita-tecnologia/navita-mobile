@@ -1,17 +1,13 @@
+<#global searchUrl="${request.contextPath}/licenses!viewLicenseBundleUse.action?id=${licenseBundle.id}" />
 <#import "template-geral.ftl" as t >
+<#import "_search_result_links.ftl" as search />
 <@t.template>
 <h1>${licenseBundle.name!}</h1>
 <br clear="all" />
 <div class="contentArea">
 <@s.actionmessage/>
- <span align="left" style="border-bottom: 1px dashed #cccccc; margin-bottom: 15px;">
-        <#if true>
-        <a href='licenses!viewLicenseBundleUse.action?id=${licenseBundle.id}&pageNumber=${pageNumber-1}'>Anterior</a> 
-        </#if>
-        <#if true>
-        <a href='licenses!viewLicenseBundleUse.action?id=${licenseBundle.id}&pageNumber=${pageNumber+1}'>Próximo</a>
-        </#if>
-        </span> 
+<#assign actList = bundleActivations/>
+
 <div class="content" id="contentFull">
 	<b class="bt"><b></b></b>
 	<div class="body">       
@@ -25,7 +21,7 @@
 				<th>Operadora</th>				
 				<th>Chave gerada (se houver)</th>				
 			</tr>	
-			<#list licenseBundle.licenseActivations as lic>		
+			<#list actList.elementsThisPage as lic>		
 			<tr valign="middle">
 				<td align="center">${lic.activationDate?string("dd/MM/yyyy kk:mm")}</td>				
 				<td align="left">${lic.email!}</td>
@@ -42,4 +38,5 @@
 
 </div>
 </div>
+<@search.searchResultLinks actList/> 
 </@t.template>

@@ -8,6 +8,8 @@ import br.com.navita.mobile.console.bizz.LicenseService;
 import br.com.navita.mobile.console.model.LicenseBundle;
 import br.com.navita.mobile.console.model.LicenseBundleType;
 import br.com.navita.mobile.console.model.LicenseActivation;
+import br.com.navita.mobile.console.model.util.SearchCriteria;
+import br.com.navita.mobile.console.model.util.SearchResultPage;
 import br.com.navita.mobile.console.view.rawdata.LicenseBundleRaw;
 
 
@@ -18,12 +20,13 @@ public class LicenseAction extends DefaultActionSupport implements LicenseBundle
 	private List<LicenseBundle> bundles;
 	private LicenseService licenseService;
 	private String acao;
-	private int pageNumber = 1;
+	private int pageNumber;
 	private String licenseBundleTypeId;
 	private int period;
 	private String name;
 	private String id;
 	private boolean enabled;
+	private static final int PAGE_SIZE = 20;
 	
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
@@ -111,6 +114,15 @@ public class LicenseAction extends DefaultActionSupport implements LicenseBundle
 		return INPUT;		
 	}
 	
+	public SearchResultPage<LicenseActivation> getBundleActivations(){
+		SearchCriteria criteria = new SearchCriteria();
+		criteria.setPageNumber(pageNumber);
+		criteria.setText(this.getId());
+		criteria.setPageSize(PAGE_SIZE );
+		return licenseService.listPaginatedLicenseActivation(criteria);
+		
+	}
+	
 	public String saveBundle() throws Exception{
 		licenseService.updateBundle(this);
 		addActionMessage("Pacote salvo com sucesso");
@@ -167,5 +179,11 @@ public class LicenseAction extends DefaultActionSupport implements LicenseBundle
 		this.name = name;
 	}
 	
+	
+	public long getCountActivations(String bundleId){
+		SearchCriteria criteria = new SearchCriteria();
+		criteria.setText(bundleId);
+		return licenseService.countLicenseBundleActivations(criteria);
+	}
 
 }

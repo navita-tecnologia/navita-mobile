@@ -10,6 +10,8 @@ import br.com.navita.mobile.console.exception.EntityNotFoundException;
 import br.com.navita.mobile.console.model.LicenseBundle;
 import br.com.navita.mobile.console.model.LicenseBundleType;
 import br.com.navita.mobile.console.model.LicenseActivation;
+import br.com.navita.mobile.console.model.util.SearchCriteria;
+import br.com.navita.mobile.console.model.util.SearchResultPage;
 import br.com.navita.mobile.console.view.rawdata.LicenseActivationRaw;
 import br.com.navita.mobile.console.view.rawdata.LicenseBundleRaw;
 
@@ -56,7 +58,7 @@ public class LicenseServiceImpl implements LicenseService {
 		LicenseBundle bundle = licenseBundleRepository.findById(raw.getBundleId());
 		
 		
-		LicenseActivation savedActivation = licenseActivationRepository.findPinOnBundle(raw);
+		LicenseActivation savedActivation = licenseActivationRepository.findPinOnBundle(raw.getPin(),raw.getBundleId());
 		if(savedActivation != null){
 			savedActivation.setCarrier(raw.getCarrier());
 			savedActivation.setEmail(raw.getEmail());
@@ -120,6 +122,19 @@ public class LicenseServiceImpl implements LicenseService {
 	@Override
 	public LicenseBundle getBundle(String id) throws EntityNotFoundException {		
 		return licenseBundleRepository.findById(id);
+	}
+
+	@Override
+	public Long countLicenseBundleActivations(SearchCriteria criteria) {		
+		return licenseActivationRepository.countLicenceBundleActivations(criteria.getText());
+	}
+
+	@Override
+	public SearchResultPage<LicenseActivation> listPaginatedLicenseActivation(SearchCriteria criteria) {		
+		Long totalElements = countLicenseBundleActivations(criteria);
+		List<LicenseActivation> elementsThisPage = licenseActivationRepository.paginateActivationsByBundle(criteria);
+		SearchResultPage<LicenseActivation> page = new SearchResultPage<LicenseActivation>(criteria, totalElements, elementsThisPage);
+		return page;
 	}
 	
 	

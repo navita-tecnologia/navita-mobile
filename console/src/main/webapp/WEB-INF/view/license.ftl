@@ -24,7 +24,7 @@
 								</td>
 								<td class="left">${bundle.licenseBundleType.name}</td>	
 								<td align="center">${bundle.period!}</td>	
-								<td align="center">${bundle.licenseActivations.size()}</td>	
+								<td align="center">${action.getCountActivations("${bundle.id}")}</td>	
 								<td align="center">
 									<a href='licenses!viewBundle.action?id=${bundle.id}'title="Editar" >editar</a>
 								</td>							
