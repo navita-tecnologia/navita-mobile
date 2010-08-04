@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.bizz;
+package br.com.navita.mobile.console.service;
 
 import java.util.List;
 

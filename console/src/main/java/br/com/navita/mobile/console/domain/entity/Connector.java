@@ -26,7 +26,7 @@ public abstract class Connector extends BaseEntity {
 	
 	
 	@OneToOne
-	private BaseLoginService loginService;
+	private AuthContainer authContainer;
 	
 	
 	@OneToOne
@@ -65,12 +65,12 @@ public abstract class Connector extends BaseEntity {
 
 	
 
-	public BaseLoginService getLoginService() {
-		return loginService;
+	public void setAuthContainer(AuthContainer authContainer) {
+		this.authContainer = authContainer;
 	}
-
-	public void setLoginService(BaseLoginService loginService) {
-		this.loginService = loginService;
+	
+	public AuthContainer getAuthContainer() {
+		return authContainer;
 	}
 
 	public LicenseBundle getLicenseBundle() {

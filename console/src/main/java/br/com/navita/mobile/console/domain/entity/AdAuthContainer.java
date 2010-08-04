@@ -37,10 +37,10 @@ import br.com.navita.mobile.console.util.Decryptor;
 import br.com.navita.mobile.console.util.DecryptorException;
 
 @Entity
-public class AdLoginService extends BaseLoginService{
+public class AdAuthContainer extends AuthContainer{
 	
 	@Transient
-	private static final Logger LOG = Logger.getLogger(AdLoginService.class.getName());
+	private static final Logger LOG = Logger.getLogger(AdAuthContainer.class.getName());
 
 	@Column
 	private String domainUser;

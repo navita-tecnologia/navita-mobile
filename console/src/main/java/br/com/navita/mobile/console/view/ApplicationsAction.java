@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.apache.struts2.dispatcher.DefaultActionSupport;
 
-import br.com.navita.mobile.console.bizz.LicenseService;
 import br.com.navita.mobile.console.dao.LdapConfigDAO;
 import br.com.navita.mobile.console.dao.MobileApplicationDAO;
 import br.com.navita.mobile.console.domain.LdapConfig;
 import br.com.navita.mobile.console.domain.MobileApplication;
 import br.com.navita.mobile.console.domain.MobileApplicationExecutor;
 import br.com.navita.mobile.console.domain.entity.LicenseBundle;
+import br.com.navita.mobile.console.service.LicenseService;
 
 public class ApplicationsAction extends DefaultActionSupport {
 

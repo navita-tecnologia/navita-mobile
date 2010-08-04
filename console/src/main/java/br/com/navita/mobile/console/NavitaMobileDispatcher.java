@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import br.com.navita.mobile.console.bizz.LicenseService;
 import br.com.navita.mobile.console.bizz.LoginService;
 import br.com.navita.mobile.console.bizz.MSWindowsLoginService;
 import br.com.navita.mobile.console.dao.LdapConfigDAO;
@@ -25,6 +24,7 @@ import br.com.navita.mobile.console.jdbc.JdbcAppProcessor;
 import br.com.navita.mobile.console.proxy.ProxyServletProcessor;
 import br.com.navita.mobile.console.remote.EjbProcessor;
 import br.com.navita.mobile.console.sap.SapMobileProcessor;
+import br.com.navita.mobile.console.service.LicenseService;
 import br.com.navita.mobile.console.stat.StaticProcessor;
 import br.com.navita.mobile.console.util.Decryptor;
 import br.com.navita.mobile.console.util.DecryptorException;

@@ -1,15 +1,15 @@
 
-    alter table AdLoginService 
-        drop constraint FKF24106EF82C77F8C;
+    alter table AdAuthContainer 
+        drop constraint FK3338583622670B60;
 
     alter table Connector 
         drop constraint FK54EC142DA338379F;
 
     alter table Connector 
-        drop constraint FK54EC142DC8E257F;
+        drop constraint FK54EC142D4D364D86;
 
     alter table Connector 
-        drop constraint FK54EC142D4D364D86;
+        drop constraint FK54EC142D6954E986;
 
     alter table Connector_Operation 
         drop constraint FKA9E46FB5207DAB26;
@@ -95,9 +95,9 @@
     alter table WebServiceConnector 
         drop constraint FKE0B4B86CAD87B9F4;
 
-    drop table AdLoginService;
+    drop table AdAuthContainer;
 
-    drop table BaseLoginService;
+    drop table AuthContainer;
 
     drop table Connector;
 
@@ -143,7 +143,7 @@
 
     drop table WebServiceConnector;
 
-    create table AdLoginService (
+    create table AdAuthContainer (
         id varchar(32) not null,
         dnsResolving smallint,
         domainName varchar(255),
@@ -158,7 +158,7 @@
         primary key (id)
     );
 
-    create table BaseLoginService (
+    create table AuthContainer (
         id varchar(32) not null,
         name varchar(255) not null,
         primary key (id)
@@ -170,9 +170,9 @@
         enabled smallint not null,
         licenseKey varchar(255) not null,
         tag varchar(255) not null,
-        licenseBundle_id varchar(32),
+        authContainer_id varchar(32),
         tokenConnector_id varchar(32),
-        loginService_id varchar(32),
+        licenseBundle_id varchar(32),
         primary key (id)
     );
 
@@ -336,10 +336,10 @@
         primary key (id)
     );
 
-    alter table AdLoginService 
-        add constraint FKF24106EF82C77F8C 
+    alter table AdAuthContainer 
+        add constraint FK3338583622670B60 
         foreign key (id) 
-        references BaseLoginService;
+        references AuthContainer;
 
     alter table Connector 
         add constraint FK54EC142DA338379F 
@@ -347,14 +347,14 @@
         references Connector;
 
     alter table Connector 
-        add constraint FK54EC142DC8E257F 
-        foreign key (loginService_id) 
-        references BaseLoginService;
-
-    alter table Connector 
         add constraint FK54EC142D4D364D86 
         foreign key (licenseBundle_id) 
         references LicenseBundle;
+
+    alter table Connector 
+        add constraint FK54EC142D6954E986 
+        foreign key (authContainer_id) 
+        references AuthContainer;
 
     alter table Connector_Operation 
         add constraint FKA9E46FB5207DAB26 

@@ -5,6 +5,9 @@
 
 	<persistence-unit name="mobilePersistenceUnit" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+		<property name="hibernate.show_sql" value="true"/>
+		</properties>
 	</persistence-unit>
 
 </persistence>
