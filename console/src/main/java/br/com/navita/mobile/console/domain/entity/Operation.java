@@ -10,6 +10,15 @@ public abstract class Operation extends BaseEntity {
 
 	private LicenseBundle licenseBundle;
 	private String licenseKey;
+	private Connector connector;
+	
+	public Connector getConnector() {
+		return connector;
+	}
+	
+	public void setConnector(Connector connector) {
+		this.connector = connector;
+	}
 	
 	public LicenseBundle getLicenseBundle() {
 		return licenseBundle;

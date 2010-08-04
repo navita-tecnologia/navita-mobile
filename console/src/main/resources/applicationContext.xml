@@ -72,14 +72,18 @@
 		lazy-init="true">
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.entity.StaticConnector" />
-	</bean>
+	</bean>	
+	<bean id="staticOperationRepository" class="br.com.navita.mobile.console.dao.jpa.impl.StaticOperationDAO"></bean>
 
 
 	<!-- end repositories -->
 
 	<bean id="baseConnectorService" class="br.com.navita.mobile.console.service.impl.BaseConnectorService" />
 	
-	<bean id="staticConnectorService" class="br.com.navita.mobile.console.service.impl.StaticConnectorService" />
+	<bean id="staticConnectorService" class="br.com.navita.mobile.console.service.impl.StaticConnectorService" />	
+	<bean id="staticOperationService" class="br.com.navita.mobile.console.service.impl.StaticOperationService"/>
+	
+	
 	
 	<!-- end services -->
 	

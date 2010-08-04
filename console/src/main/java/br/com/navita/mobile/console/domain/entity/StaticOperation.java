@@ -2,7 +2,6 @@ package br.com.navita.mobile.console.domain.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 
 @Entity
 public class StaticOperation extends Operation {
@@ -22,21 +21,6 @@ public class StaticOperation extends Operation {
 	@Column(nullable = true)
 	private String token;
 	
-	@OneToOne
-	private StaticConnector staticConnector;
-	
-	
-
-	
-
-	public StaticConnector getStaticConnector() {
-		return staticConnector;
-	}
-
-	public void setStaticConnector(StaticConnector staticConnector) {
-		this.staticConnector = staticConnector;
-	}
-
 	public String getList() {
 		return list;
 	}

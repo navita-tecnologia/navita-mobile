@@ -12,6 +12,6 @@ public interface LicenseActivationRepository<T extends LicenseActivation> extend
 	
 	Long countLicenceBundleActivations(String bundleId);
 	
-	List<LicenseActivation> paginateActivationsByBundle(SearchCriteria criteria);
+	List<T> paginateActivationsByBundle(SearchCriteria criteria);
 
 }

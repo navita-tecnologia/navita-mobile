@@ -2,6 +2,7 @@ package br.com.navita.mobile.console.domain.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -36,7 +37,7 @@ public abstract class Connector extends BaseEntity {
 	private String licenseKey;
 	
 	@OrderBy("name")
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="connector")
 	private Set<Operation> operations;
 
 	public String getTag() {

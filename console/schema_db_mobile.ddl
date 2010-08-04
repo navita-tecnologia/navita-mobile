@@ -89,9 +89,6 @@
     alter table StaticOperation 
         drop constraint FKBB883A7933289B0E;
 
-    alter table StaticOperation 
-        drop constraint FKBB883A799EC58C6;
-
     alter table WebServiceConnector 
         drop constraint FKE0B4B86CAD87B9F4;
 
@@ -234,6 +231,7 @@
     create table Operation (
         id varchar(32) not null,
         name varchar(255) not null,
+        connector varchar(255) for bit data,
         licenseBundle varchar(255) for bit data,
         licenseKey varchar(255),
         primary key (id)
@@ -326,7 +324,6 @@
         object varchar(255),
         resultCode integer,
         token varchar(255),
-        staticConnector_id varchar(32),
         primary key (id)
     );
 
@@ -485,11 +482,6 @@
         add constraint FKBB883A7933289B0E 
         foreign key (id) 
         references Operation;
-
-    alter table StaticOperation 
-        add constraint FKBB883A799EC58C6 
-        foreign key (staticConnector_id) 
-        references StaticConnector;
 
     alter table WebServiceConnector 
         add constraint FKE0B4B86CAD87B9F4 
