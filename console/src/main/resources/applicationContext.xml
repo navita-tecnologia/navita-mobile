@@ -23,11 +23,12 @@
 	<aop:aspectj-autoproxy />
 
 
-	
-		<!--
+
+	<!--
 		<jee:jndi-lookup id="dataSource"
-		jndi-name="jdbc/navitaMobileDataSource" /> -->
-	
+		jndi-name="jdbc/navitaMobileDataSource" />
+	-->
+
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -36,8 +37,8 @@
 		<property name="username" value="APP" />
 		<property name="password" value="APP" />
 	</bean>
-	
-	
+
+
 	<bean id="mobileEntityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="mobilePersistenceUnit" />
@@ -47,20 +48,30 @@
 
 	<bean id="licenseBundleTypeRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
 		lazy-init="true">
-		<constructor-arg value="br.com.navita.mobile.console.model.LicenseBundleType" />
+		<constructor-arg
+			value="br.com.navita.mobile.console.domain.entity.LicenseBundleType" />
 	</bean>
 	<bean id="licenseBundleRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
 		lazy-init="true">
-		<constructor-arg value="br.com.navita.mobile.console.model.LicenseBundle" />
+		<constructor-arg
+			value="br.com.navita.mobile.console.domain.entity.LicenseBundle" />
 	</bean>
-	<bean id="licenseActivationRepository" class="br.com.navita.mobile.console.dao.jpa.impl.LicenseActivationDAO"
+	
+	<bean id="licenseActivationRepository"
+		class="br.com.navita.mobile.console.dao.jpa.impl.LicenseActivationDAO"
 		lazy-init="true">
-		
+	</bean>
+	
+	
+	<bean id="connectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO">
+	<constructor-arg
+			value="br.com.navita.mobile.console.domain.entity.Connector" />
 	</bean>
 
 	<bean id="staticConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
 		lazy-init="true">
-		<constructor-arg value="br.com.navita.mobile.console.model.StaticConnector" />
+		<constructor-arg
+			value="br.com.navita.mobile.console.domain.entity.StaticConnector" />
 	</bean>
 
 
@@ -81,7 +92,7 @@
 	<bean id="msLoginService" class="br.com.navita.mobile.console.bizz.MSWindowsLoginService" />
 	<bean id="ldapConfigDAO" class="br.com.navita.mobile.console.dao.LdapConfigDAO" />
 	<bean id="dynamicExecutorLookupService"
-		class="br.com.navita.mobile.console.jar.DynamicExecutorLookupServiceImpl" />	
+		class="br.com.navita.mobile.console.jar.DynamicExecutorLookupServiceImpl" />
 	<bean id="licenseService" class="br.com.navita.mobile.console.bizz.LicenseServiceImpl" />
 
 	<bean id="sapMobileProcessor" class="br.com.navita.mobile.console.sap.SapMobileProcessor" />
