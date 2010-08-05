@@ -50,6 +50,23 @@
 			<result name="prepareCreate" type="freemarker">/WEB-INF/view/applicationsNew.ftl
 			</result>
 		</action>
+
+		<action name="connectors"
+			class="br.com.navita.mobile.console.view.ConnectorsAction" >
+			<result name="success" type="freemarker">/WEB-INF/view/connectors.ftl
+			</result>			
+			<result name="StaticConnector" type="freemarker">/WEB-INF/view/connectors/static-connector.ftl</result>
+			<result name="SapConnector" type="freemarker">/WEB-INF/view/connectors/sap-connector.ftl</result>
+			<result name="DataSourceConnector" type="freemarker">/WEB-INF/view/connectors/datasource-connector.ftl</result>
+			<result name="ProxyConnector" type="freemarker">/WEB-INF/view/connectors/proxy-connector.ftl</result>
+			<result name="WebServiceConnector" type="freemarker">/WEB-INF/view/connectors/webservice-connector.ftl</result>			
+		</action>
+		<action name="staticconnector"
+			class="br.com.navita.mobile.console.view.StaticConnectorAction" >
+			<result name="StaticConnector" type="freemarker">/WEB-INF/view/connectors/static-connector.ftl</result>
+		</action>
+		
+
 		<action name="domains" class="br.com.navita.mobile.console.view.DomainsAction">
 			<result name="success" type="freemarker">/WEB-INF/view/domains.ftl</result>
 			<result name="input" type="freemarker">/WEB-INF/view/domainsEdit.ftl
@@ -68,7 +85,7 @@
 		</action>
 
 		<action name="teste" class="br.com.navita.mobile.console.view.TesteAction">
-		<result name="success" type="freemarker">/WEB-INF/view/teste.ftl</result>
+			<result name="success" type="freemarker">/WEB-INF/view/teste.ftl</result>
 		</action>
 
 	</package>

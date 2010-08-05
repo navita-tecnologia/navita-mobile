@@ -15,7 +15,7 @@ public abstract class ConnectorHelper {
 			LicenseService licenseService,AuthContainerService loginService, 
 			BaseConnectorService<Connector> connectorService) throws EntityNotFoundException{
 		connector.setEnabled(raw.isEnabled());
-		LicenseBundle bundle = licenseService.getBundle(raw.getLicenceBundleId());
+		LicenseBundle bundle = licenseService.getBundle(raw.getLicenseBundleId());
 		connector.setLicenseBundle(bundle);		
 		connector.setLicenseKey(raw.getLicenseKey());
 		if(raw.getAuthContainerId() != null){

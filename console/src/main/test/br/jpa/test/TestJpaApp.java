@@ -69,7 +69,7 @@ public class TestJpaApp {
 			}
 			
 			@Override
-			public String getLicenceBundleId() {				
+			public String getLicenseBundleId() {				
 				return "2ebaead4b15a4469a3f381de5f77fd18";
 			}
 			

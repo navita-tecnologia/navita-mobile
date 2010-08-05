@@ -29,9 +29,10 @@
 			     	</form>
 			     </li>
 	        	<li class="group" id="group1"><a href="applications.action"  title="Aplica&ccedil;&otilde;es">Aplica&ccedil;&otilde;es</a></li>
-		        <li class="group" id="group1"><a href="licenses.action"  title="Licen&ccedil;as">Licen&ccedil;as</a></li>
-		        <li class="group" id="group2"><a href="domains.action" title="Dom&iacute;nios">Dom&iacute;nios</a></li>
-		        <li class="group" id="group3"><a href="admin.action" title="Senha Admin">Senha Admin</a></li>
+		        <li class="group" id="group2"><a href="connectors.action"  title="Conectores">Conectores</a></li>
+		        <li class="group" id="group3"><a href="licenses.action"  title="Licen&ccedil;as">Licen&ccedil;as</a></li>
+		        <li class="group" id="group4"><a href="domains.action" title="Dom&iacute;nios">Dom&iacute;nios</a></li>
+		        <li class="group" id="group5"><a href="admin.action" title="Senha Admin">Senha Admin</a></li>
 		  </ul>
 		</div>
 		

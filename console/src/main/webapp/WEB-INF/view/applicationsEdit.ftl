@@ -72,7 +72,7 @@
 										<tr>
 											<td valign="top">
 											<table border="0">
-											<tr><td>Nome:</td><td><a target="_blank" href="gateway.action?app=${mobileApplication.id}&operation=${name}&pin=2100000a&device=8520&carrier=Vivo&email=dumy@machine.foo&brand=RIM"><@s.property value="name"/></a></td></tr>
+											<tr><td>Nome:</td><td><a target="_blank" href="gateway.action?app=${mobileApplication.id}&operation=${name}&pin=2100000a&device=8520&carrier=Vivo&email=dummie@machine.foo&brand=RIM"><@s.property value="name"/></a></td></tr>
 											<tr><td>Classe:</td><td><@s.textfield  id="sel_${name}" theme="simple" name="className" /></td></tr>
 											<tr><td valign="top">Config:</td><td><textarea theme="simple"  rows="3" cols="80" name='cfg_<@s.property value="name"/>' id='cfg_<@s.property value="name"/>'><@s.property value="configuration"/></textarea></td></tr>										
 											</table>

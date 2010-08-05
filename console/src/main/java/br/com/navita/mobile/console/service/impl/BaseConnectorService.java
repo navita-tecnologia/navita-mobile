@@ -42,6 +42,12 @@ public class BaseConnectorService  implements br.com.navita.mobile.console.servi
 	public Connector findById(String id) throws EntityNotFoundException {
 		return connectorRepository.findById(id);
 	}
+
+	@Override
+	public void remove(String id) throws EntityNotFoundException {
+		Connector entity = connectorRepository.findById(id);
+		connectorRepository.remove(entity);		
+	}
 	
 	
 

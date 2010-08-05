@@ -4,7 +4,7 @@ public interface ConnectorRaw extends RawData {
 
 	boolean isEnabled();
 
-	String getLicenceBundleId();
+	String getLicenseBundleId();
 
 	String getLicenseKey();
 
