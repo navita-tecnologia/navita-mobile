@@ -73,7 +73,7 @@
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.entity.StaticConnector" />
 	</bean>	
-	<bean id="staticOperationRepository" class="br.com.navita.mobile.console.dao.jpa.impl.StaticOperationDAO"></bean>
+	<bean id="staticOperationRepository" class="br.com.navita.mobile.console.dao.jpa.impl.GenericOperationDAO"></bean>
 
 
 	<!-- end repositories -->

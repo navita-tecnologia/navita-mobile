@@ -29,13 +29,13 @@ public class TestJpaApp {
 		
 		ConnectorService<StaticConnector, ConnectorRaw> staticConnectorService = (ConnectorService<StaticConnector, ConnectorRaw>) ctx.getBean("staticConnectorService");
 		
-		if("a".equals(""))
+		if("a".equals("a"))
 		staticConnectorService.create(new ConnectorRaw() {
 			
 			@Override
 			public String getName() {
 				
-				return "First Connector";
+				return "Seccond Connector";
 			}
 			
 			@Override
@@ -59,7 +59,7 @@ public class TestJpaApp {
 			@Override
 			public String getTag() {
 				
-				return "app1";
+				return "app2";
 			}
 			
 			@Override
@@ -70,7 +70,7 @@ public class TestJpaApp {
 			
 			@Override
 			public String getLicenceBundleId() {				
-				return "def5f8a8fffa4e0eac3da276de1031c3";
+				return "2ebaead4b15a4469a3f381de5f77fd18";
 			}
 			
 			@Override
@@ -84,12 +84,12 @@ public class TestJpaApp {
 		BaseConnectorService<Connector> baseConnectorService = (BaseConnectorService<Connector>) ctx.getBean("baseConnectorService");
 		
 		
-		final StaticConnector conn = (StaticConnector) baseConnectorService.findById("e6200bd8d65149afb8a0153f3c540dcf");
+		final StaticConnector conn = (StaticConnector) baseConnectorService.listAll().get(0);
 		
 		System.out.println(conn);
 		
 		OperationService<StaticOperation, StaticOperationRaw> staticOperationService = (OperationService<StaticOperation, StaticOperationRaw>) ctx.getBean("staticOperationService");
-		if("".equals(""))
+		if("a".equals("a"))
 		staticOperationService.create(new StaticOperationRaw() {
 			
 			@Override

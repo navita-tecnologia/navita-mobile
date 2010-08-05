@@ -1,16 +1,23 @@
 package br.com.navita.mobile.console.domain.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Operation extends BaseEntity {
 
-	private LicenseBundle licenseBundle;
-	private String licenseKey;
-	private Connector connector;
+	@OneToOne
+	protected LicenseBundle licenseBundle;
+	
+	@Column
+	protected String licenseKey;
+	
+	@OneToOne
+	protected Connector connector;	
 	
 	public Connector getConnector() {
 		return connector;

@@ -11,12 +11,6 @@
     alter table Connector 
         drop constraint FK54EC142D6954E986;
 
-    alter table Connector_Operation 
-        drop constraint FKA9E46FB5207DAB26;
-
-    alter table Connector_Operation 
-        drop constraint FKA9E46FB538B21041;
-
     alter table DataSourceConnector 
         drop constraint FKEC68A148AD87B9F4;
 
@@ -34,6 +28,12 @@
 
     alter table LicenseBundle 
         drop constraint FKA1D5DC0379D8F966;
+
+    alter table Operation 
+        drop constraint FKDA8CF547207DAB26;
+
+    alter table Operation 
+        drop constraint FKDA8CF5474D364D86;
 
     alter table ProxyConnector 
         drop constraint FKB884F19FAD87B9F4;
@@ -97,8 +97,6 @@
     drop table AuthContainer;
 
     drop table Connector;
-
-    drop table Connector_Operation;
 
     drop table DataSourceConnector;
 
@@ -167,17 +165,10 @@
         enabled smallint not null,
         licenseKey varchar(255) not null,
         tag varchar(255) not null,
-        authContainer_id varchar(32),
         tokenConnector_id varchar(32),
         licenseBundle_id varchar(32),
+        authContainer_id varchar(32),
         primary key (id)
-    );
-
-    create table Connector_Operation (
-        Connector_id varchar(32) not null,
-        operations_id varchar(32) not null,
-        primary key (Connector_id, operations_id),
-        unique (operations_id)
     );
 
     create table DataSourceConnector (
@@ -231,9 +222,9 @@
     create table Operation (
         id varchar(32) not null,
         name varchar(255) not null,
-        connector varchar(255) for bit data,
-        licenseBundle varchar(255) for bit data,
         licenseKey varchar(255),
+        connector_id varchar(32),
+        licenseBundle_id varchar(32),
         primary key (id)
     );
 
@@ -353,16 +344,6 @@
         foreign key (authContainer_id) 
         references AuthContainer;
 
-    alter table Connector_Operation 
-        add constraint FKA9E46FB5207DAB26 
-        foreign key (Connector_id) 
-        references Connector;
-
-    alter table Connector_Operation 
-        add constraint FKA9E46FB538B21041 
-        foreign key (operations_id) 
-        references Operation;
-
     alter table DataSourceConnector 
         add constraint FKEC68A148AD87B9F4 
         foreign key (id) 
@@ -392,6 +373,16 @@
         add constraint FKA1D5DC0379D8F966 
         foreign key (licenseBundleType_id) 
         references LicenseBundleType;
+
+    alter table Operation 
+        add constraint FKDA8CF547207DAB26 
+        foreign key (connector_id) 
+        references Connector;
+
+    alter table Operation 
+        add constraint FKDA8CF5474D364D86 
+        foreign key (licenseBundle_id) 
+        references LicenseBundle;
 
     alter table ProxyConnector 
         add constraint FKB884F19FAD87B9F4 
