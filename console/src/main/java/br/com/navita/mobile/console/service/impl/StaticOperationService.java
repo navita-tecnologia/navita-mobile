@@ -51,6 +51,7 @@ public class StaticOperationService implements OperationService<StaticOperation,
 		oper.setObject(raw.getObject());
 		oper.setResultCode(raw.getResultCode());
 		oper.setToken(raw.getToken());
+		oper.setTag(raw.getTag());
 		staticOperationRepository.persist(oper);
 		
 
