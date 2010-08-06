@@ -70,7 +70,7 @@ public class TestJpaApp {
 			
 			@Override
 			public String getLicenseBundleId() {				
-				return "2ebaead4b15a4469a3f381de5f77fd18";
+				return "b4abc8c3e8b8482db7edd07cfc6e9cfe";
 			}
 			
 			@Override
@@ -84,7 +84,7 @@ public class TestJpaApp {
 		BaseConnectorService<Connector> baseConnectorService = (BaseConnectorService<Connector>) ctx.getBean("baseConnectorService");
 		
 		
-		final StaticConnector conn = (StaticConnector) baseConnectorService.listAll().get(0);
+		final StaticConnector conn = (StaticConnector) baseConnectorService.listAll().get(baseConnectorService.listAll().size()-1);
 		
 		System.out.println(conn);
 		
@@ -94,6 +94,12 @@ public class TestJpaApp {
 			
 			@Override
 			public String getName() {
+				
+				return "Teste JSON Operation";
+			}
+			
+			@Override
+			public String getTag() {
 				
 				return "st1";
 			}

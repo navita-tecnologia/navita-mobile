@@ -16,6 +16,9 @@ public abstract class Operation extends BaseEntity {
 	@Column
 	protected String licenseKey;
 	
+	@Column
+	protected String tag;
+	
 	@OneToOne
 	protected Connector connector;	
 	
@@ -40,5 +43,12 @@ public abstract class Operation extends BaseEntity {
 		this.licenseKey = licenseKey;
 	}
 	
+	public String getTag() {
+		return tag;
+	}
+	
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
 	
 }

@@ -19,31 +19,20 @@ public class StaticConnectorService extends BaseConnectorService implements Conn
 	}
 
 	@Override
-	public void create(ConnectorRaw connectorRaw) throws EntityNotFoundException {
-		saveFromRaw(new StaticConnector(),connectorRaw);
+	public StaticConnector create(ConnectorRaw connectorRaw) throws EntityNotFoundException {
+		StaticConnector conn = new StaticConnector();		
+		populateConnectorFromRaw(conn, connectorRaw);		
+		staticConnectorRepository.persist(conn);
+		return conn;
 	}
 	
-	private void saveFromRaw(StaticConnector connector,ConnectorRaw connectorRaw) throws EntityNotFoundException{
-		ConnectorHelper.populateConnectorFromRaw(connector, connectorRaw, licenseService, authContainerService,this);		
-		staticConnectorRepository.persist(connector);
-	}
-
-	@Override
-	public StaticConnector findById(String id) throws EntityNotFoundException {
-		return staticConnectorRepository.findById(id);
-	}
+	
 
 	@Override
 	public void update(ConnectorRaw connectorRaw) throws EntityNotFoundException {
-		StaticConnector connector = findById(connectorRaw.getId());
-		saveFromRaw(connector, connectorRaw);
+		StaticConnector conn = (StaticConnector) findById(connectorRaw.getId());
+		populateConnectorFromRaw(conn, connectorRaw);
 	}
 
-	@Override
-	public void remove(String id) throws EntityNotFoundException {
-		StaticConnector entity = findById(id);
-		staticConnectorRepository.remove(entity);
-		
-	}
 
 }

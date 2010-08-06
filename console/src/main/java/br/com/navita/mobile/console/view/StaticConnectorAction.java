@@ -11,10 +11,17 @@ public class StaticConnectorAction extends ConnectorsAction {
 			ConnectorService<StaticConnector, ConnectorRaw> staticConnectorService) {
 		this.staticConnectorService = staticConnectorService;
 	}
-	
+
 	public String save() throws Exception{		
 		staticConnectorService.update(this);
 		addActionMessage("Salvo com sucesso");
+		return edit();
+	}
+
+	public String create() throws Exception{		
+		connector =	staticConnectorService.create(this);
+		addActionMessage("Criado com sucesso");
+		id = connector.getId();
 		return edit();
 	}
 }

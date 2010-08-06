@@ -165,9 +165,9 @@
         enabled smallint not null,
         licenseKey varchar(255) not null,
         tag varchar(255) not null,
-        authContainer_id varchar(32),
         tokenConnector_id varchar(32),
         licenseBundle_id varchar(32),
+        authContainer_id varchar(32),
         primary key (id)
     );
 
@@ -223,6 +223,7 @@
         id varchar(32) not null,
         name varchar(255) not null,
         licenseKey varchar(255),
+        tag varchar(255),
         connector_id varchar(32),
         licenseBundle_id varchar(32),
         primary key (id)

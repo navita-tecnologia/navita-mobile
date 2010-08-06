@@ -53,8 +53,8 @@
 
 		<action name="connectors"
 			class="br.com.navita.mobile.console.view.ConnectorsAction" >
-			<result name="success" type="freemarker">/WEB-INF/view/connectors.ftl
-			</result>			
+			<result name="success" type="freemarker">/WEB-INF/view/connectors.ftl</result>			
+			<result name="input" type="freemarker">/WEB-INF/view/connectors-add.ftl</result>	
 			<result name="StaticConnector" type="freemarker">/WEB-INF/view/connectors/static-connector.ftl</result>
 			<result name="SapConnector" type="freemarker">/WEB-INF/view/connectors/sap-connector.ftl</result>
 			<result name="DataSourceConnector" type="freemarker">/WEB-INF/view/connectors/datasource-connector.ftl</result>
@@ -65,7 +65,10 @@
 			class="br.com.navita.mobile.console.view.StaticConnectorAction" >
 			<result name="StaticConnector" type="freemarker">/WEB-INF/view/connectors/static-connector.ftl</result>
 		</action>
-		
+		<action name="datasourceconnector"
+			class="br.com.navita.mobile.console.view.DataSourceConnectorAction" >
+			<result name="DataSourceConnector" type="freemarker">/WEB-INF/view/connectors/datasource-connector.ftl</result>
+		</action>
 
 		<action name="domains" class="br.com.navita.mobile.console.view.DomainsAction">
 			<result name="success" type="freemarker">/WEB-INF/view/domains.ftl</result>

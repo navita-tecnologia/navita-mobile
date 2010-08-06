@@ -72,21 +72,32 @@
 		lazy-init="true">
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.entity.StaticConnector" />
-	</bean>	
-	<bean id="staticOperationRepository" class="br.com.navita.mobile.console.dao.jpa.impl.GenericOperationDAO"></bean>
+	</bean>
+	<bean id="staticOperationRepository"
+		class="br.com.navita.mobile.console.dao.jpa.impl.GenericOperationDAO"></bean>
 
+
+	<bean id="dataSourceConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+		lazy-init="true">
+		<constructor-arg
+			value="br.com.navita.mobile.console.domain.entity.DataSourceConnector" />
+	</bean>
 
 	<!-- end repositories -->
 
-	<bean id="baseConnectorService" class="br.com.navita.mobile.console.service.impl.BaseConnectorService" />
-	
-	<bean id="staticConnectorService" class="br.com.navita.mobile.console.service.impl.StaticConnectorService" />	
-	<bean id="staticOperationService" class="br.com.navita.mobile.console.service.impl.StaticOperationService"/>
-	
-	
-	
+	<bean id="baseConnectorService"
+		class="br.com.navita.mobile.console.service.impl.BaseConnectorService" />
+
+	<bean id="staticConnectorService"
+		class="br.com.navita.mobile.console.service.impl.StaticConnectorService" />
+	<bean id="staticOperationService"
+		class="br.com.navita.mobile.console.service.impl.StaticOperationService" />
+
+	<bean id="dataSourceConnectorService"
+		class="br.com.navita.mobile.console.service.impl.DataSourceConnectorService" />
+
 	<!-- end services -->
-	
+
 	<bean id="commonConfiguration"
 		class="br.com.navita.mobile.console.dao.NavitaMobileConfiguration"
 		init-method="setDelimiterParsingDisabled">

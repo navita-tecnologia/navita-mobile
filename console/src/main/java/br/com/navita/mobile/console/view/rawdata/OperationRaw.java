@@ -5,6 +5,7 @@ public interface OperationRaw extends RawData{
 	String getLicenseBundleId();
 	String getLicenseKey();
 	String getConnectorId();
+	String getTag();
 	
 
 }

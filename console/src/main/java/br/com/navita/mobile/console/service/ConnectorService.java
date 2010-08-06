@@ -6,7 +6,7 @@ import br.com.navita.mobile.console.view.rawdata.ConnectorRaw;
 
 
 public interface ConnectorService<T extends Connector, W extends ConnectorRaw> extends BaseConnectorService<Connector> {
-	void create(W connectorRaw) throws EntityNotFoundException;
+	T create(W connectorRaw) throws EntityNotFoundException;
 	void update(W connectorRaw) throws EntityNotFoundException;	
 
 }
