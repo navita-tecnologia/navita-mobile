@@ -82,6 +82,24 @@
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.entity.DataSourceConnector" />
 	</bean>
+	
+	<bean id="sapConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+		lazy-init="true">
+		<constructor-arg
+			value="br.com.navita.mobile.console.domain.entity.SapConnector" />
+	</bean>
+	
+	<bean id="proxyConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+		lazy-init="true">
+		<constructor-arg
+			value="br.com.navita.mobile.console.domain.entity.ProxyConnector" />
+	</bean>
+	
+	<bean id="webServiceConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+		lazy-init="true">
+		<constructor-arg
+			value="br.com.navita.mobile.console.domain.entity.WebServiceConnector" />
+	</bean>
 
 	<!-- end repositories -->
 
@@ -95,6 +113,15 @@
 
 	<bean id="dataSourceConnectorService"
 		class="br.com.navita.mobile.console.service.impl.DataSourceConnectorService" />
+		
+	<bean id="sapConnectorService"
+		class="br.com.navita.mobile.console.service.impl.SapConnectorService" />
+		
+	<bean id="proxyConnectorService"
+		class="br.com.navita.mobile.console.service.impl.ProxyConnectorService" />
+		
+	<bean id="webServiceConnectorService"
+		class="br.com.navita.mobile.console.service.impl.WebServiceConnectorService" />			
 
 	<!-- end services -->
 

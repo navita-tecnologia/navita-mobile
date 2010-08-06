@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class SapConnector extends Connector {
 
-	@Column(nullable = false)
+	
 	private String router;
 	
 	@Column(nullable = false)

@@ -7,6 +7,7 @@ import br.com.navita.mobile.console.view.rawdata.DataSourceConnectorRaw;
 public class DataSourceConnectorAction extends ConnectorsAction implements DataSourceConnectorRaw {
 
 	private ConnectorService<DataSourceConnector,DataSourceConnectorRaw> dataSourceConnectorService;
+	
 	private String dataSource;
 	
 	public void setDataSourceConnectorService(
@@ -28,12 +29,11 @@ public class DataSourceConnectorAction extends ConnectorsAction implements DataS
 	}
 
 	@Override
-	public String getDataSource() {
-		
+	public String getDataSource() {		
 		return dataSource;
 	}
 	
-	public void setDataSourceName(String dataSource) {
+	public void setDataSource(String dataSource) {
 		this.dataSource = dataSource;
 	}
 }
