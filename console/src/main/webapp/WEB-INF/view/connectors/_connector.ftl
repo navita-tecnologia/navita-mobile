@@ -48,9 +48,9 @@
 								<td align="left"><input type="submit" value="${btLabel}" style="width: 150px;"/></td>
 							</tr>
 							
-							<#if act == "save">
+							<#if act == "save" && connector.operationType?exists>
 							<tr valign="middle">
-								<td valign="top">Operações <a href="operations!prepareNew.action?connectorId=${connector.id}"><img src="images/ico_add.gif" alt="Inserir Operação" border="0" /></a></td>
+								<td valign="top">Operações <a href="operations!prepareNew.action?connectorId=${connector.id}&operatyonType=${connector.operationType.simpleName}"><img src="images/ico_add.gif" alt="Inserir Operação" border="0" /></a></td>
 								<td align="left">
 								<table border="0">
 								<@s.iterator value="connector.operations" status="stat" id="oper">								

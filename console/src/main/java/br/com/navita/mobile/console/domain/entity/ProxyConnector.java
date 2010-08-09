@@ -18,4 +18,10 @@ public class ProxyConnector extends Connector {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+
+	@Override
+	public Class<? extends Operation> getOperationType() {
+		// nenhuma opracao admitida
+		return null;
+	}
 }

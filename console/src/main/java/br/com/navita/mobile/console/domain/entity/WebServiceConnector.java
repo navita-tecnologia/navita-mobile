@@ -17,5 +17,11 @@ public class WebServiceConnector extends Connector {
 	public void setWsdl(String wsdl) {
 		this.wsdl = wsdl;
 	}
+
+	@Override
+	public Class<? extends Operation> getOperationType() {
+		// nenhuma opracao permitida
+		return null;
+	}
 	
 }

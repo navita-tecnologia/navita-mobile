@@ -14,6 +14,12 @@ public class EjbConnector extends Connector {
 	public void setEjbName(String ejbName) {
 		this.ejbName = ejbName;
 	}
+
+	@Override
+	public Class<? extends Operation> getOperationType() {
+		// Nenhuma operacao admitida 
+		return null;
+	}
 	
 	
 }

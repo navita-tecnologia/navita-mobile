@@ -65,6 +65,12 @@ public class SapConnector extends Connector {
 	public Set<SapFunctionOperation> getSapFunctionOperations() {
 		return sapFunctionOperations;
 	}
+
+	@Override
+	public Class<? extends Operation> getOperationType() {
+		
+		return SapFunctionOperation.class;
+	}
 	
 	
 	

@@ -40,6 +40,9 @@ public abstract class Connector extends BaseEntity {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="connector")
 	private Set<Operation> operations;
 
+	
+	public abstract Class<? extends Operation> getOperationType();
+	
 	public String getTag() {
 		return tag;
 	}

@@ -16,6 +16,11 @@ public class DataSourceConnector extends Connector {
 	public void setDataSource(String dataSource) {
 		this.dataSource = dataSource;
 	}
+
+	@Override
+	public Class<? extends Operation> getOperationType() {		
+		return DataSourceQueryOperation.class;
+	}
 	
 	
 	
