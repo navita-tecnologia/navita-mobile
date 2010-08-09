@@ -18,4 +18,6 @@ public class GenericOperationDAO<T extends Operation> extends GenericJpaDAO<Oper
 		return query.getResultList();
 	}
 	
+	
+	
 }

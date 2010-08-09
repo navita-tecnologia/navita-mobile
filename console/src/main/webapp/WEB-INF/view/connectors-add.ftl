@@ -31,6 +31,10 @@
 							<td >Conecte fontes externas de JSON</td>							
 						</tr>
 						<tr>
+							<td ><a href="connectors!preCreate.action?type=EjbConnector"><img src="images/ico_add.gif" alt="Adicionar" border="0" /> EJB</a></td>
+							<td >Conecte um EJB Remoto ou Local</td>							
+						</tr>
+						<tr>
 							<td ><a href="connectors!preCreate.action?type=WebServiceConnector"><img src="images/ico_add.gif" alt="Adicionar" border="0" /> Web Service</a></td>
 							<td >Conecte a um web-service definido por um wsdl</td>							
 						</tr>

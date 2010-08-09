@@ -74,4 +74,6 @@ public class StaticOperationService implements OperationService<StaticOperation,
 
 	}
 
+	
+
 }

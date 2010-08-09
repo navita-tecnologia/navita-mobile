@@ -67,6 +67,11 @@
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.entity.Connector" />
 	</bean>
+	
+	<bean id="operationRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO">
+		<constructor-arg
+			value="br.com.navita.mobile.console.domain.entity.Operation" />
+	</bean>
 
 	<bean id="staticConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
 		lazy-init="true">
@@ -82,19 +87,24 @@
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.entity.DataSourceConnector" />
 	</bean>
-	
+	<bean id="ejbConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+		lazy-init="true">
+		<constructor-arg
+			value="br.com.navita.mobile.console.domain.entity.EjbConnector" />
+	</bean>
+
 	<bean id="sapConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
 		lazy-init="true">
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.entity.SapConnector" />
 	</bean>
-	
+
 	<bean id="proxyConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
 		lazy-init="true">
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.entity.ProxyConnector" />
 	</bean>
-	
+
 	<bean id="webServiceConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
 		lazy-init="true">
 		<constructor-arg
@@ -105,6 +115,9 @@
 
 	<bean id="baseConnectorService"
 		class="br.com.navita.mobile.console.service.impl.BaseConnectorService" />
+		
+	<bean id="baseOperationService"
+		class="br.com.navita.mobile.console.service.impl.BaseOperationService" />	
 
 	<bean id="staticConnectorService"
 		class="br.com.navita.mobile.console.service.impl.StaticConnectorService" />
@@ -113,15 +126,18 @@
 
 	<bean id="dataSourceConnectorService"
 		class="br.com.navita.mobile.console.service.impl.DataSourceConnectorService" />
-		
+
 	<bean id="sapConnectorService"
 		class="br.com.navita.mobile.console.service.impl.SapConnectorService" />
-		
+
 	<bean id="proxyConnectorService"
 		class="br.com.navita.mobile.console.service.impl.ProxyConnectorService" />
-		
+
 	<bean id="webServiceConnectorService"
-		class="br.com.navita.mobile.console.service.impl.WebServiceConnectorService" />			
+		class="br.com.navita.mobile.console.service.impl.WebServiceConnectorService" />
+		
+	<bean id="ejbConnectorService"
+		class="br.com.navita.mobile.console.service.impl.EjbConnectorService" />
 
 	<!-- end services -->
 
