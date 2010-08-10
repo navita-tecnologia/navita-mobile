@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class SapFunctionOperation extends Operation {
@@ -30,17 +29,7 @@ public class SapFunctionOperation extends Operation {
 	@OneToMany
 	private Set<SapTable> outputTables;
 	
-	@OneToOne
-	private SapConnector sapConnector;
-	
-	public void setSapConnector(SapConnector sapConnector) {
-		this.sapConnector = sapConnector;
-	}
-	
-	public SapConnector getSapConnector() {
-		return sapConnector;
-	}
-	
+		
 
 	public String getFunctionName() {
 		return functionName;

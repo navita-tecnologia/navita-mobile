@@ -5,5 +5,6 @@ import br.com.navita.mobile.console.exception.EntityNotFoundException;
 
 public interface BaseOperationService<T extends Operation> {
 	T findById(String id) throws EntityNotFoundException;
+	void remove(String id) throws EntityNotFoundException;
 	
 }

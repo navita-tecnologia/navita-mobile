@@ -21,7 +21,7 @@
 		            <@s.hidden name="id" value="${connector.id}"/>
 					<table class="gridContent">						
 							<tr valign="middle" >
-								<td width="350">Nome</td>
+								<td width="150">Nome</td>
 								<td align="left"><@s.textfield name="name" theme="simple" value="${connector.name!}"/></td>	
 							</tr>							
 							<tr class="active" valign="middle">
@@ -73,7 +73,7 @@
 			<script>
 			function removeOperation(nome,id){
 				if(confirm('Tem certeza que quer remover a operação '+nome+'?')){
-					window.location='<@s.url action="operations!remove.action" includeParams="none"/>?id='+id	
+					window.location='<@s.url action="connectors!removeOperation.action" includeParams="none"/>?operationId='+id+'&id=${connector.id}'	
 				}
 			}
 		</script>

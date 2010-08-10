@@ -4,7 +4,9 @@ import java.util.List;
 
 import br.com.navita.mobile.console.domain.entity.Connector;
 import br.com.navita.mobile.console.domain.entity.LicenseBundle;
+import br.com.navita.mobile.console.domain.entity.Operation;
 import br.com.navita.mobile.console.service.BaseConnectorService;
+import br.com.navita.mobile.console.service.BaseOperationService;
 import br.com.navita.mobile.console.service.LicenseService;
 import br.com.navita.mobile.console.view.rawdata.ConnectorRaw;
 
@@ -12,6 +14,9 @@ public abstract class ConnectorRawActionSupport extends RawActionSupport impleme
 	
 	protected BaseConnectorService<Connector> baseConnectorService;
 	protected LicenseService licenseService;
+	protected BaseOperationService<Operation> baseOperationService;
+	
+	
 	
 	protected String authContainerId;
 	protected String licenseBundleId;
@@ -21,6 +26,11 @@ public abstract class ConnectorRawActionSupport extends RawActionSupport impleme
 	protected boolean enabled;
 	
 	protected Connector connector;
+	
+	public void setBaseOperationService(
+			BaseOperationService<Operation> baseOperationService) {
+		this.baseOperationService = baseOperationService;
+	}
 	
 	public Connector getConnector() {
 		return connector;

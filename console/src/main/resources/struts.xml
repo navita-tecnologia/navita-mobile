@@ -95,6 +95,18 @@
 			<result name="SapFunctionOperation" type="freemarker">/WEB-INF/view/operations/sap-operation.ftl</result>
 			<result name="DataSourceQueryOperation" type="freemarker">/WEB-INF/view/operations/datasource-operation.ftl</result>			
 		</action>
+		<action name="staticoperation"
+			class="br.com.navita.mobile.console.view.StaticOperationAction" >
+			<result name="StaticOperation" type="freemarker">/WEB-INF/view/operations/static-operation.ftl</result>						
+		</action>
+		<action name="sapfunctionoperation"
+			class="br.com.navita.mobile.console.view.SapFunctionOperationAction" >
+			<result name="SapFunctionOperation" type="freemarker">/WEB-INF/view/operations/sap-operation.ftl</result>						
+		</action>
+		<action name="datasourcequeryoperation"
+			class="br.com.navita.mobile.console.view.DataSourceQueryOperationAction" >
+			<result name="DataSourceQueryOperation" type="freemarker">/WEB-INF/view/operations/datasource-operation.ftl</result>						
+		</action>
 		
 		
 		

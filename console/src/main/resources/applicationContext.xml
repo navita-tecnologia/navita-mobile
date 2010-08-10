@@ -67,7 +67,7 @@
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.entity.Connector" />
 	</bean>
-	
+
 	<bean id="operationRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO">
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.entity.Operation" />
@@ -78,9 +78,13 @@
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.entity.StaticConnector" />
 	</bean>
+
 	<bean id="staticOperationRepository"
 		class="br.com.navita.mobile.console.dao.jpa.impl.GenericOperationDAO"></bean>
-
+	<bean id="sapFunctionOperationRepository"
+		class="br.com.navita.mobile.console.dao.jpa.impl.GenericOperationDAO"></bean>
+	<bean id="dataSourceQueryOperationRepository"
+		class="br.com.navita.mobile.console.dao.jpa.impl.GenericOperationDAO"></bean>
 
 	<bean id="dataSourceConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
 		lazy-init="true">
@@ -115,14 +119,12 @@
 
 	<bean id="baseConnectorService"
 		class="br.com.navita.mobile.console.service.impl.BaseConnectorService" />
-		
+
 	<bean id="baseOperationService"
-		class="br.com.navita.mobile.console.service.impl.BaseOperationService" />	
+		class="br.com.navita.mobile.console.service.impl.BaseOperationService" />
 
 	<bean id="staticConnectorService"
 		class="br.com.navita.mobile.console.service.impl.StaticConnectorService" />
-	<bean id="staticOperationService"
-		class="br.com.navita.mobile.console.service.impl.StaticOperationService" />
 
 	<bean id="dataSourceConnectorService"
 		class="br.com.navita.mobile.console.service.impl.DataSourceConnectorService" />
@@ -135,9 +137,18 @@
 
 	<bean id="webServiceConnectorService"
 		class="br.com.navita.mobile.console.service.impl.WebServiceConnectorService" />
-		
+
 	<bean id="ejbConnectorService"
 		class="br.com.navita.mobile.console.service.impl.EjbConnectorService" />
+
+	<bean id="staticOperationService"
+		class="br.com.navita.mobile.console.service.impl.StaticOperationService" />
+
+	<bean id="sapFunctionOperationService"
+		class="br.com.navita.mobile.console.service.impl.SapFunctionOperationService" />
+
+	<bean id="dataSourceQueryOperationService"
+		class="br.com.navita.mobile.console.service.impl.DataSourceQueryOperationService" />
 
 	<!-- end services -->
 

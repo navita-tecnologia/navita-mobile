@@ -15,9 +15,6 @@
         drop constraint FKEC68A148AD87B9F4;
 
     alter table DataSourceQueryOperation 
-        drop constraint FKA0A67564C6045141;
-
-    alter table DataSourceQueryOperation 
         drop constraint FKA0A6756433289B0E;
 
     alter table EjbConnector 
@@ -43,9 +40,6 @@
 
     alter table SapFunctionOperation 
         drop constraint FKBE850CCD33289B0E;
-
-    alter table SapFunctionOperation 
-        drop constraint FKBE850CCD401C79AE;
 
     alter table SapFunctionOperation_SapInputParameter 
         drop constraint FK82C5306F6419D1E1;
@@ -165,8 +159,8 @@
         enabled smallint not null,
         licenseKey varchar(255) not null,
         tag varchar(255) not null,
-        authContainer_id varchar(32),
         tokenConnector_id varchar(32),
+        authContainer_id varchar(32),
         licenseBundle_id varchar(32),
         primary key (id)
     );
@@ -180,7 +174,6 @@
     create table DataSourceQueryOperation (
         id varchar(32) not null,
         query varchar(255),
-        connector_id varchar(32),
         primary key (id)
     );
 
@@ -247,7 +240,6 @@
     create table SapFunctionOperation (
         id varchar(32) not null,
         functionName varchar(255),
-        sapConnector_id varchar(32),
         primary key (id)
     );
 
@@ -284,8 +276,8 @@
         name varchar(255) not null,
         parameterName varchar(255),
         parameterValue varchar(255),
-        sapRow_id varchar(32),
         sapFunctionOperation_id varchar(32),
+        sapRow_id varchar(32),
         primary key (id)
     );
 
@@ -351,11 +343,6 @@
         references Connector;
 
     alter table DataSourceQueryOperation 
-        add constraint FKA0A67564C6045141 
-        foreign key (connector_id) 
-        references DataSourceConnector;
-
-    alter table DataSourceQueryOperation 
         add constraint FKA0A6756433289B0E 
         foreign key (id) 
         references Operation;
@@ -399,11 +386,6 @@
         add constraint FKBE850CCD33289B0E 
         foreign key (id) 
         references Operation;
-
-    alter table SapFunctionOperation 
-        add constraint FKBE850CCD401C79AE 
-        foreign key (sapConnector_id) 
-        references SapConnector;
 
     alter table SapFunctionOperation_SapInputParameter 
         add constraint FK82C5306F6419D1E1 

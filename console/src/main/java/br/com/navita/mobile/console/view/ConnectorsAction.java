@@ -7,6 +7,15 @@ import br.com.navita.mobile.console.domain.entity.Connector;
 public class ConnectorsAction extends ConnectorRawActionSupport {
 	
 	private String type;
+	private String operationId;
+	
+	public void setOperationId(String operationId) {
+		this.operationId = operationId;
+	}
+	
+	public String getOperationId() {
+		return operationId;
+	}
 	
 	public String getType() {
 		return type;
@@ -24,6 +33,12 @@ public class ConnectorsAction extends ConnectorRawActionSupport {
 		baseConnectorService.remove(id);
 		addActionMessage("Removido com sucesso");		
 		return SUCCESS;
+	}
+	
+	public String removeOperation() throws Exception{
+		baseOperationService.remove(operationId);
+		addActionMessage("Removido com sucesso");		
+		return edit();
 	}
 	
 	public String edit() throws Exception{

@@ -10,8 +10,8 @@ public interface OperationService<T extends Operation,W extends OperationRaw> {
 	
 	List<T> getConnectorOperations(String connectorId);
 	
-	void create(W operationRaw) throws EntityNotFoundException;
-	void update(W operationRaw);
+	T create(W operationRaw) throws EntityNotFoundException;
+	void update(W operationRaw) throws EntityNotFoundException;
 	void remove(String id) throws EntityNotFoundException;
 
 }

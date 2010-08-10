@@ -1,14 +1,22 @@
 package br.com.navita.mobile.console.view;
 
+import br.com.navita.mobile.console.domain.entity.StaticOperation;
+import br.com.navita.mobile.console.service.OperationService;
 import br.com.navita.mobile.console.view.rawdata.StaticOperationRaw;
 
-public class StaticOperationAction extends OperationRawActionSupport implements StaticOperationRaw {
+public class StaticOperationAction extends OperationsAction implements StaticOperationRaw {
+	protected OperationService<StaticOperation, StaticOperationRaw> staticOperationService;
 
 	private String list;
 	private String message;
 	private String object;
 	private int resultCode;
 	private String token;
+	
+	public void setStaticOperationService(
+			OperationService<StaticOperation, StaticOperationRaw> staticOperationService) {
+		this.staticOperationService = staticOperationService;
+	}
 	
 	@Override
 	public String getList() {
@@ -46,8 +54,17 @@ public class StaticOperationAction extends OperationRawActionSupport implements 
 		this.token = token;
 	}
 	
-	
-
+	public String save() throws Exception {
+		staticOperationService.update(this);
+		addActionMessage("Salvo com sucesso");
+		return edit();
+	}
+	public String create() throws Exception {
+		operation = staticOperationService.create(this);
+		id = operation.getId();
+		addActionMessage("Criado com sucesso");
+		return edit();
+	}
 	
 	
 }

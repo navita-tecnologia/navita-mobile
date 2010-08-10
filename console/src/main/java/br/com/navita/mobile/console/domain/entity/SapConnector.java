@@ -1,11 +1,7 @@
 package br.com.navita.mobile.console.domain.entity;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 
 @Entity
 public class SapConnector extends Connector {
@@ -22,9 +18,6 @@ public class SapConnector extends Connector {
 	@Column(nullable = false)
 	private String client;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="sapConnector")
-	private Set<SapFunctionOperation> sapFunctionOperations;
-
 	public String getRouter() {
 		return router;
 	}
@@ -57,15 +50,7 @@ public class SapConnector extends Connector {
 		this.client = client;
 	}
 
-	public void setSapFunctionOperations(
-			Set<SapFunctionOperation> sapFunctionOperations) {
-		this.sapFunctionOperations = sapFunctionOperations;
-	}
 	
-	public Set<SapFunctionOperation> getSapFunctionOperations() {
-		return sapFunctionOperations;
-	}
-
 	@Override
 	public Class<? extends Operation> getOperationType() {
 		
