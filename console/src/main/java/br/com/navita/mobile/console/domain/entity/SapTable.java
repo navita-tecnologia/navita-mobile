@@ -19,7 +19,7 @@ public class SapTable extends BaseEntity {
 	
 	@OneToOne
 	private SapFunctionOperation sapFunctionOperation;
-
+	
 	public String getTableName() {
 		return tableName;
 	}

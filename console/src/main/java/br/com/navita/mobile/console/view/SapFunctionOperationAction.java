@@ -9,16 +9,18 @@ import br.com.navita.mobile.console.view.rawdata.SapFunctionOperationRaw;
 
 public class SapFunctionOperationAction extends OperationsAction implements SapFunctionOperationRaw{
 	
+	private String paramType;
+	private Set<SapParameter> inputParameters;
+	private String functionName;
+
+	
 	private OperationService<SapFunctionOperation, SapFunctionOperationRaw> sapFunctionOperationService;
 	
 	public void setSapFunctionOperationService(
 			OperationService<SapFunctionOperation, SapFunctionOperationRaw> sapFunctionOperationService) {
 		this.sapFunctionOperationService = sapFunctionOperationService;
 	}
-
-	private Set<SapParameter> inputParameters;
-	private String functionName;
-	
+		
 	@Override
 	public String getFunctionName() {
 		return functionName;
@@ -37,6 +39,15 @@ public class SapFunctionOperationAction extends OperationsAction implements SapF
 		this.inputParameters = inputParameters;
 	}
 	
+	
+	public String getParamType() {
+		return paramType;
+	}
+	
+	public void setParamType(String paramType) {
+		this.paramType = paramType;
+	}
+	
 	public String save() throws Exception {
 		sapFunctionOperationService.update(this);
 		addActionMessage("Salvo com sucesso");
@@ -48,5 +59,57 @@ public class SapFunctionOperationAction extends OperationsAction implements SapF
 		addActionMessage("Criado com sucesso");
 		return edit();
 	}
+	
+	
+	//input parameter
+
+	public String addParameter() throws Exception{
+		
+		
+		return edit();
+	}
+	
+	public String removeParameter() throws Exception{
+		
+		return edit();
+	}
+	
+	public String saveParameter() throws Exception{
+		
+		return edit();
+	}
+
+	//input table
+	public String addTable() throws Exception{
+		
+		return edit();
+	}
+	
+	public String removeTable() throws Exception{
+		
+		return edit();
+	}
+	
+	public String saveTable() throws Exception{
+		
+		return edit();
+	}
+	
+	//table data
+	public String addTableAttribute() throws Exception{
+		
+		return edit();
+	}
+	
+	public String removeAttribute() throws Exception{
+		
+		return edit();
+	}
+	
+	public String saveAttribute() throws Exception{
+		
+		return edit();
+	}
+	
 
 }
