@@ -178,7 +178,7 @@ public class NavitaMobileDispatcher {
 		String licenseKey = app.getLicenseActivationKey();
 		String plain = null;
 		try {
-			plain = Decryptor.decrypt(licenseKey, PRIVATE_KEY);
+			plain = Decryptor.decrypt(licenseKey, PRIVATE_KEY);			
 		} catch (DecryptorException e) {
 			throw new InvalidLicenseKeyException(e.getMessage());
 		}
@@ -189,7 +189,8 @@ public class NavitaMobileDispatcher {
 		}
 
 		String[] values = plain.split("\\|");
-		if(!app.getName().equals(values[0])){
+		LOG.log(Level.WARNING,"Testing Key for " + values[0] + " with ts " + values[1]);
+		if(!app.getId().equals(values[0])){
 			LOG.log(Level.WARNING,"Invalid key " + licenseKey);
 			return false;
 		}
