@@ -126,6 +126,19 @@
 			value="br.com.navita.mobile.console.domain.entity.WebServiceConnector" />
 	</bean>
 
+
+<bean id="sapParameterRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+		lazy-init="true">
+		<constructor-arg
+			value="br.com.navita.mobile.console.domain.entity.SapParameter" />
+	</bean>
+	
+	
+	<bean id="sapTableRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+		lazy-init="true">
+		<constructor-arg
+			value="br.com.navita.mobile.console.domain.entity.SapTable" />
+	</bean>
 	<!-- end repositories -->
 
 	<bean id="baseConnectorService"

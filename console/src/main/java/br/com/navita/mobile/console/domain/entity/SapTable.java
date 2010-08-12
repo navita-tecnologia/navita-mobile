@@ -1,12 +1,12 @@
 package br.com.navita.mobile.console.domain.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class SapTable extends BaseEntity {
@@ -14,11 +14,16 @@ public class SapTable extends BaseEntity {
 	@Column
 	private String tableName;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="sapTable")
+	@OneToMany(cascade = CascadeType.ALL)
 	private Set<SapRow> sapRows;
 	
-	@OneToOne
-	private SapFunctionOperation sapFunctionOperation;
+	public SapTable() {
+		sapRows = new HashSet<SapRow>();
+	}
+	
+	public void addRow(SapRow row){
+		sapRows.add(row);
+	}
 	
 	public String getTableName() {
 		return tableName;
@@ -34,17 +39,7 @@ public class SapTable extends BaseEntity {
 
 	public void setSapRows(Set<SapRow> sapRows) {
 		this.sapRows = sapRows;
-	}
-
-	public SapFunctionOperation getSapFunctionOperation() {
-		return sapFunctionOperation;
-	}
-
-	public void setSapFunctionOperation(SapFunctionOperation sapFunctionOperation) {
-		this.sapFunctionOperation = sapFunctionOperation;
-	}
-	
-	
+	}	
 	
 	
 	

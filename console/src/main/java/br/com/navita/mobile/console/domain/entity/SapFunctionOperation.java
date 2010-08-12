@@ -1,34 +1,46 @@
 package br.com.navita.mobile.console.domain.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class SapFunctionOperation extends Operation {
 	
 	@Column
 	private String functionName;
 	
 	@JoinTable(name="SapFunctionOperation_SapInputParameter")
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private Set<SapParameter> inputParameters;
 	
 	@JoinTable(name="SapFunctionOperation_SapOutputParameter")
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private Set<SapParameter>outputParameters;
 	
 	@JoinTable(name="SapFunctionOperation_SapInputTable")
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private Set<SapTable> inputTables;
 	
 	@JoinTable(name="SapFunctionOperation_SapOutputTable")
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private Set<SapTable> outputTables;
 	
+	
+	public SapFunctionOperation() {
+		inputParameters = new HashSet<SapParameter>();
+		outputParameters = new HashSet<SapParameter>();
+		inputTables = new HashSet<SapTable>();
+		outputTables = new HashSet<SapTable>();
+	}
 		
 
 	public String getFunctionName() {
@@ -71,6 +83,26 @@ public class SapFunctionOperation extends Operation {
 		this.outputTables = outputTables;
 	}
 	
+	public void addInputParameter(SapParameter inputParameter){
+		inputParameters.add(inputParameter);
+	}
+	public void addOutputParameter(SapParameter outputParameter){
+		outputParameters.add(outputParameter);
+	}
 	
+	public void addInputTable(SapTable inputTable){
+		inputTables.add(inputTable);
+	}
+	public void addOutputTable(SapTable outputTable){
+		outputTables.add(outputTable);
+	}
 
+
+	public void removeInputParameter(SapParameter parameter) {	
+		inputParameters.remove(parameter);
+		
+	}
+	public void removeOutputParameter(SapParameter parameter) {		
+		outputParameters.remove(parameter);
+	}
 }

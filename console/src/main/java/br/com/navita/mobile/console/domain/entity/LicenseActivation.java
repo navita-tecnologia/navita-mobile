@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class LicenseActivation extends BaseEntity {
@@ -30,7 +30,7 @@ public class LicenseActivation extends BaseEntity {
 	@Column
 	private String licenseKey;
 	
-	@OneToOne
+	@ManyToOne
 	private LicenseBundle licenseBundle;
 	
 	public void setLicenseKey(String licenseKey) {

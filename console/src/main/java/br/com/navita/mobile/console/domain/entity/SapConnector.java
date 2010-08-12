@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 @Entity
 public class SapConnector extends Connector {
 
-	
+	@Column
 	private String router;
 	
 	@Column(nullable = false)

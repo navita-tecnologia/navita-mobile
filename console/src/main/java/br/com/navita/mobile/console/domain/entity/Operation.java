@@ -4,13 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Operation extends BaseEntity {
 
-	@OneToOne
+	@ManyToOne
 	protected LicenseBundle licenseBundle;
 	
 	@Column
@@ -19,7 +19,7 @@ public abstract class Operation extends BaseEntity {
 	@Column
 	protected String tag;
 	
-	@OneToOne
+	@ManyToOne
 	protected Connector connector;	
 	
 	public Connector getConnector() {

@@ -1,21 +1,26 @@
 package br.com.navita.mobile.console.domain.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class SapRow extends BaseEntity {
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="sapRow")	
+	@OneToMany(cascade = CascadeType.ALL)	
 	private Set<SapParameter> attributes;
 	
-	@OneToOne
-	private SapTable sapTable;
-
+	public SapRow() {
+		attributes = new HashSet<SapParameter>();
+	}
+	
+	public void addAttribute(SapParameter attribute){
+		attributes.add(attribute);
+	}
+	
 	public Set<SapParameter> getAttributes() {
 		return attributes;
 	}
@@ -24,13 +29,7 @@ public class SapRow extends BaseEntity {
 		this.attributes = attributes;
 	}
 
-	public SapTable getSapTable() {
-		return sapTable;
-	}
-
-	public void setSapTable(SapTable sapTable) {
-		this.sapTable = sapTable;
-	}
+	
 	
 	
 	

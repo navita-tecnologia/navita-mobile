@@ -65,17 +65,17 @@
     alter table SapFunctionOperation_SapOutputTable 
         drop constraint FKC1650FDD5A66464E;
 
-    alter table SapParameter 
-        drop constraint FKB552AA07F9F2518E;
+    alter table SapRow_SapParameter 
+        drop constraint FKE0BC702EF9F2518E;
 
-    alter table SapParameter 
-        drop constraint FKB552AA075A66464E;
+    alter table SapRow_SapParameter 
+        drop constraint FKE0BC702EC1ECF6DE;
 
-    alter table SapRow 
-        drop constraint FK932D4EB8EC4680E;
+    alter table SapTable_SapRow 
+        drop constraint FK42E1D12BEC4680E;
 
-    alter table SapTable 
-        drop constraint FK7D2A112C5A66464E;
+    alter table SapTable_SapRow 
+        drop constraint FK42E1D12BC56ECCAB;
 
     alter table StaticConnector 
         drop constraint FK35E7595FAD87B9F4;
@@ -124,7 +124,11 @@
 
     drop table SapRow;
 
+    drop table SapRow_SapParameter;
+
     drop table SapTable;
+
+    drop table SapTable_SapRow;
 
     drop table StaticConnector;
 
@@ -159,9 +163,9 @@
         enabled smallint not null,
         licenseKey varchar(255) not null,
         tag varchar(255) not null,
-        licenseBundle_id varchar(32),
         tokenConnector_id varchar(32),
         authContainer_id varchar(32),
+        licenseBundle_id varchar(32),
         primary key (id)
     );
 
@@ -217,8 +221,8 @@
         name varchar(255) not null,
         licenseKey varchar(255),
         tag varchar(255),
-        licenseBundle_id varchar(32),
         connector_id varchar(32),
+        licenseBundle_id varchar(32),
         primary key (id)
     );
 
@@ -274,26 +278,35 @@
     create table SapParameter (
         id varchar(32) not null,
         name varchar(255) not null,
-        parameterName varchar(255),
-        parameterValue varchar(255),
-        sapRow_id varchar(32),
-        sapFunctionOperation_id varchar(32),
+        value varchar(255) not null,
         primary key (id)
     );
 
     create table SapRow (
         id varchar(32) not null,
         name varchar(255) not null,
-        sapTable_id varchar(32),
         primary key (id)
+    );
+
+    create table SapRow_SapParameter (
+        SapRow_id varchar(32) not null,
+        attributes_id varchar(32) not null,
+        primary key (SapRow_id, attributes_id),
+        unique (attributes_id)
     );
 
     create table SapTable (
         id varchar(32) not null,
         name varchar(255) not null,
         tableName varchar(255),
-        sapFunctionOperation_id varchar(32),
         primary key (id)
+    );
+
+    create table SapTable_SapRow (
+        SapTable_id varchar(32) not null,
+        sapRows_id varchar(32) not null,
+        primary key (SapTable_id, sapRows_id),
+        unique (sapRows_id)
     );
 
     create table StaticConnector (
@@ -427,25 +440,25 @@
         foreign key (SapFunctionOperation_id) 
         references SapFunctionOperation;
 
-    alter table SapParameter 
-        add constraint FKB552AA07F9F2518E 
-        foreign key (sapRow_id) 
+    alter table SapRow_SapParameter 
+        add constraint FKE0BC702EF9F2518E 
+        foreign key (SapRow_id) 
         references SapRow;
 
-    alter table SapParameter 
-        add constraint FKB552AA075A66464E 
-        foreign key (sapFunctionOperation_id) 
-        references SapFunctionOperation;
+    alter table SapRow_SapParameter 
+        add constraint FKE0BC702EC1ECF6DE 
+        foreign key (attributes_id) 
+        references SapParameter;
 
-    alter table SapRow 
-        add constraint FK932D4EB8EC4680E 
-        foreign key (sapTable_id) 
+    alter table SapTable_SapRow 
+        add constraint FK42E1D12BEC4680E 
+        foreign key (SapTable_id) 
         references SapTable;
 
-    alter table SapTable 
-        add constraint FK7D2A112C5A66464E 
-        foreign key (sapFunctionOperation_id) 
-        references SapFunctionOperation;
+    alter table SapTable_SapRow 
+        add constraint FK42E1D12BC56ECCAB 
+        foreign key (sapRows_id) 
+        references SapRow;
 
     alter table StaticConnector 
         add constraint FK35E7595FAD87B9F4 

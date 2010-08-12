@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
@@ -22,7 +23,7 @@ public abstract class Connector extends BaseEntity {
 	private boolean enabled;
 	
 	
-	@OneToOne
+	@ManyToOne
 	private Connector tokenConnector;
 	
 	
@@ -30,7 +31,7 @@ public abstract class Connector extends BaseEntity {
 	private AuthContainer authContainer;
 	
 	
-	@OneToOne
+	@ManyToOne
 	private LicenseBundle licenseBundle;
 	
 	@Column(nullable = false)

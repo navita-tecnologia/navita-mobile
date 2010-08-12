@@ -1,10 +1,12 @@
 package br.com.navita.mobile.console.domain.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
 public class EjbConnector extends Connector {
 
+	@Column
 	private String ejbName;
 
 	public String getEjbName() {

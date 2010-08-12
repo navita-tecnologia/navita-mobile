@@ -2,54 +2,23 @@ package br.com.navita.mobile.console.domain.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 
 @Entity
 public class SapParameter extends BaseEntity {
 
-	@Column
-	private String parameterName;
+		
+	@Column(nullable = false)
+	private String value;
 	
-	@Column
-	private String parameterValue;
+	public String getValue() {
+		return value;
+	}
 	
-	@OneToOne
-	private SapRow sapRow;
+	public void setValue(String value) {
+		this.value = value;
+	}
+
 	
-	@OneToOne
-	private SapFunctionOperation sapFunctionOperation;
-
-	public String getParameterName() {
-		return parameterName;
-	}
-
-	public void setParameterName(String parameterName) {
-		this.parameterName = parameterName;
-	}
-
-	public String getParameterValue() {
-		return parameterValue;
-	}
-
-	public void setParameterValue(String parameterValue) {
-		this.parameterValue = parameterValue;
-	}
-
-	public SapRow getSapRow() {
-		return sapRow;
-	}
-
-	public void setSapRow(SapRow sapRow) {
-		this.sapRow = sapRow;
-	}
-
-	public SapFunctionOperation getSapFunctionOperation() {
-		return sapFunctionOperation;
-	}
-
-	public void setSapFunctionOperation(SapFunctionOperation sapFunctionOperation) {
-		this.sapFunctionOperation = sapFunctionOperation;
-	}
 	
 	
 	

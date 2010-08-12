@@ -103,6 +103,11 @@
 			class="br.com.navita.mobile.console.view.SapFunctionOperationAction" >
 			<result name="SapFunctionOperation" type="freemarker">/WEB-INF/view/operations/sap-operation.ftl</result>						
 		</action>
+		
+		<action name="saptableaction" class="br.com.navita.mobile.console.view.SapTableAction">
+		<result name="input" type="freemarker">/WEB-INF/view/operations/sap-table.ftl</result>
+		</action>
+		
 		<action name="datasourcequeryoperation"
 			class="br.com.navita.mobile.console.view.DataSourceQueryOperationAction" >
 			<result name="DataSourceQueryOperation" type="freemarker">/WEB-INF/view/operations/datasource-operation.ftl</result>						
