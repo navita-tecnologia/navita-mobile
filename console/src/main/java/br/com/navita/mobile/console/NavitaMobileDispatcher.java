@@ -212,7 +212,8 @@ public class NavitaMobileDispatcher {
 		return true;
 	}
 
-	private void registerLicenseUse(final MobileApplication app, final Map<?, ?> params) throws InvalidDeviceDataException {
+	private void registerLicenseUse(final MobileApplication app, final Map<?, ?> rawParams) throws InvalidDeviceDataException {
+		Map<String,Object> params = NavitaMobileParamsUtil.extractFromRequestMap(app,rawParams);
 		final String[] pin = (String[]) params.get("pin");
 		if(pin == null){
 			throw new InvalidDeviceDataException("PIN parameter not found");
