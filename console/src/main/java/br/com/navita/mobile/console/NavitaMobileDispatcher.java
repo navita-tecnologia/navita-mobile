@@ -214,7 +214,7 @@ public class NavitaMobileDispatcher {
 	
 	private String extractParameterValue(String paramName,String paramLabel, final Map<?, ?> rawParams) throws InvalidDeviceDataException{
 		Object obj = rawParams.get(paramName);
-		if(!(obj instanceof String) || !( obj instanceof String[] ) ){
+		if(!(obj instanceof String) && !( obj instanceof String[] ) ){
 			throw new InvalidDeviceDataException( paramLabel + " wrong parameter type");
 		}
 		
