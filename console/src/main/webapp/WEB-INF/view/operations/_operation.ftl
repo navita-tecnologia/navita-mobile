@@ -2,7 +2,7 @@
 <#macro ctpl label operationaction>
 <@t.template>
 <script language="Javascript" type="text/javascript" src="edit_area/edit_area_full.js"></script>
-<h1>Conector: ${operation.connector.name} :: ${label}</h1>
+<h1>Conectors :: <a href="connectors!edit.action?id=${operation.connector.id}">${operation.connector.name}</a> :: ${label}</h1>
 <br clear="all" />
 <div class="contentArea">
 <@s.actionmessage/>

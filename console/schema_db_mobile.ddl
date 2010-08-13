@@ -163,8 +163,8 @@
         enabled smallint not null,
         licenseKey varchar(255) not null,
         tag varchar(255) not null,
-        tokenConnector_id varchar(32),
         authContainer_id varchar(32),
+        tokenConnector_id varchar(32),
         licenseBundle_id varchar(32),
         primary key (id)
     );
@@ -221,8 +221,8 @@
         name varchar(255) not null,
         licenseKey varchar(255),
         tag varchar(255),
-        connector_id varchar(32),
         licenseBundle_id varchar(32),
+        connector_id varchar(32),
         primary key (id)
     );
 
@@ -298,7 +298,6 @@
     create table SapTable (
         id varchar(32) not null,
         name varchar(255) not null,
-        tableName varchar(255),
         primary key (id)
     );
 

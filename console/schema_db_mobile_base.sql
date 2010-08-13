@@ -71,4 +71,4 @@ insert into LicenseBundleType values ('cdf2b0011b0b4fc39490baa776d61448','Entrep
 
 insert into LicenseBundleType values ('cdf2b0011b0b4fc39490baa776d61449','Entreprise by Connector and PIN');
 
---end legacy
+insert into LICENSEBUNDLE values('cdf2b0011b0b4fc39490baa776d61450','Teste Bundle',1,30,'cdf2b0011b0b4fc39490baa776d61444');

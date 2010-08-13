@@ -105,4 +105,14 @@ public class SapFunctionOperation extends Operation {
 	public void removeOutputParameter(SapParameter parameter) {		
 		outputParameters.remove(parameter);
 	}
+
+
+	public void removeOutputTable(SapTable table) {
+		outputTables.remove(table);		
+	}
+
+
+	public void removeInputTable(SapTable table) {
+		inputTables.remove(table);		
+	}
 }

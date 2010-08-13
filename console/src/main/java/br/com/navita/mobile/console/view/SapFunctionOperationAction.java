@@ -14,6 +14,16 @@ public class SapFunctionOperationAction extends OperationsAction implements SapF
 	private String sapParameterId;
 
 	private String sapTableName;
+	private String sapTableId;
+	
+	@Override
+	public String getSapTableId() {		
+		return sapTableId;
+	}
+	
+	public void setSapTableId(String sapTableId) {
+		this.sapTableId = sapTableId;
+	}
 
 	@Override
 	public String getSapTableName() {
@@ -96,7 +106,7 @@ public class SapFunctionOperationAction extends OperationsAction implements SapF
 		if("output".equals(paramType)){
 			sapFunctionOperationService.addOutputParameter(this);
 		}
-
+		addActionMessage("Criado com sucesso");
 		return edit();
 	}
 
@@ -107,18 +117,32 @@ public class SapFunctionOperationAction extends OperationsAction implements SapF
 		if("output".equals(paramType)){
 			sapFunctionOperationService.removeOutputParameter(this);
 		}
+		addActionMessage("Removido com sucesso");
 		return edit();
 	}
 
 	
 	//input table
 	public String addTable() throws Exception{
+		if("input".equals(paramType)){
+			sapFunctionOperationService.addInputTable(this);
+		}
 
+		if("output".equals(paramType)){
+			sapFunctionOperationService.addOutputTable(this);
+		}
 		return edit();
 	}
 
 	public String removeTable() throws Exception{
 
+		if("input".equals(paramType)){
+			sapFunctionOperationService.removeInputTable(this);
+		}
+		if("output".equals(paramType)){
+			sapFunctionOperationService.removeOutputTable(this);
+		}
+		addActionMessage("Removido com sucesso");
 		return edit();
 	}
 

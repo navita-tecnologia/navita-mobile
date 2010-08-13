@@ -652,18 +652,23 @@ div.successIframeMessage span {
  * CONTEUDO
  */
 #mainContent {
-	margin: 32px 16px 0 16px;
+	margin: 12px 16px 0 16px;
 	clear: both;
 }
 
 #mainContent h1 {
-	font: 26px Arial, Helvetica, sans-serif;
+	font: 18px Arial, Helvetica, sans-serif;
 	font-weight: normal;
 	color: #222222;
 	margin: 0;
 	width: 40%;
-	float: left;
+	float: left;		
 }
+#mainContent h1 a {	
+	color: #222222;
+	text-decoration:underline;		
+}
+
 
 #mainContent ul.submenu {
 	display: inline;

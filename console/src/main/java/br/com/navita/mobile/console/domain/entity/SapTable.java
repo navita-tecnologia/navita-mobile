@@ -4,15 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 @Entity
 public class SapTable extends BaseEntity {
 
-	@Column
-	private String tableName;
+	
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	private Set<SapRow> sapRows;
@@ -25,14 +23,6 @@ public class SapTable extends BaseEntity {
 		sapRows.add(row);
 	}
 	
-	public String getTableName() {
-		return tableName;
-	}
-
-	public void setTableName(String tableName) {
-		this.tableName = tableName;
-	}
-
 	public Set<SapRow> getSapRows() {
 		return sapRows;
 	}

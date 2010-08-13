@@ -19,13 +19,13 @@
 			<tr>
 				<td><input type="text" value="${inparam.name}"/></td>
 				<td><input type="text" value="${inparam.value}" /></td>				
-				<td><a href="javascript:void(0)" onclick="removeParameter('${inparam.id}','${inparam.name}','input')"><img src="images/close.gif" alt="Excluir" border="0" /></a></td>
+				<td><a title="Remove o parâmetro ${inparam.name}" href="javascript:void(0)" onclick="removeParameter('${inparam.id}','${inparam.name}','input')"><img src="images/close.gif" alt="Excluir" border="0" /></a></td>
 			</tr>
 			</#list>
 			<tr>
 				<td><input type="text" name="inputParameterName" id="inputParameterName"/></td>
 				<td><input type="text" name="inputParameterValue" id="inputParameterValue"/></td>
-				<td><a href="javascript:void(0)" onclick="addParameter('input')" ><img src="images/ico_add.gif" alt="Inserir" border="0" /></a></td>
+				<td><a title="Adiciona um parâmetro" href="javascript:void(0)" onclick="addParameter('input')" ><img src="images/ico_add.gif" alt="Inserir" border="0" /></a></td>
 				
 			</tr>
 		</table>
@@ -36,19 +36,19 @@
 		<td align="left">			
 			<table>	
 				<tr>
-					<td colspan"2">Table name</td>					
-					<td><a href="">&nbsp;</a></td>
+					<td>Table name</td>					
+					<td colspan="2">&nbsp;</td>	
 				</tr>		
 			<#list operation.inputTables as intable>		
 				<tr>
-					<td>TB_XXX1</td>
-					<td><a href=""><img src="images/edit.gif" alt="Alterar" border="0" /></a></td>
-					<td><a href=""><img src="images/close.gif" alt="Excluir" border="0" /></a></td>
+					<td>${intable.name}</td>
+					<td><a  title="Edita a tabela ${intable.name}" href="sapfunctiontable!edit.action?"><img src="images/edit.gif" alt="Alterar" border="0" /></a></td>
+					<td><a  title="Remove a tabela ${intable.name}" href="javascript:void(0)" onclick="removeTable('${intable.id}','${intable.name}','input')"><img src="images/close.gif" alt="Excluir" border="0" /></a></td>
 				</tr>
 			</#list>			
 				<tr>
-					<td colspan"2"><input type="text" name="inputTableName" id="inputTableName"/></td>					
-					<td><a href=""><img src="images/ico_add.gif" alt="inserir" border="0" /></a></td>
+					<td ><input type="text" name="inputTableName" id="inputTableName"/></td>					
+					<td colspan="2"><a title="Adiciona uma tabela" href="javascript:void(0)" onclick="addTable('input')"><img src="images/ico_add.gif" alt="inserir" border="0" /></a></td>
 				</tr>					
 			</table>
 				
@@ -68,13 +68,13 @@
 				<td><input type="text" value="${outparam.name}"/></td>
 				<td><input type="text" value="${outparam.value}" /></td>
 				
-				<td><a href="javascript:void(0)" onclick="removeParameter('${outparam.id}','${outparam.name}','output')"><img src="images/close.gif" alt="Inserir" border="0" /></a></td>
+				<td><a title="Remove o parâmetro ${outparam.name}" href="javascript:void(0)" onclick="removeParameter('${outparam.id}','${outparam.name}','output')"><img src="images/close.gif" alt="Inserir" border="0" /></a></td>
 			</tr>
 			</#list>
 			<tr>
 				<td><input type="text" name="outputParameterName" id="outputParameterName"/></td>
 				<td><input type="text" name="outputParameterValue" id="outputParameterValue"/></td>
-				<td><a href="javascript:void(0)" onclick="addParameter('output')" ><img src="images/ico_add.gif" alt="Inserir" border="0" /></a></td>
+				<td><a title="Adiciona um parâmetro" href="javascript:void(0)" onclick="addParameter('output')" ><img src="images/ico_add.gif" alt="Inserir" border="0" /></a></td>
 				
 			</tr>
 		</table>
@@ -86,19 +86,20 @@
 					
 			<table>		
 			<tr>
-					<td colspan"2">Table name</td>					
-					<td><a href="">&nbsp;</a></td>
+					<td>Table name</td>					
+					<td colspan="2">&nbsp;</td>					
+					
 				</tr>
 			<#list operation.outputTables as outtable>		
 				<tr>
-					<td>TB_XXX1</td>
-					<td><a href=""><img src="images/edit.gif" alt="Alterar" border="0" /></a></td>
-					<td><a href=""><img src="images/close.gif" alt="Excluir" border="0" /></a></td>
+					<td>${outtable.name}</td>
+					<td><a title="Altera a tabela ${outtable.name}" href="javascript:void(0)"><img src="images/edit.gif" alt="Alterar" border="0" /></a></td>
+					<td><a  title="Remove a tabela ${outtable.name}" href="javascript:void(0)" onclick="removeTable('${outtable.id}','${outtable.name}','output')"><img src="images/close.gif" alt="Excluir" border="0" /></a></td>
 				</tr>
 			</#list>	
 			<tr>
-					<td colspan"2"><input type="text" name="outputTableName" id="outputTableName"/></td>					
-					<td><a href=""><img src="images/ico_add.gif" alt="inserir" border="0" /></a></td>
+					<td><input type="text" name="outputTableName" id="outputTableName"/></td>					
+					<td colspan="2"><a  title="Adiciona uma tabela" href="javascript:void(0)" onclick="addTable('output')"><img src="images/ico_add.gif" alt="inserir" border="0" /></a></td>
 				</tr>			
 			</table>
 				
@@ -109,8 +110,6 @@
 		<td>&nbsp;</td>
 		<td>&nbsp;</td>
 	</tr>
-	
-	
 	<script>
 	function addParameter(type){		
 		var parameterName = document.getElementById(type  + 'ParameterName').value;
@@ -136,6 +135,25 @@
 		}
 		window.location = 'sapfunctionoperation!removeParameter.action?paramType='+type+'&id=${operation.id}&sapParameterId=' + id;
 	}
+	
+	function addTable(type){
+		var tableName = document.getElementById(type  + 'TableName').value
+		if(tableName == null || tableName == ''){
+			alert('Digite um valor para o nome da tabela');
+			document.getElementById(type  + 'TableName').focus();
+			return;
+		}
+		
+		window.location = 'sapfunctionoperation!addTable.action?paramType=' + type + '&id=${operation.id}&sapTableName=' + tableName ;
+	
+	}
+	function removeTable(id,name,type){
+		if(!confirm('Tem certeza que quer excluir a tabela '+name+'?')){
+			return;
+		}
+		window.location = 'sapfunctionoperation!removeTable.action?paramType='+type+'&id=${operation.id}&sapTableId=' + id;
+	}
+	
 	</script>
 	
 </@ct.ctpl>

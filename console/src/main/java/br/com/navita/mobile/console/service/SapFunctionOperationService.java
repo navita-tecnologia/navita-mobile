@@ -16,9 +16,10 @@ public interface SapFunctionOperationService extends OperationService<SapFunctio
 	SapTable findTableById(String id) throws EntityNotFoundException;	
 	void addInputTable(SapFunctionOperationRaw raw) throws EntityNotFoundException;
 	void addOutputTable(SapFunctionOperationRaw raw)throws EntityNotFoundException;
-	void updateTable(SapFunctionOperationRaw raw);
-	void deleteTable(String id);
+	void updateTable(SapFunctionOperationRaw raw) throws EntityNotFoundException;
+	void removeInputTable(SapFunctionOperationRaw raw) throws EntityNotFoundException;
+	void removeOutputTable(SapFunctionOperationRaw raw) throws EntityNotFoundException;
 	
-	void addTableRow(SapTableRowRaw rRaw);
-	void deleteTableRow(SapTableRowRaw rRaw);
+	void addTableRow(SapTableRowRaw rRaw) throws EntityNotFoundException;
+	void deleteTableRow(SapTableRowRaw rRaw) throws EntityNotFoundException;
 }

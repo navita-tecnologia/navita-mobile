@@ -122,8 +122,17 @@ public class SapFunctionOperationService extends BaseOperationService implements
 	}
 
 	@Override
-	public void deleteTable(String id) {
-		
+	public void removeOutputTable(SapFunctionOperationRaw raw) throws EntityNotFoundException {
+		SapFunctionOperation oper = (SapFunctionOperation) findById(raw.getId());
+		SapTable table = sapTableRepository.findById(raw.getSapTableId());
+		oper.removeOutputTable(table);
+	}
+	
+	@Override
+	public void removeInputTable(SapFunctionOperationRaw raw) throws EntityNotFoundException {
+		SapFunctionOperation oper = (SapFunctionOperation) findById(raw.getId());
+		SapTable table = sapTableRepository.findById(raw.getSapTableId());
+		oper.removeInputTable(table);
 		
 	}
 
