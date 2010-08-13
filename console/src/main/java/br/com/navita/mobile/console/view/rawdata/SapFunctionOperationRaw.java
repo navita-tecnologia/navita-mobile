@@ -15,4 +15,8 @@ public interface SapFunctionOperationRaw extends OperationRaw {
 
 	String getSapTableId();
 
+	String getSapTabelFieldName();
+
+	String getSapTableFieldId();
+
 }

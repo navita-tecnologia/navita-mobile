@@ -77,6 +77,12 @@
     alter table SapTable_SapRow 
         drop constraint FK42E1D12BC56ECCAB;
 
+    alter table SapTable_SapTableField 
+        drop constraint FK7F55E15BEC4680E;
+
+    alter table SapTable_SapTableField 
+        drop constraint FK7F55E15BCEE6DA46;
+
     alter table StaticConnector 
         drop constraint FK35E7595FAD87B9F4;
 
@@ -128,7 +134,11 @@
 
     drop table SapTable;
 
+    drop table SapTableField;
+
     drop table SapTable_SapRow;
+
+    drop table SapTable_SapTableField;
 
     drop table StaticConnector;
 
@@ -221,8 +231,8 @@
         name varchar(255) not null,
         licenseKey varchar(255),
         tag varchar(255),
-        licenseBundle_id varchar(32),
         connector_id varchar(32),
+        licenseBundle_id varchar(32),
         primary key (id)
     );
 
@@ -301,11 +311,24 @@
         primary key (id)
     );
 
+    create table SapTableField (
+        id varchar(32) not null,
+        name varchar(255) not null,
+        primary key (id)
+    );
+
     create table SapTable_SapRow (
         SapTable_id varchar(32) not null,
         sapRows_id varchar(32) not null,
         primary key (SapTable_id, sapRows_id),
         unique (sapRows_id)
+    );
+
+    create table SapTable_SapTableField (
+        SapTable_id varchar(32) not null,
+        fieldNames_id varchar(32) not null,
+        primary key (SapTable_id, fieldNames_id),
+        unique (fieldNames_id)
     );
 
     create table StaticConnector (
@@ -458,6 +481,16 @@
         add constraint FK42E1D12BC56ECCAB 
         foreign key (sapRows_id) 
         references SapRow;
+
+    alter table SapTable_SapTableField 
+        add constraint FK7F55E15BEC4680E 
+        foreign key (SapTable_id) 
+        references SapTable;
+
+    alter table SapTable_SapTableField 
+        add constraint FK7F55E15BCEE6DA46 
+        foreign key (fieldNames_id) 
+        references SapTableField;
 
     alter table StaticConnector 
         add constraint FK35E7595FAD87B9F4 

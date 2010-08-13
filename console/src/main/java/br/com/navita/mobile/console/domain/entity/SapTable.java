@@ -15,8 +15,12 @@ public class SapTable extends BaseEntity {
 	@OneToMany(cascade = CascadeType.ALL)
 	private Set<SapRow> sapRows;
 	
+	@OneToMany(cascade = CascadeType.ALL)
+	private Set<SapTableField> fieldNames;
+	
 	public SapTable() {
 		sapRows = new HashSet<SapRow>();
+		fieldNames = new HashSet<SapTableField>();
 	}
 	
 	public void addRow(SapRow row){
@@ -31,6 +35,22 @@ public class SapTable extends BaseEntity {
 		this.sapRows = sapRows;
 	}	
 	
+	public Set<SapTableField> getFieldNames() {
+		return fieldNames;
+	}
+	
+	public void setFieldNames(Set<SapTableField> fieldNames) {
+		this.fieldNames = fieldNames;
+	}
+
+	public void addField(SapTableField f) {
+		sapRows.clear();
+		fieldNames.add(f);		
+	}
+	public void removeField(SapTableField f) {
+		sapRows.clear();
+		fieldNames.remove(f);	
+	}
 	
 	
 }

@@ -139,6 +139,11 @@
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.entity.SapTable" />
 	</bean>
+	<bean id="sapTableFieldRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+		lazy-init="true">
+		<constructor-arg
+			value="br.com.navita.mobile.console.domain.entity.SapTableField" />
+	</bean>
 	<!-- end repositories -->
 
 	<bean id="baseConnectorService"

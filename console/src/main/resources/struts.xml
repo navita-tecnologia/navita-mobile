@@ -104,7 +104,7 @@
 			<result name="SapFunctionOperation" type="freemarker">/WEB-INF/view/operations/sap-operation.ftl</result>						
 		</action>
 		
-		<action name="saptableaction" class="br.com.navita.mobile.console.view.SapTableAction">
+		<action name="saptable" class="br.com.navita.mobile.console.view.SapTableAction">
 		<result name="input" type="freemarker">/WEB-INF/view/operations/sap-table.ftl</result>
 		</action>
 		

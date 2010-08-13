@@ -42,7 +42,7 @@
 			<#list operation.inputTables as intable>		
 				<tr>
 					<td>${intable.name}</td>
-					<td><a  title="Edita a tabela ${intable.name}" href="sapfunctiontable!edit.action?"><img src="images/edit.gif" alt="Alterar" border="0" /></a></td>
+					<td><a  title="Edita a tabela ${intable.name}" href="saptable!input.action?sapTableId=${intable.id}&id=${operation.id}"><img src="images/edit.gif" alt="Alterar" border="0" /></a></td>
 					<td><a  title="Remove a tabela ${intable.name}" href="javascript:void(0)" onclick="removeTable('${intable.id}','${intable.name}','input')"><img src="images/close.gif" alt="Excluir" border="0" /></a></td>
 				</tr>
 			</#list>			

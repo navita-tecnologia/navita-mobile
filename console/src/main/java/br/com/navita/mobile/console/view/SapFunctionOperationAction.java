@@ -5,16 +5,35 @@ import br.com.navita.mobile.console.view.rawdata.SapFunctionOperationRaw;
 
 public class SapFunctionOperationAction extends OperationsAction implements SapFunctionOperationRaw{
 
-	private String paramType;	
-	private String functionName;
-	private SapFunctionOperationService sapFunctionOperationService;
+	protected String paramType;	
+	protected String functionName;
+	protected SapFunctionOperationService sapFunctionOperationService;
 
-	private String parameterName;
-	private String parameterValue;
-	private String sapParameterId;
+	protected String parameterName;
+	protected String parameterValue;
+	protected String sapParameterId;
 
-	private String sapTableName;
-	private String sapTableId;
+	protected String sapTableName;
+	protected String sapTableId;
+	protected String sapTableFieldName;
+	protected String sapTableFieldId;
+	
+	@Override
+	public String getSapTabelFieldName() {		
+		return sapTableFieldName;
+	}
+	
+	public void setSapTableFieldName(String sapTableFieldName) {
+		this.sapTableFieldName = sapTableFieldName;
+	}
+	
+	public String getSapTableFieldId() {
+		return sapTableFieldId;
+	}
+	
+	public void setSapTableFieldId(String sapTableFieldId) {
+		this.sapTableFieldId = sapTableFieldId;
+	}
 	
 	@Override
 	public String getSapTableId() {		
