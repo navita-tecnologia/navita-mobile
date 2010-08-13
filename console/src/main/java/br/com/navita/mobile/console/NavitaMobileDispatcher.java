@@ -211,34 +211,40 @@ public class NavitaMobileDispatcher {
 
 		return true;
 	}
+	
+	private String extractParameterValue(String paramName,String paramLabel, final Map<?, ?> rawParams) throws InvalidDeviceDataException{
+		Object obj = rawParams.get(paramName);
+		if(!(obj instanceof String) || !( obj instanceof String[] ) ){
+			throw new InvalidDeviceDataException( paramLabel + " wrong parameter type");
+		}
+		
+		String value = "";		
+		if(obj != null){
+			if( obj.getClass().isArray()){
+				value = ((String[])obj)[0];	
+			}else{
+				value = (String) obj;
+			}
+		}else{
+			throw new InvalidDeviceDataException("PIN parameter not found");			
+		}
+		
+		return value;
+	}
 
 	private void registerLicenseUse(final MobileApplication app, final Map<?, ?> rawParams) throws InvalidDeviceDataException {
-		Map<String,Object> params = NavitaMobileParamsUtil.extractFromRequestMap(app,rawParams);
-		final String[] pin = (String[]) params.get("pin");
-		if(pin == null){
-			throw new InvalidDeviceDataException("PIN parameter not found");
-		}
-
-		final String[] email = (String[]) params.get("email");
-		if(email == null){
-			throw new InvalidDeviceDataException("EMAIL parameter not found");
-		}
-
-		final String[] device = (String[]) params.get("device");
-		if(device == null){
-			throw new InvalidDeviceDataException("DEVICE model parameter not found");
-		}
-
-		final String[] brand = (String[]) params.get("brand");
-		if(brand == null){
-			throw new InvalidDeviceDataException("BRAND parameter not found");
-		}
-
-		final String[] carrier = (String[]) params.get("carrier");
-		if(carrier == null){
-			throw new InvalidDeviceDataException("CARRIER parameter not found");
-		}
-
+		
+		Map<String,Object> params = NavitaMobileParamsUtil.extractFromRequestMap(app,rawParams);		
+		final String pin = extractParameterValue("pin", "Pin", params);
+		
+		final String email = extractParameterValue("email", "Email", params);
+		
+		final String device = extractParameterValue("device", "Device", params);
+		
+		final String brand = extractParameterValue("brand", "Brand", params);
+		
+		final String carrier = extractParameterValue("carrier", "Carrier", params);
+		
 		LicenseActivationRaw activationRaw = new LicenseActivationRaw(){
 			@Override
 			public String getBundleId() {				
@@ -259,27 +265,27 @@ public class NavitaMobileDispatcher {
 			@Override
 			public String getBrand() {
 				
-				return brand[0];
+				return brand;
 			}
 			@Override
 			public String getCarrier() {
 				
-				return carrier[0];
+				return carrier;
 			}
 			@Override
 			public String getEmail() {
 				
-				return email[0];
+				return email;
 			}
 			@Override
 			public String getModel() {
 				
-				return device[0];
+				return device;
 			}
 			@Override
 			public String getPin() {
 				
-				return pin[0];
+				return pin;
 			};
 			
 		};
