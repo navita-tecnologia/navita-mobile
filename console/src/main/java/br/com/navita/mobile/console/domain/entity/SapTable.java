@@ -51,6 +51,11 @@ public class SapTable extends BaseEntity {
 		sapRows.clear();
 		fieldNames.remove(f);	
 	}
+
+	public void removeRow(SapRow row) {
+		sapRows.remove(row);
+		
+	}
 	
 	
 }

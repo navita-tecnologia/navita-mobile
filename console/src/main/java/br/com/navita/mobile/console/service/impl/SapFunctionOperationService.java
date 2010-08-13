@@ -8,9 +8,11 @@ import br.com.navita.mobile.console.dao.jpa.GenericRepository;
 import br.com.navita.mobile.console.dao.jpa.OperationRepository;
 import br.com.navita.mobile.console.domain.entity.SapFunctionOperation;
 import br.com.navita.mobile.console.domain.entity.SapParameter;
+import br.com.navita.mobile.console.domain.entity.SapRow;
 import br.com.navita.mobile.console.domain.entity.SapTable;
 import br.com.navita.mobile.console.domain.entity.SapTableField;
 import br.com.navita.mobile.console.exception.EntityNotFoundException;
+import br.com.navita.mobile.console.view.rawdata.SapFieldRaw;
 import br.com.navita.mobile.console.view.rawdata.SapFunctionOperationRaw;
 
 @Transactional
@@ -20,6 +22,11 @@ public class SapFunctionOperationService extends BaseOperationService implements
 	private GenericRepository<SapParameter> sapParameterRepository;
 	private GenericRepository<SapTable> sapTableRepository;
 	private GenericRepository<SapTableField> sapTableFieldRepository;
+	private GenericRepository<SapRow> sapRowRepository;
+	
+	public void setSapRowRepository(GenericRepository<SapRow> sapRowRepository) {
+		this.sapRowRepository = sapRowRepository;
+	}
 	
 	public void setSapTableFieldRepository(
 			GenericRepository<SapTableField> sapTableFieldRepository) {
@@ -122,12 +129,6 @@ public class SapFunctionOperationService extends BaseOperationService implements
 	}
 
 	@Override
-	public void addTableRow(SapFunctionOperationRaw rRaw) {
-		
-		
-	}
-
-	@Override
 	public void removeOutputTable(SapFunctionOperationRaw raw) throws EntityNotFoundException {
 		SapFunctionOperation oper = (SapFunctionOperation) findById(raw.getId());
 		SapTable table = sapTableRepository.findById(raw.getSapTableId());
@@ -141,10 +142,26 @@ public class SapFunctionOperationService extends BaseOperationService implements
 		oper.removeInputTable(table);
 		
 	}
+	
+	@Override
+	public void addTableRow(SapFunctionOperationRaw raw) throws EntityNotFoundException {
+		SapRow row = new SapRow();
+		row.setName("");
+		for(SapFieldRaw r: raw.getSapRowRaw()){
+			SapParameter p = new SapParameter();
+			p.setName(r.getName());
+			p.setValue(r.getFieldValue());
+			row.addAttribute(p);
+		}
+		SapTable table = sapTableRepository.findById(raw.getSapTableId());
+		table.addRow(row);
+	}
 
 	@Override
-	public void deleteTableRow(SapFunctionOperationRaw rRaw) {
-		
+	public void removeTableRow(SapFunctionOperationRaw raw) throws EntityNotFoundException {
+		SapRow row = sapRowRepository.findById(raw.getSapRowId());
+		SapTable table = sapTableRepository.findById(raw.getSapTableId());
+		table.removeRow(row);
 		
 	}
 

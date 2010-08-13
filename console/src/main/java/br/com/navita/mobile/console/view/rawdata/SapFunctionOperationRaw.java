@@ -1,5 +1,7 @@
 package br.com.navita.mobile.console.view.rawdata;
 
+import java.util.List;
+
 
 public interface SapFunctionOperationRaw extends OperationRaw {
 	
@@ -18,5 +20,9 @@ public interface SapFunctionOperationRaw extends OperationRaw {
 	String getSapTabelFieldName();
 
 	String getSapTableFieldId();
+	
+	List<SapFieldRaw> getSapRowRaw() ;
+
+	String getSapRowId();
 
 }

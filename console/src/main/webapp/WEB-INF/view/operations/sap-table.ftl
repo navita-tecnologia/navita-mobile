@@ -22,25 +22,28 @@
 								<td align="left">
 								<table>
 									<tr>
-										<td>CAMPO1</td><td align="center"><img src="images/close.gif" alt="Excluir" border="0" /></td>
-										<td>CAMPO2</td><td align="center"><img src="images/close.gif" alt="Excluir" border="0" /></td>	
+										<#list sapTable.fieldNames as td>
+											<td>${td.name}</td>
+											<td align="center"><a title="Remove este campo da tablea" href="javascript:void(0)" onclick="removeTableField('${td.name}','${td.id}')"><img src="images/close.gif" alt="Excluir" border="0" /></a></td>
+										</#list>
 										<td colspan="2"><a title="Incluir um campo na tablea" href="javascript:void(0)" onclick="addTableField()"><img src="images/ico_add.gif" alt="Inserir" border="0" /></a></td>											
 									</tr>
+									<#list sapTable.sapRows as tr>
 									<tr>
-										<td colspan="2"><input type="text" value="xxx"/></td>
-										<td colspan="2"><input type="text" value="zzz" /></td>
+										<#list tr.attributes as td>
+											<td colspan="2"><input type="text" value="${td.name} ${td.value}"/></td>
+										</#list>										
 										<td><a title="Remove o parâmetro"  ><img src="images/close.gif" alt="Excluir" border="0" /></a></td>
 									</tr>
+									</#list>
+									<#if sapTable.fieldNames.size() gt 0>
 									<tr>
-										<td colspan="2"><input type="text" value="yyy"/></td>
-										<td colspan="2"><input type="text" value="aaa" /></td>
-										<td><a title="Remove o parâmetro"  ><img src="images/close.gif" alt="Excluir" border="0" /></a></td>
+										<#list sapTable.fieldNames as td>
+											<td colspan="2"><input type="text" value="" id="att${td.name}"/></td>
+										</#list>
+										<td><a title="Adiciona uma linha" href="javascript:void(0)" onclick="addRow()" ><img src="images/ico_add.gif" alt="Inserir" border="0" /></a></td>
 									</tr>
-									<tr>
-										<td colspan="2"><input type="text" value=""/></td>
-										<td colspan="2"><input type="text" value="" /></td>
-										<td><a href=""><img src="images/ico_add.gif" alt="Inserir" border="0" /></a></td>
-									</tr>	
+									</#if>	
 								</table>
 								
 								</td>	
@@ -65,12 +68,35 @@
 </div>
 
 <script>
+var names = [];
+var idx = 0;
+<#list sapTable.fieldNames as td>
+	names[idx++] = '${td.name}';
+</#list>
 function addTableField(){
 	var fname = prompt('Nome do campo');
 	if(fname == null || fname == ''){
 		return;
 	}
 	window.location = 'saptable!addField.action?sapTableId=${sapTable.id}&id=${operation.id}&sapTableFieldName='+fname;
+}
+
+function removeTableField(name, id){
+	if(! confirm('Tem certeza que quer excluir o campo ' + name + '?')){
+		return;
+	}
+	window.location = 'saptable!removeField.action?sapTableId=${sapTable.id}&id=${operation.id}&sapTableFieldId='+id;
+}
+
+function addRow(){	
+	var rowData = '';
+	for(var i = 0; i < names.length; i++){
+		if(i > 0){rowData += '|';}
+		var obj = names[i];
+		value = document.getElementById('att'+obj).value;
+		rowData += obj + ':' + value 		
+	}		
+	window.location = 'saptable!addRow.action?sapTableId=${sapTable.id}&id=${operation.id}&rowData='+rowData;
 }
 
 </script>

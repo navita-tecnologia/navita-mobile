@@ -127,7 +127,7 @@
 	</bean>
 
 
-<bean id="sapParameterRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+	<bean id="sapParameterRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
 		lazy-init="true">
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.entity.SapParameter" />
@@ -143,6 +143,11 @@
 		lazy-init="true">
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.entity.SapTableField" />
+	</bean>
+	<bean id="sapRowRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+		lazy-init="true">
+		<constructor-arg
+			value="br.com.navita.mobile.console.domain.entity.SapRow" />
 	</bean>
 	<!-- end repositories -->
 

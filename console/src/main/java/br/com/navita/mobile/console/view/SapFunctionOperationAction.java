@@ -1,6 +1,9 @@
 package br.com.navita.mobile.console.view;
 
+import java.util.List;
+
 import br.com.navita.mobile.console.service.SapFunctionOperationService;
+import br.com.navita.mobile.console.view.rawdata.SapFieldRaw;
 import br.com.navita.mobile.console.view.rawdata.SapFunctionOperationRaw;
 
 public class SapFunctionOperationAction extends OperationsAction implements SapFunctionOperationRaw{
@@ -17,6 +20,27 @@ public class SapFunctionOperationAction extends OperationsAction implements SapF
 	protected String sapTableId;
 	protected String sapTableFieldName;
 	protected String sapTableFieldId;
+	protected List<SapFieldRaw> sapRowRaw;
+	protected String sapRowId;
+	
+	@Override
+	public String getSapRowId() {		
+		return sapRowId;
+	}
+	
+	public void setSapRowId(String sapRowId) {
+		this.sapRowId = sapRowId;
+	}
+	
+	public List<SapFieldRaw> getSapRowRaw() {
+		return sapRowRaw;
+	}
+	
+	public void setSapRowRaw(List<SapFieldRaw> sapRowRaw) {
+		this.sapRowRaw = sapRowRaw;
+	}
+		
+
 	
 	@Override
 	public String getSapTabelFieldName() {		
@@ -169,5 +193,7 @@ public class SapFunctionOperationAction extends OperationsAction implements SapF
 
 		return edit();
 	}
+
+	
 
 }
