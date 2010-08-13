@@ -12,10 +12,10 @@ public class SearchCriteria {
 
 	/* Atributos ******************************************************************************* */
 
-	/** Índice do primeiro resultado */
+	/** Indice do primeiro resultado */
 	private int pageNumber;
 
-	/** Número máximo de elementos a serem buscados */
+	/** Numero maximo de elementos a serem buscados */
 	private int pageSize;
 
 	private String text;
