@@ -1,5 +1,6 @@
 package br.com.navita.mobile.console.domain.entity;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ public class SapTable extends BaseEntity {
 	private Set<SapTableField> fieldNames;
 	
 	public SapTable() {
-		sapRows = new HashSet<SapRow>();
+		sapRows = Collections.synchronizedSet( new HashSet<SapRow>() );
 		fieldNames = new HashSet<SapTableField>();
 	}
 	
@@ -44,11 +45,9 @@ public class SapTable extends BaseEntity {
 	}
 
 	public void addField(SapTableField f) {
-		sapRows.clear();
 		fieldNames.add(f);		
 	}
 	public void removeField(SapTableField f) {
-		sapRows.clear();
 		fieldNames.remove(f);	
 	}
 

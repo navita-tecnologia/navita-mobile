@@ -33,7 +33,7 @@
 										<#list tr.attributes as td>
 											<td colspan="2"><input type="text" value="${td.name} ${td.value}"/></td>
 										</#list>										
-										<td><a title="Remove o parâmetro"  ><img src="images/close.gif" alt="Excluir" border="0" /></a></td>
+										<td><a title="Remove esta linha" href="javascript:void(0)" onclick="deleteRow('${tr.id}')" ><img src="images/close.gif" alt="Excluir" border="0" /></a></td>
 									</tr>
 									</#list>
 									<#if sapTable.fieldNames.size() gt 0>
@@ -99,6 +99,13 @@ function addRow(){
 	window.location = 'saptable!addRow.action?sapTableId=${sapTable.id}&id=${operation.id}&rowData='+rowData;
 }
 
+function deleteRow(id){
+	if(! confirm('Tem certeza que quer excluir esta linha?')){
+		return;
+	}
+	window.location = 'saptable!removeRow.action?sapTableId=${sapTable.id}&id=${operation.id}&sapRowId='+id;
+
+}
 </script>
 
 </@t.template>

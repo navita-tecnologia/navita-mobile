@@ -113,6 +113,7 @@ public class SapFunctionOperation extends Operation {
 
 
 	public void removeInputTable(SapTable table) {
+		
 		inputTables.remove(table);		
 	}
 }
