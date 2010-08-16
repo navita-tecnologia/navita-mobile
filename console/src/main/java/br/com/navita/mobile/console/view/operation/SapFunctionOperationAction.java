@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.view;
+package br.com.navita.mobile.console.view.operation;
 
 import java.util.List;
 
@@ -127,11 +127,19 @@ public class SapFunctionOperationAction extends OperationsAction implements SapF
 	}
 
 	public String save() throws Exception {
+		if(! baseOperationService.isTagUniqueForIdAndConnector(tag, id, connectorId)){
+			addActionError("Tag " + tag + " existe em outra operação deste mesmo conector");
+			return edit();
+		}
 		sapFunctionOperationService.update(this);
 		addActionMessage("Salvo com sucesso");
 		return edit();
 	}
 	public String create() throws Exception {
+		if(! baseOperationService.isTagUniqueForConnector(tag, connectorId)){
+			addActionError("Tag " + tag + " existe em outra operação deste mesmo conector");
+			return prepareCreate();
+		}
 		operation = sapFunctionOperationService.create(this);
 		id = operation.getId();
 		addActionMessage("Criado com sucesso");

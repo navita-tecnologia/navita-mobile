@@ -3,6 +3,13 @@ package br.com.navita.mobile.console.domain.entity;
 import javax.persistence.Entity;
 
 @Entity
-public class SapTableField extends BaseEntity{
+public class SapTableField extends BaseEntity implements Comparable<SapTableField>{
 
+	@Override
+	public int compareTo(SapTableField o) {
+		
+		return this.getName().compareTo(o.getName());
+	}
+
+	
 }

@@ -23,31 +23,31 @@ public class SapFunctionOperationService extends BaseOperationService implements
 	private GenericRepository<SapTable> sapTableRepository;
 	private GenericRepository<SapTableField> sapTableFieldRepository;
 	private GenericRepository<SapRow> sapRowRepository;
-	
+
 	public void setSapRowRepository(GenericRepository<SapRow> sapRowRepository) {
 		this.sapRowRepository = sapRowRepository;
 	}
-	
+
 	public void setSapTableFieldRepository(
 			GenericRepository<SapTableField> sapTableFieldRepository) {
 		this.sapTableFieldRepository = sapTableFieldRepository;
 	}
-	
+
 	public void setSapParameterRepository(
 			GenericRepository<SapParameter> sapParameterRepository) {
 		this.sapParameterRepository = sapParameterRepository;
 	}
-	
+
 	public void setSapTableRepository(
 			GenericRepository<SapTable> sapTableRepository) {
 		this.sapTableRepository = sapTableRepository;
 	}
-	
+
 	public void setSapFunctionOperationRepository(
 			OperationRepository<SapFunctionOperation> sapFunctionOperationRepository) {
 		this.sapFunctionOperationRepository = sapFunctionOperationRepository;
 	}
-	
+
 	@Override
 	public SapFunctionOperation create(SapFunctionOperationRaw raw) throws EntityNotFoundException {
 		SapFunctionOperation op = new SapFunctionOperation();
@@ -73,7 +73,7 @@ public class SapFunctionOperationService extends BaseOperationService implements
 		SapFunctionOperation op = (SapFunctionOperation) sapFunctionOperationRepository.findById(raw.getId());
 		populateOperationFromRaw(op, raw);
 		op.setFunctionName(raw.getFunctionName());		
-		
+
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class SapFunctionOperationService extends BaseOperationService implements
 		parameter.setValue(raw.getParameterValue());
 		SapFunctionOperation oper = (SapFunctionOperation) findById(raw.getId());
 		oper.addInputParameter(parameter);		
-		
+
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class SapFunctionOperationService extends BaseOperationService implements
 		parameter.setValue(raw.getParameterValue());
 		SapFunctionOperation oper = (SapFunctionOperation) findById(raw.getId());
 		oper.addOutputParameter(parameter);
-		
+
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class SapFunctionOperationService extends BaseOperationService implements
 		SapParameter parameter = sapParameterRepository.findById(raw.getSapParameterId());
 		oper.removeInputParameter(parameter);
 		sapParameterRepository.remove(parameter);
-			
+
 	}
 	@Override
 	public void removeOutputParameter(SapFunctionOperationRaw raw) throws EntityNotFoundException {
@@ -111,7 +111,7 @@ public class SapFunctionOperationService extends BaseOperationService implements
 		oper.removeOutputParameter(parameter);
 		sapParameterRepository.remove(parameter);
 	}
-	
+
 	@Override
 	public void addInputTable(SapFunctionOperationRaw raw) throws EntityNotFoundException {
 		SapTable table = new SapTable();
@@ -126,7 +126,7 @@ public class SapFunctionOperationService extends BaseOperationService implements
 		table.setName(raw.getSapTableName());
 		SapFunctionOperation oper = (SapFunctionOperation) findById(raw.getId());
 		oper.addOutputTable(table);
-		
+
 	}
 
 	@Override
@@ -136,16 +136,16 @@ public class SapFunctionOperationService extends BaseOperationService implements
 		oper.removeOutputTable(table);
 		sapTableRepository.remove(table);
 	}
-	
+
 	@Override
 	public void removeInputTable(SapFunctionOperationRaw raw) throws EntityNotFoundException {
 		SapFunctionOperation oper = (SapFunctionOperation) findById(raw.getId());
 		SapTable table = sapTableRepository.findById(raw.getSapTableId());
 		oper.removeInputTable(table);
 		sapTableRepository.remove(table);
-		
+
 	}
-	
+
 	@Override
 	public void addTableRow(SapFunctionOperationRaw raw) throws EntityNotFoundException {
 		SapRow row = new SapRow();
@@ -166,55 +166,64 @@ public class SapFunctionOperationService extends BaseOperationService implements
 		SapTable table = sapTableRepository.findById(raw.getSapTableId());
 		table.removeRow(row);
 		sapRowRepository.remove(row);
-		
+
 	}
 
 	@Override
 	public SapTable findTableById(String id) throws EntityNotFoundException {
-		
+
 		return sapTableRepository.findById(id);
 	}
 
-	
+
 	@Override
 	public void updateTable(SapFunctionOperationRaw raw) {
-		
-		
+
+
 	}
 
 	@Override
 	public void saveTable(SapFunctionOperationRaw raw)
-			throws EntityNotFoundException {
+	throws EntityNotFoundException {
 		SapTable entity  = sapTableRepository.findById(raw.getSapTableId());
 		entity.setName(raw.getSapTableName());		
-		
+
 	}
 
 	@Override
 	public void addSapTableField(SapFunctionOperationRaw raw)
-			throws EntityNotFoundException {
+	throws EntityNotFoundException {
 		SapTable table = sapTableRepository.findById(raw.getSapTableId());
-		clearTableRows(table);
+		table.getSapRows().clear();
 		SapTableField f = new SapTableField();
 		f.setName(raw.getSapTabelFieldName());
 		table.addField(f);
+		for(SapRow row:table.getSapRows()){
+			removeSapRow(row);
+		}		
+		table.getSapRows().clear();
 	}
 
-	private void clearTableRows(SapTable table) {
-		for(SapRow r: table.getSapRows()){
-			table.removeRow(r);
-			sapRowRepository.remove(r);
+	private void removeSapRow(SapRow sapRow){
+		for(SapParameter attribute: sapRow.getAttributes()){
+			sapParameterRepository.remove(attribute);
 		}
+		sapRow.getAttributes().clear();
+		sapRowRepository.remove(sapRow);
 	}
 
 	@Override
 	public void removeSapTableField(SapFunctionOperationRaw raw)
-			throws EntityNotFoundException {
+	throws EntityNotFoundException {
 		SapTableField f = sapTableFieldRepository.findById(raw.getSapTableFieldId());
 		SapTable table = sapTableRepository.findById(raw.getSapTableId());
-		clearTableRows(table);
 		table.removeField(f);
 		sapTableFieldRepository.remove(f);
+		
+		for(SapRow row:table.getSapRows()){
+			removeSapRow(row);
+		}		
+		table.getSapRows().clear();
 	}
 
 }

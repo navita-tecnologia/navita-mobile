@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.view;
+package br.com.navita.mobile.console.view.operation;
 
 import br.com.navita.mobile.console.domain.entity.Operation;
 

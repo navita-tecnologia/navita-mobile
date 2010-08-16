@@ -6,6 +6,7 @@
 <br clear="all" />
 <div class="contentArea">
 <@s.actionmessage/>
+<@s.actionerror/>
 	<div class="content" id="contentFull">
 				<b class="bt"><b></b></b>
 				<div class="body">
@@ -20,6 +21,7 @@
 				
 				<@s.form action="${operationaction}!${act}.action">
 		            <@s.hidden name="id" value="${operation.id}"/>
+		            <@s.hidden name="operationType" value="${operation.class.simpleName}"/>
 		            <@s.hidden name="connectorId" value="${operation.connector.id}"/>
 					<table class="gridContent">						
 							<tr valign="middle" >

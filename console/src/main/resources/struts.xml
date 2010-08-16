@@ -11,6 +11,14 @@
 	<include file="struts-default.xml" />
 
 	<package name="default" extends="struts-default" namespace="/">
+		<global-results>
+			<result name="error" type="freemarker">/WEB-INF/view/error.ftl</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="error" exception="java.lang.Throwable">
+			</exception-mapping>
+		</global-exception-mappings>
+
 		<action name="login" class="br.com.navita.mobile.console.view.IndexAction">
 			<result name="success" type="freemarker">/WEB-INF/view/login.ftl
 			</result>
@@ -52,71 +60,94 @@
 		</action>
 
 		<action name="connectors"
-			class="br.com.navita.mobile.console.view.ConnectorsAction" >
-			<result name="success" type="freemarker">/WEB-INF/view/connectors.ftl</result>			
-			<result name="input" type="freemarker">/WEB-INF/view/connectors-add.ftl</result>	
-			<result name="StaticConnector" type="freemarker">/WEB-INF/view/connectors/static-connector.ftl</result>
-			<result name="SapConnector" type="freemarker">/WEB-INF/view/connectors/sap-connector.ftl</result>
-			<result name="DataSourceConnector" type="freemarker">/WEB-INF/view/connectors/datasource-connector.ftl</result>
-			<result name="ProxyConnector" type="freemarker">/WEB-INF/view/connectors/proxy-connector.ftl</result>
-			<result name="WebServiceConnector" type="freemarker">/WEB-INF/view/connectors/webservice-connector.ftl</result>
-			<result name="EjbConnector" type="freemarker">/WEB-INF/view/connectors/ejb-connector.ftl</result>				
+			class="br.com.navita.mobile.console.view.connector.ConnectorsAction">
+			<result name="success" type="freemarker">/WEB-INF/view/connectors.ftl
+			</result>
+			<result name="input" type="freemarker">/WEB-INF/view/connectors-add.ftl</result>
+			<result name="StaticConnector" type="freemarker">/WEB-INF/view/connectors/static-connector.ftl
+			</result>
+			<result name="SapConnector" type="freemarker">/WEB-INF/view/connectors/sap-connector.ftl
+			</result>
+			<result name="DataSourceConnector" type="freemarker">/WEB-INF/view/connectors/datasource-connector.ftl
+			</result>
+			<result name="ProxyConnector" type="freemarker">/WEB-INF/view/connectors/proxy-connector.ftl
+			</result>
+			<result name="WebServiceConnector" type="freemarker">/WEB-INF/view/connectors/webservice-connector.ftl
+			</result>
+			<result name="EjbConnector" type="freemarker">/WEB-INF/view/connectors/ejb-connector.ftl
+			</result>
 		</action>
 		<action name="staticconnector"
-			class="br.com.navita.mobile.console.view.StaticConnectorAction" >
-			<result name="StaticConnector" type="freemarker">/WEB-INF/view/connectors/static-connector.ftl</result>
+			class="br.com.navita.mobile.console.view.connector.StaticConnectorAction">
+			<result name="StaticConnector" type="freemarker">/WEB-INF/view/connectors/static-connector.ftl</result>			
 		</action>
 		<action name="datasourceconnector"
-			class="br.com.navita.mobile.console.view.DataSourceConnectorAction" >
+			class="br.com.navita.mobile.console.view.connector.DataSourceConnectorAction">
 			<result name="DataSourceConnector" type="freemarker">/WEB-INF/view/connectors/datasource-connector.ftl</result>
+			
 		</action>
 		<action name="sapconnector"
-			class="br.com.navita.mobile.console.view.SapConnectorAction" >
-			<result name="SapConnector" type="freemarker">/WEB-INF/view/connectors/sap-connector.ftl</result>
+			class="br.com.navita.mobile.console.view.connector.SapConnectorAction">
+			<result name="SapConnector" type="freemarker">/WEB-INF/view/connectors/sap-connector.ftl
+			</result>
+			
 		</action>
 		<action name="proxyconnector"
-			class="br.com.navita.mobile.console.view.ProxyConnectorAction" >
-			<result name="ProxyConnector" type="freemarker">/WEB-INF/view/connectors/proxy-connector.ftl</result>
+			class="br.com.navita.mobile.console.view.connector.ProxyConnectorAction">
+			<result name="ProxyConnector" type="freemarker">/WEB-INF/view/connectors/proxy-connector.ftl
+			</result>
+			
 		</action>
 		<action name="webserviceconnector"
-			class="br.com.navita.mobile.console.view.WebServiceConnectorAction" >
-			<result name="WebServiceConnector" type="freemarker">/WEB-INF/view/connectors/webservice-connector.ftl</result>
+			class="br.com.navita.mobile.console.view.connector.WebServiceConnectorAction">
+			<result name="WebServiceConnector" type="freemarker">/WEB-INF/view/connectors/webservice-connector.ftl
+			</result>
+			
 		</action>
 		<action name="ejbconnector"
-			class="br.com.navita.mobile.console.view.EjbConnectorAction" >
-			<result name="EjbConnector" type="freemarker">/WEB-INF/view/connectors/ejb-connector.ftl</result>
+			class="br.com.navita.mobile.console.view.connector.EjbConnectorAction">
+			<result name="EjbConnector" type="freemarker">/WEB-INF/view/connectors/ejb-connector.ftl
+			</result>
+			
 		</action>
-		
-		
-		
+
+
+
 		<action name="operations"
-			class="br.com.navita.mobile.console.view.OperationsAction" >
-			<result name="StaticOperation" type="freemarker">/WEB-INF/view/operations/static-operation.ftl</result>
-			<result name="SapFunctionOperation" type="freemarker">/WEB-INF/view/operations/sap-operation.ftl</result>
-			<result name="DataSourceQueryOperation" type="freemarker">/WEB-INF/view/operations/datasource-operation.ftl</result>			
+			class="br.com.navita.mobile.console.view.operation.OperationsAction">
+			<result name="StaticOperation" type="freemarker">/WEB-INF/view/operations/static-operation.ftl
+			</result>
+			<result name="SapFunctionOperation" type="freemarker">/WEB-INF/view/operations/sap-operation.ftl
+			</result>
+			<result name="DataSourceQueryOperation" type="freemarker">/WEB-INF/view/operations/datasource-operation.ftl
+			</result>
 		</action>
 		<action name="staticoperation"
-			class="br.com.navita.mobile.console.view.StaticOperationAction" >
-			<result name="StaticOperation" type="freemarker">/WEB-INF/view/operations/static-operation.ftl</result>						
+			class="br.com.navita.mobile.console.view.operation.StaticOperationAction">
+			<result name="StaticOperation" type="freemarker">/WEB-INF/view/operations/static-operation.ftl
+			</result>
 		</action>
 		<action name="sapfunctionoperation"
-			class="br.com.navita.mobile.console.view.SapFunctionOperationAction" >
-			<result name="SapFunctionOperation" type="freemarker">/WEB-INF/view/operations/sap-operation.ftl</result>						
+			class="br.com.navita.mobile.console.view.operation.SapFunctionOperationAction">
+			<result name="SapFunctionOperation" type="freemarker">/WEB-INF/view/operations/sap-operation.ftl
+			</result>
 		</action>
-		
-		<action name="saptable" class="br.com.navita.mobile.console.view.SapTableAction">
-		<result name="input" type="freemarker">/WEB-INF/view/operations/sap-table.ftl</result>
+
+		<action name="saptable" class="br.com.navita.mobile.console.view.operation.SapTableAction">
+			<result name="input" type="freemarker">/WEB-INF/view/operations/sap-table.ftl
+			</result>
 		</action>
-		
+
 		<action name="datasourcequeryoperation"
-			class="br.com.navita.mobile.console.view.DataSourceQueryOperationAction" >
-			<result name="DataSourceQueryOperation" type="freemarker">/WEB-INF/view/operations/datasource-operation.ftl</result>						
+			class="br.com.navita.mobile.console.view.operation.DataSourceQueryOperationAction">
+			<result name="DataSourceQueryOperation" type="freemarker">/WEB-INF/view/operations/datasource-operation.ftl
+			</result>
 		</action>
-		
-		
-		
-		
-		
+
+
+
+
+
 		<action name="domains" class="br.com.navita.mobile.console.view.DomainsAction">
 			<result name="success" type="freemarker">/WEB-INF/view/domains.ftl</result>
 			<result name="input" type="freemarker">/WEB-INF/view/domainsEdit.ftl

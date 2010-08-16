@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.view;
+package br.com.navita.mobile.console.view.connector;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import br.com.navita.mobile.console.domain.entity.Operation;
 import br.com.navita.mobile.console.service.BaseConnectorService;
 import br.com.navita.mobile.console.service.BaseOperationService;
 import br.com.navita.mobile.console.service.LicenseService;
+import br.com.navita.mobile.console.view.RawActionSupport;
 import br.com.navita.mobile.console.view.rawdata.ConnectorRaw;
 
 public abstract class ConnectorRawActionSupport extends RawActionSupport implements ConnectorRaw{

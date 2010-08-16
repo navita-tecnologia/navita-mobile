@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class SapParameter extends BaseEntity {
+public class SapParameter extends BaseEntity implements Comparable<SapParameter>{
 
 		
 	@Column(nullable = false)
@@ -16,6 +16,11 @@ public class SapParameter extends BaseEntity {
 	
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	@Override
+	public int compareTo(SapParameter o) {
+		return this.getName().compareTo(o.getName());
 	}
 
 	

@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.view;
+package br.com.navita.mobile.console.view.connector;
 
 import java.util.List;
 
@@ -54,5 +54,9 @@ public class ConnectorsAction extends ConnectorRawActionSupport {
 		connector = (Connector) Class.forName("br.com.navita.mobile.console.domain.entity."+type).newInstance();
 		return type;
 	}
+
+	
+	
+	
 	
 }

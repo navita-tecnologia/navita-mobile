@@ -919,5 +919,8 @@ b.bb b {
 	cursor: hand;
 }
 
-
 */
+
+
+.errorMessage{color: red;}
+.actionMessage{color: green;}

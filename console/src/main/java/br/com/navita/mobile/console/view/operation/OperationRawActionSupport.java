@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.view;
+package br.com.navita.mobile.console.view.operation;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import br.com.navita.mobile.console.service.BaseConnectorService;
 import br.com.navita.mobile.console.service.BaseOperationService;
 import br.com.navita.mobile.console.service.LicenseService;
 import br.com.navita.mobile.console.service.OperationService;
+import br.com.navita.mobile.console.view.RawActionSupport;
 import br.com.navita.mobile.console.view.rawdata.OperationRaw;
 
 public abstract class OperationRawActionSupport extends RawActionSupport implements OperationRaw {

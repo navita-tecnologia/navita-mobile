@@ -16,7 +16,7 @@ import javax.persistence.OrderBy;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Connector extends BaseEntity {
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)	
 	private String tag;
 	
 	@Column(nullable = false)

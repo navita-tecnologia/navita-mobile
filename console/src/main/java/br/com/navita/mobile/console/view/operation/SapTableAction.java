@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.view;
+package br.com.navita.mobile.console.view.operation;
 
 import java.util.ArrayList;
 import java.util.List;

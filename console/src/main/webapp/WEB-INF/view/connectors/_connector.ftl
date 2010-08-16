@@ -5,6 +5,7 @@
 <br clear="all" />
 <div class="contentArea">
 <@s.actionmessage/>
+<@s.actionerror/>
 	<div class="content" id="contentFull">
 				<b class="bt"><b></b></b>
 				<div class="body">
@@ -19,6 +20,7 @@
 				
 				<@s.form action="${connectoraction}!${act}.action">
 		            <@s.hidden name="id" value="${connector.id}"/>
+		            <@s.hidden name="type" value="${connector.class.simpleName}"/>
 					<table class="gridContent">						
 							<tr valign="middle" >
 								<td width="150">Nome</td>

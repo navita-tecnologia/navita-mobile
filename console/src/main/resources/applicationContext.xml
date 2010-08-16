@@ -74,15 +74,9 @@
 	</bean>
 
 
-	<bean id="connectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO">
-		<constructor-arg
-			value="br.com.navita.mobile.console.domain.entity.Connector" />
-	</bean>
+	<bean id="connectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.ConnectorDAO"></bean>
 
-	<bean id="operationRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO">
-		<constructor-arg
-			value="br.com.navita.mobile.console.domain.entity.Operation" />
-	</bean>
+	<bean id="operationRepository" class="br.com.navita.mobile.console.dao.jpa.impl.GenericOperationDAO" />
 
 	<bean id="staticConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
 		lazy-init="true">

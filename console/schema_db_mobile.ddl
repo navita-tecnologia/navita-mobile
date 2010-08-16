@@ -172,7 +172,7 @@
         name varchar(255) not null,
         enabled smallint not null,
         licenseKey varchar(255) not null,
-        tag varchar(255) not null,
+        tag varchar(255) not null unique,
         authContainer_id varchar(32),
         tokenConnector_id varchar(32),
         licenseBundle_id varchar(32),
@@ -231,8 +231,8 @@
         name varchar(255) not null,
         licenseKey varchar(255),
         tag varchar(255),
-        connector_id varchar(32),
         licenseBundle_id varchar(32),
+        connector_id varchar(32),
         primary key (id)
     );
 

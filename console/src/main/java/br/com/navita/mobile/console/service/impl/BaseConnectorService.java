@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.navita.mobile.console.dao.jpa.GenericRepository;
+import br.com.navita.mobile.console.dao.jpa.ConnectorRepository;
 import br.com.navita.mobile.console.domain.entity.AuthContainer;
 import br.com.navita.mobile.console.domain.entity.Connector;
 import br.com.navita.mobile.console.domain.entity.LicenseBundle;
@@ -16,8 +16,8 @@ import br.com.navita.mobile.console.view.rawdata.ConnectorRaw;
 @Transactional
 public class BaseConnectorService  implements br.com.navita.mobile.console.service.BaseConnectorService<Connector>{
 	
-	private GenericRepository<Connector> connectorRepository;
-	
+	private ConnectorRepository<Connector> connectorRepository;
+		
 	protected LicenseService licenseService;	
 	protected AuthContainerService authContainerService;
 	
@@ -31,7 +31,7 @@ public class BaseConnectorService  implements br.com.navita.mobile.console.servi
 	}
 	
 	public void setConnectorRepository(
-			GenericRepository<Connector> connectorRepository) {
+			ConnectorRepository<Connector> connectorRepository) {
 		this.connectorRepository = connectorRepository;
 	}
 
@@ -68,7 +68,17 @@ public class BaseConnectorService  implements br.com.navita.mobile.console.servi
 			Connector tokenConnector = findById(raw.getTokenConnectorId());
 			connector.setTokenConnector(tokenConnector);
 		}
+	}
 
+	@Override
+	public boolean isTagUnique(String tag)	throws EntityNotFoundException {		
+		return connectorRepository.findByTag(tag) == null ;
+	}
+
+	@Override
+	public boolean isTagUniqueForId(String tag, String id)	throws EntityNotFoundException {		
+		Connector connector =  connectorRepository.findByTag(tag);		
+		return connector == null || id.equals( connector.getId());
 	}
 
 }

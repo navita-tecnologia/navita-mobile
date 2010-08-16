@@ -2,7 +2,7 @@ package br.com.navita.mobile.console.service.impl;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.navita.mobile.console.dao.jpa.GenericRepository;
+import br.com.navita.mobile.console.dao.jpa.OperationRepository;
 import br.com.navita.mobile.console.domain.entity.Connector;
 import br.com.navita.mobile.console.domain.entity.LicenseBundle;
 import br.com.navita.mobile.console.domain.entity.Operation;
@@ -14,7 +14,7 @@ import br.com.navita.mobile.console.view.rawdata.OperationRaw;
 @Transactional
 public class BaseOperationService implements br.com.navita.mobile.console.service.BaseOperationService<Operation>{
 
-	protected GenericRepository<Operation> operationRepository;
+	protected OperationRepository<Operation> operationRepository;
 	protected LicenseService licenseService;
 	protected BaseConnectorService<Connector> baseConnectorService;
 	public void setBaseConnectorService(
@@ -23,7 +23,7 @@ public class BaseOperationService implements br.com.navita.mobile.console.servic
 	}
 
 	public void setOperationRepository(
-			GenericRepository<Operation> operationRepository) {
+			OperationRepository<Operation> operationRepository) {
 		this.operationRepository = operationRepository;
 	}
 
@@ -54,6 +54,20 @@ public class BaseOperationService implements br.com.navita.mobile.console.servic
 		Operation op = operationRepository.findById(id);
 		operationRepository.remove(op);
 		
+	}
+
+	@Override
+	public boolean isTagUniqueForConnector(String tag, String connectorId) throws EntityNotFoundException {
+		
+		return operationRepository.findByTagAndConnectorId(tag,connectorId) == null;
+	}
+
+	@Override
+	public boolean isTagUniqueForIdAndConnector(String tag, String operationId,
+			String connectorId) throws EntityNotFoundException {
+		Operation operation = operationRepository.findByTagAndConnectorId(tag,connectorId);
+		
+		return operation == null || operation.getId().equals(operationId);
 	}
 
 

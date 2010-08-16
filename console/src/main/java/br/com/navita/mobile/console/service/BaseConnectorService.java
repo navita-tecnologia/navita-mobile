@@ -10,6 +10,8 @@ public interface BaseConnectorService<T extends Connector> {
 	List<T> listAll();
 	T findById(String id) throws EntityNotFoundException;
 	void remove(String id)throws EntityNotFoundException;
+	boolean isTagUnique(String tag)throws EntityNotFoundException;
+	boolean isTagUniqueForId(String tag,String id)throws EntityNotFoundException;
 	
 
 }

@@ -1,12 +1,12 @@
 package br.com.navita.mobile.console.domain.entity;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 @Entity
 public class SapTable extends BaseEntity {
@@ -17,11 +17,12 @@ public class SapTable extends BaseEntity {
 	private Set<SapRow> sapRows;
 	
 	@OneToMany(cascade = CascadeType.ALL)
+	@OrderBy("name")
 	private Set<SapTableField> fieldNames;
 	
 	public SapTable() {
-		sapRows = Collections.synchronizedSet( new HashSet<SapRow>() );
-		fieldNames = new HashSet<SapTableField>();
+		sapRows =  new TreeSet<SapRow>() ;
+		fieldNames = new TreeSet<SapTableField>();
 	}
 	
 	public void addRow(SapRow row){
