@@ -395,7 +395,7 @@
 									<packageName>br.com.navita.mobile.ws.client</packageName>
 									<sourceDestDir>./src/main/java</sourceDestDir>
 									<wsdlUrls>
-										<wsdlUrl>http://127.0.0.1:8889/navita-mobile-sample-app/ws?wsdl</wsdlUrl>
+										<wsdlUrl>http://127.0.0.1:80/navita-mobile-sample-app/ws?wsdl</wsdlUrl>
 									</wsdlUrls>
 									<extension>true</extension>
 								</configuration>
@@ -407,6 +407,7 @@
 			</build>
 		</profile>
 		<profile>
+		<!--  mvn generate-sources jaxws:wsimport -Ppushwsgen -->
 			<id>pushwsgen</id>
 			<build>
 				<plugins>
@@ -424,9 +425,10 @@
 									<packageName>br.com.navita.mobile.push.ws.client</packageName>
 									<sourceDestDir>./src/main/java</sourceDestDir>
 									<wsdlUrls>
-										<wsdlUrl>http://192.168.10.104:8888/mobile-console/push-ws?wsdl</wsdlUrl>
+										<wsdlUrl>http://192.168.10.105:80/mobile-console/push-ws?wsdl</wsdlUrl>
 									</wsdlUrls>
 									<extension>true</extension>
+									<verbose>true</verbose>
 								</configuration>
 							</execution>
 						</executions>
