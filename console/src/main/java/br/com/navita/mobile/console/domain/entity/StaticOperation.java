@@ -1,9 +1,15 @@
 package br.com.navita.mobile.console.domain.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import br.com.navita.mobile.domain.MobileBean;
 
@@ -66,8 +72,32 @@ public class StaticOperation extends Operation {
 	}
 	
 	@Override
-	public MobileBean process(Map<?, ?> params) {		
-		return new MobileBean();
+	public MobileBean process(Map<?, ?> params) throws JSONException {
+		MobileBean bean = new MobileBean();
+		
+		bean.setMessage(message);
+		bean.setToken(token);
+		bean.setResultCode(resultCode);
+		
+		bean.setList(null);
+		if(object != null && ! object.isEmpty()){
+			JSONObject obj = new JSONObject(object);
+			bean.setObject(obj.toString());
+		}
+		
+		if(list != null){
+			JSONArray array = new JSONArray(list);
+			List<Object> listArray = new ArrayList<Object>();
+			bean.setList(listArray);
+			for(int i = 0;i<array.length();i++){
+				listArray.add(array.get(i));
+			}
+			bean.setList(listArray);
+		}
+		
+		
+		
+		return bean;
 	}
 	
 }

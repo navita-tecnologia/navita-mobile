@@ -70,6 +70,13 @@
 								</td>	
 							</tr>
 							</#if>
+							<#if  ! connector.operationType?exists>
+							<tr valign="middle">								
+								<td>&nbsp;</td>
+								<td align="left"><input style="width: 150px;" type="button" value="Testar" onclick="testOperation()"/>
+									&nbsp; <input type="text" value="" style="width: 150px;" name="operationTagTest" id="operationTagTest"/></td>
+							</tr>
+							</#if>
 					</table></@s.form>			
 
 			<script>
@@ -78,6 +85,22 @@
 					window.location='<@s.url action="connectors!removeOperation.action" includeParams="none"/>?operationId='+id+'&id=${connector.id}'	
 				}
 			}
+			
+			function testOperation(){
+				var oper = document.getElementById('operationTagTest').value;
+				if(oper == null || oper == ''){
+					alert('Digite uma operação a ser testada');
+					document.getElementById('operationTagTest').focus();
+					return;
+				}
+				
+				var url = 'processor.action?retType=json&connectorTag=${connector.tag!}&operationTag=' + oper + 
+				'&pin=2100000a&device=8520&carrier=Vivo&email=dummie@machine.foo&brand=RIM';
+				
+				window.open(url);
+				
+			}
+			
 		</script>
 
 	</div>

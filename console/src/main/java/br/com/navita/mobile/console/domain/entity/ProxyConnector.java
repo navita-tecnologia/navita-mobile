@@ -1,7 +1,11 @@
 package br.com.navita.mobile.console.domain.entity;
 
+import java.util.Map;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
+import br.com.navita.mobile.domain.MobileBean;
 
 @Entity
 public class ProxyConnector extends Connector {
@@ -26,8 +30,17 @@ public class ProxyConnector extends Connector {
 	}
 
 	@Override
-	public Operation createDynamicOperation(String operationTag) {
-		// TODO Auto-generated method stub
-		return null;
+	public Operation createDynamicOperation(String operationTag) {		
+		return new ProxyOperation();
+	}
+	
+	class ProxyOperation extends Operation{
+
+		@Override
+		public MobileBean process(Map<?, ?> params) throws Exception {
+			
+			return null;
+		}
+		
 	}
 }
