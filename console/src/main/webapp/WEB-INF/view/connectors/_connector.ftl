@@ -59,7 +59,7 @@
 									<tr <#if stat.odd>class="active"</#if>>
 										<td><a href='operations!edit.action?id=${oper.id}'>${oper.name}</a></td>
 										<td>${oper.tag!}</td>	
-										<td><a target="_blank"  href="processor.action?connector=${connector.tag!}&operation=${oper.tag!}&pin=2100000a&device=8520&carrier=Vivo&email=dummie@machine.foo&brand=RIM"><img src="images/drop-yes.gif" alt="Testar Operação" border="0" /></a></td>									
+										<td><a target="_blank"  href="processor.action?retType=json&connectorTag=${connector.tag!}&operationTag=${oper.tag!}&pin=2100000a&device=8520&carrier=Vivo&email=dummie@machine.foo&brand=RIM"><img src="images/drop-yes.gif" alt="Testar Operação" border="0" /></a></td>									
 										<td><a href="#" onclick='removeOperation("${oper.name}","${oper.id}")'><img src="images/close.gif" alt="Remover Operação" border="0" /></a></td>
 									</tr>
 								</@s.iterator>

@@ -1,5 +1,7 @@
 package br.com.navita.mobile.console.domain.entity;
 
+import java.util.Map;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -7,6 +9,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import br.com.navita.mobile.domain.MobileBean;
 
 @Entity
 @Table(uniqueConstraints=@UniqueConstraint(columnNames={"id","tag"}))
@@ -53,5 +57,7 @@ public abstract class Operation extends BaseEntity {
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
+
+	public abstract MobileBean process(Map<?, ?> params) throws Exception;
 	
 }

@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.sap;
+package br.com.navita.mobile.console.processor.sap;
 
 import java.util.Properties;
 import java.util.UUID;

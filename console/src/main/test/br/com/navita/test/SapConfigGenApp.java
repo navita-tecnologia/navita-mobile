@@ -3,10 +3,10 @@ package br.com.navita.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.navita.mobile.console.sap.SapExecutionConfig;
-import br.com.navita.mobile.console.sap.wrap.SapParameter;
-import br.com.navita.mobile.console.sap.wrap.SapRow;
-import br.com.navita.mobile.console.sap.wrap.SapTable;
+import br.com.navita.mobile.console.processor.sap.SapExecutionConfig;
+import br.com.navita.mobile.console.processor.sap.wrap.SapParameter;
+import br.com.navita.mobile.console.processor.sap.wrap.SapRow;
+import br.com.navita.mobile.console.processor.sap.wrap.SapTable;
 
 import com.thoughtworks.xstream.XStream;
 

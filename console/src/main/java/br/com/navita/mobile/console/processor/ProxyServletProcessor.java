@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.proxy;
+package br.com.navita.mobile.console.processor;
 
 import java.util.ArrayList;
 import java.util.List;

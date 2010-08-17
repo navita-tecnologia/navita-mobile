@@ -81,4 +81,9 @@ public class BaseConnectorService  implements br.com.navita.mobile.console.servi
 		return connector == null || id.equals( connector.getId());
 	}
 
+	@Override
+	public Connector findByTag(String connectorTag) {		
+		return connectorRepository.findByTag(connectorTag);
+	}
+
 }

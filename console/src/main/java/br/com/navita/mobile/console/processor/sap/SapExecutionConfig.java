@@ -1,10 +1,10 @@
-package br.com.navita.mobile.console.sap;
+package br.com.navita.mobile.console.processor.sap;
 
 import java.io.Serializable;
 import java.util.List;
 
-import br.com.navita.mobile.console.sap.wrap.SapParameter;
-import br.com.navita.mobile.console.sap.wrap.SapTable;
+import br.com.navita.mobile.console.processor.sap.wrap.SapParameter;
+import br.com.navita.mobile.console.processor.sap.wrap.SapTable;
 
 
 public class SapExecutionConfig implements Serializable {

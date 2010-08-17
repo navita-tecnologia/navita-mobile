@@ -12,6 +12,7 @@ public interface BaseConnectorService<T extends Connector> {
 	void remove(String id)throws EntityNotFoundException;
 	boolean isTagUnique(String tag)throws EntityNotFoundException;
 	boolean isTagUniqueForId(String tag,String id)throws EntityNotFoundException;
+	T findByTag(String connectorTag);
 	
 
 }

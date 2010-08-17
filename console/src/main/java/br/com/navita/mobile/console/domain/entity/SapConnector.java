@@ -56,6 +56,11 @@ public class SapConnector extends Connector {
 		
 		return SapFunctionOperation.class;
 	}
+
+	@Override
+	public Operation createDynamicOperation(String operationTag) {		
+		return null;
+	}
 	
 	
 	

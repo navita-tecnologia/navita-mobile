@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.remote;
+package br.com.navita.mobile.console.processor;
 
 import java.security.Permission;
 import java.util.Map;

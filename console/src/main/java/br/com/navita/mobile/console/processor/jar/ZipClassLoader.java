@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.jar;
+package br.com.navita.mobile.console.processor.jar;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

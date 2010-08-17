@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.sap;
+package br.com.navita.mobile.console.processor.sap;
 
 import java.util.Map;
 import java.util.logging.Level;
@@ -10,9 +10,9 @@ import br.com.navita.mobile.console.domain.MobileApplicationExecutor;
 import br.com.navita.mobile.domain.MobileBean;
 import br.com.navita.mobile.console.exception.OperationNotFoundException;
 import br.com.navita.mobile.console.exception.SapGatewayException;
-import br.com.navita.mobile.console.sap.wrap.SapParameter;
-import br.com.navita.mobile.console.sap.wrap.SapRow;
-import br.com.navita.mobile.console.sap.wrap.SapTable;
+import br.com.navita.mobile.console.processor.sap.wrap.SapParameter;
+import br.com.navita.mobile.console.processor.sap.wrap.SapRow;
+import br.com.navita.mobile.console.processor.sap.wrap.SapTable;
 
 import com.thoughtworks.xstream.XStream;
 

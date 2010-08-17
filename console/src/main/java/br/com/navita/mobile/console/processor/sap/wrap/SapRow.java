@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.sap.wrap;
+package br.com.navita.mobile.console.processor.sap.wrap;
 
 import java.util.ArrayList;
 import java.util.HashMap;

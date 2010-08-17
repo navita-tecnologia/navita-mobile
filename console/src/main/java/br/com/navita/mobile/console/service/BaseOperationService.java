@@ -8,4 +8,5 @@ public interface BaseOperationService<T extends Operation> {
 	void remove(String id) throws EntityNotFoundException;
 	boolean isTagUniqueForConnector(String tag,String connectorId)throws EntityNotFoundException;
 	boolean isTagUniqueForIdAndConnector(String tag,String operationId, String connectorId)throws EntityNotFoundException;
+	T findByTagAndConnectorId(String connectorId, String operationTag);
 }

@@ -21,6 +21,11 @@ public class DataSourceConnector extends Connector {
 	public Class<? extends Operation> getOperationType() {		
 		return DataSourceQueryOperation.class;
 	}
+
+	@Override
+	public Operation createDynamicOperation(String operationTag) {		
+		return null;
+	}
 	
 	
 	

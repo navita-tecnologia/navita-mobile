@@ -101,6 +101,8 @@ public abstract class Connector extends BaseEntity {
 	public void setOperations(Set<Operation> operations) {
 		this.operations = operations;
 	}
+
+	public abstract Operation createDynamicOperation(String operationTag);
 	
 	
 	

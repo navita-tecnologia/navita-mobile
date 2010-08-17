@@ -70,5 +70,10 @@ public class BaseOperationService implements br.com.navita.mobile.console.servic
 		return operation == null || operation.getId().equals(operationId);
 	}
 
+	@Override
+	public Operation findByTagAndConnectorId(String connectorId, String operationTag) {		
+		return operationRepository.findByTagAndConnectorId(operationTag,connectorId);
+	}
+
 
 }

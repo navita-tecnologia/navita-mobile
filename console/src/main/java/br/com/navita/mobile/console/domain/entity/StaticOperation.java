@@ -1,7 +1,11 @@
 package br.com.navita.mobile.console.domain.entity;
 
+import java.util.Map;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
+import br.com.navita.mobile.domain.MobileBean;
 
 @Entity
 public class StaticOperation extends Operation {
@@ -61,5 +65,9 @@ public class StaticOperation extends Operation {
 		this.token = token;
 	}
 	
+	@Override
+	public MobileBean process(Map<?, ?> params) {		
+		return new MobileBean();
+	}
 	
 }
