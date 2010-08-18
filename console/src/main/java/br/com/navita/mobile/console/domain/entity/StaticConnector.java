@@ -11,9 +11,6 @@ public class StaticConnector extends Connector {
 		return StaticOperation.class;
 	}
 
-	@Override
-	public Operation createDynamicOperation(String operationTag) {		
-		return null;
-	}
+	
 
 }

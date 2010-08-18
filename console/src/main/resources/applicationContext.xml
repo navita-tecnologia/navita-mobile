@@ -20,8 +20,7 @@
 
 	<tx:annotation-driven />
 	<ctx:annotation-config />
-	<aop:aspectj-autoproxy />
-
+	<aop:aspectj-autoproxy />	
 
 
 	<!--
@@ -37,17 +36,15 @@
 		<property name="username" value="APP" />
 		<property name="password" value="APP" />
 	</bean>
-	<!-- 
-	<bean id="dataSource"
+	<!--
+		<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="net.sourceforge.jtds.jdbc.Driver" />
-		<property name="url" value="jdbc:jtds:sqlserver://washburn:1433/navita-mobile" />
-		<property name="username" value="sa" />
-		<property name="password" value="navita" />
-	</bean>
-	
-	
-	 -->
+		<property name="driverClassName"
+		value="net.sourceforge.jtds.jdbc.Driver" /> <property name="url"
+		value="jdbc:jtds:sqlserver://washburn:1433/navita-mobile" /> <property
+		name="username" value="sa" /> <property name="password" value="navita"
+		/> </bean>
+	-->
 
 
 	<bean id="mobileEntityManagerFactory"
@@ -73,10 +70,10 @@
 		lazy-init="true">
 	</bean>
 
-
 	<bean id="connectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.ConnectorDAO"></bean>
 
-	<bean id="operationRepository" class="br.com.navita.mobile.console.dao.jpa.impl.GenericOperationDAO" />
+	<bean id="operationRepository"
+		class="br.com.navita.mobile.console.dao.jpa.impl.GenericOperationDAO" />
 
 	<bean id="staticConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
 		lazy-init="true">
@@ -126,12 +123,11 @@
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.entity.SapParameter" />
 	</bean>
-	
-	
+
+
 	<bean id="sapTableRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
 		lazy-init="true">
-		<constructor-arg
-			value="br.com.navita.mobile.console.domain.entity.SapTable" />
+		<constructor-arg value="br.com.navita.mobile.console.domain.entity.SapTable" />
 	</bean>
 	<bean id="sapTableFieldRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
 		lazy-init="true">
@@ -140,8 +136,7 @@
 	</bean>
 	<bean id="sapRowRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
 		lazy-init="true">
-		<constructor-arg
-			value="br.com.navita.mobile.console.domain.entity.SapRow" />
+		<constructor-arg value="br.com.navita.mobile.console.domain.entity.SapRow" />
 	</bean>
 	<!-- end repositories -->
 
@@ -179,38 +174,24 @@
 		class="br.com.navita.mobile.console.service.impl.DataSourceQueryOperationService" />
 
 	<!-- end services -->
-
-	<bean id="commonConfiguration"
-		class="br.com.navita.mobile.console.dao.NavitaMobileConfiguration"
-		init-method="setDelimiterParsingDisabled">
-		<constructor-arg index="0" ref="dataSource"></constructor-arg>
-		<constructor-arg index="1" type="java.lang.String"
-			value="mobileconfig"></constructor-arg>
-		<constructor-arg index="2" type="java.lang.String"
-			value="id"></constructor-arg>
-		<constructor-arg index="3" type="java.lang.String"
-			value="value"></constructor-arg>
-
-	</bean>
-
-	<bean id="ldapService" class="br.com.navita.mobile.console.bizz.LdapServiceImpl" />
-	<bean id="msLoginService" class="br.com.navita.mobile.console.bizz.MSWindowsLoginService" />
-	<bean id="ldapConfigDAO" class="br.com.navita.mobile.console.dao.LdapConfigDAO" />
-	<bean id="dynamicExecutorLookupService"
-		class="br.com.navita.mobile.console.processor.jar.DynamicExecutorLookupServiceImpl" />
-	<bean id="licenseService"
-		class="br.com.navita.mobile.console.service.impl.LicenseServiceImpl" />
-
-	<bean id="sapMobileProcessor" class="br.com.navita.mobile.console.processor.sap.SapMobileProcessor" />
-	<bean id="staticProcessor" class="br.com.navita.mobile.console.processor.StaticProcessor" />
-	<bean id="dsAppProcessor"
-		class="br.com.navita.mobile.console.processor.DataSourceAppProcessor" />
-	<bean id="jdbcAppProcessor" class="br.com.navita.mobile.console.processor.JdbcAppProcessor" />
-	<bean id="deployableProcessor" class="br.com.navita.mobile.console.processor.jar.DeployableProcessor" />
-	<bean id="ejbProcessor" class="br.com.navita.mobile.console.processor.EjbProcessor" />
-	<bean id="genericWsProcessor" class="br.com.navita.mobile.ws.processor.GenericWsProcessor" />
-	<bean id="proxyServletProcessor"
-		class="br.com.navita.mobile.console.processor.ProxyServletProcessor" />
+	
+	
+	<!-- OPERATOR -->
+	
+	<bean id="operator" class="br.com.navita.mobile.console.operator.GenericOperator"/>
+	<bean id="connectorOperator" parent="operator"/>
+	
+	<bean id="dataSourceOperator" class="br.com.navita.mobile.console.operator.DataSourceOperator"/>
+	<bean id="ejbOperator" class="br.com.navita.mobile.console.operator.EjbOperator"/>
+	<bean id="proxyOperator" class="br.com.navita.mobile.console.operator.ProxyOperator"/>
+	<bean id="sapOperator" class="br.com.navita.mobile.console.operator.SapOperator"/>
+	<bean id="staticOperator" class="br.com.navita.mobile.console.operator.StaticOperator"/>
+	<bean id="wsOperator" class="br.com.navita.mobile.console.operator.WsOperator"/>
+	
+	
+	<!-- END OPERATOR -->
+	
+	
 
 	<security:http>
 		<security:intercept-url pattern="/**" access="ROLE_USER" />
@@ -222,7 +203,7 @@
 			filters='none' />
 		<security:intercept-url pattern="/gateway.action*"
 			filters='none' />
-			<security:intercept-url pattern="/processor.action*"
+		<security:intercept-url pattern="/processor.action*"
 			filters='none' />
 		<security:intercept-url pattern="/push*/**"
 			filters='none' />
@@ -253,13 +234,6 @@
 	<bean id="gatewayDispatcher" class="br.com.navita.mobile.console.NavitaMobileDispatcher" />
 
 
-	<!--
-		<security:authentication-provider> <security:password-encoder
-		hash="md5" /> <security:user-service> <security:user name="admin"
-		password="navita" authorities="ROLE_ADMINISTRATOR, ROLE_USER" />
-		</security:user-service> </security:authentication-provider>
-	-->
-
 	<bean id="checkOldSession"
 		class="br.com.navita.mobile.console.listener.MobileSessionTimeoutScheduler"></bean>
 
@@ -279,6 +253,44 @@
 			</list>
 		</property>
 	</bean>
+
+<!-- legacy  -->
+	<bean id="commonConfiguration"
+		class="br.com.navita.mobile.console.dao.NavitaMobileConfiguration"
+		init-method="setDelimiterParsingDisabled">
+		<constructor-arg index="0" ref="dataSource"></constructor-arg>
+		<constructor-arg index="1" type="java.lang.String"
+			value="mobileconfig"></constructor-arg>
+		<constructor-arg index="2" type="java.lang.String"
+			value="id"></constructor-arg>
+		<constructor-arg index="3" type="java.lang.String"
+			value="value"></constructor-arg>
+
+	</bean>
+
+	<bean id="ldapService" class="br.com.navita.mobile.console.bizz.LdapServiceImpl" />
+	<bean id="msLoginService" class="br.com.navita.mobile.console.bizz.MSWindowsLoginService" />
+	<bean id="ldapConfigDAO" class="br.com.navita.mobile.console.dao.LdapConfigDAO" />
+	<bean id="dynamicExecutorLookupService"
+		class="br.com.navita.mobile.console.processor.jar.DynamicExecutorLookupServiceImpl" />
+	<bean id="licenseService"
+		class="br.com.navita.mobile.console.service.impl.LicenseServiceImpl" />
+
+	<bean id="sapMobileProcessor"
+		class="br.com.navita.mobile.console.processor.sap.SapMobileProcessor" />
+	<bean id="staticProcessor" class="br.com.navita.mobile.console.processor.StaticProcessor" />
+	<bean id="dsAppProcessor"
+		class="br.com.navita.mobile.console.processor.DataSourceAppProcessor" />
+	<bean id="jdbcAppProcessor" class="br.com.navita.mobile.console.processor.JdbcAppProcessor" />
+	<bean id="deployableProcessor"
+		class="br.com.navita.mobile.console.processor.jar.DeployableProcessor" />
+	<bean id="ejbProcessor" class="br.com.navita.mobile.console.processor.EjbProcessor" />
+	<bean id="genericWsProcessor" class="br.com.navita.mobile.ws.processor.GenericWsProcessor" />
+	<bean id="proxyServletProcessor"
+		class="br.com.navita.mobile.console.processor.ProxyServletProcessor" />
+
+<!-- end legacy -->
+
 
 	<!-- WS -->
 

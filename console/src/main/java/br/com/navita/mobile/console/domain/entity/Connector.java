@@ -102,7 +102,7 @@ public abstract class Connector extends BaseEntity {
 		this.operations = operations;
 	}
 
-	public abstract Operation createDynamicOperation(String operationTag);
+	
 	
 	
 	

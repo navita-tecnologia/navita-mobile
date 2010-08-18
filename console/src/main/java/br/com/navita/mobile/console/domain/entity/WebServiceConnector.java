@@ -24,9 +24,6 @@ public class WebServiceConnector extends Connector {
 		return null;
 	}
 
-	@Override
-	public Operation createDynamicOperation(String operationTag) {		
-		return null;
-	}
+	
 	
 }

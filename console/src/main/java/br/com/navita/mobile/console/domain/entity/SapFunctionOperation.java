@@ -1,7 +1,6 @@
 package br.com.navita.mobile.console.domain.entity;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,8 +10,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
-
-import br.com.navita.mobile.domain.MobileBean;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -119,8 +116,5 @@ public class SapFunctionOperation extends Operation {
 		inputTables.remove(table);		
 	}
 	
-	@Override
-	public MobileBean process(Map<?, ?> params) {		
-		return new MobileBean();
-	}
+	
 }

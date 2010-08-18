@@ -22,10 +22,6 @@ public class DataSourceConnector extends Connector {
 		return DataSourceQueryOperation.class;
 	}
 
-	@Override
-	public Operation createDynamicOperation(String operationTag) {		
-		return null;
-	}
 	
 	
 	

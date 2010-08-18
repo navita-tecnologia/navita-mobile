@@ -12,6 +12,8 @@ import br.com.navita.mobile.console.domain.entity.Connector;
 import br.com.navita.mobile.console.domain.entity.Operation;
 import br.com.navita.mobile.console.exception.InvalidDeviceDataException;
 import br.com.navita.mobile.console.exception.InvalidLicenseKeyException;
+import br.com.navita.mobile.console.operator.ConnectorOperator;
+import br.com.navita.mobile.console.operator.Operator;
 import br.com.navita.mobile.console.service.BaseConnectorService;
 import br.com.navita.mobile.console.service.BaseOperationService;
 import br.com.navita.mobile.console.view.RawActionSupport;
@@ -37,6 +39,18 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	
 	private BaseConnectorService<Connector> baseConnectorService;
 	private BaseOperationService<Operation> baseOperationService;
+	
+	private ConnectorOperator connectorOperator;
+	private Operator operator;
+	
+	public void setOperator(Operator operator) {
+		this.operator = operator;
+	}
+	
+	public void setConnectorOperator(ConnectorOperator connectorOperator) {
+		this.connectorOperator = connectorOperator;
+	}
+	
 	
 	public void setBaseConnectorService(
 			BaseConnectorService<Connector> baseConnectorService) {
@@ -152,32 +166,33 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public String execute() {		
 		try {
+			MobileBean obj = new MobileBean();
+			
 			prepareAndCheckParameters();
 			Connector connector = baseConnectorService.findByTag(connectorTag);
 			boolean isExternalOperation = connector.getOperationType() == null;
-			Operation operation = null;
+			boolean isConnectorLicenseInUse = isUsingConnectorLicense(connector);
+			
 			if(! isExternalOperation){
+				Operation operation = null;
 				operation = baseOperationService.findByTagAndConnectorId(connector.getId(),operationTag);
+				if(!isConnectorLicenseInUse){
+					checkOperationLicense(operation);
+				}
+				obj = operator.doOperation(operation, (Map<String, Object>) params);
+				
 			}else{
-				operation = connector.createDynamicOperation(operationTag);
+				obj = connectorOperator.doConnectorOperation(connector, (Map<String, Object>) params);
 			}
-			
-			if(! isUsingConnectorLicense(connector)){
-				checkOperationLicense(operation);
-			}
-			
 					
-			MobileBean obj = operation.process(params);	
-			serializeBean(obj);
+			registerLicense(); 	//license use
+			registerAction(); 	//statistics
 			
-			
-			
-			
-			registerLicense();
-			registerAction();
+			serializeBean(obj);	
 			
 		} catch (Throwable t) {
 			serializeBean(failBean(t));			
@@ -211,7 +226,11 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 
 	private MobileBean failBean(Throwable t) {
 		MobileBean bean = new MobileBean();
-		bean.setMessage(t.getMessage());
+		String message = t.getMessage();
+		if(message == null|| message.isEmpty()){
+			message = t.getClass().getName();
+		}
+		bean.setMessage(message);
 		bean.setResultCode(1);
 		return bean;
 	}

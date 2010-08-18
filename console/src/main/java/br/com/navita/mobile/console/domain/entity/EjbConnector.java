@@ -23,11 +23,6 @@ public class EjbConnector extends Connector {
 		return null;
 	}
 
-	@Override
-	public Operation createDynamicOperation(String operationTag) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	
 }
