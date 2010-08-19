@@ -11,17 +11,18 @@ import org.apache.struts2.interceptor.ParameterAware;
 import br.com.navita.mobile.console.domain.entity.Connector;
 import br.com.navita.mobile.console.domain.entity.Operation;
 import br.com.navita.mobile.console.exception.InvalidDeviceDataException;
-import br.com.navita.mobile.console.exception.InvalidLicenseKeyException;
+import br.com.navita.mobile.console.exception.OperationNotFoundException;
 import br.com.navita.mobile.console.operator.ConnectorOperator;
 import br.com.navita.mobile.console.operator.Operator;
 import br.com.navita.mobile.console.service.BaseConnectorService;
 import br.com.navita.mobile.console.service.BaseOperationService;
+import br.com.navita.mobile.console.util.LicenseHelper;
 import br.com.navita.mobile.console.view.RawActionSupport;
 import br.com.navita.mobile.console.view.rawdata.ProcessorRaw;
 import br.com.navita.mobile.domain.MobileBean;
 
 public class ProcessorAction extends RawActionSupport implements ParameterAware, ProcessorRaw{
-	
+
 	private String retType;
 	private String connectorTag;
 	private String operationTag;
@@ -31,42 +32,53 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	private String carrier;
 	private String device;
 	private String brand;
-	
-	
+
+
 	private InputStream inStream;	
 	private Map<?,?> params;
-	
-	
+
+
 	private BaseConnectorService<Connector> baseConnectorService;
 	private BaseOperationService<Operation> baseOperationService;
 	
+	
+	private LicenseHelper licenseHelper;
+
 	private ConnectorOperator connectorOperator;
 	private Operator operator;
+
+
 	
+
+	
+	public void setLicenseHelper(LicenseHelper licenseHelper) {
+		this.licenseHelper = licenseHelper;
+	}
+		
 	public void setOperator(Operator operator) {
 		this.operator = operator;
 	}
-	
+
 	public void setConnectorOperator(ConnectorOperator connectorOperator) {
 		this.connectorOperator = connectorOperator;
 	}
-	
-	
+
+
 	public void setBaseConnectorService(
 			BaseConnectorService<Connector> baseConnectorService) {
 		this.baseConnectorService = baseConnectorService;
 	}
-	
+
 	public void setBaseOperationService(
 			BaseOperationService<Operation> baseOperationService) {
 		this.baseOperationService = baseOperationService;
 	}
-	
+
 	@Override
 	public String getPin() {		
 		return pin;
 	}
-	
+
 	@Override
 	public String getEmail() {
 		return email;
@@ -75,7 +87,7 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	@Override
 	public String getCarrier() {
 		return carrier;
@@ -119,29 +131,29 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	public String getConnectorTag() {		
 		return connectorTag;
 	}
-	
+
 	public void setConnectorTag(String connectorTag) {
 		this.connectorTag = connectorTag;
 	}
-	
+
 	@Override
 	public String getOperationTag() {		
 		return operationTag;
 	}
-	
+
 	public void setOperationTag(String operationTag) {
 		this.operationTag = operationTag;
 	}
-	
+
 	@Override
 	public String getRaw() {		
 		return raw;
 	}
-	
+
 	public void setRaw(String raw) {
 		this.raw = raw;
 	}	
-	
+
 	public InputStream getInStream() {
 		return inStream;
 	}
@@ -164,65 +176,65 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 		this.params = params;
 
 	}
-	
-	
+
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public String execute() {		
 		try {
 			MobileBean obj = new MobileBean();
-			
 			prepareAndCheckParameters();
 			Connector connector = baseConnectorService.findByTag(connectorTag);
 			boolean isExternalOperation = connector.getOperationType() == null;
-			boolean isConnectorLicenseInUse = isUsingConnectorLicense(connector);
-			
+			boolean isConnectorLicenseInUse = licenseHelper.isUsingConnectorLicense(connector);
+			String licenseBundleId = "";
+
 			if(! isExternalOperation){
 				Operation operation = null;
 				operation = baseOperationService.findByTagAndConnectorId(connector.getId(),operationTag);
+				if(operation == null){
+					throw new OperationNotFoundException(operationTag);
+				}
 				if(!isConnectorLicenseInUse){
-					checkOperationLicense(operation);
+					licenseHelper.checkOperationLicense(operation);
+					licenseBundleId = operation.getLicenseBundle().getId();
+				}else{
+					licenseBundleId = connector.getLicenseBundle().getId();
 				}
 				obj = operator.doOperation(operation, (Map<String, Object>) params);
-				
+
 			}else{
 				obj = connectorOperator.doConnectorOperation(connector, (Map<String, Object>) params);
 			}
-					
-			registerLicense(); 	//license use
+
+			licenseHelper.registerLicense(licenseBundleId,this); 	//license use
 			registerAction(); 	//statistics
-			
+
 			serializeBean(obj);	
-			
+
 		} catch (Throwable t) {
 			serializeBean(failBean(t));			
-			
+
 		}
-		
+
 		return retType;
 	}
 
-	
+
 	private void serializeBean(MobileBean bean) {
 		byte[] buff = null;
 		buff = JSONSerializer.toJSON(bean).toString().getBytes();		
 		setInStream(new ByteArrayInputStream(buff));		
 	}
 
-	private void checkOperationLicense(Operation operation)  throws InvalidLicenseKeyException{
-		
-		
-	}
+	
 
 	private void registerAction() {
-		
-		
+
+
 	}
 
-	private void registerLicense() {
-		
-		
-	}
+	
 
 	private MobileBean failBean(Throwable t) {
 		MobileBean bean = new MobileBean();
@@ -234,18 +246,14 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 		bean.setResultCode(1);
 		return bean;
 	}
-
-	private boolean isUsingConnectorLicense(Connector connector)  throws InvalidLicenseKeyException{
-		
-		return true;
-		
-	}
-
 	
+	
+
+
 	private void prepareAndCheckParameters() throws InvalidDeviceDataException {
-		
-		
+
+
 	}
-	
-	
+
+
 }

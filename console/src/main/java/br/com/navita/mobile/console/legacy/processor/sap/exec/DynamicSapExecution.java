@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.processor.sap.exec;
+package br.com.navita.mobile.console.legacy.processor.sap.exec;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,11 +6,11 @@ import java.util.Map;
 
 import br.com.navita.mobile.domain.MobileBean;
 import br.com.navita.mobile.console.exception.SapGatewayException;
-import br.com.navita.mobile.console.processor.sap.PoolManager;
-import br.com.navita.mobile.console.processor.sap.SapExecution;
-import br.com.navita.mobile.console.processor.sap.wrap.SapParameter;
-import br.com.navita.mobile.console.processor.sap.wrap.SapRow;
-import br.com.navita.mobile.console.processor.sap.wrap.SapTable;
+import br.com.navita.mobile.console.legacy.processor.sap.PoolManager;
+import br.com.navita.mobile.console.legacy.processor.sap.SapExecution;
+import br.com.navita.mobile.console.legacy.processor.sap.wrap.SapParameter;
+import br.com.navita.mobile.console.legacy.processor.sap.wrap.SapRow;
+import br.com.navita.mobile.console.legacy.processor.sap.wrap.SapTable;
 
 import com.sap.mw.jco.JCO;
 import com.sap.mw.jco.JCO.Function;

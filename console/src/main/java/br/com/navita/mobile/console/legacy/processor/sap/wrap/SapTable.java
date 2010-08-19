@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.processor.sap.wrap;
+package br.com.navita.mobile.console.legacy.processor.sap.wrap;
 
 import java.io.Serializable;
 import java.util.ArrayList;

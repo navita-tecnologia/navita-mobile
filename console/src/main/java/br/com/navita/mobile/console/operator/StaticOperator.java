@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import br.com.navita.mobile.console.domain.entity.Operation;
 import br.com.navita.mobile.console.domain.entity.StaticOperation;
@@ -19,20 +18,20 @@ public class StaticOperator implements Operator{
 	public MobileBean doOperation(Operation operation, Map<String, Object> params) throws JSONException {
 		MobileBean bean = new MobileBean();
 		StaticOperation staticOperation = (StaticOperation) operation;	
-		JSONObject j = new JSONObject();
-		if(! j.isNull("message")){
+		
+		if(staticOperation.getMessage() != null){
 			bean.setMessage(staticOperation.getMessage());
 		}
-		if(! j.isNull("token")){
+		if(staticOperation.getToken() != null){
 			bean.setToken(staticOperation.getToken());
 		}
-		if(! j.isNull("resultCode")){
-			bean.setResultCode(staticOperation.getResultCode());
-		}
-		if(! j.isNull("object")){
+		
+		bean.setResultCode(staticOperation.getResultCode());
+		
+		if(staticOperation.getObject() != null){
 			bean.setObject(staticOperation.getObject());
 		}
-		if(! j.isNull("list")){
+		if(staticOperation.getList() != null){
 			JSONArray array = new JSONArray(staticOperation.getList());
 			List<Object> list = new ArrayList<Object>();
 			bean.setList(list);

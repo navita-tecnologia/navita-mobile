@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.processor;
+package br.com.navita.mobile.console.legacy.processor;
 import java.util.List;
 import java.util.Map;
 

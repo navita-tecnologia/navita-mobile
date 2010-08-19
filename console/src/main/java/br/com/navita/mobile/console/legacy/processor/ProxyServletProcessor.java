@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.processor;
+package br.com.navita.mobile.console.legacy.processor;
 
 import java.util.ArrayList;
 import java.util.List;

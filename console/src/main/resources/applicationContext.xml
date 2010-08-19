@@ -20,7 +20,7 @@
 
 	<tx:annotation-driven />
 	<ctx:annotation-config />
-	<aop:aspectj-autoproxy />	
+	<aop:aspectj-autoproxy />
 
 
 	<!--
@@ -174,24 +174,25 @@
 		class="br.com.navita.mobile.console.service.impl.DataSourceQueryOperationService" />
 
 	<!-- end services -->
-	
-	
+
+
 	<!-- OPERATOR -->
-	
-	<bean id="operator" class="br.com.navita.mobile.console.operator.GenericOperator"/>
-	<bean id="connectorOperator" parent="operator"/>
-	
-	<bean id="dataSourceOperator" class="br.com.navita.mobile.console.operator.DataSourceOperator"/>
-	<bean id="ejbOperator" class="br.com.navita.mobile.console.operator.EjbOperator"/>
-	<bean id="proxyOperator" class="br.com.navita.mobile.console.operator.ProxyOperator"/>
-	<bean id="sapOperator" class="br.com.navita.mobile.console.operator.SapOperator"/>
-	<bean id="staticOperator" class="br.com.navita.mobile.console.operator.StaticOperator"/>
-	<bean id="wsOperator" class="br.com.navita.mobile.console.operator.WsOperator"/>
-	
-	
+
+	<bean id="operator" class="br.com.navita.mobile.console.operator.GenericOperator" />
+	<bean id="connectorOperator" parent="operator" />
+
+	<bean id="dataSourceOperator"
+		class="br.com.navita.mobile.console.operator.DataSourceOperator" />
+	<bean id="ejbOperator" class="br.com.navita.mobile.console.operator.EjbOperator" />
+	<bean id="proxyOperator" class="br.com.navita.mobile.console.operator.ProxyOperator" />
+	<bean id="sapOperator" class="br.com.navita.mobile.console.operator.SapOperator" />
+	<bean id="staticOperator" class="br.com.navita.mobile.console.operator.StaticOperator" />
+	<bean id="wsOperator" class="br.com.navita.mobile.console.operator.WsOperator" />
+
+
 	<!-- END OPERATOR -->
-	
-	
+
+
 
 	<security:http>
 		<security:intercept-url pattern="/**" access="ROLE_USER" />
@@ -253,8 +254,12 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="licenseHelper" class="br.com.navita.mobile.console.util.LicenseHelper" />
 
-<!-- legacy  -->
+	<bean id="httpClient" class="br.com.navita.mobile.console.util.HttpClientUtil" />
+
+	<!-- legacy  -->
 	<bean id="commonConfiguration"
 		class="br.com.navita.mobile.console.dao.NavitaMobileConfiguration"
 		init-method="setDelimiterParsingDisabled">
@@ -272,24 +277,24 @@
 	<bean id="msLoginService" class="br.com.navita.mobile.console.bizz.MSWindowsLoginService" />
 	<bean id="ldapConfigDAO" class="br.com.navita.mobile.console.dao.LdapConfigDAO" />
 	<bean id="dynamicExecutorLookupService"
-		class="br.com.navita.mobile.console.processor.jar.DynamicExecutorLookupServiceImpl" />
+		class="br.com.navita.mobile.console.legacy.processor.jar.DynamicExecutorLookupServiceImpl" />
 	<bean id="licenseService"
 		class="br.com.navita.mobile.console.service.impl.LicenseServiceImpl" />
 
 	<bean id="sapMobileProcessor"
-		class="br.com.navita.mobile.console.processor.sap.SapMobileProcessor" />
-	<bean id="staticProcessor" class="br.com.navita.mobile.console.processor.StaticProcessor" />
+		class="br.com.navita.mobile.console.legacy.processor.sap.SapMobileProcessor" />
+	<bean id="staticProcessor" class="br.com.navita.mobile.console.legacy.processor.StaticProcessor" />
 	<bean id="dsAppProcessor"
-		class="br.com.navita.mobile.console.processor.DataSourceAppProcessor" />
-	<bean id="jdbcAppProcessor" class="br.com.navita.mobile.console.processor.JdbcAppProcessor" />
+		class="br.com.navita.mobile.console.legacy.processor.DataSourceAppProcessor" />
+	<bean id="jdbcAppProcessor" class="br.com.navita.mobile.console.legacy.processor.JdbcAppProcessor" />
 	<bean id="deployableProcessor"
-		class="br.com.navita.mobile.console.processor.jar.DeployableProcessor" />
-	<bean id="ejbProcessor" class="br.com.navita.mobile.console.processor.EjbProcessor" />
+		class="br.com.navita.mobile.console.legacy.processor.jar.DeployableProcessor" />
+	<bean id="ejbProcessor" class="br.com.navita.mobile.console.legacy.processor.EjbProcessor" />
 	<bean id="genericWsProcessor" class="br.com.navita.mobile.ws.processor.GenericWsProcessor" />
 	<bean id="proxyServletProcessor"
-		class="br.com.navita.mobile.console.processor.ProxyServletProcessor" />
+		class="br.com.navita.mobile.console.legacy.processor.ProxyServletProcessor" />
 
-<!-- end legacy -->
+	<!-- end legacy -->
 
 
 	<!-- WS -->
@@ -305,8 +310,7 @@
 		<property name="lookupServiceOnStartup" value="false" />
 	</bean>
 
-
-	<bean id="httpClient" class="br.com.navita.mobile.console.util.HttpClientUtil" />
+	
 
 
 </beans>

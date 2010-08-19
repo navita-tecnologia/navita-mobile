@@ -1,11 +1,11 @@
-package br.com.navita.mobile.console.processor.sap.exec;
+package br.com.navita.mobile.console.legacy.processor.sap.exec;
 
 import java.util.Map;
 
 import br.com.navita.mobile.domain.MobileBean;
 import br.com.navita.mobile.console.exception.SapGatewayException;
-import br.com.navita.mobile.console.processor.sap.PoolManager;
-import br.com.navita.mobile.console.processor.sap.SapExecution;
+import br.com.navita.mobile.console.legacy.processor.sap.PoolManager;
+import br.com.navita.mobile.console.legacy.processor.sap.SapExecution;
 
 import com.sap.mw.jco.JCO;
 import com.sap.mw.jco.JCO.ParameterList;

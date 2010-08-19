@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.processor.sap;
+package br.com.navita.mobile.console.legacy.processor.sap;
 
 public class SapUrl {
 

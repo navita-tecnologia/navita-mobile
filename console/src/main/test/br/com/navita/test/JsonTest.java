@@ -11,8 +11,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import br.com.navita.mobile.domain.MobileBean;
-import br.com.navita.mobile.console.processor.sap.wrap.SapRow;
-import br.com.navita.mobile.console.processor.sap.wrap.SapTable;
+import br.com.navita.mobile.console.legacy.processor.sap.wrap.SapRow;
+import br.com.navita.mobile.console.legacy.processor.sap.wrap.SapTable;
 
 public class JsonTest {
 

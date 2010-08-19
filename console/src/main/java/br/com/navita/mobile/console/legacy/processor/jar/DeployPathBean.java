@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.processor.jar;
+package br.com.navita.mobile.console.legacy.processor.jar;
 
 public class DeployPathBean {
 	private String deployPath;

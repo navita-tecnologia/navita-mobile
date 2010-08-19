@@ -15,27 +15,27 @@ import br.com.navita.mobile.console.view.rawdata.ConnectorRaw;
 
 @Transactional
 public class BaseConnectorService  implements br.com.navita.mobile.console.service.BaseConnectorService<Connector>{
-	
+
 	private ConnectorRepository<Connector> connectorRepository;
-		
+
 	protected LicenseService licenseService;	
 	protected AuthContainerService authContainerService;
-	
+
 	public void setAuthContainerService(
 			AuthContainerService authContainerService) {
 		this.authContainerService = authContainerService;
 	}
-	
+
 	public void setLicenseService(LicenseService licenseService) {
 		this.licenseService = licenseService;
 	}
-	
+
 	public void setConnectorRepository(
 			ConnectorRepository<Connector> connectorRepository) {
 		this.connectorRepository = connectorRepository;
 	}
 
-	
+
 	@Override
 	public List<Connector> listAll() {		
 		return connectorRepository.findAll();
@@ -52,11 +52,15 @@ public class BaseConnectorService  implements br.com.navita.mobile.console.servi
 		Connector entity = connectorRepository.findById(id);
 		connectorRepository.remove(entity);		
 	}
-	
+
 	protected void populateConnectorFromRaw(Connector connector, ConnectorRaw raw) throws EntityNotFoundException{
 		connector.setEnabled(raw.isEnabled());
-		LicenseBundle bundle = licenseService.getBundle(raw.getLicenseBundleId());
-		connector.setLicenseBundle(bundle);		
+		if(raw.getLicenseBundleId() != null && ! raw.getLicenseBundleId().isEmpty()){
+			LicenseBundle bundle = licenseService.getBundle(raw.getLicenseBundleId());
+			connector.setLicenseBundle(bundle);
+		}else{
+			connector.setLicenseBundle(null);
+		}
 		connector.setLicenseKey(raw.getLicenseKey());
 		if(raw.getAuthContainerId() != null){
 			AuthContainer authContainer = authContainerService.findbyId(raw.getAuthContainerId());
