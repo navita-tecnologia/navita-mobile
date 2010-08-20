@@ -7,10 +7,10 @@ import java.util.Map;
 
 import br.com.navita.mobile.console.legacy.processor.sap.PoolManager;
 import br.com.navita.mobile.console.legacy.processor.sap.SapExecutionConfig;
-import br.com.navita.mobile.console.legacy.processor.sap.SapSession;
 import br.com.navita.mobile.console.legacy.processor.sap.wrap.SapParameter;
 import br.com.navita.mobile.console.legacy.processor.sap.wrap.SapRow;
 import br.com.navita.mobile.console.legacy.processor.sap.wrap.SapTable;
+import br.com.navita.mobile.console.operator.sap.SapSession;
 
 import com.sap.mw.jco.JCO;
 import com.sap.mw.jco.JCO.Client;

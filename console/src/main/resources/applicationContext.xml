@@ -27,24 +27,25 @@
 		<jee:jndi-lookup id="dataSource"
 		jndi-name="jdbc/navitaMobileDataSource" />
 	-->
-
-
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver" />
-		<property name="url" value="jdbc:derby://127.0.0.1:1527/mobiledb" />
-		<property name="username" value="APP" />
-		<property name="password" value="APP" />
-	</bean>
 	<!--
+
 		<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
-		value="net.sourceforge.jtds.jdbc.Driver" /> <property name="url"
-		value="jdbc:jtds:sqlserver://washburn:1433/navita-mobile" /> <property
-		name="username" value="sa" /> <property name="password" value="navita"
+		value="org.apache.derby.jdbc.ClientDriver" /> <property name="url"
+		value="jdbc:derby://127.0.0.1:1527/mobiledb" /> <property
+		name="username" value="APP" /> <property name="password" value="APP"
 		/> </bean>
 	-->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="net.sourceforge.jtds.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:jtds:sqlserver://washburn:1433/navita-mobile" />
+		<property name="username" value="sa" />
+		<property name="password" value="navita" />
+	</bean>
+
 
 
 	<bean id="mobileEntityManagerFactory"
@@ -185,7 +186,7 @@
 		class="br.com.navita.mobile.console.operator.DataSourceOperator" />
 	<bean id="ejbOperator" class="br.com.navita.mobile.console.operator.EjbOperator" />
 	<bean id="proxyOperator" class="br.com.navita.mobile.console.operator.ProxyOperator" />
-	<bean id="sapOperator" class="br.com.navita.mobile.console.operator.SapOperator" />
+	<bean id="sapOperator" class="br.com.navita.mobile.console.operator.sap.SapOperator" />
 	<bean id="staticOperator" class="br.com.navita.mobile.console.operator.StaticOperator" />
 	<bean id="wsOperator" class="br.com.navita.mobile.console.operator.WsOperator" />
 
@@ -254,7 +255,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="licenseHelper" class="br.com.navita.mobile.console.util.LicenseHelper" />
 
 	<bean id="httpClient" class="br.com.navita.mobile.console.util.HttpClientUtil" />
@@ -283,13 +284,16 @@
 
 	<bean id="sapMobileProcessor"
 		class="br.com.navita.mobile.console.legacy.processor.sap.SapMobileProcessor" />
-	<bean id="staticProcessor" class="br.com.navita.mobile.console.legacy.processor.StaticProcessor" />
+	<bean id="staticProcessor"
+		class="br.com.navita.mobile.console.legacy.processor.StaticProcessor" />
 	<bean id="dsAppProcessor"
 		class="br.com.navita.mobile.console.legacy.processor.DataSourceAppProcessor" />
-	<bean id="jdbcAppProcessor" class="br.com.navita.mobile.console.legacy.processor.JdbcAppProcessor" />
+	<bean id="jdbcAppProcessor"
+		class="br.com.navita.mobile.console.legacy.processor.JdbcAppProcessor" />
 	<bean id="deployableProcessor"
 		class="br.com.navita.mobile.console.legacy.processor.jar.DeployableProcessor" />
-	<bean id="ejbProcessor" class="br.com.navita.mobile.console.legacy.processor.EjbProcessor" />
+	<bean id="ejbProcessor"
+		class="br.com.navita.mobile.console.legacy.processor.EjbProcessor" />
 	<bean id="genericWsProcessor" class="br.com.navita.mobile.ws.processor.GenericWsProcessor" />
 	<bean id="proxyServletProcessor"
 		class="br.com.navita.mobile.console.legacy.processor.ProxyServletProcessor" />
@@ -310,7 +314,7 @@
 		<property name="lookupServiceOnStartup" value="false" />
 	</bean>
 
-	
+
 
 
 </beans>

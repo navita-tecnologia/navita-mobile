@@ -13,6 +13,7 @@ import br.com.navita.mobile.console.exception.SapGatewayException;
 import br.com.navita.mobile.console.legacy.processor.sap.wrap.SapParameter;
 import br.com.navita.mobile.console.legacy.processor.sap.wrap.SapRow;
 import br.com.navita.mobile.console.legacy.processor.sap.wrap.SapTable;
+import br.com.navita.mobile.console.operator.sap.SapSession;
 
 import com.thoughtworks.xstream.XStream;
 

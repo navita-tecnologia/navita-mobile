@@ -173,9 +173,9 @@
         enabled smallint not null,
         licenseKey varchar(255) not null,
         tag varchar(255) not null unique,
+        licenseBundle_id varchar(32),
         authContainer_id varchar(32),
         tokenConnector_id varchar(32),
-        licenseBundle_id varchar(32),
         primary key (id)
     );
 
@@ -231,8 +231,8 @@
         name varchar(255) not null,
         licenseKey varchar(255),
         tag varchar(255),
-        licenseBundle_id varchar(32),
         connector_id varchar(32),
+        licenseBundle_id varchar(32),
         primary key (id)
     );
 
@@ -244,8 +244,9 @@
 
     create table SapConnector (
         id varchar(32) not null,
+        asHost varchar(255) not null,
         client varchar(255) not null,
-        ip varchar(255) not null,
+        lang varchar(255),
         router varchar(255),
         sysnr varchar(255) not null,
         primary key (id)

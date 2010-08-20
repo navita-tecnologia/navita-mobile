@@ -7,10 +7,11 @@ import br.com.navita.mobile.console.view.rawdata.SapConnectorRaw;
 public class SapConnectorAction extends ConnectorsAction implements SapConnectorRaw{
 	private ConnectorService<SapConnector,SapConnectorRaw> sapConnectorService;
 	
-	private String ip;
+	private String asHost;
 	private String sysnr;
 	private String client;
 	private String router;
+	private String lang;
 	
 	public void setSapConnectorService(
 			ConnectorService<SapConnector, SapConnectorRaw> sapConnectorService) {
@@ -18,11 +19,21 @@ public class SapConnectorAction extends ConnectorsAction implements SapConnector
 	}
 	
 	@Override
-	public String getIp() {
-		return ip;
+	public String getLang() {
+		
+		return lang;
 	}
-	public void setIp(String ip) {
-		this.ip = ip;
+	
+	public void setLang(String lang) {
+		this.lang = lang;
+	}
+	
+	@Override
+	public String getAsHost() {
+		return asHost;
+	}
+	public void setAsHost(String asHost) {
+		this.asHost = asHost;
 	}
 	
 	@Override

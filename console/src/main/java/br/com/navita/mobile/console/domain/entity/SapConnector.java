@@ -10,13 +10,24 @@ public class SapConnector extends Connector {
 	private String router;
 	
 	@Column(nullable = false)
-	private String ip;
+	private String asHost;
 	
 	@Column(nullable = false)
 	private String sysnr;
 	
 	@Column(nullable = false)
 	private String client;
+	
+	@Column
+	private String lang;
+	
+	public String getLang() {
+		return lang;
+	}
+	
+	public void setLang(String lang) {
+		this.lang = lang;
+	}
 	
 	public String getRouter() {
 		return router;
@@ -26,12 +37,12 @@ public class SapConnector extends Connector {
 		this.router = router;
 	}
 
-	public String getIp() {
-		return ip;
+	public String getAsHost() {
+		return asHost;
 	}
-
-	public void setIp(String ip) {
-		this.ip = ip;
+	
+	public void setAsHost(String asHost) {
+		this.asHost = asHost;
 	}
 
 	public String getSysnr() {

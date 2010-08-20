@@ -64,5 +64,19 @@
 			</New>
 		</Arg>
 	</New>
+
+	<New id="CrisisDataSourceId" class="org.mortbay.jetty.plus.naming.Resource">
+		<Arg>jdbc/crisisDataSource</Arg>
+		<Arg>
+			<New class="com.atomikos.jdbc.nonxa.NonXADataSourceBean">
+				<Set name="Url">jdbc:jtds:sqlserver://washburn:1433/crisis-system
+				</Set>
+				<Set name="driverClassName">net.sourceforge.jtds.jdbc.Driver</Set>
+				<Set name="user">sa</Set>
+				<Set name="password">navita</Set>
+			</New>
+		</Arg>
+	</New>
+
 </Configure>
 

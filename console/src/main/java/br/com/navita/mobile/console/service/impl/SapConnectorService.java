@@ -23,7 +23,8 @@ public class SapConnectorService extends BaseConnectorService implements Connect
 			throws EntityNotFoundException {
 		SapConnector conn = new SapConnector();
 		conn.setClient(connectorRaw.getClient());
-		conn.setIp(connectorRaw.getIp());
+		conn.setAsHost(connectorRaw.getAsHost());
+		conn.setLang(connectorRaw.getLang());
 		conn.setSysnr(connectorRaw.getSysnr());
 		conn.setRouter(connectorRaw.getRouter());		
 		populateConnectorFromRaw(conn, connectorRaw);
@@ -35,7 +36,8 @@ public class SapConnectorService extends BaseConnectorService implements Connect
 	public void update(SapConnectorRaw connectorRaw)	throws EntityNotFoundException {
 		SapConnector conn = (SapConnector) findById(connectorRaw.getId());
 		conn.setClient(connectorRaw.getClient());
-		conn.setIp(connectorRaw.getIp());
+		conn.setAsHost(connectorRaw.getAsHost());
+		conn.setLang(connectorRaw.getLang());
 		conn.setSysnr(connectorRaw.getSysnr());
 		conn.setRouter(connectorRaw.getRouter());
 		populateConnectorFromRaw(conn, connectorRaw);				

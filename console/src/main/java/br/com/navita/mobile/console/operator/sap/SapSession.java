@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.legacy.processor.sap;
+package br.com.navita.mobile.console.operator.sap;
 
 import br.com.navita.mobile.console.session.MobileSession;
 

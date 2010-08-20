@@ -1,10 +1,11 @@
-package br.com.navita.mobile.console.legacy.processor.sap;
+package br.com.navita.mobile.console.operator.sap;
 
 import java.util.Properties;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import br.com.navita.mobile.console.domain.entity.SapConnector;
 import br.com.navita.mobile.console.exception.InvalidTokenSapGatewayException;
 import br.com.navita.mobile.console.exception.SapGatewayException;
 import br.com.navita.mobile.console.operator.sap.SapSession;
@@ -19,20 +20,20 @@ public class PoolManager {
 
 	
 		
-	public static SapSession createSession(String login, String passwd,String url) throws SapGatewayException {
+	public static SapSession createSession(String login, String passwd,SapConnector connector) throws SapGatewayException {
 		String token = login+"-"+UUID.randomUUID();
 		Properties p = new Properties();
-		SapUrl sapUrl = SapUrl.parse(url);
+		
 		p.setProperty("jco.client.user", login);
 		p.setProperty("jco.client.passwd", passwd);
-		p.setProperty("jco.client.client", sapUrl.getClient());
-		p.setProperty("jco.client.sysnr", sapUrl.getSysNr());
-		p.setProperty("jco.client.ashost", sapUrl.getAsHost());
-		p.setProperty("jco.client.lang", sapUrl.getLang());
+		p.setProperty("jco.client.client", connector.getClient());
+		p.setProperty("jco.client.sysnr", connector.getSysnr());
+		p.setProperty("jco.client.ashost", connector.getAsHost());
+		p.setProperty("jco.client.lang", connector.getLang());
 		//sap:///H/200.32.97.5/H/172.16.1.57?client=800&sysnr=IDE
 		
 		JCO.addClientPool(token,10,p);
-		JCO.Repository repo = new JCO.Repository(sapUrl.getClient(),token);		
+		JCO.Repository repo = new JCO.Repository(connector.getClient(),token);		
 		JCO.Client client = JCO.getClient(token);
 		JCO.Function f = repo.getFunctionTemplate("STFC_CONNECTION").getFunction();
 		f.getImportParameterList().setValue( token ,"REQUTEXT");
@@ -41,7 +42,7 @@ public class PoolManager {
 		SapSession session = new SapSession(repo,token);
 		session.setTimeStamp(System.currentTimeMillis());
 		SessionPool.put(token, session);
-		LOG.log(Level.WARNING,"Session criada para "+login+" em "+url);
+		LOG.log(Level.WARNING,"Session criada para "+login+" em " + connector.getAsHost() + ":" + connector.getSysnr()+ ":" + connector.getClient());
 		return session;
 	}
 
