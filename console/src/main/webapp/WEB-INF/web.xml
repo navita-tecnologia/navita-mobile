@@ -63,12 +63,8 @@
 		<servlet-name>PushGatewayPort</servlet-name>
 		<url-pattern>/push-ws</url-pattern>
 	</servlet-mapping>
-	<!--
-		<persistence-unit-ref>
-		<persistence-unit-ref-name>persistence/mobilePersistenceUnit</persistence-unit-ref-name>
-		<persistence-unit-name>mobilePersistenceUnit</persistence-unit-name>
-		</persistence-unit-ref>
-	-->
+
+	
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
