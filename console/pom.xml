@@ -88,7 +88,7 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${springframework.version}</version>
 			<scope>compile</scope>
-		</dependency>			
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
@@ -166,15 +166,6 @@
 			<version>2.1.8</version>
 		</dependency>
 
-		<!--  END ERP's -->
-
-		<dependency>
-			<groupId>com.sun.xml.ws</groupId>
-			<artifactId>jaxws-rt</artifactId>
-			<version>2.1.7</version>
-		</dependency>
-
-
 		<!--  START Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -192,29 +183,12 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>1.6.8</version>
-			
 		</dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.6.8</version>
-			
 		</dependency>
-
-
-		<!-- DERBY TEMP -->
-		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derby</artifactId>
-			<version>${derby.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derbyclient</artifactId>
-			<version>${derby.version}</version>
-		</dependency>
-		<!-- END DERBY TEMP -->
-
 
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -291,8 +265,9 @@
 						antrun:run
 						-Dhibernate.dialect=org.hibernate.dialect.Oracle10gDialect mvn
 						compile antrun:run
-						-Dhibernate.dialect=org.hibernate.dialect.SQLServerDialect 
-						mvn compile antrun:run -Dhibernate.dialect=org.hibernate.dialect.DerbyDialect
+						-Dhibernate.dialect=org.hibernate.dialect.SQLServerDialect mvn
+						compile antrun:run
+						-Dhibernate.dialect=org.hibernate.dialect.DerbyDialect
 					-->
 					<tasks>
 						<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" />
@@ -310,6 +285,31 @@
 		</plugins>
 	</build>
 	<profiles>
+		<profile>
+			<id>webcontainer</id>
+			<dependencies>				
+				<dependency>
+					<groupId>com.sun.xml.ws</groupId>
+					<artifactId>jaxws-rt</artifactId>
+					<version>2.1.7</version>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>derby</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.apache.derby</groupId>
+					<artifactId>derby</artifactId>
+					<version>${derby.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.derby</groupId>
+					<artifactId>derbyclient</artifactId>
+					<version>${derby.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
 		<profile>
 			<id>jetty</id>
 			<build>
@@ -407,7 +407,7 @@
 			</build>
 		</profile>
 		<profile>
-		<!--  mvn generate-sources jaxws:wsimport -Ppushwsgen -->
+			<!--  mvn generate-sources jaxws:wsimport -Ppushwsgen -->
 			<id>pushwsgen</id>
 			<build>
 				<plugins>

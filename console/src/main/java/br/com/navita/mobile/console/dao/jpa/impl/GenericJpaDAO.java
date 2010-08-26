@@ -17,10 +17,11 @@ public class GenericJpaDAO<T> implements GenericRepository<T> {
 
 	/** Entidade associada a este DAO */
 	protected Class<T> persistentClass;
-
-	@PersistenceContext(unitName = "mobilePersistenceUnit")
+	
+	@PersistenceContext(unitName="mobiPU")
 	protected EntityManager entityManager;
-
+	
+	
 	/**
 	 *
 	 */
@@ -29,6 +30,7 @@ public class GenericJpaDAO<T> implements GenericRepository<T> {
 		// Pega o primeiro tipo parametrizado
 		// Ex. GenericRepository<Pessoa>, este metodo vai retornar o Class Pessoa
 		persistentClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+		
 	}
 
 	/**
@@ -52,11 +54,11 @@ public class GenericJpaDAO<T> implements GenericRepository<T> {
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
 		String ql = "FROM " + persistentClass.getSimpleName();
-		Query query = entityManager.createQuery(ql);
+		Query query =  entityManager.createQuery(ql);
 		return query.getResultList();
 	}
-	
-	
+
+
 	/**
 	 * @see com.navita.portal.master.dao.GenericRepository#persist(java.lang.Object)
 	 */
