@@ -14,7 +14,7 @@ public class GenericOperationDAO<T extends Operation> extends GenericJpaDAO<Oper
 	@Override
 	public List<T> listConnectorOperations(String connectorId) {
 		String ql = "FROM " + persistentClass.getSimpleName() + " where connector.id = :connectorId";
-		Query query = entityManager.createQuery(ql);
+		Query query = getEntityManager().createQuery(ql);
 		query.setParameter("connectorId", connectorId);		
 		return query.getResultList();
 	}
@@ -23,7 +23,7 @@ public class GenericOperationDAO<T extends Operation> extends GenericJpaDAO<Oper
 	@Override
 	public T findByTagAndConnectorId(String tag, String connectorId) {		
 		String ql = "FROM " + persistentClass.getSimpleName() + " where upper(tag) = upper(:tag) and connector.id = :connectorId ";
-		Query query = entityManager.createQuery(ql);
+		Query query = getEntityManager().createQuery(ql);
 		query.setParameter("connectorId", connectorId);
 		query.setParameter("tag", tag);
 		T operation = null;

@@ -36,7 +36,7 @@ public class BaseEntityDAO<T extends BaseEntity> extends GenericJpaDAO<T> implem
 	@SuppressWarnings("unchecked")
 	public T findById(String id) throws EntityNotFoundException {
 		String ql = "SELECT e FROM " + persistentClass.getSimpleName() + " e WHERE (e.id = :id)";
-		Query query = entityManager.createQuery(ql);
+		Query query = getEntityManager().createQuery(ql);
 		query.setParameter("id", id);
 		//query.setParameter("removed", false);
 		try {
@@ -53,7 +53,7 @@ public class BaseEntityDAO<T extends BaseEntity> extends GenericJpaDAO<T> implem
 	@SuppressWarnings("unchecked")
 	public T findByUniqueName(String name) {
 		String ql = "SELECT e FROM " + persistentClass.getSimpleName() + " e WHERE (upper(e.name) = upper(:name))";
-		Query query = entityManager.createQuery(ql);
+		Query query = getEntityManager().createQuery(ql);
 		query.setParameter("name", name);
 		query.setParameter("removed", false);
 		try {
@@ -69,7 +69,7 @@ public class BaseEntityDAO<T extends BaseEntity> extends GenericJpaDAO<T> implem
 	@SuppressWarnings("unchecked")
 	public List<T> findByNonUniqueName(String name) {
 		String ql = "SELECT e FROM " + persistentClass.getSimpleName() + " e WHERE  (upper(e.name) LIKE upper(:name))";
-		Query query = entityManager.createQuery(ql);
+		Query query = getEntityManager().createQuery(ql);
 		query.setParameter("name", "%" + name + "%");
 		query.setParameter("removed", false);
 		return query.getResultList();
@@ -82,7 +82,7 @@ public class BaseEntityDAO<T extends BaseEntity> extends GenericJpaDAO<T> implem
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
 		String ql = "SELECT e FROM " + persistentClass.getSimpleName() + " e  ORDER BY upper(e.name)";
-		Query query = entityManager.createQuery(ql);
+		Query query = getEntityManager().createQuery(ql);
 		//query.setParameter("removed", false);
 		return query.getResultList();
 	}
@@ -92,6 +92,6 @@ public class BaseEntityDAO<T extends BaseEntity> extends GenericJpaDAO<T> implem
 	 */
 	public void remove(T entity) {
 		//entity.remove();
-		entityManager.remove(entity);
+		getEntityManager().remove(entity);
 	}
 }

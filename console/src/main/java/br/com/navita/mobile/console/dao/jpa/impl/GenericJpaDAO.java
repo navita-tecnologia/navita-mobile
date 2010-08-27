@@ -4,8 +4,10 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
+
+import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 
 import br.com.navita.mobile.console.dao.jpa.GenericRepository;
 import br.com.navita.mobile.console.exception.EntityNotFoundException;
@@ -18,8 +20,16 @@ public class GenericJpaDAO<T> implements GenericRepository<T> {
 	/** Entidade associada a este DAO */
 	protected Class<T> persistentClass;
 	
-	@PersistenceContext(unitName="mobiPU")
-	protected EntityManager entityManager;
+	private EntityManagerFactory entityManagerFactory;
+	
+	public void setEntityManagerFactory(
+			EntityManagerFactory entityManagerFactory) {
+		this.entityManagerFactory = entityManagerFactory;
+	}
+	
+	protected EntityManager getEntityManager() {		
+		return EntityManagerFactoryUtils.getTransactionalEntityManager(entityManagerFactory);
+	}
 	
 	
 	/**
@@ -45,7 +55,7 @@ public class GenericJpaDAO<T> implements GenericRepository<T> {
 	 * @see com.navita.portal.master.dao.GenericRepository#findById(java.lang.String)
 	 */
 	public T findById(String id) throws EntityNotFoundException {
-		return entityManager.find(persistentClass, id);
+		return getEntityManager().find(persistentClass, id);
 	}
 
 	/**
@@ -54,7 +64,7 @@ public class GenericJpaDAO<T> implements GenericRepository<T> {
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
 		String ql = "FROM " + persistentClass.getSimpleName();
-		Query query =  entityManager.createQuery(ql);
+		Query query =  getEntityManager().createQuery(ql);
 		return query.getResultList();
 	}
 
@@ -63,20 +73,20 @@ public class GenericJpaDAO<T> implements GenericRepository<T> {
 	 * @see com.navita.portal.master.dao.GenericRepository#persist(java.lang.Object)
 	 */
 	public void persist(T entity) {
-		entityManager.persist(entity);
+		getEntityManager().persist(entity);
 	}
 
 	/**
 	 * @see com.navita.portal.master.dao.GenericRepository#merge(java.lang.Object)
 	 */
 	public <X> X merge(X entity) {
-		return entityManager.merge(entity);
+		return getEntityManager().merge(entity);
 	}
 
 	/**
 	 * @see com.navita.portal.master.dao.GenericRepository#remove(java.lang.Object)
 	 */
 	public void remove(T entity) {
-		entityManager.remove(entity);
+		getEntityManager().remove(entity);
 	}
 }

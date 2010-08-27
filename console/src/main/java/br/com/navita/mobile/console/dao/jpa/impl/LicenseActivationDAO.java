@@ -16,7 +16,7 @@ public class LicenseActivationDAO extends GenericJpaDAO<LicenseActivation> imple
 	@Override
 	public LicenseActivation findPinOnBundle(String pin, String bundleId) {		
 		String ql = "FROM LicenseActivation WHERE upper(pin) = upper(:pin) and licenseBundle.id = :bundleId";
-		Query query = entityManager.createQuery(ql);
+		Query query = getEntityManager().createQuery(ql);
 		query.setParameter("pin", pin);
 		query.setParameter("bundleId", bundleId);
 		try{
@@ -29,7 +29,7 @@ public class LicenseActivationDAO extends GenericJpaDAO<LicenseActivation> imple
 	@Override
 	public Long countLicenceBundleActivations(String bundleId) {
 		String ql = "select count(e) from LicenseActivation e where e.licenseBundle.id = :bundleId";
-		Query query = entityManager.createQuery(ql);
+		Query query = getEntityManager().createQuery(ql);
 		query.setParameter("bundleId", bundleId);
 		return ((Number) query.getSingleResult()).longValue();
 	}
@@ -37,7 +37,7 @@ public class LicenseActivationDAO extends GenericJpaDAO<LicenseActivation> imple
 	@Override
 	public List<LicenseActivation> paginateActivationsByBundle(SearchCriteria criteria) {
 		String ql = "FROM LicenseActivation where licenseBundle.id = :bundleId";
-		TypedQuery<LicenseActivation> query = entityManager.createQuery(ql,LicenseActivation.class);
+		TypedQuery<LicenseActivation> query = getEntityManager().createQuery(ql,LicenseActivation.class);
 		query.setParameter("bundleId", criteria.getText());
 		query.setFirstResult(criteria.getOffset());
 		query.setMaxResults(criteria.getPageSize());

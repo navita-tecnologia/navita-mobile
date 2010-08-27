@@ -11,7 +11,7 @@ public class ConnectorDAO extends GenericJpaDAO<Connector> implements ConnectorR
 	@Override
 	public Connector findByTag(String tag) {
 		String ql = "from Connector where upper(tag) = upper(:tag)";
-		TypedQuery<Connector> q = entityManager.createQuery(ql, Connector.class);		
+		TypedQuery<Connector> q = getEntityManager().createQuery(ql, Connector.class);		
 		q.setParameter("tag", tag);
 		Connector connector =  null;
 		try{
