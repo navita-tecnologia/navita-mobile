@@ -10,6 +10,15 @@ public class SapParameter extends BaseEntity implements Comparable<SapParameter>
 	@Column(nullable = false)
 	private String value;
 	
+	public SapParameter(String name, String value) {
+		setName(name);
+		this.value = value;
+	}
+
+	public SapParameter() {
+		
+	}
+
 	public String getValue() {
 		return value;
 	}

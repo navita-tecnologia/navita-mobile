@@ -24,6 +24,7 @@ public class DataSourceQueryOperationService extends BaseOperationService implem
 	public DataSourceQueryOperation create(DataSourceQueryOperationRaw operationRaw) throws EntityNotFoundException {
 		DataSourceQueryOperation op = new DataSourceQueryOperation();
 		op.setQuery(operationRaw.getQuery());
+		op.setReturnResultSet(operationRaw.isReturnResultSet());
 		populateOperationFromRaw(op, operationRaw);
 		dataSourceQueryOperationRepository.persist(op);
 		return op;
@@ -45,6 +46,7 @@ public class DataSourceQueryOperationService extends BaseOperationService implem
 	public void update(DataSourceQueryOperationRaw operationRaw) throws EntityNotFoundException {
 			DataSourceQueryOperation op = (DataSourceQueryOperation) dataSourceQueryOperationRepository.findById(operationRaw.getId());
 			op.setQuery(operationRaw.getQuery());
+			op.setReturnResultSet(operationRaw.isReturnResultSet());
 			populateOperationFromRaw(op, operationRaw);
 			
 	}

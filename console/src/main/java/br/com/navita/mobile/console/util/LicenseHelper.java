@@ -64,8 +64,16 @@ public  class LicenseHelper {
 		}
 
 		String[] values = plain.split("\\|");
+		
+		if(values.length != 3){
+			LOG.log(Level.WARNING,"Invalid key size" );
+			throw new  InvalidLicenseKeyException("Invalid key size");
+		}
+		
 		LOG.log(Level.WARNING,"Testing Key for " + values[0]  + " " + values[1] + " with ts " + values[2]);
 
+		
+		
 		if(!type.equals(values[0])){
 			LOG.log(Level.WARNING,"Invalid key " + licenseKey);
 			throw new  InvalidLicenseKeyException("Invalid key " + licenseKey);

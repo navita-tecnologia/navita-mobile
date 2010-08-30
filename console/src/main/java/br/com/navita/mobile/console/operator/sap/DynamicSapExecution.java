@@ -1,40 +1,42 @@
-package br.com.navita.mobile.console.legacy.processor.sap.exec;
+package br.com.navita.mobile.console.operator.sap;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import br.com.navita.mobile.domain.MobileBean;
+import br.com.navita.mobile.console.domain.entity.Operation;
+import br.com.navita.mobile.console.domain.entity.SapFunctionOperation;
+import br.com.navita.mobile.console.domain.entity.SapParameter;
+import br.com.navita.mobile.console.domain.entity.SapRow;
+import br.com.navita.mobile.console.domain.entity.SapTable;
 import br.com.navita.mobile.console.exception.SapGatewayException;
-import br.com.navita.mobile.console.legacy.processor.sap.PoolManager;
-import br.com.navita.mobile.console.legacy.processor.sap.SapExecution;
-import br.com.navita.mobile.console.legacy.processor.sap.wrap.SapParameter;
-import br.com.navita.mobile.console.legacy.processor.sap.wrap.SapRow;
-import br.com.navita.mobile.console.legacy.processor.sap.wrap.SapTable;
+import br.com.navita.mobile.console.operator.Operator;
+import br.com.navita.mobile.domain.MobileBean;
 
 import com.sap.mw.jco.JCO;
 import com.sap.mw.jco.JCO.Function;
 import com.sap.mw.jco.JCO.ParameterList;
 import com.sap.mw.jco.JCO.Table;
 
-public class DynamicSapExecution extends SapExecution {
+public class DynamicSapExecution implements Operator {
 
 	@Override
-	protected MobileBean execute(Map<String, Object> params) throws SapGatewayException {
+	public MobileBean  doOperation(Operation operation, Map<String, Object> params) throws SapGatewayException  {
 		String token = (String) params.get("token");		
-		JCO.Client client = null;
+		JCO.Client client = null;		
+		SapFunctionOperation sapFunctionOperation = (SapFunctionOperation) operation;
 		MobileBean bean = new MobileBean();
 		try{
 			client = JCO.getClient(token);
 
-			String fName = config.getFunctionName();
+			String fName = sapFunctionOperation.getFunctionName();
 			Function function = PoolManager.createFunction(fName, token);
 
 			ParameterList paramInList = function.getImportParameterList();
 			if(paramInList != null){
-				for(SapParameter sapParam:config.getInputParameterList()){			
+				for(SapParameter sapParam : sapFunctionOperation.getInputParameters()){			
 					String value = sapParam.getValue();
-					if(value.startsWith("$")){
+					if(value.startsWith("$") || value.startsWith(":")){
 						Object param = params.get(value.substring(1));
 						if(null == param){
 							value= " ";
@@ -47,16 +49,16 @@ public class DynamicSapExecution extends SapExecution {
 			}
 			ParameterList tList = function.getTableParameterList();
 
-			if(config.getInputTableList()!=null){
-				for(SapTable paramTable: config.getInputTableList()){
-					Table table = tList.getTable(paramTable.getTableName());
+			if(sapFunctionOperation.getInputTables() !=null){
+				for(SapTable paramTable: sapFunctionOperation.getInputTables()){
+					Table table = tList.getTable(paramTable.getName());
 					int paramIndex = 0;
-					for(SapRow row:paramTable.getRows()){
+					for(SapRow row : paramTable.getSapRows()){
 						table.appendRow();
 						table.setRow(paramIndex++);
-						for(SapParameter param:row.getSapParameters()){	
+						for(SapParameter param : row.getAttributes()){	
 							String value = param.getValue();
-							if(value.startsWith("$")){
+							if(value.startsWith("$") || value.startsWith(":")){
 								value = (String) params.get(value.substring(1));
 							}	
 							table.setValue(value, param.getName());
@@ -67,16 +69,15 @@ public class DynamicSapExecution extends SapExecution {
 			client.execute(function);
 
 			List<SapTable> tables = new ArrayList<SapTable>();
-			for(SapTable st : config.getOutputTableList()){				
-				Table sapTable = tList.getTable(st.getTableName());
-				st.setRows(new ArrayList<SapRow>());
+			for(SapTable st : sapFunctionOperation.getOutputTables()){				
+				Table sapTable = tList.getTable(st.getName());				
 				for(int row =0;row < sapTable.getNumRows();row++){
 					sapTable.setRow(row);
 					SapRow mapRow = new SapRow();
 					for(int field = 0;field < sapTable.getFieldCount();field++){
-						mapRow.add(new SapParameter(sapTable.getField(field).getName(), sapTable.getString(field)));
+						mapRow.addAttribute(new SapParameter(sapTable.getField(field).getName(), sapTable.getString(field)));
 					}				
-					st.add(mapRow);
+					st.addRow(mapRow);
 				}
 				tables.add(st);
 			}

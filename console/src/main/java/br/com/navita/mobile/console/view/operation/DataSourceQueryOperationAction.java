@@ -14,6 +14,13 @@ public class DataSourceQueryOperationAction extends OperationsAction implements 
 	}
 
 	private String query;
+	private boolean returnResultSet;
+	
+	public void setReturnResultSet(boolean returnResultSet) {
+		this.returnResultSet = returnResultSet;
+	}
+	
+	
 	
 	public String getQuery() {
 		return query;
@@ -41,6 +48,12 @@ public class DataSourceQueryOperationAction extends OperationsAction implements 
 		id = operation.getId();
 		addActionMessage("Criado com sucesso");
 		return edit();
+	}
+
+	@Override
+	public boolean isReturnResultSet() {
+		
+		return returnResultSet;
 	}
 	
 	

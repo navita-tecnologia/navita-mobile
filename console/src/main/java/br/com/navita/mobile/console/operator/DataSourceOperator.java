@@ -26,9 +26,16 @@ public class DataSourceOperator implements Operator{
 		DataSource ds = (DataSource)jndiBean.getJndiTemplate().lookup(connector.getDataSource());
 		NamedParameterJdbcTemplate  tp = new NamedParameterJdbcTemplate (ds);		
 		SqlParameterSource args = new MapSqlParameterSource(params);
-		List<?> result = tp.queryForList(queryOperation.getQuery(), args);
 		MobileBean bean = new MobileBean();
-		bean.setList(result);		
+		if(queryOperation.isReturnResultSet()){
+			List<?> result = tp.queryForList(queryOperation.getQuery(), args);
+			bean.setList(result);
+		}else{
+			int resultCode = tp.update(queryOperation.getQuery(), args);
+			bean.setObject(resultCode);
+		}
+		
+				
 		return bean;
 	}
 

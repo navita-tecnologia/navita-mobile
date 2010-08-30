@@ -8,12 +8,17 @@ import net.sf.json.JSONSerializer;
 
 import org.apache.struts2.interceptor.ParameterAware;
 
+import br.com.navita.mobile.console.domain.LoginResult;
+import br.com.navita.mobile.console.domain.entity.AuthContainer;
 import br.com.navita.mobile.console.domain.entity.Connector;
 import br.com.navita.mobile.console.domain.entity.Operation;
+import br.com.navita.mobile.console.domain.entity.SapConnector;
 import br.com.navita.mobile.console.exception.InvalidDeviceDataException;
+import br.com.navita.mobile.console.exception.InvalidLicenseKeyException;
 import br.com.navita.mobile.console.exception.OperationNotFoundException;
 import br.com.navita.mobile.console.operator.ConnectorOperator;
 import br.com.navita.mobile.console.operator.Operator;
+import br.com.navita.mobile.console.operator.sap.SapAuthContainer;
 import br.com.navita.mobile.console.service.BaseConnectorService;
 import br.com.navita.mobile.console.service.BaseOperationService;
 import br.com.navita.mobile.console.util.LicenseHelper;
@@ -40,21 +45,21 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 
 	private BaseConnectorService<Connector> baseConnectorService;
 	private BaseOperationService<Operation> baseOperationService;
-	
-	
+
+
 	private LicenseHelper licenseHelper;
 
 	private ConnectorOperator connectorOperator;
 	private Operator operator;
 
 
-	
 
-	
+
+
 	public void setLicenseHelper(LicenseHelper licenseHelper) {
 		this.licenseHelper = licenseHelper;
 	}
-		
+
 	public void setOperator(Operator operator) {
 		this.operator = operator;
 	}
@@ -189,22 +194,39 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 			boolean isConnectorLicenseInUse = licenseHelper.isUsingConnectorLicense(connector);
 			String licenseBundleId = "";
 
-			if(! isExternalOperation){
-				Operation operation = null;
-				operation = baseOperationService.findByTagAndConnectorId(connector.getId(),operationTag);
-				if(operation == null){
-					throw new OperationNotFoundException(operationTag);
-				}
+			if("login".equals(operationTag)){//Login eh operacao especial
 				if(!isConnectorLicenseInUse){
-					licenseHelper.checkOperationLicense(operation);
-					licenseBundleId = operation.getLicenseBundle().getId();
-				}else{
-					licenseBundleId = connector.getLicenseBundle().getId();
+					throw new InvalidLicenseKeyException("Connector license bundle not found");
 				}
-				obj = operator.doOperation(operation, (Map<String, Object>) params);
-
+				licenseBundleId = connector.getLicenseBundle().getId();
+				
+				if(connector.getAuthContainer() != null){//login no AD
+					obj = doActiveDirectoryLogin(connector);
+				}else{//login do conector
+					obj = doConnectorLogin(connector);
+				}
+				
+				
 			}else{
-				obj = connectorOperator.doConnectorOperation(connector, (Map<String, Object>) params);
+				if(! isExternalOperation){//Operacao do conector 
+					Operation operation = null;
+					operation = baseOperationService.findByTagAndConnectorId(connector.getId(),operationTag);
+					if(operation == null){
+						throw new OperationNotFoundException(operationTag);
+					}
+					if(!isConnectorLicenseInUse){
+						licenseHelper.checkOperationLicense(operation);
+						licenseBundleId = operation.getLicenseBundle().getId();
+					}else{
+						licenseBundleId = connector.getLicenseBundle().getId();
+					}
+					
+					obj = operator.doOperation(operation, (Map<String, Object>) params);
+
+				}else{//Operacao externa
+					obj = connectorOperator.doConnectorOperation(connector, (Map<String, Object>) params);
+				}
+
 			}
 
 			licenseHelper.registerLicense(licenseBundleId,this); 	//license use
@@ -221,33 +243,74 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	}
 
 
+	private MobileBean doConnectorLogin(Connector connector) {
+		if(connector instanceof SapConnector){
+			SapAuthContainer sapAuthContainer = new SapAuthContainer((SapConnector) connector);
+			return processLoginContainer(sapAuthContainer);
+		}
+		return null;
+	}
+	
+	private MobileBean processLoginContainer(AuthContainer authContainer){
+		MobileBean bean = new MobileBean();
+		String login = (String) params.get("login");
+		if(null == login){//tenta usar 'user'			
+			login = (String) params.get("user");
+		}
+		String passwd = (String) params.get("passwd");
+		if(null == passwd){//tenta usar 'password'			
+			passwd = (String) params.get("password");
+		}
+		
+		LoginResult result = authContainer.login(login, passwd);
+		
+		bean.setMessage(result.getMessage());
+		bean.setResultCode(result.isLogged()?0:1);
+		bean.setList(result.getGroups());		
+		bean.setToken(result.getToken());		
+		return bean;
+	}
+
+	private MobileBean doActiveDirectoryLogin(Connector connector) {
+		MobileBean bean = processLoginContainer(connector.getAuthContainer());
+		String token = "";
+		if(connector.getTokenConnector() != null){
+			//TODO: resolver a questao do token remoto
+			
+		}
+		bean.setToken(token);		
+		return bean;
+	}
+
 	private void serializeBean(MobileBean bean) {
 		byte[] buff = null;
 		buff = JSONSerializer.toJSON(bean).toString().getBytes();		
 		setInStream(new ByteArrayInputStream(buff));		
 	}
 
-	
+
 
 	private void registerAction() {
 
 
 	}
 
-	
 
-	private MobileBean failBean(Throwable t) {
+
+	private MobileBean failBean(Throwable t1) {
+
+
 		MobileBean bean = new MobileBean();
-		String message = t.getMessage();
+		String message = t1.getMessage();
 		if(message == null|| message.isEmpty()){
-			message = t.getClass().getName();
+			message = t1.getClass().getName();
 		}
 		bean.setMessage(message);
 		bean.setResultCode(1);
 		return bean;
 	}
-	
-	
+
+
 
 
 	private void prepareAndCheckParameters() throws InvalidDeviceDataException {

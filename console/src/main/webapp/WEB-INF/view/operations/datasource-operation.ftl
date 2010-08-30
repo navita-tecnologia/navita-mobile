@@ -1,14 +1,17 @@
 <#import "_operation.ftl" as ct />
 
 <@ct.ctpl label="Datasource Query" operationaction="datasourcequeryoperation">
-	<tr valign="top">
+	<tr valign="middle">
+		<td>Retornar ResutSet</td>
+		<td align="left"><@s.select value="${operation.returnResultSet?string}"  name="returnResultSet" 
+		theme="simple" list="# {'true':'Sim','false':'Não'}"/></td>
+	</tr>
+	<tr valign="top" class="active">
 		<td>Query</td>
 		<td align="left"><@s.textarea id="query" name="query" theme="simple" value="${operation.query!}"/></td>	
 	</tr>
-	<tr valign="middle" class="active">
-		<td>&nbsp;</td>
-		<td align="left">&nbsp;</td>	
-	</tr>
+	
+	
 	<script>
 	editAreaLoader.init({
 			id: "query"	

@@ -9,7 +9,21 @@ public class DataSourceQueryOperation extends Operation {
 	@Column
 	private String query;
 	
+	@Column
+	private boolean returnResultSet;
 	
+	
+	
+	
+	
+	public boolean isReturnResultSet() {
+		return returnResultSet;
+	}
+
+	public void setReturnResultSet(boolean returnResultSet) {
+		this.returnResultSet = returnResultSet;
+	}
+
 	public String getQuery() {
 		return query;
 	}

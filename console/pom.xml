@@ -266,14 +266,14 @@
 						-Dhibernate.dialect=org.hibernate.dialect.Oracle10gDialect mvn
 						compile antrun:run
 						-Dhibernate.dialect=org.hibernate.dialect.SQLServerDialect mvn
-						compile antrun:run
-						-Dhibernate.dialect=org.hibernate.dialect.DerbyDialect
+						compile 
+						antrun:run -Dhibernate.dialect=org.hibernate.dialect.DerbyDialect
 					-->
 					<tasks>
 						<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" />
 						<hibernatetool destdir="${project.build.directory}">
 							<classpath refid="maven.compile.classpath" />
-							<jpaconfiguration persistenceunit="mobilePersistenceUnit" />
+							<jpaconfiguration persistenceunit="mobiPU"  />
 							<hbm2ddl export="false" format="true" drop="true"
 								outputfilename="schema_db_mobile.ddl" haltonerror="false" />
 						</hibernatetool>
