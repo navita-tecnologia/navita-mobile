@@ -18,7 +18,6 @@ import br.com.navita.mobile.console.exception.InvalidDeviceDataException;
 import br.com.navita.mobile.console.exception.InvalidLicenseKeyException;
 import br.com.navita.mobile.console.exception.InvalidMobileUrlException;
 import br.com.navita.mobile.console.exception.MobileApplictionNotFoundException;
-import br.com.navita.mobile.console.legacy.processor.sap.SapMobileProcessor;
 import br.com.navita.mobile.console.service.LicenseService;
 import br.com.navita.mobile.console.util.Decryptor;
 import br.com.navita.mobile.console.util.DecryptorException;
@@ -38,7 +37,7 @@ public class NavitaMobileDispatcher {
 	private LdapConfigDAO ldapConfigDAO;
 	private LoginService msLoginService;
 
-	private SapMobileProcessor sapMobileProcessor;
+	
 	
 	private GenericWsProcessor genericWsProcessor;
 
@@ -58,10 +57,7 @@ public class NavitaMobileDispatcher {
 
 	
 
-	public void setSapMobileProcessor(SapMobileProcessor sapMobileProcessor) {
-		this.sapMobileProcessor = sapMobileProcessor;
-	}
-
+	
 	
 
 
@@ -293,12 +289,7 @@ public class NavitaMobileDispatcher {
 
 	private MobileAppProcessor lookupProcessor(String url) {
 		MobileAppProcessor processor = null;
-
-		if(url.startsWith("sap://")){
-			processor = sapMobileProcessor;
-		}
-
-
+		
 		if(url.startsWith("ws://")){
 			processor = genericWsProcessor;
 		}
