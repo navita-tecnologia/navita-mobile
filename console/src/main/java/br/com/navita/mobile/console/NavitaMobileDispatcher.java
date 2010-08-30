@@ -18,12 +18,6 @@ import br.com.navita.mobile.console.exception.InvalidDeviceDataException;
 import br.com.navita.mobile.console.exception.InvalidLicenseKeyException;
 import br.com.navita.mobile.console.exception.InvalidMobileUrlException;
 import br.com.navita.mobile.console.exception.MobileApplictionNotFoundException;
-import br.com.navita.mobile.console.legacy.processor.DataSourceAppProcessor;
-import br.com.navita.mobile.console.legacy.processor.EjbProcessor;
-import br.com.navita.mobile.console.legacy.processor.JdbcAppProcessor;
-import br.com.navita.mobile.console.legacy.processor.ProxyServletProcessor;
-import br.com.navita.mobile.console.legacy.processor.StaticProcessor;
-import br.com.navita.mobile.console.legacy.processor.jar.DeployableProcessor;
 import br.com.navita.mobile.console.legacy.processor.sap.SapMobileProcessor;
 import br.com.navita.mobile.console.service.LicenseService;
 import br.com.navita.mobile.console.util.Decryptor;
@@ -45,51 +39,30 @@ public class NavitaMobileDispatcher {
 	private LoginService msLoginService;
 
 	private SapMobileProcessor sapMobileProcessor;
-	private StaticProcessor staticProcessor;	
-	private DataSourceAppProcessor dsAppProcessor;
-	private JdbcAppProcessor jdbcAppProcessor;
-	private DeployableProcessor deployableProcessor;	
-	private EjbProcessor ejbProcessor;
+	
 	private GenericWsProcessor genericWsProcessor;
-	private ProxyServletProcessor proxyServletProcessor;
+
 
 
 	public void setLicenseService(LicenseService licenseService) {
 		this.licenseService = licenseService;
 	}
 
-	public void setProxyServletProcessor(
-			ProxyServletProcessor proxyServletProcessor) {
-		this.proxyServletProcessor = proxyServletProcessor;
-	}
+	
 
 	public void setGenericWsProcessor(GenericWsProcessor genericWsProcessor) {
 		this.genericWsProcessor = genericWsProcessor;
 	}
 
-	public void setEjbProcessor(EjbProcessor ejbProcessor) {
-		this.ejbProcessor = ejbProcessor;
-	}
+	
 
-	public void setDeployableProcessor(DeployableProcessor deployableProcessor) {
-		this.deployableProcessor = deployableProcessor;
-	}
-
-	public void setJdbcAppProcessor(JdbcAppProcessor jdbcAppProcessor) {
-		this.jdbcAppProcessor = jdbcAppProcessor;
-	}
-
-	public void setDsAppProcessor(DataSourceAppProcessor dsAppProcessor) {
-		this.dsAppProcessor = dsAppProcessor;
-	}
+	
 
 	public void setSapMobileProcessor(SapMobileProcessor sapMobileProcessor) {
 		this.sapMobileProcessor = sapMobileProcessor;
 	}
 
-	public void setStaticProcessor(StaticProcessor staticProcessor) {
-		this.staticProcessor = staticProcessor;
-	}
+	
 
 
 	public void setMsLoginService(LoginService msLoginService) {
@@ -325,33 +298,11 @@ public class NavitaMobileDispatcher {
 			processor = sapMobileProcessor;
 		}
 
-		if(url.startsWith("static://")){
-			processor = staticProcessor;
-		}
-
-		if(url.startsWith("ds://")){
-			processor = dsAppProcessor;			
-		}
-
-		if( url.startsWith("jdbc://")){
-			processor = jdbcAppProcessor;
-		}
-
-		if( url.startsWith("jar://")){
-			processor = deployableProcessor;
-		}
-
-		if( url.startsWith("ejb://")){
-			processor = ejbProcessor;
-		}
 
 		if(url.startsWith("ws://")){
 			processor = genericWsProcessor;
 		}
 
-		if(url.startsWith("proxy://")){
-			processor = proxyServletProcessor;
-		}
 
 		return processor;
 	}
