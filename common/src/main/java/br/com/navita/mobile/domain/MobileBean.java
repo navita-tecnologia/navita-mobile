@@ -24,6 +24,15 @@ public class MobileBean implements Serializable{
 	protected String message;
 	protected List<?> list;
 	protected Object object;
+	protected Long processingTime;
+	
+	public Long getProcessingTime() {
+		return processingTime;
+	}
+	
+	public void setProcessingTime(Long processingTime) {
+		this.processingTime = processingTime;
+	}
 	
 	
 	public String getToken() {
