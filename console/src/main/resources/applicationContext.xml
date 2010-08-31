@@ -233,12 +233,6 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 
-	<bean id="mobileApplicationDAO"
-		class="br.com.navita.mobile.console.dao.MobileApplicationDAOImpl"></bean>
-
-	<bean id="gatewayDispatcher" class="br.com.navita.mobile.console.NavitaMobileDispatcher" />
-
-
 	<bean id="checkOldSession"
 		class="br.com.navita.mobile.console.listener.MobileSessionTimeoutScheduler"></bean>
 
@@ -266,32 +260,7 @@
 	<bean id="licenseService"
 		class="br.com.navita.mobile.console.service.impl.LicenseServiceImpl" />
 
-	<!-- legacy  -->
-
-	<bean id="commonConfiguration"
-		class="br.com.navita.mobile.console.dao.NavitaMobileConfiguration"
-		init-method="setDelimiterParsingDisabled">
-		<constructor-arg index="0" ref="dataSource"></constructor-arg>
-		<constructor-arg index="1" type="java.lang.String"
-			value="mobileconfig"></constructor-arg>
-		<constructor-arg index="2" type="java.lang.String"
-			value="id"></constructor-arg>
-		<constructor-arg index="3" type="java.lang.String"
-			value="value"></constructor-arg>
-
-	</bean>
-
-	<bean id="ldapService" class="br.com.navita.mobile.console.bizz.LdapServiceImpl" />
-	<bean id="msLoginService" class="br.com.navita.mobile.console.bizz.MSWindowsLoginService" />
-	<bean id="ldapConfigDAO" class="br.com.navita.mobile.console.dao.LdapConfigDAO" />
-
-
-
-
-
-	<!-- end legacy -->
-
-
+	
 	<!-- WS -->
 
 	<bean id="dynaClient" scope="prototype"

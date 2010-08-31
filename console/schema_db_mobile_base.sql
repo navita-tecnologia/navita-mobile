@@ -12,36 +12,6 @@ CREATE TABLE authorities(
 ALTER TABLE authorities ADD  CONSTRAINT fk_authorities_users FOREIGN KEY(username)
 REFERENCES users (username);
 
-
-
---legacy
-CREATE TABLE mobileapp(
-	id varchar(255) NOT NULL PRIMARY KEY,
-	name varchar(100) NOT NULL,
-	enabled int NOT NULL,
-	url varchar(255) ,	
-	usingNativeLoginService int NOT NULL,
-	loginServiceId varchar(100) ,
-	privateKey varchar(255) ,
-	tokenGeneratorUrl varchar(255),
-	licenseBundleId varchar(100),
-	licenseActivationKey varchar(500)
-); 
-
-CREATE TABLE mobileappexecutor(
-	name varchar(255) ,
-	classname varchar(255) ,
-	configuration varchar(5000) ,
-	mobileid varchar(255) 
-); 
-
-CREATE TABLE mobileconfig(
-	id varchar(255) NOT NULL PRIMARY KEY,
-	value varchar(255) 
-);
-
-
-
 INSERT INTO USERS VALUES('admin','972bfefb9b804dedbb79c02caf7d818a',1);
 
 INSERT INTO AUTHORITIES VALUES('admin','ROLE_USER');

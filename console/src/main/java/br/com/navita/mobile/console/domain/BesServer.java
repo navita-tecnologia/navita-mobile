@@ -1,9 +1,9 @@
-package br.com.navita.mobile.console.dao.jpa;
+package br.com.navita.mobile.console.domain;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 
-import br.com.navita.mobile.console.domain.BaseEntity;
-
+@Entity
 public class BesServer extends BaseEntity {
 	
 	@Column(nullable=false)

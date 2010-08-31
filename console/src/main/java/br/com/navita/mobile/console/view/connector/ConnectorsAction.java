@@ -56,7 +56,7 @@ public class ConnectorsAction extends ConnectorRawActionSupport {
 	}
 	
 	public String preCreate() throws Exception{
-		connector = (Connector) Class.forName("br.com.navita.mobile.console.domain.entity."+type).newInstance();
+		connector = (Connector) Class.forName("br.com.navita.mobile.console.domain."+type).newInstance();
 		return type;
 	}
 

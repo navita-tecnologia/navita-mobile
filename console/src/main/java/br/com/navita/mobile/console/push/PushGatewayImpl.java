@@ -6,7 +6,7 @@ import javax.jws.WebService;
 
 import org.apache.commons.httpclient.NameValuePair;
 
-import br.com.navita.mobile.console.dao.jpa.BesServer;
+import br.com.navita.mobile.console.domain.BesServer;
 import br.com.navita.mobile.console.exception.PushException;
 import br.com.navita.mobile.console.service.BesPushService;
 import br.com.navita.mobile.console.util.HttpClientUtil;

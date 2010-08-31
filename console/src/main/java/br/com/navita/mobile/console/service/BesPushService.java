@@ -1,6 +1,6 @@
 package br.com.navita.mobile.console.service;
 
-import br.com.navita.mobile.console.dao.jpa.BesServer;
+import br.com.navita.mobile.console.domain.BesServer;
 
 public interface BesPushService {
 

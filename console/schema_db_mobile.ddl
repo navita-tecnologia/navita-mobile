@@ -1,100 +1,102 @@
 
     alter table AdAuthContainer 
-        drop constraint FK3338583622670B60;
+        drop constraint FK33385836CE68831D;
 
     alter table Connector 
-        drop constraint FK54EC142DA338379F;
+        drop constraint FK54EC142DD57D15DC;
 
     alter table Connector 
-        drop constraint FK54EC142D4D364D86;
+        drop constraint FK54EC142DF937C543;
 
     alter table Connector 
-        drop constraint FK54EC142D6954E986;
+        drop constraint FK54EC142D15566143;
 
     alter table DataSourceConnector 
-        drop constraint FKEC68A148AD87B9F4;
+        drop constraint FKEC68A148DFCC9831;
 
     alter table DataSourceQueryOperation 
-        drop constraint FKA0A6756433289B0E;
+        drop constraint FKA0A67564656D794B;
 
     alter table EjbConnector 
-        drop constraint FK929CF890AD87B9F4;
+        drop constraint FK929CF890DFCC9831;
 
     alter table LicenseActivation 
-        drop constraint FKF36D84174D364D86;
+        drop constraint FKF36D8417F937C543;
 
     alter table LicenseBundle 
-        drop constraint FKA1D5DC0379D8F966;
+        drop constraint FKA1D5DC03D4AE4AA3;
 
     alter table Operation 
-        drop constraint FKDA8CF547207DAB26;
+        drop constraint FKDA8CF54752C28963;
 
     alter table Operation 
-        drop constraint FKDA8CF5474D364D86;
+        drop constraint FKDA8CF547F937C543;
 
     alter table ProxyConnector 
-        drop constraint FKB884F19FAD87B9F4;
+        drop constraint FKB884F19FDFCC9831;
 
     alter table SapConnector 
-        drop constraint FK1E4DEAABAD87B9F4;
+        drop constraint FK1E4DEAABDFCC9831;
 
     alter table SapFunctionOperation 
-        drop constraint FKBE850CCD33289B0E;
+        drop constraint FKBE850CCD656D794B;
 
     alter table SapFunctionOperation_SapInputParameter 
-        drop constraint FK82C5306F6419D1E1;
+        drop constraint FK82C5306F405BEE84;
 
     alter table SapFunctionOperation_SapInputParameter 
-        drop constraint FK82C5306F5A66464E;
+        drop constraint FK82C5306FB85F0FF1;
 
     alter table SapFunctionOperation_SapInputTable 
-        drop constraint FKAC700B94B8F3DBAB;
+        drop constraint FKAC700B941DABC1CE;
 
     alter table SapFunctionOperation_SapInputTable 
-        drop constraint FKAC700B945A66464E;
+        drop constraint FKAC700B94B85F0FF1;
 
     alter table SapFunctionOperation_SapOutputParameter 
-        drop constraint FK519CE838ABCC020A;
+        drop constraint FK519CE838880E1EAD;
 
     alter table SapFunctionOperation_SapOutputParameter 
-        drop constraint FK519CE8385A66464E;
+        drop constraint FK519CE838B85F0FF1;
 
     alter table SapFunctionOperation_SapOutputTable 
-        drop constraint FKC1650FDDDC8E8854;
+        drop constraint FKC1650FDD41466E77;
 
     alter table SapFunctionOperation_SapOutputTable 
-        drop constraint FKC1650FDD5A66464E;
+        drop constraint FKC1650FDDB85F0FF1;
 
     alter table SapRow_SapParameter 
-        drop constraint FKE0BC702EF9F2518E;
+        drop constraint FKE0BC702EC6A36471;
 
     alter table SapRow_SapParameter 
-        drop constraint FKE0BC702EC1ECF6DE;
+        drop constraint FKE0BC702E9E2F1381;
 
     alter table SapTable_SapRow 
-        drop constraint FK42E1D12BEC4680E;
+        drop constraint FK42E1D12B737C4E31;
 
     alter table SapTable_SapRow 
-        drop constraint FK42E1D12BC56ECCAB;
+        drop constraint FK42E1D12B921FDF8E;
 
     alter table SapTable_SapTableField 
-        drop constraint FK7F55E15BEC4680E;
+        drop constraint FK7F55E15B737C4E31;
 
     alter table SapTable_SapTableField 
-        drop constraint FK7F55E15BCEE6DA46;
+        drop constraint FK7F55E15B7AE85203;
 
     alter table StaticConnector 
-        drop constraint FK35E7595FAD87B9F4;
+        drop constraint FK35E7595FDFCC9831;
 
     alter table StaticOperation 
-        drop constraint FKBB883A7933289B0E;
+        drop constraint FKBB883A79656D794B;
 
     alter table WebServiceConnector 
-        drop constraint FKE0B4B86CAD87B9F4;
+        drop constraint FKE0B4B86CDFCC9831;
 
     drop table AdAuthContainer;
 
     drop table AuthContainer;
+
+    drop table BesServer;
 
     drop table Connector;
 
@@ -167,15 +169,23 @@
         primary key (id)
     );
 
+    create table BesServer (
+        id varchar(32) not null,
+        name varchar(255) not null,
+        port varchar(255) not null,
+        url varchar(255) not null,
+        primary key (id)
+    );
+
     create table Connector (
         id varchar(32) not null,
         name varchar(255) not null,
         enabled smallint not null,
         licenseKey varchar(255) not null,
         tag varchar(255) not null unique,
-        tokenConnector_id varchar(32),
-        authContainer_id varchar(32),
         licenseBundle_id varchar(32),
+        authContainer_id varchar(32),
+        tokenConnector_id varchar(32),
         primary key (id)
     );
 
@@ -355,156 +365,156 @@
     );
 
     alter table AdAuthContainer 
-        add constraint FK3338583622670B60 
+        add constraint FK33385836CE68831D 
         foreign key (id) 
         references AuthContainer;
 
     alter table Connector 
-        add constraint FK54EC142DA338379F 
+        add constraint FK54EC142DD57D15DC 
         foreign key (tokenConnector_id) 
         references Connector;
 
     alter table Connector 
-        add constraint FK54EC142D4D364D86 
+        add constraint FK54EC142DF937C543 
         foreign key (licenseBundle_id) 
         references LicenseBundle;
 
     alter table Connector 
-        add constraint FK54EC142D6954E986 
+        add constraint FK54EC142D15566143 
         foreign key (authContainer_id) 
         references AuthContainer;
 
     alter table DataSourceConnector 
-        add constraint FKEC68A148AD87B9F4 
+        add constraint FKEC68A148DFCC9831 
         foreign key (id) 
         references Connector;
 
     alter table DataSourceQueryOperation 
-        add constraint FKA0A6756433289B0E 
+        add constraint FKA0A67564656D794B 
         foreign key (id) 
         references Operation;
 
     alter table EjbConnector 
-        add constraint FK929CF890AD87B9F4 
+        add constraint FK929CF890DFCC9831 
         foreign key (id) 
         references Connector;
 
     alter table LicenseActivation 
-        add constraint FKF36D84174D364D86 
+        add constraint FKF36D8417F937C543 
         foreign key (licenseBundle_id) 
         references LicenseBundle;
 
     alter table LicenseBundle 
-        add constraint FKA1D5DC0379D8F966 
+        add constraint FKA1D5DC03D4AE4AA3 
         foreign key (licenseBundleType_id) 
         references LicenseBundleType;
 
     alter table Operation 
-        add constraint FKDA8CF547207DAB26 
+        add constraint FKDA8CF54752C28963 
         foreign key (connector_id) 
         references Connector;
 
     alter table Operation 
-        add constraint FKDA8CF5474D364D86 
+        add constraint FKDA8CF547F937C543 
         foreign key (licenseBundle_id) 
         references LicenseBundle;
 
     alter table ProxyConnector 
-        add constraint FKB884F19FAD87B9F4 
+        add constraint FKB884F19FDFCC9831 
         foreign key (id) 
         references Connector;
 
     alter table SapConnector 
-        add constraint FK1E4DEAABAD87B9F4 
+        add constraint FK1E4DEAABDFCC9831 
         foreign key (id) 
         references Connector;
 
     alter table SapFunctionOperation 
-        add constraint FKBE850CCD33289B0E 
+        add constraint FKBE850CCD656D794B 
         foreign key (id) 
         references Operation;
 
     alter table SapFunctionOperation_SapInputParameter 
-        add constraint FK82C5306F6419D1E1 
+        add constraint FK82C5306F405BEE84 
         foreign key (inputParameters_id) 
         references SapParameter;
 
     alter table SapFunctionOperation_SapInputParameter 
-        add constraint FK82C5306F5A66464E 
+        add constraint FK82C5306FB85F0FF1 
         foreign key (SapFunctionOperation_id) 
         references SapFunctionOperation;
 
     alter table SapFunctionOperation_SapInputTable 
-        add constraint FKAC700B94B8F3DBAB 
+        add constraint FKAC700B941DABC1CE 
         foreign key (inputTables_id) 
         references SapTable;
 
     alter table SapFunctionOperation_SapInputTable 
-        add constraint FKAC700B945A66464E 
+        add constraint FKAC700B94B85F0FF1 
         foreign key (SapFunctionOperation_id) 
         references SapFunctionOperation;
 
     alter table SapFunctionOperation_SapOutputParameter 
-        add constraint FK519CE838ABCC020A 
+        add constraint FK519CE838880E1EAD 
         foreign key (outputParameters_id) 
         references SapParameter;
 
     alter table SapFunctionOperation_SapOutputParameter 
-        add constraint FK519CE8385A66464E 
+        add constraint FK519CE838B85F0FF1 
         foreign key (SapFunctionOperation_id) 
         references SapFunctionOperation;
 
     alter table SapFunctionOperation_SapOutputTable 
-        add constraint FKC1650FDDDC8E8854 
+        add constraint FKC1650FDD41466E77 
         foreign key (outputTables_id) 
         references SapTable;
 
     alter table SapFunctionOperation_SapOutputTable 
-        add constraint FKC1650FDD5A66464E 
+        add constraint FKC1650FDDB85F0FF1 
         foreign key (SapFunctionOperation_id) 
         references SapFunctionOperation;
 
     alter table SapRow_SapParameter 
-        add constraint FKE0BC702EF9F2518E 
+        add constraint FKE0BC702EC6A36471 
         foreign key (SapRow_id) 
         references SapRow;
 
     alter table SapRow_SapParameter 
-        add constraint FKE0BC702EC1ECF6DE 
+        add constraint FKE0BC702E9E2F1381 
         foreign key (attributes_id) 
         references SapParameter;
 
     alter table SapTable_SapRow 
-        add constraint FK42E1D12BEC4680E 
+        add constraint FK42E1D12B737C4E31 
         foreign key (SapTable_id) 
         references SapTable;
 
     alter table SapTable_SapRow 
-        add constraint FK42E1D12BC56ECCAB 
+        add constraint FK42E1D12B921FDF8E 
         foreign key (sapRows_id) 
         references SapRow;
 
     alter table SapTable_SapTableField 
-        add constraint FK7F55E15BEC4680E 
+        add constraint FK7F55E15B737C4E31 
         foreign key (SapTable_id) 
         references SapTable;
 
     alter table SapTable_SapTableField 
-        add constraint FK7F55E15BCEE6DA46 
+        add constraint FK7F55E15B7AE85203 
         foreign key (fieldNames_id) 
         references SapTableField;
 
     alter table StaticConnector 
-        add constraint FK35E7595FAD87B9F4 
+        add constraint FK35E7595FDFCC9831 
         foreign key (id) 
         references Connector;
 
     alter table StaticOperation 
-        add constraint FKBB883A7933289B0E 
+        add constraint FKBB883A79656D794B 
         foreign key (id) 
         references Operation;
 
     alter table WebServiceConnector 
-        add constraint FKE0B4B86CAD87B9F4 
+        add constraint FKE0B4B86CDFCC9831 
         foreign key (id) 
         references Connector;

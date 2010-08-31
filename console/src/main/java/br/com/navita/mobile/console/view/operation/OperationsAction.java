@@ -34,7 +34,7 @@ public class OperationsAction extends OperationRawActionSupport {
 	}
 	
 	public String prepareCreate() throws Exception{
-		operation = (Operation) Class.forName( "br.com.navita.mobile.console.domain.entity." + operationType).newInstance();
+		operation = (Operation) Class.forName( "br.com.navita.mobile.console.domain." + operationType).newInstance();
 		operation.setConnector(baseConnectorService.findById(connectorId));
 		return operationType; 
 	}
