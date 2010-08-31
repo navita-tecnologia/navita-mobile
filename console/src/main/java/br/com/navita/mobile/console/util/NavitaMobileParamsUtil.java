@@ -2,51 +2,27 @@ package br.com.navita.mobile.console.util;
 
 import java.net.URLDecoder;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import br.com.navita.mobile.console.domain.MobileApplication;
+import br.com.navita.mobile.console.EncryptionAware;
 
 
 
-public abstract class NavitaMobileParamsUtil {
-	private static String PRIVATE_KEY = "RrSe916DqrdQANfFKaQkgQ==";
+public abstract class NavitaMobileParamsUtil implements EncryptionAware{
+	
+	
 	private static final Logger LOG = Logger.getLogger(NavitaMobileParamsUtil.class.getName());
-	public static Map<String, Object> extractFromRequestMap(MobileApplication app, Map<?, ?> params) {
-		LOG.log(Level.INFO,"Extracting parameters for "+app.getId());
-		Map<String, Object> result = new HashMap<String, Object>();
+	
+	
 
-		for(Iterator<?> it = params.keySet().iterator();it.hasNext();){
-			String key = it.next().toString();
-			String[] values = (String[]) params.get(key);
-			
-			if("raw".equals(key)){
-				if(!"plain".equals(values[0])){
-					result.putAll(decodeParams(PRIVATE_KEY,((String[]) params.get(key))[0]));
-					continue;
-				}
-			}
-			
-
-			if(values.length == 1){
-				result.put(key, values[0]);
-			}else{
-				result.put(key, values);
-			}
-		}
-
-		LOG.log(Level.INFO,"Extracting parameters for "+app.getId()+" done");
-		return result;
-	}
-
-	private static Map<String,Object> decodeParams(String privateKey, String hash)  {		
+	public static Map<String,Object> decodeParams(String hash)  {		
 		Map<String, Object> result = new HashMap<String, Object>();
 		String plain = null;
 		try {
-			plain = Decryptor.decrypt(hash,privateKey);			
+			plain = Decryptor.decrypt(hash,PRIVATE_KEY);			
 		} catch (DecryptorException e) {
 			LOG.log(Level.SEVERE,"Error decripting raw parameters",e);
 			return null;

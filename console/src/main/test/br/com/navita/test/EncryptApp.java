@@ -9,7 +9,7 @@ public class EncryptApp {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
-		System.out.println(Encryptor.encrypt("user=mguedes&password=navita", "RrSe916DqrdQANfFKaQkgQ=="));
+		System.out.println(Encryptor.encrypt("login=marcio.guedes&password=success567", "RrSe916DqrdQANfFKaQkgQ=="));
 	}
 
 }

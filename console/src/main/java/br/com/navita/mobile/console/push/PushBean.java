@@ -13,6 +13,8 @@ public class PushBean implements Serializable {
 	private String attributeCode;
 	private String rawData;
 	
+
+	
 	
 	public String getPin() {
 		return pin;

@@ -2,7 +2,7 @@ package br.com.navita.mobile.console.view;
 
 import org.apache.struts2.dispatcher.DefaultActionSupport;
 
-import br.com.navita.mobile.console.bizz.SecurityService;
+import br.com.navita.mobile.console.service.SecurityService;
 
 
 public class AdminAction extends DefaultActionSupport {

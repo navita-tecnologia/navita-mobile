@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.bizz;
+package br.com.navita.mobile.console.util;
 
 import java.util.Enumeration;
 import java.util.logging.Logger;

@@ -2,15 +2,13 @@ package br.com.navita.mobile.console.push;
 
 import java.io.IOException;
 
-import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import org.apache.commons.httpclient.NameValuePair;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.navita.mobile.console.dao.MobileApplicationDAO;
-import br.com.navita.mobile.console.domain.MobileApplication;
+import br.com.navita.mobile.console.dao.jpa.BesServer;
 import br.com.navita.mobile.console.exception.PushException;
+import br.com.navita.mobile.console.service.BesPushService;
 import br.com.navita.mobile.console.util.HttpClientUtil;
 import br.com.navita.mobile.console.util.NavitaAutowiringSupport;
 
@@ -21,23 +19,20 @@ public class PushGatewayImpl extends NavitaAutowiringSupport implements PushGate
 		initialize();
 	}
 	
-	@Autowired
-	private MobileApplicationDAO mobileApplicationDAO;
+	private BesPushService besPushService;
 	
-	@WebMethod(exclude = true)
-	public void setMobileApplicationDAO(
-			MobileApplicationDAO mobileApplicationDAO) {
-		this.mobileApplicationDAO = mobileApplicationDAO;
+	public void setBesPushService(BesPushService besPushService) {
+		this.besPushService = besPushService;
 	}
 	
+		
 	@Override
 	public PushResult execute(PushBean pushBean) throws PushException {			
-		pushBean.getApplicationId();
-		MobileApplication app = mobileApplicationDAO.findById(pushBean.getApplicationId());
-		String port = app.getExecutorByName("port").getConfiguration();
+		BesServer besServer = besPushService.getBesServer(pushBean.getApplicationId());		
+		
 		PushResult result = new PushResult();
 		try {
-			String pushResult = doPush(app.getUrl(), pushBean.getPin(), port, new NameValuePair[]{
+			String pushResult = doPush(besServer.getUrl(), pushBean.getPin(), besServer.getPort(), new NameValuePair[]{
 				new NameValuePair("rawData",pushBean.getRawData()),
 				new NameValuePair("attributeCode",pushBean.getAttributeCode())
 				});

@@ -28,16 +28,17 @@ import jcifs.smb.NtlmPasswordAuthentication;
 import jcifs.smb.SmbException;
 import jcifs.smb.SmbSession;
 
-import br.com.navita.mobile.console.bizz.DcResolver;
+import br.com.navita.mobile.console.EncryptionAware;
 import br.com.navita.mobile.console.domain.DomainControler;
-import br.com.navita.mobile.console.domain.LdapConfig;
+
 import br.com.navita.mobile.console.domain.LoginResult;
 import br.com.navita.mobile.console.domain.UserGroup;
+import br.com.navita.mobile.console.util.DcResolver;
 import br.com.navita.mobile.console.util.Decryptor;
 import br.com.navita.mobile.console.util.DecryptorException;
 
 @Entity
-public class AdAuthContainer extends AuthContainer{
+public class AdAuthContainer extends AuthContainer implements EncryptionAware{
 	
 	@Transient
 	private static final Logger LOG = Logger.getLogger(AdAuthContainer.class.getName());
@@ -250,7 +251,7 @@ public class AdAuthContainer extends AuthContainer{
 		String adminName = this.domainUser;		
 		String adminPassword = "";
 		try {
-			adminPassword = Decryptor.decrypt(this.domainUserPassword, LdapConfig.DEFAULT_PRIVATE_KEY);
+			adminPassword = Decryptor.decrypt(this.domainUserPassword, PRIVATE_KEY);
 		} catch (DecryptorException e) {
 
 		}

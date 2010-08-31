@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.bizz;
+package br.com.navita.mobile.console.service.impl;
 
 import java.sql.SQLException;
 
@@ -6,6 +6,7 @@ import org.springframework.security.authentication.encoding.MessageDigestPasswor
 
 import br.com.navita.mobile.console.dao.SecurityDAO;
 import br.com.navita.mobile.console.exception.MobileConsoleException;
+import br.com.navita.mobile.console.service.SecurityService;
 
 public class SecurityServiceImpl implements SecurityService {
 	

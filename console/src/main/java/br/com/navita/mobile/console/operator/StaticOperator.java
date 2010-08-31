@@ -19,19 +19,19 @@ public class StaticOperator implements Operator{
 		MobileBean bean = new MobileBean();
 		StaticOperation staticOperation = (StaticOperation) operation;	
 		
-		if(staticOperation.getMessage() != null){
+		if(staticOperation.getMessage() != null && ! staticOperation.getMessage().isEmpty() ){
 			bean.setMessage(staticOperation.getMessage());
 		}
-		if(staticOperation.getToken() != null){
+		if(staticOperation.getToken() != null && ! staticOperation.getToken().isEmpty()){
 			bean.setToken(staticOperation.getToken());
 		}
 		
 		bean.setResultCode(staticOperation.getResultCode());
 		
-		if(staticOperation.getObject() != null){
+		if(staticOperation.getObject() != null  && ! staticOperation.getObject().isEmpty()){
 			bean.setObject(staticOperation.getObject());
 		}
-		if(staticOperation.getList() != null){
+		if(staticOperation.getList() != null  && ! staticOperation.getList().isEmpty()){
 			JSONArray array = new JSONArray(staticOperation.getList());
 			List<Object> list = new ArrayList<Object>();
 			bean.setList(list);

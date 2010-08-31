@@ -2,10 +2,12 @@ package br.com.navita.mobile.console.view.processor;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import net.sf.json.JSONSerializer;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts2.interceptor.ParameterAware;
 
 import br.com.navita.mobile.console.domain.LoginResult;
@@ -23,6 +25,7 @@ import br.com.navita.mobile.console.operator.sap.SapAuthContainer;
 import br.com.navita.mobile.console.service.BaseConnectorService;
 import br.com.navita.mobile.console.service.BaseOperationService;
 import br.com.navita.mobile.console.util.LicenseHelper;
+import br.com.navita.mobile.console.util.NavitaMobileParamsUtil;
 import br.com.navita.mobile.console.view.RawActionSupport;
 import br.com.navita.mobile.console.view.rawdata.ProcessorRaw;
 import br.com.navita.mobile.domain.MobileBean;
@@ -38,7 +41,7 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	private String carrier;
 	private String device;
 	private String brand;
-	
+
 	private String user;
 	private String login;
 	private String password;
@@ -163,7 +166,10 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 
 	public void setRaw(String raw) {
 		this.raw = raw;
+		decodeRaw(raw);
 	}	
+
+
 
 	public InputStream getInStream() {
 		return inStream;
@@ -180,8 +186,8 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	public void setRetType(String retType) {
 		this.retType = retType;
 	}
-	
-	
+
+
 
 	public String getUser() {
 		return user;
@@ -222,10 +228,11 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 
 	}
 
-
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public String execute() {		
+		long start = System.currentTimeMillis();
 		try {
 			MobileBean obj = new MobileBean();
 			prepareAndCheckParameters();
@@ -239,14 +246,14 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 					throw new InvalidLicenseKeyException("Connector license bundle not found");
 				}
 				licenseBundleId = connector.getLicenseBundle().getId();
-				
+
 				if(connector.getAuthContainer() != null){//login no AD
 					obj = doActiveDirectoryLogin(connector);
 				}else{//login do conector
 					obj = doConnectorLogin(connector);
 				}
-				
-				
+
+
 			}else{
 				if(! isExternalOperation){//Operacao do conector 
 					Operation operation = null;
@@ -260,7 +267,7 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 					}else{
 						licenseBundleId = connector.getLicenseBundle().getId();
 					}
-					
+
 					obj = operator.doOperation(operation, (Map<String, Object>) params);
 
 				}else{//Operacao externa
@@ -271,16 +278,16 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 
 			licenseHelper.registerLicense(licenseBundleId,this); 	//license use
 			registerAction(); 	//statistics
-			
+
 			if(obj == null){
 				throw new InvalidResultBeanException("Não foi possível resolver a operação "+operationTag+" no conector "+connectorTag);
 			}
-			
-			
-			serializeBean(obj);	
+
+
+			serializeBean(obj,start);	
 
 		} catch (Throwable t) {
-			serializeBean(failBean(t));			
+			serializeBean(failBean(t),start);			
 
 		}
 
@@ -295,7 +302,7 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 		}
 		return null;
 	}
-	
+
 	private MobileBean processLoginContainer(AuthContainer authContainer){
 		MobileBean bean = new MobileBean();
 		String loginToUse = login;
@@ -306,9 +313,9 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 		if(null == passwdToUse){//tenta usar 'password'			
 			passwdToUse = password;
 		}
-		
+
 		LoginResult result = authContainer.login(loginToUse, passwdToUse);
-		
+
 		bean.setMessage(result.getMessage());
 		bean.setResultCode(result.isLogged()?0:1);
 		bean.setList(result.getGroups());		
@@ -323,12 +330,14 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 			//TODO: resolver a questao do token remoto
 			bean.setToken(token);	
 		}
-			
+
 		return bean;
 	}
 
-	private void serializeBean(MobileBean bean) {
+	private void serializeBean(MobileBean bean,long start) {
 		byte[] buff = null;
+		long total = System.currentTimeMillis() - start;
+		bean.setProcessingTime(total);
 		buff = JSONSerializer.toJSON(bean).toString().getBytes();		
 		setInStream(new ByteArrayInputStream(buff));		
 	}
@@ -355,11 +364,40 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 		return bean;
 	}
 
+	private void decodeRaw(String raw2) {
+		if(raw2 == null || raw2.isEmpty()){
+			return;
+		}
+		Map<String, Object> processedParams = NavitaMobileParamsUtil.decodeParams(raw2);
+		try {
+			BeanUtils.populate(this, processedParams);
+		} catch (IllegalAccessException e) {
+			
+		} catch (InvocationTargetException e) {
+			
+		}
 
+	}
 
 
 	private void prepareAndCheckParameters() throws InvalidDeviceDataException {
-
+		if(pin == null || pin.isEmpty()){
+			throw new InvalidDeviceDataException("PIN parameter not found");
+		}
+		if(email == null || email.isEmpty() ){
+			throw new InvalidDeviceDataException("EMAIL parameter not found");
+		}
+		if( device == null || device.isEmpty()){
+			throw new InvalidDeviceDataException("DEVICE parameter not found");
+		}
+		
+		if(brand == null || brand.isEmpty() ){
+			throw new InvalidDeviceDataException("BRAND parameter not found");
+		}
+		
+		if(carrier == null || carrier.isEmpty()){
+			throw new InvalidDeviceDataException("CARRIER parameter not found");
+		}
 
 	}
 
