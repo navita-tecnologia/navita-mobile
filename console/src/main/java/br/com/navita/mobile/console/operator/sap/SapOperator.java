@@ -9,11 +9,11 @@ import com.sap.mw.jco.JCO.Function;
 import com.sap.mw.jco.JCO.ParameterList;
 import com.sap.mw.jco.JCO.Table;
 
-import br.com.navita.mobile.console.domain.entity.Operation;
-import br.com.navita.mobile.console.domain.entity.SapFunctionOperation;
-import br.com.navita.mobile.console.domain.entity.SapParameter;
-import br.com.navita.mobile.console.domain.entity.SapRow;
-import br.com.navita.mobile.console.domain.entity.SapTable;
+import br.com.navita.mobile.console.domain.Operation;
+import br.com.navita.mobile.console.domain.SapFunctionOperation;
+import br.com.navita.mobile.console.domain.SapParameter;
+import br.com.navita.mobile.console.domain.SapRow;
+import br.com.navita.mobile.console.domain.SapTable;
 import br.com.navita.mobile.console.exception.SapGatewayException;
 import br.com.navita.mobile.console.operator.Operator;
 import br.com.navita.mobile.domain.MobileBean;

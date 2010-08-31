@@ -6,7 +6,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.com.navita.mobile.console.dao.jpa.OperationRepository;
-import br.com.navita.mobile.console.domain.entity.Operation;
+import br.com.navita.mobile.console.domain.Operation;
 
 public class GenericOperationDAO<T extends Operation> extends GenericJpaDAO<Operation> implements OperationRepository<T>{
 

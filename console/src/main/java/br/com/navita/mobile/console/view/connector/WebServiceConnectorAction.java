@@ -1,6 +1,6 @@
 package br.com.navita.mobile.console.view.connector;
 
-import br.com.navita.mobile.console.domain.entity.WebServiceConnector;
+import br.com.navita.mobile.console.domain.WebServiceConnector;
 import br.com.navita.mobile.console.service.ConnectorService;
 import br.com.navita.mobile.console.view.rawdata.WebServiceConnectorRaw;
 

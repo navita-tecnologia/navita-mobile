@@ -3,10 +3,10 @@ package br.com.navita.mobile.console.view;
 import org.apache.struts2.dispatcher.DefaultActionSupport;
 
 import br.com.navita.mobile.console.dao.jpa.GenericRepository;
-import br.com.navita.mobile.console.domain.entity.Connector;
-import br.com.navita.mobile.console.domain.entity.LicenseBundle;
-import br.com.navita.mobile.console.domain.entity.LicenseBundleType;
-import br.com.navita.mobile.console.domain.entity.StaticConnector;
+import br.com.navita.mobile.console.domain.Connector;
+import br.com.navita.mobile.console.domain.LicenseBundle;
+import br.com.navita.mobile.console.domain.LicenseBundleType;
+import br.com.navita.mobile.console.domain.StaticConnector;
 
 public class TesteAction extends DefaultActionSupport{
 

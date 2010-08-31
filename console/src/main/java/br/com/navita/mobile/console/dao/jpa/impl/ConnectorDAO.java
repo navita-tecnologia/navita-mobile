@@ -4,7 +4,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import br.com.navita.mobile.console.dao.jpa.ConnectorRepository;
-import br.com.navita.mobile.console.domain.entity.Connector;
+import br.com.navita.mobile.console.domain.Connector;
 
 public class ConnectorDAO extends GenericJpaDAO<Connector> implements ConnectorRepository<Connector> {
 

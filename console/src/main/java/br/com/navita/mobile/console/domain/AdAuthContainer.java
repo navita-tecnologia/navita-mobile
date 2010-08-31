@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.domain.entity;
+package br.com.navita.mobile.console.domain;
 
 import java.net.UnknownHostException;
 import java.text.MessageFormat;
@@ -29,10 +29,7 @@ import jcifs.smb.SmbException;
 import jcifs.smb.SmbSession;
 
 import br.com.navita.mobile.console.EncryptionAware;
-import br.com.navita.mobile.console.domain.DomainControler;
 
-import br.com.navita.mobile.console.domain.LoginResult;
-import br.com.navita.mobile.console.domain.UserGroup;
 import br.com.navita.mobile.console.util.DcResolver;
 import br.com.navita.mobile.console.util.Decryptor;
 import br.com.navita.mobile.console.util.DecryptorException;

@@ -6,8 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.navita.mobile.console.EncryptionAware;
 import br.com.navita.mobile.console.dao.jpa.GenericRepository;
-import br.com.navita.mobile.console.domain.entity.AdAuthContainer;
-import br.com.navita.mobile.console.domain.entity.AuthContainer;
+import br.com.navita.mobile.console.domain.AdAuthContainer;
+import br.com.navita.mobile.console.domain.AuthContainer;
 import br.com.navita.mobile.console.exception.EntityNotFoundException;
 import br.com.navita.mobile.console.util.Encryptor;
 import br.com.navita.mobile.console.view.rawdata.AdAuthContainerRaw;

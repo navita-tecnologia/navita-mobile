@@ -1,6 +1,6 @@
 package br.com.navita.mobile.console.view.connector;
 
-import br.com.navita.mobile.console.domain.entity.EjbConnector;
+import br.com.navita.mobile.console.domain.EjbConnector;
 import br.com.navita.mobile.console.service.ConnectorService;
 import br.com.navita.mobile.console.view.rawdata.EjbConnectorRaw;
 

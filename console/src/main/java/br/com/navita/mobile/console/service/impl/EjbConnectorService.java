@@ -3,7 +3,7 @@ package br.com.navita.mobile.console.service.impl;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.navita.mobile.console.dao.jpa.GenericRepository;
-import br.com.navita.mobile.console.domain.entity.EjbConnector;
+import br.com.navita.mobile.console.domain.EjbConnector;
 import br.com.navita.mobile.console.exception.EntityNotFoundException;
 import br.com.navita.mobile.console.service.ConnectorService;
 import br.com.navita.mobile.console.view.rawdata.EjbConnectorRaw;

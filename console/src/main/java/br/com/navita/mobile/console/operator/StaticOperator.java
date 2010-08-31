@@ -7,8 +7,8 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import br.com.navita.mobile.console.domain.entity.Operation;
-import br.com.navita.mobile.console.domain.entity.StaticOperation;
+import br.com.navita.mobile.console.domain.Operation;
+import br.com.navita.mobile.console.domain.StaticOperation;
 import br.com.navita.mobile.domain.MobileBean;
 
 public class StaticOperator implements Operator{

@@ -2,8 +2,8 @@ package br.com.navita.mobile.console.view.connector;
 
 import java.util.List;
 
-import br.com.navita.mobile.console.domain.entity.AuthContainer;
-import br.com.navita.mobile.console.domain.entity.Connector;
+import br.com.navita.mobile.console.domain.AuthContainer;
+import br.com.navita.mobile.console.domain.Connector;
 
 public class ConnectorsAction extends ConnectorRawActionSupport {
 	

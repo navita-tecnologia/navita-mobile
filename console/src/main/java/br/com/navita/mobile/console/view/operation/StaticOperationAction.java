@@ -1,6 +1,6 @@
 package br.com.navita.mobile.console.view.operation;
 
-import br.com.navita.mobile.console.domain.entity.StaticOperation;
+import br.com.navita.mobile.console.domain.StaticOperation;
 import br.com.navita.mobile.console.service.OperationService;
 import br.com.navita.mobile.console.view.rawdata.StaticOperationRaw;
 

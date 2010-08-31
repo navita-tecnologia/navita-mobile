@@ -7,8 +7,8 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import br.com.navita.mobile.console.dao.jpa.LicenseActivationRepository;
-import br.com.navita.mobile.console.domain.entity.LicenseActivation;
-import br.com.navita.mobile.console.domain.entity.util.SearchCriteria;
+import br.com.navita.mobile.console.domain.LicenseActivation;
+import br.com.navita.mobile.console.domain.util.SearchCriteria;
 
 
 public class LicenseActivationDAO extends GenericJpaDAO<LicenseActivation> implements LicenseActivationRepository<LicenseActivation>{

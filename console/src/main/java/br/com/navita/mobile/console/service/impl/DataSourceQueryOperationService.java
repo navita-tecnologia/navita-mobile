@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.navita.mobile.console.dao.jpa.OperationRepository;
-import br.com.navita.mobile.console.domain.entity.DataSourceQueryOperation;
+import br.com.navita.mobile.console.domain.DataSourceQueryOperation;
 import br.com.navita.mobile.console.exception.EntityNotFoundException;
 import br.com.navita.mobile.console.service.OperationService;
 import br.com.navita.mobile.console.view.rawdata.DataSourceQueryOperationRaw;

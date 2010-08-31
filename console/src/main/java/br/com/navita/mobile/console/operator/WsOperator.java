@@ -2,7 +2,7 @@ package br.com.navita.mobile.console.operator;
 
 import java.util.Map;
 
-import br.com.navita.mobile.console.domain.entity.Connector;
+import br.com.navita.mobile.console.domain.Connector;
 import br.com.navita.mobile.domain.MobileBean;
 
 public class WsOperator implements ConnectorOperator{

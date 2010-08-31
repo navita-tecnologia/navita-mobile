@@ -5,10 +5,10 @@ import java.util.logging.Logger;
 
 import javax.naming.NamingException;
 
+import br.com.navita.mobile.console.domain.AuthContainer;
 import br.com.navita.mobile.console.domain.LoginResult;
+import br.com.navita.mobile.console.domain.SapConnector;
 import br.com.navita.mobile.console.domain.UserGroup;
-import br.com.navita.mobile.console.domain.entity.AuthContainer;
-import br.com.navita.mobile.console.domain.entity.SapConnector;
 import br.com.navita.mobile.console.exception.SapGatewayException;
 
 public class SapAuthContainer extends AuthContainer{

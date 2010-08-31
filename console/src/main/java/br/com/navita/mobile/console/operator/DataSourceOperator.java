@@ -11,9 +11,9 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jndi.JndiObjectFactoryBean;
 
-import br.com.navita.mobile.console.domain.entity.DataSourceConnector;
-import br.com.navita.mobile.console.domain.entity.DataSourceQueryOperation;
-import br.com.navita.mobile.console.domain.entity.Operation;
+import br.com.navita.mobile.console.domain.DataSourceConnector;
+import br.com.navita.mobile.console.domain.DataSourceQueryOperation;
+import br.com.navita.mobile.console.domain.Operation;
 import br.com.navita.mobile.domain.MobileBean;
 
 public class DataSourceOperator implements Operator{

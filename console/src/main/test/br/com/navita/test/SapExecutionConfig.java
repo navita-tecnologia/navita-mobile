@@ -1,7 +1,7 @@
 package br.com.navita.test;
 
-import br.com.navita.mobile.console.domain.entity.SapParameter;
-import br.com.navita.mobile.console.domain.entity.SapTable;
+import br.com.navita.mobile.console.domain.SapParameter;
+import br.com.navita.mobile.console.domain.SapTable;
 
 public class SapExecutionConfig {
 

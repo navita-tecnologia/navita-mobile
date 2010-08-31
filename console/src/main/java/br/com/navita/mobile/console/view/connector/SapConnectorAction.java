@@ -1,6 +1,6 @@
 package br.com.navita.mobile.console.view.connector;
 
-import br.com.navita.mobile.console.domain.entity.SapConnector;
+import br.com.navita.mobile.console.domain.SapConnector;
 import br.com.navita.mobile.console.service.ConnectorService;
 import br.com.navita.mobile.console.view.rawdata.SapConnectorRaw;
 

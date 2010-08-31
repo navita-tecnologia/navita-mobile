@@ -1,6 +1,6 @@
 package br.com.navita.mobile.console.service;
 
-import br.com.navita.mobile.console.domain.entity.Connector;
+import br.com.navita.mobile.console.domain.Connector;
 import br.com.navita.mobile.console.exception.EntityNotFoundException;
 import br.com.navita.mobile.console.view.rawdata.ConnectorRaw;
 

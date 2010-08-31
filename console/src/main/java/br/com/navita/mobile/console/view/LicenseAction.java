@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.apache.struts2.dispatcher.DefaultActionSupport;
 
-import br.com.navita.mobile.console.domain.entity.LicenseActivation;
-import br.com.navita.mobile.console.domain.entity.LicenseBundle;
-import br.com.navita.mobile.console.domain.entity.LicenseBundleType;
-import br.com.navita.mobile.console.domain.entity.util.SearchCriteria;
-import br.com.navita.mobile.console.domain.entity.util.SearchResultPage;
+import br.com.navita.mobile.console.domain.LicenseActivation;
+import br.com.navita.mobile.console.domain.LicenseBundle;
+import br.com.navita.mobile.console.domain.LicenseBundleType;
+import br.com.navita.mobile.console.domain.util.SearchCriteria;
+import br.com.navita.mobile.console.domain.util.SearchResultPage;
 import br.com.navita.mobile.console.service.LicenseService;
 import br.com.navita.mobile.console.view.rawdata.LicenseBundleRaw;
 

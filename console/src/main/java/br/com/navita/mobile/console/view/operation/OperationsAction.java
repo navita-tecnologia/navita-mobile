@@ -1,6 +1,6 @@
 package br.com.navita.mobile.console.view.operation;
 
-import br.com.navita.mobile.console.domain.entity.Operation;
+import br.com.navita.mobile.console.domain.Operation;
 
 public class OperationsAction extends OperationRawActionSupport {
 

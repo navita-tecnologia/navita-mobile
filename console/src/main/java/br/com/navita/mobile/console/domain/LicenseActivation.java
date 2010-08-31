@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.domain.entity;
+package br.com.navita.mobile.console.domain;
 
 import java.util.Date;
 

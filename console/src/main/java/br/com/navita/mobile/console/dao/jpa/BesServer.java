@@ -2,7 +2,7 @@ package br.com.navita.mobile.console.dao.jpa;
 
 import javax.persistence.Column;
 
-import br.com.navita.mobile.console.domain.entity.BaseEntity;
+import br.com.navita.mobile.console.domain.BaseEntity;
 
 public class BesServer extends BaseEntity {
 	

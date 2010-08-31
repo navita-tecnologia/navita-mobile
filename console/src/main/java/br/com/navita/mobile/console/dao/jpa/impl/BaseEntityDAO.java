@@ -6,7 +6,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.com.navita.mobile.console.dao.jpa.BaseEntityRepository;
-import br.com.navita.mobile.console.domain.entity.BaseEntity;
+import br.com.navita.mobile.console.domain.BaseEntity;
 import br.com.navita.mobile.console.exception.EntityNotFoundException;
 
 /**

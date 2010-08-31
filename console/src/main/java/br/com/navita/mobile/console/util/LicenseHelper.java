@@ -5,9 +5,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import br.com.navita.mobile.console.EncryptionAware;
-import br.com.navita.mobile.console.domain.entity.Connector;
-import br.com.navita.mobile.console.domain.entity.LicenseBundle;
-import br.com.navita.mobile.console.domain.entity.Operation;
+import br.com.navita.mobile.console.domain.Connector;
+import br.com.navita.mobile.console.domain.LicenseBundle;
+import br.com.navita.mobile.console.domain.Operation;
 import br.com.navita.mobile.console.exception.EntityNotFoundException;
 import br.com.navita.mobile.console.exception.InvalidDeviceDataException;
 import br.com.navita.mobile.console.exception.InvalidLicenseKeyException;

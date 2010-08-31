@@ -10,8 +10,8 @@ import net.sf.json.JSONObject;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.NameValuePair;
 
-import br.com.navita.mobile.console.domain.entity.Connector;
-import br.com.navita.mobile.console.domain.entity.ProxyConnector;
+import br.com.navita.mobile.console.domain.Connector;
+import br.com.navita.mobile.console.domain.ProxyConnector;
 import br.com.navita.mobile.console.util.HttpClientUtil;
 import br.com.navita.mobile.domain.MobileBean;
 

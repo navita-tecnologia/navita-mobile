@@ -4,14 +4,14 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.navita.mobile.console.domain.entity.Connector;
-import br.com.navita.mobile.console.domain.entity.DataSourceQueryOperation;
-import br.com.navita.mobile.console.domain.entity.EjbConnector;
-import br.com.navita.mobile.console.domain.entity.Operation;
-import br.com.navita.mobile.console.domain.entity.ProxyConnector;
-import br.com.navita.mobile.console.domain.entity.SapFunctionOperation;
-import br.com.navita.mobile.console.domain.entity.StaticOperation;
-import br.com.navita.mobile.console.domain.entity.WebServiceConnector;
+import br.com.navita.mobile.console.domain.Connector;
+import br.com.navita.mobile.console.domain.DataSourceQueryOperation;
+import br.com.navita.mobile.console.domain.EjbConnector;
+import br.com.navita.mobile.console.domain.Operation;
+import br.com.navita.mobile.console.domain.ProxyConnector;
+import br.com.navita.mobile.console.domain.SapFunctionOperation;
+import br.com.navita.mobile.console.domain.StaticOperation;
+import br.com.navita.mobile.console.domain.WebServiceConnector;
 import br.com.navita.mobile.domain.MobileBean;
 
 public class GenericOperator implements ConnectorOperator,Operator {

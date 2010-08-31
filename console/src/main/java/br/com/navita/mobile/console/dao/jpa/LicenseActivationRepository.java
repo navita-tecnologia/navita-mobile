@@ -2,8 +2,8 @@ package br.com.navita.mobile.console.dao.jpa;
 
 import java.util.List;
 
-import br.com.navita.mobile.console.domain.entity.LicenseActivation;
-import br.com.navita.mobile.console.domain.entity.util.SearchCriteria;
+import br.com.navita.mobile.console.domain.LicenseActivation;
+import br.com.navita.mobile.console.domain.util.SearchCriteria;
 
 
 public interface LicenseActivationRepository<T extends LicenseActivation> extends GenericRepository<LicenseActivation>{

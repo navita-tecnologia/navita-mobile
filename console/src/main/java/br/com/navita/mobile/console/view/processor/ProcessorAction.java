@@ -10,11 +10,11 @@ import net.sf.json.JSONSerializer;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts2.interceptor.ParameterAware;
 
+import br.com.navita.mobile.console.domain.AuthContainer;
+import br.com.navita.mobile.console.domain.Connector;
 import br.com.navita.mobile.console.domain.LoginResult;
-import br.com.navita.mobile.console.domain.entity.AuthContainer;
-import br.com.navita.mobile.console.domain.entity.Connector;
-import br.com.navita.mobile.console.domain.entity.Operation;
-import br.com.navita.mobile.console.domain.entity.SapConnector;
+import br.com.navita.mobile.console.domain.Operation;
+import br.com.navita.mobile.console.domain.SapConnector;
 import br.com.navita.mobile.console.exception.InvalidDeviceDataException;
 import br.com.navita.mobile.console.exception.InvalidLicenseKeyException;
 import br.com.navita.mobile.console.exception.InvalidResultBeanException;

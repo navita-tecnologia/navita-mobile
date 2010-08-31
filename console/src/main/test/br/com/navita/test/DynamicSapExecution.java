@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import br.com.navita.mobile.console.domain.entity.SapParameter;
-import br.com.navita.mobile.console.domain.entity.SapRow;
-import br.com.navita.mobile.console.domain.entity.SapTable;
+import br.com.navita.mobile.console.domain.SapParameter;
+import br.com.navita.mobile.console.domain.SapRow;
+import br.com.navita.mobile.console.domain.SapTable;
 import br.com.navita.mobile.console.exception.SapGatewayException;
 import br.com.navita.mobile.console.operator.sap.PoolManager;
 import br.com.navita.mobile.domain.MobileBean;

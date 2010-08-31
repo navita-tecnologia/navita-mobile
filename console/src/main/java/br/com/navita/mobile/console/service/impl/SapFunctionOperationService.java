@@ -6,11 +6,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.navita.mobile.console.dao.jpa.GenericRepository;
 import br.com.navita.mobile.console.dao.jpa.OperationRepository;
-import br.com.navita.mobile.console.domain.entity.SapFunctionOperation;
-import br.com.navita.mobile.console.domain.entity.SapParameter;
-import br.com.navita.mobile.console.domain.entity.SapRow;
-import br.com.navita.mobile.console.domain.entity.SapTable;
-import br.com.navita.mobile.console.domain.entity.SapTableField;
+import br.com.navita.mobile.console.domain.SapFunctionOperation;
+import br.com.navita.mobile.console.domain.SapParameter;
+import br.com.navita.mobile.console.domain.SapRow;
+import br.com.navita.mobile.console.domain.SapTable;
+import br.com.navita.mobile.console.domain.SapTableField;
 import br.com.navita.mobile.console.exception.EntityNotFoundException;
 import br.com.navita.mobile.console.view.rawdata.SapFieldRaw;
 import br.com.navita.mobile.console.view.rawdata.SapFunctionOperationRaw;

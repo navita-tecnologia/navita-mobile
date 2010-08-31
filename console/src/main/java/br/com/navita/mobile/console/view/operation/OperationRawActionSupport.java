@@ -2,9 +2,9 @@ package br.com.navita.mobile.console.view.operation;
 
 import java.util.List;
 
-import br.com.navita.mobile.console.domain.entity.Connector;
-import br.com.navita.mobile.console.domain.entity.LicenseBundle;
-import br.com.navita.mobile.console.domain.entity.Operation;
+import br.com.navita.mobile.console.domain.Connector;
+import br.com.navita.mobile.console.domain.LicenseBundle;
+import br.com.navita.mobile.console.domain.Operation;
 import br.com.navita.mobile.console.service.BaseConnectorService;
 import br.com.navita.mobile.console.service.BaseOperationService;
 import br.com.navita.mobile.console.service.LicenseService;

@@ -6,11 +6,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.navita.mobile.console.dao.jpa.GenericRepository;
 import br.com.navita.mobile.console.dao.jpa.LicenseActivationRepository;
-import br.com.navita.mobile.console.domain.entity.LicenseActivation;
-import br.com.navita.mobile.console.domain.entity.LicenseBundle;
-import br.com.navita.mobile.console.domain.entity.LicenseBundleType;
-import br.com.navita.mobile.console.domain.entity.util.SearchCriteria;
-import br.com.navita.mobile.console.domain.entity.util.SearchResultPage;
+import br.com.navita.mobile.console.domain.LicenseActivation;
+import br.com.navita.mobile.console.domain.LicenseBundle;
+import br.com.navita.mobile.console.domain.LicenseBundleType;
+import br.com.navita.mobile.console.domain.util.SearchCriteria;
+import br.com.navita.mobile.console.domain.util.SearchResultPage;
 import br.com.navita.mobile.console.exception.EntityNotFoundException;
 import br.com.navita.mobile.console.service.LicenseService;
 import br.com.navita.mobile.console.view.rawdata.LicenseActivationRaw;
@@ -25,7 +25,7 @@ public class LicenseServiceImpl implements LicenseService {
 	private LicenseActivationRepository<LicenseActivation> licenseActivationRepository;
 	
 	public void setLicenseBundleTypeRepository(
-			GenericRepository<br.com.navita.mobile.console.domain.entity.LicenseBundleType> licenseBundleTypeRepository) {
+			GenericRepository<br.com.navita.mobile.console.domain.LicenseBundleType> licenseBundleTypeRepository) {
 		this.licenseBundleTypeRepository = licenseBundleTypeRepository;
 	}
 	

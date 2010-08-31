@@ -1,6 +1,6 @@
 package br.com.navita.mobile.console.view.connector;
 
-import br.com.navita.mobile.console.domain.entity.StaticConnector;
+import br.com.navita.mobile.console.domain.StaticConnector;
 import br.com.navita.mobile.console.service.ConnectorService;
 import br.com.navita.mobile.console.view.rawdata.ConnectorRaw;
 

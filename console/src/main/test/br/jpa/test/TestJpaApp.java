@@ -5,9 +5,9 @@ import javax.naming.NamingException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import br.com.navita.mobile.console.domain.entity.Connector;
-import br.com.navita.mobile.console.domain.entity.StaticConnector;
-import br.com.navita.mobile.console.domain.entity.StaticOperation;
+import br.com.navita.mobile.console.domain.Connector;
+import br.com.navita.mobile.console.domain.StaticConnector;
+import br.com.navita.mobile.console.domain.StaticOperation;
 import br.com.navita.mobile.console.service.BaseConnectorService;
 import br.com.navita.mobile.console.service.ConnectorService;
 import br.com.navita.mobile.console.service.OperationService;

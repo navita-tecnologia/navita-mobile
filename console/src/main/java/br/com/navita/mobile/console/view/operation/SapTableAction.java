@@ -3,7 +3,7 @@ package br.com.navita.mobile.console.view.operation;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.navita.mobile.console.domain.entity.SapTable;
+import br.com.navita.mobile.console.domain.SapTable;
 import br.com.navita.mobile.console.view.rawdata.SapFieldRaw;
 
 

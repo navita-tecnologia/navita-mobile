@@ -5,7 +5,7 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import br.com.navita.mobile.console.domain.entity.SapConnector;
+import br.com.navita.mobile.console.domain.SapConnector;
 import br.com.navita.mobile.console.exception.InvalidTokenSapGatewayException;
 import br.com.navita.mobile.console.exception.SapGatewayException;
 import br.com.navita.mobile.console.operator.sap.SapSession;

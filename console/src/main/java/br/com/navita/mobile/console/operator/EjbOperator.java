@@ -8,8 +8,8 @@ import java.util.logging.Logger;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import br.com.navita.mobile.console.domain.entity.Connector;
-import br.com.navita.mobile.console.domain.entity.EjbConnector;
+import br.com.navita.mobile.console.domain.Connector;
+import br.com.navita.mobile.console.domain.EjbConnector;
 import br.com.navita.mobile.domain.MobileBean;
 import br.com.navita.mobile.exception.ServiceNotFoundException;
 import br.com.navita.mobile.remote.EjbServiceFactory;
