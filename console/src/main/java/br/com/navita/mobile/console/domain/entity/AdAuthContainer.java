@@ -352,8 +352,13 @@ public class AdAuthContainer extends AuthContainer{
 		this.groupAttribute = groupAttribute;
 	}
 
+	public void setGroupFilter(String groupFilter) {
+		this.groupFilter = groupFilter;
+	}
 	
-	
+	public String getGroupFilter() {
+		return groupFilter;
+	}
 	
 	
 	

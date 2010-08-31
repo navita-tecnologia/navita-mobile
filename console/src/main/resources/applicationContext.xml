@@ -36,10 +36,10 @@
 	</bean>
 
 	<bean id="entityManagerFactory"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">		
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="mobiPU" />
-		<property name="dataSource" ref="dataSource" />	
-		<property name="persistenceXmlLocation" value="classpath:META-INF/mobile-persistence.xml"></property>	
+		<property name="dataSource" ref="dataSource" />
+		<property name="persistenceXmlLocation" value="classpath:META-INF/mobile-persistence.xml"></property>
 	</bean>
 
 
@@ -132,6 +132,13 @@
 		lazy-init="true">
 		<constructor-arg value="br.com.navita.mobile.console.domain.entity.SapRow" />
 	</bean>
+
+	<bean id="authContainerRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+		lazy-init="true">
+		<constructor-arg
+			value="br.com.navita.mobile.console.domain.entity.AuthContainer" />
+	</bean>
+
 	<!-- end repositories -->
 
 	<bean id="baseConnectorService"
@@ -166,6 +173,9 @@
 
 	<bean id="dataSourceQueryOperationService"
 		class="br.com.navita.mobile.console.service.impl.DataSourceQueryOperationService" />
+
+	<bean id="authContainerService"
+		class="br.com.navita.mobile.console.service.impl.AuthContainerService" />
 
 	<!-- end services -->
 
@@ -253,7 +263,11 @@
 
 	<bean id="httpClient" class="br.com.navita.mobile.console.util.HttpClientUtil" />
 
+	<bean id="licenseService"
+		class="br.com.navita.mobile.console.service.impl.LicenseServiceImpl" />
+
 	<!-- legacy  -->
+
 	<bean id="commonConfiguration"
 		class="br.com.navita.mobile.console.dao.NavitaMobileConfiguration"
 		init-method="setDelimiterParsingDisabled">
@@ -270,14 +284,11 @@
 	<bean id="ldapService" class="br.com.navita.mobile.console.bizz.LdapServiceImpl" />
 	<bean id="msLoginService" class="br.com.navita.mobile.console.bizz.MSWindowsLoginService" />
 	<bean id="ldapConfigDAO" class="br.com.navita.mobile.console.dao.LdapConfigDAO" />
-		
-	<bean id="licenseService"
-		class="br.com.navita.mobile.console.service.impl.LicenseServiceImpl" />
 
-	<bean id="sapMobileProcessor"
-		class="br.com.navita.mobile.console.legacy.processor.sap.SapMobileProcessor" />
-	
-	
+
+
+
+
 	<!-- end legacy -->
 
 

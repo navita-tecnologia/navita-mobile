@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import br.com.navita.mobile.console.EncryptionAware;
 import br.com.navita.mobile.console.domain.entity.Connector;
 import br.com.navita.mobile.console.domain.entity.LicenseBundle;
 import br.com.navita.mobile.console.domain.entity.Operation;
@@ -14,10 +15,10 @@ import br.com.navita.mobile.console.service.LicenseService;
 import br.com.navita.mobile.console.view.rawdata.LicenseActivationRaw;
 import br.com.navita.mobile.console.view.rawdata.ProcessorRaw;
 
-public  class LicenseHelper {
+public  class LicenseHelper implements EncryptionAware{
 
 	private static final Logger LOG = Logger.getLogger(LicenseHelper.class.getName());
-	private static String PRIVATE_KEY = "RrSe916DqrdQANfFKaQkgQ==";
+	
 
 	private LicenseService licenseService;
 	

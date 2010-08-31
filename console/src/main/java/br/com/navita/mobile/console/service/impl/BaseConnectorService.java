@@ -62,15 +62,19 @@ public class BaseConnectorService  implements br.com.navita.mobile.console.servi
 			connector.setLicenseBundle(null);
 		}
 		connector.setLicenseKey(raw.getLicenseKey());
-		if(raw.getAuthContainerId() != null){
+		if(raw.getAuthContainerId() != null && ! raw.getAuthContainerId().isEmpty()){
 			AuthContainer authContainer = authContainerService.findbyId(raw.getAuthContainerId());
 			connector.setAuthContainer(authContainer);
+		}else{
+			connector.setAuthContainer(null);
 		}
 		connector.setName(raw.getName());
 		connector.setTag(raw.getTag());
-		if(raw.getTokenConnectorId() != null){
+		if(raw.getTokenConnectorId() != null && ! raw.getTokenConnectorId().isEmpty()){
 			Connector tokenConnector = findById(raw.getTokenConnectorId());
 			connector.setTokenConnector(tokenConnector);
+		}else{
+			connector.setTokenConnector(null);
 		}
 	}
 

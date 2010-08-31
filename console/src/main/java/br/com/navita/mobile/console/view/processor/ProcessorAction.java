@@ -15,6 +15,7 @@ import br.com.navita.mobile.console.domain.entity.Operation;
 import br.com.navita.mobile.console.domain.entity.SapConnector;
 import br.com.navita.mobile.console.exception.InvalidDeviceDataException;
 import br.com.navita.mobile.console.exception.InvalidLicenseKeyException;
+import br.com.navita.mobile.console.exception.InvalidResultBeanException;
 import br.com.navita.mobile.console.exception.OperationNotFoundException;
 import br.com.navita.mobile.console.operator.ConnectorOperator;
 import br.com.navita.mobile.console.operator.Operator;
@@ -37,6 +38,11 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	private String carrier;
 	private String device;
 	private String brand;
+	
+	private String user;
+	private String login;
+	private String password;
+	private String passwd;
 
 
 	private InputStream inStream;	
@@ -174,6 +180,40 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	public void setRetType(String retType) {
 		this.retType = retType;
 	}
+	
+	
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getPasswd() {
+		return passwd;
+	}
+
+	public void setPasswd(String passwd) {
+		this.passwd = passwd;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -231,7 +271,12 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 
 			licenseHelper.registerLicense(licenseBundleId,this); 	//license use
 			registerAction(); 	//statistics
-
+			
+			if(obj == null){
+				throw new InvalidResultBeanException("Não foi possível resolver a operação "+operationTag+" no conector "+connectorTag);
+			}
+			
+			
 			serializeBean(obj);	
 
 		} catch (Throwable t) {
@@ -253,16 +298,16 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	
 	private MobileBean processLoginContainer(AuthContainer authContainer){
 		MobileBean bean = new MobileBean();
-		String login = (String) params.get("login");
-		if(null == login){//tenta usar 'user'			
-			login = (String) params.get("user");
+		String loginToUse = login;
+		if(null == loginToUse){//tenta usar 'user'			
+			loginToUse = user;
 		}
-		String passwd = (String) params.get("passwd");
-		if(null == passwd){//tenta usar 'password'			
-			passwd = (String) params.get("password");
+		String passwdToUse = passwd;
+		if(null == passwdToUse){//tenta usar 'password'			
+			passwdToUse = password;
 		}
 		
-		LoginResult result = authContainer.login(login, passwd);
+		LoginResult result = authContainer.login(loginToUse, passwdToUse);
 		
 		bean.setMessage(result.getMessage());
 		bean.setResultCode(result.isLogged()?0:1);
@@ -276,9 +321,9 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 		String token = "";
 		if(connector.getTokenConnector() != null){
 			//TODO: resolver a questao do token remoto
-			
+			bean.setToken(token);	
 		}
-		bean.setToken(token);		
+			
 		return bean;
 	}
 

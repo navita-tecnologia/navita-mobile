@@ -11,5 +11,10 @@ public interface ProcessorRaw extends RawData{
 	String getCarrier();
 	String getDevice();
 	String getBrand();
+	
+	String getLogin();
+	String getUser();
+	String getPassword();
+	String getPasswd();
 
 }

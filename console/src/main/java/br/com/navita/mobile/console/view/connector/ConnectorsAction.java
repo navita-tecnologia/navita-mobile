@@ -2,6 +2,7 @@ package br.com.navita.mobile.console.view.connector;
 
 import java.util.List;
 
+import br.com.navita.mobile.console.domain.entity.AuthContainer;
 import br.com.navita.mobile.console.domain.entity.Connector;
 
 public class ConnectorsAction extends ConnectorRawActionSupport {
@@ -27,6 +28,10 @@ public class ConnectorsAction extends ConnectorRawActionSupport {
 
 	public List<Connector> getAllConnectors(){
 		return baseConnectorService.listAll();
+	}
+	
+	public List<AuthContainer> getAuthContainers(){
+		return authContainerService.listAll();
 	}
 	
 	public String remove() throws Exception{

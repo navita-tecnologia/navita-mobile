@@ -36,11 +36,16 @@
 								theme="simple" list="# {'true':'Sim','false':'Não'}"/></td>
 							</tr>
 							<tr class="active" valign="middle">
+								<td>Autentica&ccedil;ao</td>
+								<td align="left"><@s.select value="connector.authContainer.id" name="authContainerId" 
+								theme="simple" headerKey="" headerValue="---" theme="simple" list="authContainers" listKey="id" listValue="name"/></td>	
+							</tr>
+							<tr  valign="middle">
 								<td>Pacote de Licen&ccedil;a</td>
 								<td align="left"><@s.select value="connector.licenseBundle.id" name="licenseBundleId" 
 								theme="simple" headerKey="" headerValue="---" theme="simple" list="licenseBundles" listKey="id" listValue="name"/></td>	
 							</tr>
-							<tr valign="middle">
+							<tr class="active" valign="middle">
 								<td>Chave de liberação</td>
 								<td align="left"><@s.textfield name="licenseKey" theme="simple" value="${connector.licenseKey!}"/></td>	
 							</tr>

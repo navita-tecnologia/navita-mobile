@@ -16,10 +16,10 @@
 							<th width="20%">Controler</th>
 							<th width="70px">Ações</th>
 						</tr>
-						<@s.iterator value="dominios" status="stat">
+						<@s.iterator value="authContainers" status="stat">
 							<tr valign="middle" <#if stat.odd>class="active"</#if> >
 								<td>
-									<a href='domains!edit.action?serviceId=<@s.property value="id"/>' title="Editar" ><@s.property value="name"/></a>
+									<a href='domains!edit.action?id=<@s.property value="id"/>' title="Editar" ><@s.property value="name"/></a>
 								</td>
 								<td align="center"><@s.property value="domainName"/></td>
 	

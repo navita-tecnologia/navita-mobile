@@ -38,7 +38,7 @@
 				<param name="bufferSize">1024</param>
 			</result>
 		</action>
-		
+
 
 		<action name="applications"
 			class="br.com.navita.mobile.console.view.ApplicationsAction">
@@ -48,15 +48,6 @@
 			</result>
 			<result name="prepareCreate" type="freemarker">/WEB-INF/view/applicationsNew.ftl
 			</result>
-		</action>
-		
-		<action name="domains" class="br.com.navita.mobile.console.view.DomainsAction">
-			<result name="success" type="freemarker">/WEB-INF/view/domains.ftl</result>
-			<result name="input" type="freemarker">/WEB-INF/view/domainsEdit.ftl
-			</result>
-			<result name="createPrepare" type="freemarker">/WEB-INF/view/domainsNew.ftl
-			</result>
-
 		</action>
 
 		<action name="licenses" class="br.com.navita.mobile.console.view.LicenseAction">
@@ -70,10 +61,10 @@
 		<action name="teste" class="br.com.navita.mobile.console.view.TesteAction">
 			<result name="success" type="freemarker">/WEB-INF/view/teste.ftl</result>
 		</action>
-		
-		
+
+
 		<!-- REFACTORING -->
-		
+
 
 		<action name="login" class="br.com.navita.mobile.console.view.IndexAction">
 			<result name="success" type="freemarker">/WEB-INF/view/login.ftl
@@ -85,11 +76,20 @@
 			</result>
 		</action>
 
+		<action name="domains" class="br.com.navita.mobile.console.view.DomainsAction">
+			<result name="success" type="freemarker">/WEB-INF/view/domains.ftl</result>
+			<result name="input" type="freemarker">/WEB-INF/view/domainsEdit.ftl
+			</result>
+			
+
+		</action>
+
 		<action name="connectors"
 			class="br.com.navita.mobile.console.view.connector.ConnectorsAction">
 			<result name="success" type="freemarker">/WEB-INF/view/connectors.ftl
 			</result>
-			<result name="input" type="freemarker">/WEB-INF/view/connectors-add.ftl</result>
+			<result name="input" type="freemarker">/WEB-INF/view/connectors-add.ftl
+			</result>
 			<result name="StaticConnector" type="freemarker">/WEB-INF/view/connectors/static-connector.ftl
 			</result>
 			<result name="SapConnector" type="freemarker">/WEB-INF/view/connectors/sap-connector.ftl
@@ -103,39 +103,41 @@
 			<result name="EjbConnector" type="freemarker">/WEB-INF/view/connectors/ejb-connector.ftl
 			</result>
 		</action>
-		
+
 		<action name="staticconnector"
 			class="br.com.navita.mobile.console.view.connector.StaticConnectorAction">
-			<result name="StaticConnector" type="freemarker">/WEB-INF/view/connectors/static-connector.ftl</result>			
+			<result name="StaticConnector" type="freemarker">/WEB-INF/view/connectors/static-connector.ftl
+			</result>
 		</action>
-		
+
 		<action name="datasourceconnector"
 			class="br.com.navita.mobile.console.view.connector.DataSourceConnectorAction">
-			<result name="DataSourceConnector" type="freemarker">/WEB-INF/view/connectors/datasource-connector.ftl</result>			
+			<result name="DataSourceConnector" type="freemarker">/WEB-INF/view/connectors/datasource-connector.ftl
+			</result>
 		</action>
-		
+
 		<action name="sapconnector"
 			class="br.com.navita.mobile.console.view.connector.SapConnectorAction">
 			<result name="SapConnector" type="freemarker">/WEB-INF/view/connectors/sap-connector.ftl
-			</result>			
+			</result>
 		</action>
-		
+
 		<action name="proxyconnector"
 			class="br.com.navita.mobile.console.view.connector.ProxyConnectorAction">
 			<result name="ProxyConnector" type="freemarker">/WEB-INF/view/connectors/proxy-connector.ftl
-			</result>			
+			</result>
 		</action>
-		
+
 		<action name="webserviceconnector"
 			class="br.com.navita.mobile.console.view.connector.WebServiceConnectorAction">
 			<result name="WebServiceConnector" type="freemarker">/WEB-INF/view/connectors/webservice-connector.ftl
-			</result>			
+			</result>
 		</action>
-		
+
 		<action name="ejbconnector"
 			class="br.com.navita.mobile.console.view.connector.EjbConnectorAction">
 			<result name="EjbConnector" type="freemarker">/WEB-INF/view/connectors/ejb-connector.ftl
-			</result>			
+			</result>
 		</action>
 
 		<action name="operations"
@@ -147,20 +149,21 @@
 			<result name="DataSourceQueryOperation" type="freemarker">/WEB-INF/view/operations/datasource-operation.ftl
 			</result>
 		</action>
-		
+
 		<action name="staticoperation"
 			class="br.com.navita.mobile.console.view.operation.StaticOperationAction">
 			<result name="StaticOperation" type="freemarker">/WEB-INF/view/operations/static-operation.ftl
 			</result>
 		</action>
-		
+
 		<action name="sapfunctionoperation"
 			class="br.com.navita.mobile.console.view.operation.SapFunctionOperationAction">
 			<result name="SapFunctionOperation" type="freemarker">/WEB-INF/view/operations/sap-operation.ftl
 			</result>
 		</action>
 
-		<action name="saptable" class="br.com.navita.mobile.console.view.operation.SapTableAction">
+		<action name="saptable"
+			class="br.com.navita.mobile.console.view.operation.SapTableAction">
 			<result name="input" type="freemarker">/WEB-INF/view/operations/sap-table.ftl
 			</result>
 		</action>
@@ -170,9 +173,10 @@
 			<result name="DataSourceQueryOperation" type="freemarker">/WEB-INF/view/operations/datasource-operation.ftl
 			</result>
 		</action>
-		
-		
-		<action name="processor" class="br.com.navita.mobile.console.view.processor.ProcessorAction">
+
+
+		<action name="processor"
+			class="br.com.navita.mobile.console.view.processor.ProcessorAction">
 			<result name="json" type="stream">
 				<param name="contentType">application/json</param>
 				<param name="inputName">inStream</param>
@@ -188,13 +192,13 @@
 				<param name="bufferSize">1024</param>
 			</result>
 		</action>
-		
-
-	<!-- END REFACTORING -->
 
 
+		<!-- END REFACTORING -->
 
-		
+
+
+
 	</package>
 
 </struts>
