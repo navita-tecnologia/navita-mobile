@@ -263,9 +263,8 @@
 						-Dhibernate.dialect=org.hibernate.dialect.Oracle9Dialect (warning:
 						no oracle trocar todos os "long raw" por "blob") mvn compile
 						antrun:run
-						-Dhibernate.dialect=org.hibernate.dialect.Oracle10gDialect mvn
-						compile antrun:run
-						-Dhibernate.dialect=org.hibernate.dialect.SQLServerDialect 
+						-Dhibernate.dialect=org.hibernate.dialect.Oracle10gDialect 
+						mvn compile antrun:run -Dhibernate.dialect=org.hibernate.dialect.SQLServerDialect 
 						mvn compile	antrun:run -Dhibernate.dialect=org.hibernate.dialect.DerbyDialect
 					-->
 					<tasks>

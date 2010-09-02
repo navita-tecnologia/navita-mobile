@@ -2,6 +2,7 @@ package br.com.navita.mobile.console.push;
 
 import java.io.IOException;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import org.apache.commons.httpclient.NameValuePair;
@@ -21,6 +22,7 @@ public class PushGatewayImpl extends NavitaAutowiringSupport implements PushGate
 	
 	private BesPushService besPushService;
 	
+	@WebMethod(exclude=true)
 	public void setBesPushService(BesPushService besPushService) {
 		this.besPushService = besPushService;
 	}

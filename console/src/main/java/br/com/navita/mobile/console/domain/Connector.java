@@ -9,7 +9,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 
 @Entity
@@ -27,7 +26,7 @@ public abstract class Connector extends BaseEntity {
 	private Connector tokenConnector;
 	
 	
-	@OneToOne
+	@ManyToOne
 	private AuthContainer authContainer;
 	
 	
