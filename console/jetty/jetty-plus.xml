@@ -37,9 +37,21 @@
 			<New class="com.atomikos.icatch.jta.UserTransactionImp" />
 		</Arg>
 	</New>
+	
+	<New id="navitaMobileDataSource" class="org.mortbay.jetty.plus.naming.Resource">
+		<Arg>jdbc/navitaMobileDatasource</Arg>
+		<Arg>
+			<New class="com.atomikos.jdbc.nonxa.NonXADataSourceBean">
+				<Set name="Url">jdbc:derby://127.0.0.1:1527/mobiledb</Set>
+				<Set name="driverClassName">org.apache.derby.jdbc.ClientDriver</Set>
+				<Set name="user">APP</Set>
+				<Set name="password">APP</Set>
+			</New>
+		</Arg>
+	</New>
 
 	<New id="navitaMobileDataSourceId" class="org.mortbay.jetty.plus.naming.Resource">
-		<Arg>jdbc/navitaMobileDataSource</Arg>
+		<Arg>jdbc/navitaMobileDataSourceSql</Arg>
 		<Arg>
 			<New class="com.atomikos.jdbc.nonxa.NonXADataSourceBean">
 				<Set name="Url">jdbc:jtds:sqlserver://nvtweb01.navita.com.br:1433
