@@ -26,7 +26,7 @@ public class MobileClientTester {
 
 		String result1 = null;
 		
-		if(true)
+		if("a".equals("a"))
 		while(true){
 			result1 = browser.get(url, null);
 			System.out.println(result1);
@@ -38,7 +38,7 @@ public class MobileClientTester {
 		System.out.println(obj1.getString("foo"));
 
 
-		if(true)return;
+		if("a".equals("a"))return;
 		String token = obj1.getString("token");
 		System.out.println(token);
 		String op2="teste";

@@ -261,13 +261,13 @@
 						org.hibernate.dialect.SQLServerDialect Oracle:
 						org.hibernate.dialect.Oracle9Dialect Ex.: mvn compile antrun:run
 						-Dhibernate.dialect=org.hibernate.dialect.Oracle9Dialect (warning:
-						no oracle trocar todos os "long raw" por "blob") mvn compile
-						antrun:run
-						-Dhibernate.dialect=org.hibernate.dialect.Oracle10gDialect 
+						no oracle trocar todos os "long raw" por "blob") 
+						mvn compile antrun:run -Dhibernate.dialect=org.hibernate.dialect.Oracle10gDialect 
 						mvn compile antrun:run -Dhibernate.dialect=org.hibernate.dialect.SQLServerDialect 
-						mvn compile	antrun:run -Dhibernate.dialect=org.hibernate.dialect.DerbyDialect
+						mvn compile antrun:run -Dhibernate.dialect=org.hibernate.dialect.DerbyDialect
 					-->
 					<tasks>
+						<copy file="src/main/resources/META-INF/mobile-persistence.xml" tofile="src/main/resources/META-INF/persistence.xml"/>		
 						<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" />
 						<hibernatetool destdir="${project.build.directory}">
 							<classpath refid="maven.compile.classpath" />
@@ -275,6 +275,7 @@
 							<hbm2ddl export="false" format="true" drop="true"
 								outputfilename="schema_db_mobile.ddl" haltonerror="false" />
 						</hibernatetool>
+						<delete file="src/main/resources/META-INF/persistence.xml"/>
 					</tasks>
 				</configuration>
 			</plugin>
