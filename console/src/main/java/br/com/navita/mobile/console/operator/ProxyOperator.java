@@ -28,8 +28,17 @@ public class ProxyOperator implements ConnectorOperator{
 		ProxyConnector proxyConnector = (ProxyConnector) connector;
 		List<NameValuePair> params = new ArrayList<NameValuePair>();		
 		for(String key: processedParams.keySet()){
-			params.add(new NameValuePair(key,processedParams.get(key).toString()));
+			params.add(new NameValuePair(key, extractFirstParam(processedParams.get(key))));
 		}
+		
+		//compat com proxy antigos
+		if(processedParams.get("operation") == null){
+			params.add(new NameValuePair("operation",extractFirstParam(processedParams.get("operationTag"))));
+		}
+		if(processedParams.get("app") == null){
+			params.add(new NameValuePair("app",extractFirstParam(processedParams.get("connectorTag"))));
+		}
+		
 		String url = proxyConnector.getUrl();
 		if(!url.endsWith("/")){
 			url += "/";
@@ -37,13 +46,26 @@ public class ProxyOperator implements ConnectorOperator{
 		String json = httpClient.post(url,  params.toArray(new NameValuePair[params.size()]), null);
 		JSONObject jsonObject = JSONObject.fromObject( json );
 		MobileBean bean = new MobileBean();
+		
 		bean.setMessage(jsonObject.getString("message"));
-		bean.setResultCode(jsonObject.getInt("resultCode"));
-		bean.setObject(jsonObject.get("object"));
+		bean.setResultCode(jsonObject.getInt("resultCode"));		
+		bean.setObject(jsonObject.getJSONObject("object"));		
 		bean.setList(jsonObject.getJSONArray("list"));
 		bean.setToken(jsonObject.getString("token"));
 
 		return bean;
+	}
+
+	private String extractFirstParam(Object object) {
+		if(object instanceof String){
+			return (String) object;
+		}else if(object instanceof String[]){
+			return ((String[])object)[0];
+		}
+		
+		return object.toString();
+		
+		
 	}
 
 	

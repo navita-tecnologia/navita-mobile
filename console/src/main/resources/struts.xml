@@ -157,7 +157,7 @@
 		</action>
 
 
-		<action name="processor"
+		<action name="processor" 
 			class="br.com.navita.mobile.console.view.processor.ProcessorAction">
 			<result name="json" type="stream">
 				<param name="contentType">application/json</param>
@@ -175,7 +175,23 @@
 			</result>
 		</action>
 
-
+	<action name="gateway" 
+			class="br.com.navita.mobile.console.view.processor.ProcessorAction">
+			<result name="json" type="stream">
+				<param name="contentType">application/json</param>
+				<param name="inputName">inStream</param>
+				<param name="contentDisposition">inline</param>
+				<param name="allowCaching ">false</param>
+				<param name="bufferSize">1024</param>
+			</result>
+			<result name="xml" type="stream">
+				<param name="contentType">text/xml</param>
+				<param name="inputName">inStream</param>
+				<param name="contentDisposition">inline</param>
+				<param name="allowCaching ">false</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
 		<!-- END REFACTORING -->
 
 

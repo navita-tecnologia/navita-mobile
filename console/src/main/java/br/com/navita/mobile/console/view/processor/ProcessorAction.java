@@ -19,6 +19,7 @@ import br.com.navita.mobile.console.exception.InvalidDeviceDataException;
 import br.com.navita.mobile.console.exception.InvalidLicenseKeyException;
 import br.com.navita.mobile.console.exception.InvalidResultBeanException;
 import br.com.navita.mobile.console.exception.OperationNotFoundException;
+import br.com.navita.mobile.console.exception.UnresolvedReturnTypeException;
 import br.com.navita.mobile.console.operator.ConnectorOperator;
 import br.com.navita.mobile.console.operator.Operator;
 import br.com.navita.mobile.console.operator.sap.SapAuthContainer;
@@ -29,6 +30,9 @@ import br.com.navita.mobile.console.util.NavitaMobileParamsUtil;
 import br.com.navita.mobile.console.view.RawActionSupport;
 import br.com.navita.mobile.console.view.rawdata.ProcessorRaw;
 import br.com.navita.mobile.domain.MobileBean;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class ProcessorAction extends RawActionSupport implements ParameterAware, ProcessorRaw{
 
@@ -46,6 +50,9 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	private String login;
 	private String password;
 	private String passwd;
+
+	private String operation; //compatibilidade com o antigo
+	private String app;//compatibilidade com o antigo
 
 
 	private InputStream inStream;	
@@ -86,6 +93,26 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	public void setBaseOperationService(
 			BaseOperationService<Operation> baseOperationService) {
 		this.baseOperationService = baseOperationService;
+	}
+
+
+
+	public String getOperation() {
+		return operation;
+	}
+
+	public void setOperation(String operation) {
+		operationTag = operation;
+		this.operation = operation;
+	}
+
+	public String getApp() {
+		return app;
+	}
+
+	public void setApp(String app) {
+		this.app = app;
+		this.connectorTag = app;
 	}
 
 	@Override
@@ -228,11 +255,20 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 
 	}
 
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public String execute() {		
 		long start = System.currentTimeMillis();
+
+		
+		
+		if(retType == null || retType.isEmpty() || (! "xml".equals(retType) && ! "json".equals(retType))){
+			serializeBean(failBean(new UnresolvedReturnTypeException("retType must be 'json' or 'xml'")), start);
+			return "json";
+		}
+
+
 		try {
 			MobileBean obj = new MobileBean();
 			prepareAndCheckParameters();
@@ -254,7 +290,7 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 				}
 
 
-			}else{
+			} else {
 				if(! isExternalOperation){//Operacao do conector 
 					Operation operation = null;
 					operation = baseOperationService.findByTagAndConnectorId(connector.getId(),operationTag);
@@ -271,6 +307,11 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 					obj = operator.doOperation(operation, (Map<String, Object>) params);
 
 				}else{//Operacao externa
+					if(!isConnectorLicenseInUse){
+						throw new InvalidLicenseKeyException("Connector license bundle not found");
+					}
+					licenseBundleId = connector.getLicenseBundle().getId();
+
 					obj = connectorOperator.doConnectorOperation(connector, (Map<String, Object>) params);
 				}
 
@@ -338,7 +379,15 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 		byte[] buff = null;
 		long total = System.currentTimeMillis() - start;
 		bean.setProcessingTime(total);
-		buff = JSONSerializer.toJSON(bean).toString().getBytes();		
+		if("json".equals(retType)){
+			buff = JSONSerializer.toJSON(bean).toString().getBytes();
+		}
+		if("xml".equals(retType)){
+			XStream xs =  new XStream(new DomDriver("utf-8"));
+			xs.alias("mobile-bean", MobileBean.class);
+			buff = xs.toXML(bean).getBytes();
+		}
+		
 		setInStream(new ByteArrayInputStream(buff));		
 	}
 
@@ -372,9 +421,9 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 		try {
 			BeanUtils.populate(this, processedParams);
 		} catch (IllegalAccessException e) {
-			
+
 		} catch (InvocationTargetException e) {
-			
+
 		}
 
 	}
@@ -390,14 +439,17 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 		if( device == null || device.isEmpty()){
 			throw new InvalidDeviceDataException("DEVICE parameter not found");
 		}
-		
+
 		if(brand == null || brand.isEmpty() ){
 			throw new InvalidDeviceDataException("BRAND parameter not found");
 		}
-		
+
 		if(carrier == null || carrier.isEmpty()){
 			throw new InvalidDeviceDataException("CARRIER parameter not found");
 		}
+
+
+
 
 	}
 

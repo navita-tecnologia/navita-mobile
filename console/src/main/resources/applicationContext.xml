@@ -16,13 +16,13 @@
 	<ctx:annotation-config />
 	<aop:aspectj-autoproxy />
 
-	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+	<!--<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName">
 			<value>jdbc/navitaMobileDatasource</value>
 		</property>
 	</bean>
 
-	<!--
+	--><!--
 		<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
@@ -33,7 +33,7 @@
 	-->
 
 
-	<!--
+	
 		<bean id="dataSource"
 			class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 			<property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver" />
@@ -41,7 +41,7 @@
 			<property name="username" value="APP" />
 			<property name="password" value="APP" />
 		</bean>
-	-->
+	
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="mobiPU" />
