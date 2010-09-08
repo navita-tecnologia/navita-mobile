@@ -38,9 +38,9 @@
 								<td align="left"><@s.textfield name="licenseKey" theme="simple" value="${app.licenseKey!}"/></td>	
 							</tr>							
 							
-							<tr valign="middle">
+							<tr valign="middle">								
+								<td><a href="connectors.action?applicationId=${id}">Conectores [${action.getCountConnectors("${id}")}]</a></td>
 								<td>&nbsp;</td>
-								<td align="left">&nbsp;</td>
 							</tr>
 							
 							<tr valign="middle"  class="active">								

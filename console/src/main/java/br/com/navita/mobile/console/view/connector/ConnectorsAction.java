@@ -47,7 +47,7 @@ public class ConnectorsAction extends ConnectorRawActionSupport {
 	public String remove() throws Exception{
 		baseConnectorService.remove(id);
 		addActionMessage("Removido com sucesso");		
-		return SUCCESS;
+		return execute();
 	}
 	
 	public String removeOperation() throws Exception{
@@ -66,6 +66,7 @@ public class ConnectorsAction extends ConnectorRawActionSupport {
 	}
 	
 	public String preCreate() throws Exception{
+		app = applicationService.findbyId(applicationId);
 		connector = (Connector) Class.forName("br.com.navita.mobile.console.domain."+type).newInstance();
 		return type;
 	}

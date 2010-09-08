@@ -1,7 +1,12 @@
 <#import "../template-geral.ftl" as t >
 <#macro ctpl label connectoraction>
 <@t.template>
-<h1>Conector ${label}  </h1>
+<h1>Conector ${label} da aplicação 
+<#if connector.application?exists>
+	<a href='applications!edit.action?id=${connector.application.id}' title="Editar" >${connector.application.name}</a>
+<#else>
+	<a href='applications!edit.action?id=${app.id}' title="Editar" >${app.name}</a>
+</#if> </h1>
 <br clear="all" />
 <div class="contentArea">
 <@s.actionmessage/>
@@ -81,7 +86,7 @@
 								</td>	
 							</tr>
 							</#if>
-							<#if  ! connector.operationType?exists>
+							<#if  ! connector.operationType?exists && connector.name?exists>
 							<tr valign="middle">								
 								<td>&nbsp;</td>
 								<td align="left"><input style="width: 150px;" type="button" value="Testar" onclick="testOperation()"/>
