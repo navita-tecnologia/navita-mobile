@@ -1,39 +1,45 @@
 package br.com.navita.mobile.console.view.connector;
 
-import java.util.List;
-
 import br.com.navita.mobile.console.domain.Connector;
-import br.com.navita.mobile.console.domain.LicenseBundle;
 import br.com.navita.mobile.console.domain.Operation;
+import br.com.navita.mobile.console.service.ApplicationService;
 import br.com.navita.mobile.console.service.AuthContainerService;
 import br.com.navita.mobile.console.service.BaseConnectorService;
 import br.com.navita.mobile.console.service.BaseOperationService;
-import br.com.navita.mobile.console.service.LicenseService;
-import br.com.navita.mobile.console.view.RawActionSupport;
+import br.com.navita.mobile.console.view.LicenseWareActionSupport;
 import br.com.navita.mobile.console.view.rawdata.ConnectorRaw;
 
-public abstract class ConnectorRawActionSupport extends RawActionSupport implements ConnectorRaw{
+public abstract class ConnectorRawActionSupport extends LicenseWareActionSupport implements ConnectorRaw{
 	
-	protected BaseConnectorService<Connector> baseConnectorService;
-	protected LicenseService licenseService;
+	protected BaseConnectorService<Connector> baseConnectorService;	
 	protected BaseOperationService<Operation> baseOperationService;
 	protected AuthContainerService authContainerService;
+	protected ApplicationService applicationService;
+	
+	protected String authContainerId;
+	protected String applicationId;
+	protected String tag;
+	protected String tokenConnectorId;
+	protected boolean enabled;
+	protected Connector connector;
+	
+	
+	public String getApplicationId() {
+		return applicationId;
+	}
+	
+	public void setApplicationId(String applicationId) {
+		this.applicationId = applicationId;
+	}
+	
+	public void setApplicationService(ApplicationService applicationService) {
+		this.applicationService = applicationService;
+	}
 	
 	public void setAuthContainerService(
 			AuthContainerService authContainerService) {
 		this.authContainerService = authContainerService;
 	}
-	
-	
-	
-	protected String authContainerId;
-	protected String licenseBundleId;
-	protected String licenseKey;
-	protected String tag;
-	protected String tokenConnectorId;
-	protected boolean enabled;
-	
-	protected Connector connector;
 	
 	public void setBaseOperationService(
 			BaseOperationService<Operation> baseOperationService) {
@@ -53,21 +59,9 @@ public abstract class ConnectorRawActionSupport extends RawActionSupport impleme
 		
 		return authContainerId;
 	}
-
+	
 	@Override
-	public String getLicenseBundleId() {
-		
-		return licenseBundleId;
-	}
-
-	@Override
-	public String getLicenseKey() {		
-		return licenseKey;
-	}
-
-	@Override
-	public String getTag() {
-		
+	public String getTag() {		
 		return tag;
 	}
 
@@ -89,14 +83,6 @@ public abstract class ConnectorRawActionSupport extends RawActionSupport impleme
 		this.authContainerId = authContainerId;
 	}
 
-	public void setLicenseBundleId(String licenseBundleId) {
-		this.licenseBundleId = licenseBundleId;
-	}
-
-	public void setLicenseKey(String licenseKey) {
-		this.licenseKey = licenseKey;
-	}
-
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
@@ -114,11 +100,5 @@ public abstract class ConnectorRawActionSupport extends RawActionSupport impleme
 		this.baseConnectorService = baseConnectorService;
 	}
 	
-	public void setLicenseService(LicenseService licenseService) {
-		this.licenseService = licenseService;
-	}
 	
-	public List<LicenseBundle> getLicenseBundles(){
-		return licenseService.listBundle();
-	}
 }

@@ -21,6 +21,8 @@ public abstract class Connector extends BaseEntity {
 	@Column(nullable = false)
 	private boolean enabled;
 	
+	@ManyToOne
+	private Application application;
 	
 	@ManyToOne
 	private Connector tokenConnector;
@@ -101,7 +103,13 @@ public abstract class Connector extends BaseEntity {
 		this.operations = operations;
 	}
 
+	public void setApplication(Application application) {
+		this.application = application;
+	}
 	
+	public Application getApplication() {
+		return application;
+	}
 	
 	
 	

@@ -1,7 +1,7 @@
 <#import "../template-geral.ftl" as t >
 <#macro ctpl label connectoraction>
 <@t.template>
-<h1>Conector ${label}</h1>
+<h1>Conector ${label}  </h1>
 <br clear="all" />
 <div class="contentArea">
 <@s.actionmessage/>
@@ -20,6 +20,12 @@
 				
 				<@s.form action="${connectoraction}!${act}.action">
 		            <@s.hidden name="id" value="${connector.id}"/>
+		            <#if connector.application?exists>
+		            	<@s.hidden name="applicationId" value="${connector.application.id}"/>
+		            <#else>
+		            	<@s.hidden name="applicationId" value="${applicationId}"/>
+		        	</#if>    
+		            
 		            <@s.hidden name="type" value="${connector.class.simpleName}"/>
 					<table class="gridContent">						
 							<tr valign="middle" >

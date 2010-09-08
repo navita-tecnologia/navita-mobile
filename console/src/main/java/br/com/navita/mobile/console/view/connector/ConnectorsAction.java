@@ -2,6 +2,7 @@ package br.com.navita.mobile.console.view.connector;
 
 import java.util.List;
 
+import br.com.navita.mobile.console.domain.Application;
 import br.com.navita.mobile.console.domain.AuthContainer;
 import br.com.navita.mobile.console.domain.Connector;
 
@@ -9,6 +10,15 @@ public class ConnectorsAction extends ConnectorRawActionSupport {
 	
 	private String type;
 	private String operationId;
+	private Application app;
+	
+	public Application getApp() {
+		return app;
+	}
+	
+	public void setApp(Application app) {
+		this.app = app;
+	}
 	
 	public void setOperationId(String operationId) {
 		this.operationId = operationId;
@@ -27,7 +37,7 @@ public class ConnectorsAction extends ConnectorRawActionSupport {
 	}
 
 	public List<Connector> getAllConnectors(){
-		return baseConnectorService.listAll();
+		return baseConnectorService.listByApp(applicationId);
 	}
 	
 	public List<AuthContainer> getAuthContainers(){
@@ -60,7 +70,12 @@ public class ConnectorsAction extends ConnectorRawActionSupport {
 		return type;
 	}
 
-	
+
+	@Override
+	public String execute() throws Exception {		
+		app = applicationService.findbyId(applicationId);		
+		return SUCCESS;
+	}
 	
 	
 	

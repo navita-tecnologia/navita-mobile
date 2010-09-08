@@ -2,6 +2,24 @@
     alter table AdAuthContainer 
         drop constraint FK33385836CE68831D;
 
+    alter table Application 
+        drop constraint FKC00DAD30F937C543;
+
+    alter table Application_BesServer 
+        drop constraint FK7F0AF784C7F3B843;
+
+    alter table Application_BesServer 
+        drop constraint FK7F0AF784AC2C6810;
+
+    alter table Application_Connector 
+        drop constraint FK47A7FFDEC7F3B843;
+
+    alter table Application_Connector 
+        drop constraint FK47A7FFDECB9F494A;
+
+    alter table Connector 
+        drop constraint FK54EC142DC7F3B843;
+
     alter table Connector 
         drop constraint FK54EC142DD57D15DC;
 
@@ -94,6 +112,12 @@
 
     drop table AdAuthContainer;
 
+    drop table Application;
+
+    drop table Application_BesServer;
+
+    drop table Application_Connector;
+
     drop table AuthContainer;
 
     drop table BesServer;
@@ -150,17 +174,40 @@
 
     create table AdAuthContainer (
         id varchar(32) not null,
-        dnsResolving smallint,
-        domainName varchar(255),
-        domainUser varchar(255),
-        domainUserPassword varchar(255),
-        groupAttribute varchar(255),
-        groupFilter varchar(255),
-        ip varchar(255),
-        searchBase varchar(255),
-        searchFilter varchar(255),
-        url varchar(255),
+        dnsResolving tinyint null,
+        domainName varchar(255) null,
+        domainUser varchar(255) null,
+        domainUserPassword varchar(255) null,
+        groupAttribute varchar(255) null,
+        groupFilter varchar(255) null,
+        ip varchar(255) null,
+        searchBase varchar(255) null,
+        searchFilter varchar(255) null,
+        url varchar(255) null,
         primary key (id)
+    );
+
+    create table Application (
+        id varchar(32) not null,
+        name varchar(255) not null,
+        enabled tinyint null,
+        licenseKey varchar(255) null,
+        licenseBundle_id varchar(32) null,
+        primary key (id)
+    );
+
+    create table Application_BesServer (
+        Application_id varchar(32) not null,
+        besPushServers_id varchar(32) not null,
+        primary key (Application_id, besPushServers_id),
+        unique (besPushServers_id)
+    );
+
+    create table Application_Connector (
+        Application_id varchar(32) not null,
+        connectors_id varchar(32) not null,
+        primary key (Application_id, connectors_id),
+        unique (connectors_id)
     );
 
     create table AuthContainer (
@@ -180,54 +227,55 @@
     create table Connector (
         id varchar(32) not null,
         name varchar(255) not null,
-        enabled smallint not null,
+        enabled tinyint not null,
         licenseKey varchar(255) not null,
         tag varchar(255) not null unique,
-        licenseBundle_id varchar(32),
-        authContainer_id varchar(32),
-        tokenConnector_id varchar(32),
+        tokenConnector_id varchar(32) null,
+        application_id varchar(32) null,
+        licenseBundle_id varchar(32) null,
+        authContainer_id varchar(32) null,
         primary key (id)
     );
 
     create table DataSourceConnector (
         id varchar(32) not null,
-        dataSource varchar(255),
+        dataSource varchar(255) null,
         primary key (id)
     );
 
     create table DataSourceQueryOperation (
         id varchar(32) not null,
-        query varchar(255),
-        returnResultSet smallint,
+        query varchar(255) null,
+        returnResultSet tinyint null,
         primary key (id)
     );
 
     create table EjbConnector (
         id varchar(32) not null,
-        ejbName varchar(255),
+        ejbName varchar(255) null,
         primary key (id)
     );
 
     create table LicenseActivation (
         id varchar(32) not null,
         name varchar(255) not null,
-        activationDate timestamp,
-        brand varchar(255),
-        carrier varchar(255),
-        email varchar(255),
-        licenseKey varchar(255),
-        model varchar(255),
-        pin varchar(255),
-        licenseBundle_id varchar(32),
+        activationDate datetime null,
+        brand varchar(255) null,
+        carrier varchar(255) null,
+        email varchar(255) null,
+        licenseKey varchar(255) null,
+        model varchar(255) null,
+        pin varchar(255) null,
+        licenseBundle_id varchar(32) null,
         primary key (id)
     );
 
     create table LicenseBundle (
         id varchar(32) not null,
         name varchar(255) not null,
-        enabled smallint not null,
-        period integer not null,
-        licenseBundleType_id varchar(32),
+        enabled tinyint not null,
+        period int not null,
+        licenseBundleType_id varchar(32) null,
         primary key (id)
     );
 
@@ -240,16 +288,17 @@
     create table Operation (
         id varchar(32) not null,
         name varchar(255) not null,
-        licenseKey varchar(255),
-        tag varchar(255),
-        licenseBundle_id varchar(32),
-        connector_id varchar(32),
-        primary key (id)
+        licenseKey varchar(255) null,
+        tag varchar(255) null unique,
+        licenseBundle_id varchar(32) null,
+        connector_id varchar(32) null,
+        primary key (id),
+        unique (id, tag)
     );
 
     create table ProxyConnector (
         id varchar(32) not null,
-        url varchar(255),
+        url varchar(255) null,
         primary key (id)
     );
 
@@ -257,15 +306,15 @@
         id varchar(32) not null,
         asHost varchar(255) not null,
         client varchar(255) not null,
-        lang varchar(255),
-        router varchar(255),
+        lang varchar(255) null,
+        router varchar(255) null,
         sysnr varchar(255) not null,
         primary key (id)
     );
 
     create table SapFunctionOperation (
         id varchar(32) not null,
-        functionName varchar(255),
+        functionName varchar(255) null,
         primary key (id)
     );
 
@@ -350,17 +399,17 @@
 
     create table StaticOperation (
         id varchar(32) not null,
-        list varchar(255),
-        message varchar(255),
-        object varchar(255),
-        resultCode integer,
-        token varchar(255),
+        list varchar(255) null,
+        message varchar(255) null,
+        object varchar(255) null,
+        resultCode int null,
+        token varchar(255) null,
         primary key (id)
     );
 
     create table WebServiceConnector (
         id varchar(32) not null,
-        wsdl varchar(255),
+        wsdl varchar(255) null,
         primary key (id)
     );
 
@@ -368,6 +417,36 @@
         add constraint FK33385836CE68831D 
         foreign key (id) 
         references AuthContainer;
+
+    alter table Application 
+        add constraint FKC00DAD30F937C543 
+        foreign key (licenseBundle_id) 
+        references LicenseBundle;
+
+    alter table Application_BesServer 
+        add constraint FK7F0AF784C7F3B843 
+        foreign key (Application_id) 
+        references Application;
+
+    alter table Application_BesServer 
+        add constraint FK7F0AF784AC2C6810 
+        foreign key (besPushServers_id) 
+        references BesServer;
+
+    alter table Application_Connector 
+        add constraint FK47A7FFDEC7F3B843 
+        foreign key (Application_id) 
+        references Application;
+
+    alter table Application_Connector 
+        add constraint FK47A7FFDECB9F494A 
+        foreign key (connectors_id) 
+        references Connector;
+
+    alter table Connector 
+        add constraint FK54EC142DC7F3B843 
+        foreign key (application_id) 
+        references Application;
 
     alter table Connector 
         add constraint FK54EC142DD57D15DC 

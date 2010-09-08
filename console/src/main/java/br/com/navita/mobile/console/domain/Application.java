@@ -3,6 +3,7 @@ package br.com.navita.mobile.console.domain;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -14,10 +15,16 @@ public class Application extends BaseEntity {
 	private Set<Connector> connectors;	
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<BesServer> pushServers;
+	private Set<BesServer> besPushServers;
 	
 	@ManyToOne
 	private LicenseBundle licenseBundle;
+	
+	@Column
+	private boolean enabled;
+	
+	@Column
+	private String licenseKey;
 
 	public Set<Connector> getConnectors() {
 		return connectors;
@@ -27,14 +34,7 @@ public class Application extends BaseEntity {
 		this.connectors = connectors;
 	}
 
-	public Set<BesServer> getPushServers() {
-		return pushServers;
-	}
-
-	public void setPushServers(Set<BesServer> pushServers) {
-		this.pushServers = pushServers;
-	}
-
+	
 	public LicenseBundle getLicenseBundle() {
 		return licenseBundle;
 	}
@@ -44,5 +44,29 @@ public class Application extends BaseEntity {
 	}
 	
 	
+	public Set<BesServer> getBesPushServers() {
+		return besPushServers;
+	}
+	
+	public void setBesPushServers(Set<BesServer> besPushServers) {
+		this.besPushServers = besPushServers;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	
+
+	public String getLicenseKey() {
+		return licenseKey;
+	}
+	
+	public void setLicenseKey(String licenseKey) {
+		this.licenseKey = licenseKey;
+	}
 	
 }

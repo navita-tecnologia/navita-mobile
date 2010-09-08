@@ -7,7 +7,7 @@ import br.com.navita.mobile.console.exception.EntityNotFoundException;
 
 
 public interface BaseConnectorService<T extends Connector> {
-	List<T> listAll();
+	List<T> listByApp(String appId);
 	T findById(String id) throws EntityNotFoundException;
 	void remove(String id)throws EntityNotFoundException;
 	boolean isTagUnique(String tag)throws EntityNotFoundException;

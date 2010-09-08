@@ -9,8 +9,9 @@ import br.com.navita.mobile.console.view.rawdata.RawData;
  * @author mpguedes
  *
  */
-public abstract class RawActionSupport extends DefaultActionSupport implements
-		RawData {
+public abstract class RawActionSupport extends DefaultActionSupport implements	RawData {
+	
+	
 
 	protected String id;
 	protected String name;
@@ -34,5 +35,7 @@ public abstract class RawActionSupport extends DefaultActionSupport implements
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	
 
 }

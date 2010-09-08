@@ -9,6 +9,7 @@ import br.com.navita.mobile.console.domain.AuthContainer;
 import br.com.navita.mobile.console.domain.Connector;
 import br.com.navita.mobile.console.domain.LicenseBundle;
 import br.com.navita.mobile.console.exception.EntityNotFoundException;
+import br.com.navita.mobile.console.service.ApplicationService;
 import br.com.navita.mobile.console.service.AuthContainerService;
 import br.com.navita.mobile.console.service.LicenseService;
 import br.com.navita.mobile.console.view.rawdata.ConnectorRaw;
@@ -17,9 +18,14 @@ import br.com.navita.mobile.console.view.rawdata.ConnectorRaw;
 public class BaseConnectorService  implements br.com.navita.mobile.console.service.BaseConnectorService<Connector>{
 
 	private ConnectorRepository<Connector> connectorRepository;
+	private ApplicationService applicationService;
 
 	protected LicenseService licenseService;	
 	protected AuthContainerService authContainerService;
+
+	public void setApplicationService(ApplicationService applicationService) {
+		this.applicationService = applicationService;
+	}	
 
 	public void setAuthContainerService(
 			AuthContainerService authContainerService) {
@@ -37,8 +43,8 @@ public class BaseConnectorService  implements br.com.navita.mobile.console.servi
 
 
 	@Override
-	public List<Connector> listAll() {		
-		return connectorRepository.findAll();
+	public List<Connector> listByApp(String appId) {		
+		return connectorRepository.findByAppId(appId);
 	}
 
 
@@ -54,6 +60,9 @@ public class BaseConnectorService  implements br.com.navita.mobile.console.servi
 	}
 
 	protected void populateConnectorFromRaw(Connector connector, ConnectorRaw raw) throws EntityNotFoundException{
+
+		connector.setApplication(applicationService.findbyId(raw.getApplicationId()));
+		
 		connector.setEnabled(raw.isEnabled());
 		if(raw.getLicenseBundleId() != null && ! raw.getLicenseBundleId().isEmpty()){
 			LicenseBundle bundle = licenseService.getBundle(raw.getLicenseBundleId());

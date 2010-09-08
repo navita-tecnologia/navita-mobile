@@ -24,12 +24,8 @@
 
 		<action name="applications"
 			class="br.com.navita.mobile.console.view.ApplicationsAction">
-			<result name="success" type="freemarker">/WEB-INF/view/applications.ftl
-			</result>
-			<result name="input" type="freemarker">/WEB-INF/view/applicationsEdit.ftl
-			</result>
-			<result name="prepareCreate" type="freemarker">/WEB-INF/view/applicationsNew.ftl
-			</result>
+			<result name="success" type="freemarker">/WEB-INF/view/applications.ftl</result>
+			<result name="input" type="freemarker">/WEB-INF/view/applicationsEdit.ftl</result>			
 		</action>
 
 		<action name="licenses" class="br.com.navita.mobile.console.view.LicenseAction">

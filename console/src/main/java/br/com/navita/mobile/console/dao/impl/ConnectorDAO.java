@@ -1,5 +1,7 @@
 package br.com.navita.mobile.console.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
@@ -21,6 +23,14 @@ public class ConnectorDAO extends GenericJpaDAO<Connector> implements ConnectorR
 		}
 		
 		return connector;
+	}
+
+	@Override
+	public List<Connector> findByAppId(String appId) {
+		String ql = "from Connector where upper(application.id) = upper(:appId)";
+		TypedQuery<Connector> q = getEntityManager().createQuery(ql, Connector.class);		
+		q.setParameter("appId", appId);
+		return q.getResultList();
 	}
 
 }

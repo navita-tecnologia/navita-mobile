@@ -126,6 +126,11 @@
 			value="br.com.navita.mobile.console.domain.AuthContainer" />
 	</bean>
 
+	<bean id="applicationRepository" class="br.com.navita.mobile.console.dao.impl.BaseEntityDAO"
+		lazy-init="true">
+		<constructor-arg
+			value="br.com.navita.mobile.console.domain.Application" />
+	</bean>
 	<!-- end repositories -->
 
 	<bean id="baseConnectorService"
@@ -163,6 +168,8 @@
 
 	<bean id="authContainerService"
 		class="br.com.navita.mobile.console.service.impl.AuthContainerService" />
+		
+		<bean id="applicationService" class="br.com.navita.mobile.console.service.impl.ApplicationService" />
 
 	<!-- end services -->
 

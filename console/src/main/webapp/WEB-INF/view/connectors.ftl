@@ -1,7 +1,7 @@
 	<#import "template-geral.ftl" as t >
 	<@t.template>
 	
-		<h1>Conectores</h1>
+		<h1>Conectores da aplicação <a href='applications!edit.action?id=${app.id}' title="Editar" >${app.name!}</a></h1>
 		<br clear="all" />
 	    <div class="contentArea">
 	<@s.actionmessage/>
@@ -26,7 +26,7 @@
 								<td align="center" ><@s.property value="tag"/></td>
 								<td align="center" ><#if enabled>Sim<#else>Não</#if></td>
 								<td align="center">
-									<a href="#" onclick='removeConnector("<@s.property value="name"/>","<@s.property value="id"/>")'>remover</a>
+									<a href="#" onclick='removeConnector("<@s.property value="name"/>","<@s.property value="id"/>","<@s.property value="applicationId"/>")'>remover</a>
 								</td>
 								<td align="center">-</td>
 							</tr>							
@@ -38,9 +38,9 @@
 			</div>
 		</div>
 		<script>
-		function removeConnector(nome,id){
+		function removeConnector(nome,id,appId){
 			if(confirm('Tem certeza que quer remover o conector '+nome+'?')){
-				window.location='<@s.url action="connectors!remove.action" includeParams="none"/>?id='+id	
+				window.location='<@s.url action="connectors!remove.action" includeParams="none"/>?id='+id+'&applicationId='+appId	
 			}
 		}
 		</script>
