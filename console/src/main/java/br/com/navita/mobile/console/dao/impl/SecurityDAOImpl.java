@@ -1,10 +1,12 @@
-package br.com.navita.mobile.console.dao;
+package br.com.navita.mobile.console.dao.impl;
 
 import java.sql.SQLException;
 
 
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import br.com.navita.mobile.console.dao.SecurityDAO;
 
 public class SecurityDAOImpl implements SecurityDAO{
 	
