@@ -35,92 +35,92 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<bean id="licenseBundleTypeRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+	<bean id="licenseBundleTypeRepository" class="br.com.navita.mobile.console.dao.impl.BaseEntityDAO"
 		lazy-init="true">
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.LicenseBundleType" />
 	</bean>
-	<bean id="licenseBundleRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+	<bean id="licenseBundleRepository" class="br.com.navita.mobile.console.dao.impl.BaseEntityDAO"
 		lazy-init="true">
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.LicenseBundle" />
 	</bean>
 
 	<bean id="licenseActivationRepository"
-		class="br.com.navita.mobile.console.dao.jpa.impl.LicenseActivationDAO"
+		class="br.com.navita.mobile.console.dao.impl.LicenseActivationDAO"
 		lazy-init="true">
 	</bean>
 
-	<bean id="connectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.ConnectorDAO"></bean>
+	<bean id="connectorRepository" class="br.com.navita.mobile.console.dao.impl.ConnectorDAO"></bean>
 
 	<bean id="operationRepository"
-		class="br.com.navita.mobile.console.dao.jpa.impl.GenericOperationDAO" />
+		class="br.com.navita.mobile.console.dao.impl.GenericOperationDAO" />
 
-	<bean id="staticConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+	<bean id="staticConnectorRepository" class="br.com.navita.mobile.console.dao.impl.BaseEntityDAO"
 		lazy-init="true">
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.StaticConnector" />
 	</bean>
 
 	<bean id="staticOperationRepository"
-		class="br.com.navita.mobile.console.dao.jpa.impl.GenericOperationDAO"></bean>
+		class="br.com.navita.mobile.console.dao.impl.GenericOperationDAO"></bean>
 	<bean id="sapFunctionOperationRepository"
-		class="br.com.navita.mobile.console.dao.jpa.impl.GenericOperationDAO"></bean>
+		class="br.com.navita.mobile.console.dao.impl.GenericOperationDAO"></bean>
 	<bean id="dataSourceQueryOperationRepository"
-		class="br.com.navita.mobile.console.dao.jpa.impl.GenericOperationDAO"></bean>
+		class="br.com.navita.mobile.console.dao.impl.GenericOperationDAO"></bean>
 
-	<bean id="dataSourceConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+	<bean id="dataSourceConnectorRepository" class="br.com.navita.mobile.console.dao.impl.BaseEntityDAO"
 		lazy-init="true">
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.DataSourceConnector" />
 	</bean>
-	<bean id="ejbConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+	<bean id="ejbConnectorRepository" class="br.com.navita.mobile.console.dao.impl.BaseEntityDAO"
 		lazy-init="true">
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.EjbConnector" />
 	</bean>
 
-	<bean id="sapConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+	<bean id="sapConnectorRepository" class="br.com.navita.mobile.console.dao.impl.BaseEntityDAO"
 		lazy-init="true">
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.SapConnector" />
 	</bean>
 
-	<bean id="proxyConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+	<bean id="proxyConnectorRepository" class="br.com.navita.mobile.console.dao.impl.BaseEntityDAO"
 		lazy-init="true">
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.ProxyConnector" />
 	</bean>
 
-	<bean id="webServiceConnectorRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+	<bean id="webServiceConnectorRepository" class="br.com.navita.mobile.console.dao.impl.BaseEntityDAO"
 		lazy-init="true">
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.WebServiceConnector" />
 	</bean>
 
 
-	<bean id="sapParameterRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+	<bean id="sapParameterRepository" class="br.com.navita.mobile.console.dao.impl.BaseEntityDAO"
 		lazy-init="true">
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.SapParameter" />
 	</bean>
 
 
-	<bean id="sapTableRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+	<bean id="sapTableRepository" class="br.com.navita.mobile.console.dao.impl.BaseEntityDAO"
 		lazy-init="true">
 		<constructor-arg value="br.com.navita.mobile.console.domain.SapTable" />
 	</bean>
-	<bean id="sapTableFieldRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+	<bean id="sapTableFieldRepository" class="br.com.navita.mobile.console.dao.impl.BaseEntityDAO"
 		lazy-init="true">
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.SapTableField" />
 	</bean>
-	<bean id="sapRowRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+	<bean id="sapRowRepository" class="br.com.navita.mobile.console.dao.impl.BaseEntityDAO"
 		lazy-init="true">
 		<constructor-arg value="br.com.navita.mobile.console.domain.SapRow" />
 	</bean>
 
-	<bean id="authContainerRepository" class="br.com.navita.mobile.console.dao.jpa.impl.BaseEntityDAO"
+	<bean id="authContainerRepository" class="br.com.navita.mobile.console.dao.impl.BaseEntityDAO"
 		lazy-init="true">
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.AuthContainer" />

@@ -2,7 +2,7 @@ package br.com.navita.mobile.console.service.impl;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.navita.mobile.console.dao.jpa.OperationRepository;
+import br.com.navita.mobile.console.dao.OperationRepository;
 import br.com.navita.mobile.console.domain.Connector;
 import br.com.navita.mobile.console.domain.LicenseBundle;
 import br.com.navita.mobile.console.domain.Operation;

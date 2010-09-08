@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.dao.jpa.impl;
+package br.com.navita.mobile.console.dao.impl;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import br.com.navita.mobile.console.dao.jpa.LicenseActivationRepository;
+import br.com.navita.mobile.console.dao.LicenseActivationRepository;
 import br.com.navita.mobile.console.domain.LicenseActivation;
 import br.com.navita.mobile.console.domain.util.SearchCriteria;
 

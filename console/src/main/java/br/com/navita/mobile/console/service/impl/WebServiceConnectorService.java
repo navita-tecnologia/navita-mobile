@@ -2,7 +2,7 @@ package br.com.navita.mobile.console.service.impl;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.navita.mobile.console.dao.jpa.GenericRepository;
+import br.com.navita.mobile.console.dao.GenericRepository;
 import br.com.navita.mobile.console.domain.WebServiceConnector;
 import br.com.navita.mobile.console.exception.EntityNotFoundException;
 import br.com.navita.mobile.console.service.ConnectorService;

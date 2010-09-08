@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.dao.jpa.impl;
+package br.com.navita.mobile.console.dao.impl;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -9,7 +9,7 @@ import javax.persistence.Query;
 
 import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 
-import br.com.navita.mobile.console.dao.jpa.GenericRepository;
+import br.com.navita.mobile.console.dao.GenericRepository;
 import br.com.navita.mobile.console.exception.EntityNotFoundException;
 
 /**

@@ -1,4 +1,4 @@
-package br.com.navita.mobile.console.dao.jpa;
+package br.com.navita.mobile.console.dao;
 
 import br.com.navita.mobile.console.domain.Connector;
 

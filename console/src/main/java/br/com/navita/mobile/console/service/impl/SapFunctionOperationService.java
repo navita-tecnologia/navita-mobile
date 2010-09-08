@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.navita.mobile.console.dao.jpa.GenericRepository;
-import br.com.navita.mobile.console.dao.jpa.OperationRepository;
+import br.com.navita.mobile.console.dao.GenericRepository;
+import br.com.navita.mobile.console.dao.OperationRepository;
 import br.com.navita.mobile.console.domain.SapFunctionOperation;
 import br.com.navita.mobile.console.domain.SapParameter;
 import br.com.navita.mobile.console.domain.SapRow;

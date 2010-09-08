@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.navita.mobile.console.dao.jpa.GenericRepository;
-import br.com.navita.mobile.console.dao.jpa.LicenseActivationRepository;
+import br.com.navita.mobile.console.dao.GenericRepository;
+import br.com.navita.mobile.console.dao.LicenseActivationRepository;
 import br.com.navita.mobile.console.domain.LicenseActivation;
 import br.com.navita.mobile.console.domain.LicenseBundle;
 import br.com.navita.mobile.console.domain.LicenseBundleType;

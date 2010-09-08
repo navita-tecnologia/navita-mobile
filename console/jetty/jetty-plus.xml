@@ -39,7 +39,7 @@
 	</New>
 	
 	<New id="navitaMobileDataSource" class="org.mortbay.jetty.plus.naming.Resource">
-		<Arg>jdbc/navitaMobileDatasource</Arg>
+		<Arg>jdbc/navitaMobileDatasourceDerby</Arg>
 		<Arg>
 			<New class="com.atomikos.jdbc.nonxa.NonXADataSourceBean">
 				<Set name="Url">jdbc:derby://127.0.0.1:1527/mobiledb</Set>
@@ -51,14 +51,13 @@
 	</New>
 
 	<New id="navitaMobileDataSourceId" class="org.mortbay.jetty.plus.naming.Resource">
-		<Arg>jdbc/navitaMobileDataSourceSql</Arg>
+		<Arg>jdbc/navitaMobileDatasource</Arg>
 		<Arg>
 			<New class="com.atomikos.jdbc.nonxa.NonXADataSourceBean">
-				<Set name="Url">jdbc:jtds:sqlserver://nvtweb01.navita.com.br:1433
-				</Set>
+				<Set name="Url">jdbc:jtds:sqlserver://192.168.10.20:1433/navita-mobile</Set>
 				<Set name="driverClassName">net.sourceforge.jtds.jdbc.Driver</Set>
-				<Set name="user">nvt-mobile</Set>
-				<Set name="password">banana01</Set>
+				<Set name="user">sa</Set>
+				<Set name="password">navita</Set>
 			</New>
 		</Arg>
 	</New>

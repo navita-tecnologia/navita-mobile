@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.navita.mobile.console.dao.jpa.ConnectorRepository;
+import br.com.navita.mobile.console.dao.ConnectorRepository;
 import br.com.navita.mobile.console.domain.AuthContainer;
 import br.com.navita.mobile.console.domain.Connector;
 import br.com.navita.mobile.console.domain.LicenseBundle;
