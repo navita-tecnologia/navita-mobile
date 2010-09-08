@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import br.com.navita.mobile.console.dao.SecurityDAO;
 
-public class SecurityDAOImpl implements SecurityDAO{
+
+public class SecurityDAO implements br.com.navita.mobile.console.dao.SecurityDAO{
 	
 	private JdbcTemplate jdbcTemplate;	
 	public void setDataSource(DataSource dataSource) {
