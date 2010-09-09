@@ -15,7 +15,7 @@ public class Application extends BaseEntity {
 	private Set<Connector> connectors;	
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<BesServer> besPushServers;
+	private Set<PushServer> besPushServers;
 	
 	@ManyToOne
 	private LicenseBundle licenseBundle;
@@ -44,11 +44,11 @@ public class Application extends BaseEntity {
 	}
 	
 	
-	public Set<BesServer> getBesPushServers() {
+	public Set<PushServer> getBesPushServers() {
 		return besPushServers;
 	}
 	
-	public void setBesPushServers(Set<BesServer> besPushServers) {
+	public void setBesPushServers(Set<PushServer> besPushServers) {
 		this.besPushServers = besPushServers;
 	}
 

@@ -131,6 +131,8 @@
 		<constructor-arg
 			value="br.com.navita.mobile.console.domain.Application" />
 	</bean>
+	
+	<bean id="pushServerRepository" class="br.com.navita.mobile.console.dao.impl.PushServerDAO"/>
 	<!-- end repositories -->
 
 	<bean id="baseConnectorService"
@@ -169,7 +171,9 @@
 	<bean id="authContainerService"
 		class="br.com.navita.mobile.console.service.impl.AuthContainerService" />
 		
-		<bean id="applicationService" class="br.com.navita.mobile.console.service.impl.ApplicationService" />
+	<bean id="applicationService" class="br.com.navita.mobile.console.service.impl.ApplicationService" />
+	
+	<bean id="pushServerService" class="br.com.navita.mobile.console.service.impl.PushServerService"/>
 
 	<!-- end services -->
 

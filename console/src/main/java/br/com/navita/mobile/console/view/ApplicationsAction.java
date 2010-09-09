@@ -6,16 +6,23 @@ import br.com.navita.mobile.console.domain.Application;
 import br.com.navita.mobile.console.domain.Connector;
 import br.com.navita.mobile.console.service.ApplicationService;
 import br.com.navita.mobile.console.service.BaseConnectorService;
+import br.com.navita.mobile.console.service.PushServerService;
 import br.com.navita.mobile.console.view.rawdata.ApplicationRaw;
 
 public class ApplicationsAction extends LicenseWareActionSupport implements ApplicationRaw {
 	
 	private ApplicationService applicationService;
 	protected BaseConnectorService<Connector> baseConnectorService;	
+	protected PushServerService pushServerService;
 	
 
 	private Application app;
 	private boolean enabled;
+	
+	
+	public void setPushServerService(PushServerService pushServerService) {
+		this.pushServerService = pushServerService;
+	}
 	
 	public void setBaseConnectorService(
 			BaseConnectorService<Connector> baseConnectorService) {
@@ -82,6 +89,10 @@ public class ApplicationsAction extends LicenseWareActionSupport implements Appl
 	public Integer getCountConnectors(String id){
 		return baseConnectorService.listByApp(id).size();
 		
+	}
+	
+	public Integer getCountPushServers(String id){
+		return pushServerService.listbyApplicationId(id).size();
 	}
 	
 }

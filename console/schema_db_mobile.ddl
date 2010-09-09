@@ -5,23 +5,23 @@
     alter table Application 
         drop constraint FKC00DAD30F937C543;
 
-    alter table Application_BesServer 
-        drop constraint FK7F0AF784C7F3B843;
-
-    alter table Application_BesServer 
-        drop constraint FK7F0AF784AC2C6810;
-
     alter table Application_Connector 
         drop constraint FK47A7FFDEC7F3B843;
 
     alter table Application_Connector 
         drop constraint FK47A7FFDECB9F494A;
 
-    alter table Connector 
-        drop constraint FK54EC142DC7F3B843;
+    alter table Application_PushServer 
+        drop constraint FK3A11F58CC7F3B843;
+
+    alter table Application_PushServer 
+        drop constraint FK3A11F58C3B7BB6A8;
 
     alter table Connector 
         drop constraint FK54EC142DD57D15DC;
+
+    alter table Connector 
+        drop constraint FK54EC142DC7F3B843;
 
     alter table Connector 
         drop constraint FK54EC142DF937C543;
@@ -52,6 +52,9 @@
 
     alter table ProxyConnector 
         drop constraint FKB884F19FDFCC9831;
+
+    alter table PushServer 
+        drop constraint FKD5506B1DC7F3B843;
 
     alter table SapConnector 
         drop constraint FK1E4DEAABDFCC9831;
@@ -114,13 +117,11 @@
 
     drop table Application;
 
-    drop table Application_BesServer;
-
     drop table Application_Connector;
 
-    drop table AuthContainer;
+    drop table Application_PushServer;
 
-    drop table BesServer;
+    drop table AuthContainer;
 
     drop table Connector;
 
@@ -139,6 +140,8 @@
     drop table Operation;
 
     drop table ProxyConnector;
+
+    drop table PushServer;
 
     drop table SapConnector;
 
@@ -196,13 +199,6 @@
         primary key (id)
     );
 
-    create table Application_BesServer (
-        Application_id varchar(32) not null,
-        besPushServers_id varchar(32) not null,
-        primary key (Application_id, besPushServers_id),
-        unique (besPushServers_id)
-    );
-
     create table Application_Connector (
         Application_id varchar(32) not null,
         connectors_id varchar(32) not null,
@@ -210,17 +206,16 @@
         unique (connectors_id)
     );
 
+    create table Application_PushServer (
+        Application_id varchar(32) not null,
+        besPushServers_id varchar(32) not null,
+        primary key (Application_id, besPushServers_id),
+        unique (besPushServers_id)
+    );
+
     create table AuthContainer (
         id varchar(32) not null,
         name varchar(255) not null,
-        primary key (id)
-    );
-
-    create table BesServer (
-        id varchar(32) not null,
-        name varchar(255) not null,
-        port varchar(255) not null,
-        url varchar(255) not null,
         primary key (id)
     );
 
@@ -230,10 +225,10 @@
         enabled tinyint not null,
         licenseKey varchar(255) not null,
         tag varchar(255) not null unique,
-        tokenConnector_id varchar(32) null,
         application_id varchar(32) null,
-        licenseBundle_id varchar(32) null,
         authContainer_id varchar(32) null,
+        licenseBundle_id varchar(32) null,
+        tokenConnector_id varchar(32) null,
         primary key (id)
     );
 
@@ -299,6 +294,15 @@
     create table ProxyConnector (
         id varchar(32) not null,
         url varchar(255) null,
+        primary key (id)
+    );
+
+    create table PushServer (
+        id varchar(32) not null,
+        name varchar(255) not null,
+        port varchar(255) not null,
+        url varchar(255) not null,
+        application_id varchar(32) null,
         primary key (id)
     );
 
@@ -423,16 +427,6 @@
         foreign key (licenseBundle_id) 
         references LicenseBundle;
 
-    alter table Application_BesServer 
-        add constraint FK7F0AF784C7F3B843 
-        foreign key (Application_id) 
-        references Application;
-
-    alter table Application_BesServer 
-        add constraint FK7F0AF784AC2C6810 
-        foreign key (besPushServers_id) 
-        references BesServer;
-
     alter table Application_Connector 
         add constraint FK47A7FFDEC7F3B843 
         foreign key (Application_id) 
@@ -443,15 +437,25 @@
         foreign key (connectors_id) 
         references Connector;
 
-    alter table Connector 
-        add constraint FK54EC142DC7F3B843 
-        foreign key (application_id) 
+    alter table Application_PushServer 
+        add constraint FK3A11F58CC7F3B843 
+        foreign key (Application_id) 
         references Application;
+
+    alter table Application_PushServer 
+        add constraint FK3A11F58C3B7BB6A8 
+        foreign key (besPushServers_id) 
+        references PushServer;
 
     alter table Connector 
         add constraint FK54EC142DD57D15DC 
         foreign key (tokenConnector_id) 
         references Connector;
+
+    alter table Connector 
+        add constraint FK54EC142DC7F3B843 
+        foreign key (application_id) 
+        references Application;
 
     alter table Connector 
         add constraint FK54EC142DF937C543 
@@ -502,6 +506,11 @@
         add constraint FKB884F19FDFCC9831 
         foreign key (id) 
         references Connector;
+
+    alter table PushServer 
+        add constraint FKD5506B1DC7F3B843 
+        foreign key (application_id) 
+        references Application;
 
     alter table SapConnector 
         add constraint FK1E4DEAABDFCC9831 
