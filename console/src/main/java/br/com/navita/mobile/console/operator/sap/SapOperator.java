@@ -16,6 +16,7 @@ import br.com.navita.mobile.console.domain.SapRow;
 import br.com.navita.mobile.console.domain.SapTable;
 import br.com.navita.mobile.console.exception.SapGatewayException;
 import br.com.navita.mobile.console.operator.Operator;
+import br.com.navita.mobile.console.util.NavitaMobileParamsUtil;
 import br.com.navita.mobile.domain.MobileBean;
 
 public class SapOperator implements Operator{
@@ -24,7 +25,7 @@ public class SapOperator implements Operator{
 
 	@Override
 	public MobileBean  doOperation(Operation operation, Map<String, Object> params) throws SapGatewayException  {
-		String token = (String) params.get("token");		
+		String token = NavitaMobileParamsUtil.extractFirstParam(params.get("token"));		
 		JCO.Client client = null;		
 		SapFunctionOperation sapFunctionOperation = (SapFunctionOperation) operation;
 		MobileBean bean = new MobileBean();
@@ -76,6 +77,7 @@ public class SapOperator implements Operator{
 				for(int row =0;row < sapTable.getNumRows();row++){
 					sapTable.setRow(row);
 					SapRow mapRow = new SapRow();
+					mapRow.setName("");
 					for(int field = 0;field < sapTable.getFieldCount();field++){
 						mapRow.addAttribute(new SapParameter(sapTable.getField(field).getName(), sapTable.getString(field)));
 					}				

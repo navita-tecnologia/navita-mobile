@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import net.sf.json.JSONSerializer;
 
@@ -35,6 +37,8 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class ProcessorAction extends RawActionSupport implements ParameterAware, ProcessorRaw{
+	
+	private static final Logger LOG = Logger.getLogger(ProcessorAction.class.getName());
 
 	private String retType;
 	private String connectorTag;
@@ -328,6 +332,7 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 			serializeBean(obj,start);	
 
 		} catch (Throwable t) {
+			LOG.log(Level.SEVERE,"Erro geral",t);
 			serializeBean(failBean(t),start);			
 
 		}

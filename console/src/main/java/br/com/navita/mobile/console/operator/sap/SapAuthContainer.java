@@ -55,6 +55,7 @@ public class SapAuthContainer extends AuthContainer{
 
 		loginResult.setMessage(message);
 		loginResult.setToken(sessionToken);
+		loginResult.setLogged(true);
 
 		return loginResult;
 	}

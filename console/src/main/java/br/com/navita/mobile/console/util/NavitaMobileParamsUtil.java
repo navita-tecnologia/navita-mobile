@@ -42,4 +42,15 @@ public abstract class NavitaMobileParamsUtil implements EncryptionAware{
 		return result;
 	}
 
+	public static String extractFirstParam(Object object) {
+		if(object instanceof String){
+			return (String) object;
+		}else if(object instanceof String[]){
+			return ((String[])object)[0];
+		}
+		
+		return object.toString();
+		
+		
+	}
 }
