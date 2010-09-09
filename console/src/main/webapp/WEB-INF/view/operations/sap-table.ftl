@@ -31,7 +31,7 @@
 									<#list sapTable.sapRows as tr>
 									<tr>
 										<#list tr.attributes as td>
-											<td colspan="2"><input type="text" value="${td.name} ${td.value}"/></td>
+											<td colspan="2"><input type="text" value="${td.value}"/></td>
 										</#list>										
 										<td><a title="Remove esta linha" href="javascript:void(0)" onclick="deleteRow('${tr.id}')" ><img src="images/close.gif" alt="Excluir" border="0" /></a></td>
 									</tr>
