@@ -71,21 +71,23 @@ public class SapOperator implements Operator{
 			}
 			client.execute(function);
 
-			List<SapTable> tables = new ArrayList<SapTable>();
-			for(SapTable st : sapFunctionOperation.getOutputTables()){				
+			List<br.com.navita.mobile.console.operator.sap.wrap.SapTable> outTables = new ArrayList<br.com.navita.mobile.console.operator.sap.wrap.SapTable>();
+			for(SapTable st : sapFunctionOperation.getOutputTables()){	
+				br.com.navita.mobile.console.operator.sap.wrap.SapTable wrapTable = new br.com.navita.mobile.console.operator.sap.wrap.SapTable();
+				wrapTable.setTableName(st.getName());
 				Table sapTable = tList.getTable(st.getName());				
 				for(int row =0;row < sapTable.getNumRows();row++){
 					sapTable.setRow(row);
-					SapRow mapRow = new SapRow();
-					mapRow.setName("");
-					for(int field = 0;field < sapTable.getFieldCount();field++){
-						mapRow.addAttribute(new SapParameter(sapTable.getField(field).getName(), sapTable.getString(field)));
+					br.com.navita.mobile.console.operator.sap.wrap.SapRow mapRow = new br.com.navita.mobile.console.operator.sap.wrap.SapRow();
+					
+					for(int field = 0;field < sapTable.getFieldCount();field++){						
+						mapRow.add(new br.com.navita.mobile.console.operator.sap.wrap.SapParameter(sapTable.getField(field).getName(), sapTable.getString(field)));
 					}				
-					st.addRow(mapRow);
+					wrapTable.add(mapRow);
 				}
-				tables.add(st);
+				outTables.add(wrapTable);
 			}
-			bean.setList(tables);
+			bean.setList(outTables);
 			bean.setMessage("");
 			bean.setResultCode(0);
 		}finally{		
