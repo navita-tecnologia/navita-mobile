@@ -39,8 +39,10 @@
 							</tr>							
 							
 							<tr valign="middle">								
-								<td><a href="connectors.action?applicationId=${id}">Conectores [${action.getCountConnectors("${id}")}]</a></td>
 								<td>&nbsp;</td>
+								<td><a href="connectors.action?applicationId=${id}">Conectores [${action.getCountConnectors("${id}")}]</a><br/>
+								<a href="pushservers.action?applicationId=${id}">Push Servers [${action.getCountPushServers("${id}")}]</a>
+								</td>
 							</tr>
 							
 							<tr valign="middle"  class="active">								

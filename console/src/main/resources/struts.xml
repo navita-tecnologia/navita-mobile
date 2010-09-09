@@ -58,8 +58,11 @@
 			<result name="success" type="freemarker">/WEB-INF/view/domains.ftl</result>
 			<result name="input" type="freemarker">/WEB-INF/view/domainsEdit.ftl
 			</result>
-			
-
+		</action>
+		<action name="pushservers" class="br.com.navita.mobile.console.view.PushServersAction">
+			<result name="success" type="freemarker">/WEB-INF/view/pushservers.ftl</result>
+			<result name="input" type="freemarker">/WEB-INF/view/pushserversEdit.ftl
+			</result>
 		</action>
 
 		<action name="connectors"
