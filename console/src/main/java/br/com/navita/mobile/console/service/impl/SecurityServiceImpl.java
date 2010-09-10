@@ -34,9 +34,10 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
-	public boolean passwordMatch(String userName, String currentPassword, String password) {
-		
-		return false;
+	public boolean passwordMatch(String userName, String typedPassword) {
+		String currentPassword = securityDAO.findUserById(userName).getPassword();
+		String md5TypedPassword = md5PasswordEncoder.encodePassword(typedPassword, null);		
+		return currentPassword != null && currentPassword.equalsIgnoreCase(md5TypedPassword);
 	}
 
 }

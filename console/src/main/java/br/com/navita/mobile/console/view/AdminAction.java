@@ -58,7 +58,7 @@ public class AdminAction extends DefaultActionSupport {
 	
 	
 	public String changeAdminPassword() throws Exception {
-		if(null == password || ! password.equals(retypePassword) || ! securityService.passwordMatch("admin",currentPassword,password)){			
+		if(null == password || ! password.equals(retypePassword) || ! securityService.passwordMatch("admin",currentPassword)){			
 			addActionMessage("Senhas nao coincidem");
 			return SUCCESS;
 		}
