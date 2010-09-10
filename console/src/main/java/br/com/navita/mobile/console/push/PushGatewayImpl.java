@@ -6,6 +6,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import org.apache.commons.httpclient.NameValuePair;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.navita.mobile.console.domain.PushServer;
 import br.com.navita.mobile.console.exception.PushException;
@@ -20,6 +21,7 @@ public class PushGatewayImpl extends NavitaAutowiringSupport implements PushGate
 		initialize();
 	}
 
+	@Autowired
 	private PushServerService pushServerService;
 
 	@WebMethod(exclude=true)

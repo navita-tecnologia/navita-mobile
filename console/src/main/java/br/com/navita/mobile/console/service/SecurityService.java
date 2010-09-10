@@ -6,5 +6,5 @@ public interface SecurityService {
 
 	void updatePassword(String login, String password) throws MobileConsoleException;
 
-	boolean passwordMatch(String currentPassword, String password);
+	boolean passwordMatch(String userName, String currentPassword, String password);
 }

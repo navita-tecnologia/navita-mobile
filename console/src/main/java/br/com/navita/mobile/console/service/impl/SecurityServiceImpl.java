@@ -34,8 +34,8 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
-	public boolean passwordMatch(String currentPassword, String password) {
-		// TODO Auto-generated method stub
+	public boolean passwordMatch(String userName, String currentPassword, String password) {
+		
 		return false;
 	}
 
