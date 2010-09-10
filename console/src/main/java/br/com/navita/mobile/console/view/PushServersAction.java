@@ -18,6 +18,7 @@ public class PushServersAction extends RawActionSupport implements PushServerRaw
 	private String url;
 	private String applicationId;
 	private String port;
+	private String tag;
 	
 	
 	public void setApplicationService(ApplicationService applicationService) {
@@ -59,6 +60,14 @@ public class PushServersAction extends RawActionSupport implements PushServerRaw
 
 	public void setPort(String port) {
 		this.port = port;
+	}
+	
+	@Override
+	public String getTag() {		
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 	
 	public List<PushServer> getPushServers(){

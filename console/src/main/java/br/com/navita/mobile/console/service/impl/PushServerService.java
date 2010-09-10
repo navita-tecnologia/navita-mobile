@@ -48,6 +48,7 @@ public class PushServerService implements br.com.navita.mobile.console.service.P
 		entity.setName(raw.getName());
 		entity.setPort(raw.getPort());
 		entity.setUrl(raw.getUrl());
+		entity.setTag(raw.getTag());
 		Application app  = applicationService.findbyId(raw.getApplicationId());
 		entity.setApplication(app);
 		
@@ -65,6 +66,12 @@ public class PushServerService implements br.com.navita.mobile.console.service.P
 		PushServer pushServer = pushServerRepository.findById(raw.getId());
 		fillEntityWithRaw(pushServer,raw);
 		return pushServer;
+	}
+
+	@Override
+	public PushServer findByTag(String applicationId) {
+		
+		return pushServerRepository.findByTag(applicationId);
 	}
 	
 	

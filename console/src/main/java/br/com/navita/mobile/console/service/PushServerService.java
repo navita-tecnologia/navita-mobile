@@ -17,4 +17,6 @@ public interface PushServerService {
 	PushServer save(PushServerRaw pushServersAction) throws EntityNotFoundException;
 
 	void remove(String id) throws EntityNotFoundException;
+
+	PushServer findByTag(String applicationId);
 }

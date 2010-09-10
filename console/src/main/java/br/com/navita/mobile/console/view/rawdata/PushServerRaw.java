@@ -8,4 +8,6 @@ public interface PushServerRaw extends RawData {
 
 	String getApplicationId();
 
+	String getTag();
+
 }

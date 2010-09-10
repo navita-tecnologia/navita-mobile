@@ -16,9 +16,17 @@
 							<th class="left" >&nbsp;</th>
 						</tr>				
 							<tr class="active" valign="middle" >
-								<td width="250">Senha</td>
+								<td width="250">Senha Atual</td>
+								<td align="left"><@s.password name="currentPassword" value="" theme="simple" maxlength="50" size="30" cssStyle="width: 200px; "/></td>	
+							</tr>	
+							<tr valign="middle" >
+								<td width="250">Nova Senha</td>
 								<td align="left"><@s.password name="password" theme="simple" maxlength="50" size="30" cssStyle="width: 200px; "/></td>	
-							</tr>							
+							</tr>
+							<tr class="active" valign="middle" >
+								<td width="250">Confirme a senha</td>
+								<td align="left"><@s.password name="retypePassword" theme="simple" maxlength="50" size="30" cssStyle="width: 200px; "/></td>	
+							</tr>								
 							<tr  valign="middle">
 								<td>&nbsp;</td>
 								<td align="left"><input type="submit" value="Salvar" style="width: 150px;"/></td>

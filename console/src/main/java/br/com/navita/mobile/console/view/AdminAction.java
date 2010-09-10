@@ -14,6 +14,10 @@ public class AdminAction extends DefaultActionSupport {
 	
 	private String password;
 	
+	private String currentPassword;
+	
+	private String retypePassword;
+	
 	private SecurityService securityService;
 	
 	public void setSecurityService(SecurityService securityService) {
@@ -28,6 +32,24 @@ public class AdminAction extends DefaultActionSupport {
 		return password;
 	}
 	
+	
+	
+	public String getCurrentPassword() {
+		return currentPassword;
+	}
+
+	public void setCurrentPassword(String currentPassword) {
+		this.currentPassword = currentPassword;
+	}
+
+	public String getRetypePassword() {
+		return retypePassword;
+	}
+
+	public void setRetypePassword(String retypePassword) {
+		this.retypePassword = retypePassword;
+	}
+
 	@Override
 	public String execute() throws Exception {				
 		return SUCCESS;
@@ -36,6 +58,11 @@ public class AdminAction extends DefaultActionSupport {
 	
 	
 	public String changeAdminPassword() throws Exception {
+		if(null == password || ! password.equals(retypePassword) || ! securityService.passwordMatch(currentPassword,password)){			
+			addActionMessage("Senhas nao coincidem");
+			return SUCCESS;
+		}
+		
 		securityService.updatePassword("admin", password);
 		addActionMessage("Senha alterada com sucesso");
 		return SUCCESS;

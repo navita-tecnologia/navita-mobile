@@ -225,9 +225,9 @@
         enabled tinyint not null,
         licenseKey varchar(255) not null,
         tag varchar(255) not null unique,
-        application_id varchar(32) null,
-        authContainer_id varchar(32) null,
         licenseBundle_id varchar(32) null,
+        authContainer_id varchar(32) null,
+        application_id varchar(32) null,
         tokenConnector_id varchar(32) null,
         primary key (id)
     );
@@ -285,8 +285,8 @@
         name varchar(255) not null,
         licenseKey varchar(255) null,
         tag varchar(255) null unique,
-        licenseBundle_id varchar(32) null,
         connector_id varchar(32) null,
+        licenseBundle_id varchar(32) null,
         primary key (id),
         unique (id, tag)
     );
@@ -301,6 +301,7 @@
         id varchar(32) not null,
         name varchar(255) not null,
         port varchar(255) not null,
+        tag varchar(255) not null unique,
         url varchar(255) not null,
         application_id varchar(32) null,
         primary key (id)

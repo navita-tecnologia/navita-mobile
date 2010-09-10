@@ -18,6 +18,15 @@ public class PushServerDAO extends GenericJpaDAO<PushServer> implements PushServ
 		return q.getResultList();
 	}
 
+	@Override
+	public PushServer findByTag(String tag) {
+		String ql = "from PushServer where tag = :tag";
+		TypedQuery<PushServer> q = getEntityManager().createQuery(ql, PushServer.class);		
+		q.setParameter("tag", tag);
+		return q.getSingleResult();
+	}
+
+	
 	
 
 

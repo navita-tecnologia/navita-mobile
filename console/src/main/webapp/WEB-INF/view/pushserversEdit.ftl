@@ -39,10 +39,15 @@
 								theme="simple" /></td>
 							</tr>	
 							<tr valign="middle">
+								<td>Tag</td>
+								<td align="left"><@s.textfield value="${pushServer.tag!}"  name="tag" 
+								theme="simple" /></td>
+							</tr>
+							<tr valign="middle" class="active">
 								<td>&nbsp;</td>
 								<td align="left">&nbsp;</td>
 							</tr>							
-							<tr valign="middle"  class="active">								
+							<tr valign="middle"  >								
 								<td>&nbsp;</td>
 								<td align="left"><input type="submit" value="${btLabel}" style="width: 150px;"/></td>
 							</tr>

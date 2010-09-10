@@ -14,7 +14,7 @@
 							<th class="left" width="150px">Nome&nbsp;&nbsp;<a href="<@s.url action="pushservers!prepareCreate.action"/>" title="Cadastrar Servidor" >&nbsp;<img src="images/ico_add.gif" alt="Adicionar" border="0" /></a></th>
 							<th class="left">Url</th>
 							<th  >Port</th>
-							<th >ID</th>
+							<th >Tag (applicationId)</th>
 							<th  >Aç&atilde;o</th>
 						</tr>
 						
@@ -28,7 +28,7 @@
 									${port}
 								</td>
 								<td align="center">
-									${id}
+									${tag}
 								</td>
 								<td align="center">
 									<a href="#" onclick='removeServer("<@s.property value="name"/>","<@s.property value="id"/>","${application.id}")'>remover</a>

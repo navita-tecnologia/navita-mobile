@@ -8,7 +8,6 @@ import javax.jws.WebService;
 import org.apache.commons.httpclient.NameValuePair;
 
 import br.com.navita.mobile.console.domain.PushServer;
-import br.com.navita.mobile.console.exception.EntityNotFoundException;
 import br.com.navita.mobile.console.exception.PushException;
 import br.com.navita.mobile.console.service.PushServerService;
 import br.com.navita.mobile.console.util.HttpClientUtil;
@@ -16,44 +15,43 @@ import br.com.navita.mobile.console.util.NavitaAutowiringSupport;
 
 @WebService(name="pushService",serviceName="push",portName="pushPort")
 public class PushGatewayImpl extends NavitaAutowiringSupport implements PushGatewayService {
-	
+
 	public PushGatewayImpl() {
 		initialize();
 	}
-	
+
 	private PushServerService pushServerService;
-	
+
 	@WebMethod(exclude=true)
 	public void setPushServerService(PushServerService pushServerService) {
 		this.pushServerService = pushServerService;
 	}
-	
-		
+
+
 	@Override
 	public PushResult execute(PushBean pushBean) throws PushException {			
 		PushServer besServer;
-		try {
-			besServer = pushServerService.findById(pushBean.getApplicationId());
-		} catch (EntityNotFoundException e1) {
-			throw new PushException(e1);
-		}		
-		
+		besServer = pushServerService.findByTag(pushBean.getApplicationId());	
+		if(besServer == null){
+			throw new PushException("Push Server not found [" + pushBean.getApplicationId() + "]");
+		}
+
 		PushResult result = new PushResult();
 		try {
 			String pushResult = doPush(besServer.getUrl(), pushBean.getPin(), besServer.getPort(), new NameValuePair[]{
 				new NameValuePair("rawData",pushBean.getRawData()),
 				new NameValuePair("attributeCode",pushBean.getAttributeCode())
-				});
+			});
 			result.setMessage(pushResult);
 			result.setResultCode(0);
 		} catch (IOException e) {
 			result.setMessage(e.getMessage());
 			result.setResultCode(1);
 		}		
-		
+
 		return result;
 	}
-	
+
 	private String doPush(String mdsServerUri, String pin, String appPort, NameValuePair[] params) throws IOException{
 		try {
 			HttpClientUtil http = new HttpClientUtil();
@@ -68,13 +66,13 @@ public class PushGatewayImpl extends NavitaAutowiringSupport implements PushGate
 							//new NameValuePair("X-RIM-Push-Type","Browser-Message")
 					}	
 			);
-			
+
 			if(http.getStatusCode() == 200 && "".equals(result)){
 				result = "Pushed to "+pin+" over "+mdsServerUri;
 			}else{
 				throw new IOException(result);
 			}
-			
+
 			return result;
 		} catch (Exception e) {
 			throw new IOException(e);

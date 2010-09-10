@@ -13,7 +13,9 @@ public class PushServer extends BaseEntity {
 	@Column(nullable=false)
 	private String port;
 	
-	
+	@Column(nullable=false,unique=true)
+	private String tag;
+		
 	@ManyToOne
 	private Application application;
 
@@ -39,6 +41,14 @@ public class PushServer extends BaseEntity {
 	
 	public Application getApplication() {
 		return application;
+	}
+	
+	public String getTag() {
+		return tag;
+	}
+	
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 	
 }
