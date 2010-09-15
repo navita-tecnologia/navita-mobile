@@ -38,86 +38,16 @@
 		</Arg>
 	</New>
 
-	<New id="navitaMobileDataSource" class="org.mortbay.jetty.plus.naming.Resource">
-		<Arg>jdbc/navitaMobileDatasourceDerby</Arg>
+	<New id="vrPessoaFisicaJava" class="org.mortbay.jetty.plus.naming.Resource">
+		<Arg>jdbc/vrPessoaFisicaJava</Arg>
 		<Arg>
 			<New class="com.atomikos.jdbc.nonxa.NonXADataSourceBean">
-				<Set name="Url">jdbc:derby://127.0.0.1:1527/mobiledb</Set>
-				<Set name="driverClassName">org.apache.derby.jdbc.ClientDriver</Set>
-				<Set name="user">APP</Set>
-				<Set name="password">APP</Set>
-			</New>
-		</Arg>
-	</New>
-
-	<New id="navitaMobileDataSourceId" class="org.mortbay.jetty.plus.naming.Resource">
-		<Arg>jdbc/navitaMobileDatasource</Arg>
-		<Arg>
-			<New class="com.atomikos.jdbc.AtomikosDataSourceBean">
-				<Set name="xaDataSourceClassName">net.sourceforge.jtds.jdbcx.JtdsDataSource</Set>
-				<Set name="xaProperties">
-					<New class="java.util.Properties">
-						<Call name="setProperty">
-							<Arg>databaseName</Arg>
-							<Arg>navita-mobile</Arg>
-						</Call>		
-						<Call name="setProperty">
-							<Arg>serverName</Arg>
-							<Arg>192.168.10.20</Arg>
-						</Call>	
-						<Call name="setProperty">
-							<Arg>portNumber</Arg>
-							<Arg>1433</Arg>
-						</Call>	
-						<Call name="setProperty">
-							<Arg>user</Arg>
-							<Arg>sa</Arg>
-						</Call>	
-						<Call name="setProperty">
-							<Arg>password</Arg>
-							<Arg>navita</Arg>
-						</Call>				
-					</New>
-				</Set>
-				<Set name="UniqueResourceName">navitaMobileDatasource</Set>
-			</New>
-		</Arg>
-
-		<!--
-			<Arg> <New class="com.atomikos.jdbc.nonxa.NonXADataSourceBean"> <Set
-			name="Url">jdbc:jtds:sqlserver://192.168.10.20:1433/navita-mobile</Set>
-			<Set name="driverClassName">net.sourceforge.jtds.jdbc.Driver</Set>
-			<Set name="user">sa</Set> <Set name="password">navita</Set> </New>
-			</Arg>
-		-->
-	</New>
-
-
-	<New id="msSqlWashburn" class="org.mortbay.jetty.plus.naming.Resource">
-		<Arg>jdbc/sportsDataSource</Arg>
-		<Arg>
-			<New class="com.atomikos.jdbc.nonxa.NonXADataSourceBean">
-				<Set name="Url">jdbc:jtds:sqlserver://nvtweb01.navita.com.br:1433
-				</Set>
-				<Set name="driverClassName">net.sourceforge.jtds.jdbc.Driver</Set>
-				<Set name="user">futebol</Set>
-				<Set name="password">n@v1t@</Set>
-			</New>
-		</Arg>
-	</New>
-
-	<New id="CrisisDataSourceId" class="org.mortbay.jetty.plus.naming.Resource">
-		<Arg>jdbc/crisisDataSource</Arg>
-		<Arg>
-			<New class="com.atomikos.jdbc.nonxa.NonXADataSourceBean">
-				<Set name="Url">jdbc:jtds:sqlserver://washburn:1433/crisis-system
-				</Set>
+				<Set name="Url">jdbc:jtds:sqlserver://washburn:1433/VR-PessoaFisica-Java</Set>
 				<Set name="driverClassName">net.sourceforge.jtds.jdbc.Driver</Set>
 				<Set name="user">sa</Set>
 				<Set name="password">navita</Set>
 			</New>
 		</Arg>
 	</New>
-
 </Configure>
 
