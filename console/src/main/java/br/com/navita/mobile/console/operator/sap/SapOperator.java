@@ -62,7 +62,7 @@ public class SapOperator implements Operator{
 						for(SapParameter param : row.getAttributes()){	
 							String value = param.getValue();
 							if(value.startsWith("$") || value.startsWith(":")){
-								value = (String) params.get(value.substring(1));
+								value = extractFirstParam( params.get(value.substring(1)));
 							}	
 							table.setValue(value, param.getName());
 						}
@@ -100,6 +100,18 @@ public class SapOperator implements Operator{
 
 		return bean;
 	}
+	private String extractFirstParam(Object object) {
+		if(object instanceof String){
+			return (String) object;
+		}else if(object instanceof String[]){
+			return ((String[])object)[0];
+		}
+		
+		return object.toString();
+		
+		
+	}
+
 
 }
 
