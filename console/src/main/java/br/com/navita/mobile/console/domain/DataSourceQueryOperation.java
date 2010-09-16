@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 @Entity
 public class DataSourceQueryOperation extends Operation {
 
-	@Column
+	@Column(length=5000)
 	private String query;
 	
 	@Column
