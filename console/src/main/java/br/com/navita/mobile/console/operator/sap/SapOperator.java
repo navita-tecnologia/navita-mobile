@@ -40,12 +40,7 @@ public class SapOperator implements Operator{
 				for(SapParameter sapParam : sapFunctionOperation.getInputParameters()){			
 					String value = sapParam.getValue();
 					if(value.startsWith("$") || value.startsWith(":")){
-						Object param = params.get(value.substring(1));
-						if(null == param){
-							value= " ";
-						}else{
-							value = param.toString();
-						}						
+						value = extractFirstParam( params.get(value.substring(1)));					
 					}				
 					paramInList.setValue(value, sapParam.getName());				
 				}
@@ -101,6 +96,9 @@ public class SapOperator implements Operator{
 		return bean;
 	}
 	private String extractFirstParam(Object object) {
+		if (object == null){
+			return " ";
+		}
 		if(object instanceof String){
 			return (String) object;
 		}else if(object instanceof String[]){
