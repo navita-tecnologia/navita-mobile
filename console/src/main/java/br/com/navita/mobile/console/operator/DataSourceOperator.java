@@ -1,5 +1,6 @@
 package br.com.navita.mobile.console.operator;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,8 +25,10 @@ public class DataSourceOperator implements Operator{
 		DataSourceConnector connector = (DataSourceConnector) operation.getConnector();
 		JndiObjectFactoryBean jndiBean = new JndiObjectFactoryBean();
 		DataSource ds = (DataSource)jndiBean.getJndiTemplate().lookup(connector.getDataSource());
-		NamedParameterJdbcTemplate  tp = new NamedParameterJdbcTemplate (ds);		
-		SqlParameterSource args = new MapSqlParameterSource(params);
+		NamedParameterJdbcTemplate  tp = new NamedParameterJdbcTemplate (ds);
+		//FIXME: deve vir ja convertido em <String,String>
+		Map<String,String> processedParams = prepareParameters(params);
+		SqlParameterSource args = new MapSqlParameterSource(processedParams);
 		MobileBean bean = new MobileBean();
 		if(queryOperation.isReturnResultSet()){
 			List<?> result = tp.queryForList(queryOperation.getQuery(), args);
@@ -38,5 +41,21 @@ public class DataSourceOperator implements Operator{
 				
 		return bean;
 	}
+
+	private Map<String, String> prepareParameters(Map<String, Object> params) {
+		Map<String, String> ret = new HashMap<String, String>();
+		for(String key: params.keySet()){
+			Object value = params.get(key);
+			if(value != null && value.getClass().isArray()){
+				ret.put(key, ((Object[])value)[0].toString());
+			}else{
+				ret.put(key, value.toString());
+			}
+		}
+		
+		return ret;
+	}
+	
+	
 
 }
