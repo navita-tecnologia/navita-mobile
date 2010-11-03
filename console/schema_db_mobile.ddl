@@ -18,10 +18,10 @@
         drop constraint FK3A11F58C3B7BB6A8;
 
     alter table Connector 
-        drop constraint FK54EC142DD57D15DC;
+        drop constraint FK54EC142DC7F3B843;
 
     alter table Connector 
-        drop constraint FK54EC142DC7F3B843;
+        drop constraint FK54EC142DD57D15DC;
 
     alter table Connector 
         drop constraint FK54EC142DF937C543;
@@ -226,9 +226,9 @@
         licenseKey varchar(255) not null,
         tag varchar(255) not null unique,
         licenseBundle_id varchar(32) null,
+        tokenConnector_id varchar(32) null,
         authContainer_id varchar(32) null,
         application_id varchar(32) null,
-        tokenConnector_id varchar(32) null,
         primary key (id)
     );
 
@@ -240,7 +240,7 @@
 
     create table DataSourceQueryOperation (
         id varchar(32) not null,
-        query varchar(255) null,
+        query varchar(5000) null,
         returnResultSet tinyint null,
         primary key (id)
     );
@@ -285,8 +285,8 @@
         name varchar(255) not null,
         licenseKey varchar(255) null,
         tag varchar(255) null unique,
-        connector_id varchar(32) null,
         licenseBundle_id varchar(32) null,
+        connector_id varchar(32) null,
         primary key (id),
         unique (id, tag)
     );
@@ -449,14 +449,14 @@
         references PushServer;
 
     alter table Connector 
-        add constraint FK54EC142DD57D15DC 
-        foreign key (tokenConnector_id) 
-        references Connector;
-
-    alter table Connector 
         add constraint FK54EC142DC7F3B843 
         foreign key (application_id) 
         references Application;
+
+    alter table Connector 
+        add constraint FK54EC142DD57D15DC 
+        foreign key (tokenConnector_id) 
+        references Connector;
 
     alter table Connector 
         add constraint FK54EC142DF937C543 
