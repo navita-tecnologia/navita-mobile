@@ -1,6 +1,7 @@
 package br.com.navita.mobile.console.util;
 
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -47,10 +48,17 @@ public abstract class NavitaMobileParamsUtil implements EncryptionAware{
 			return (String) object;
 		}else if(object instanceof String[]){
 			return ((String[])object)[0];
-		}
-		
-		return object.toString();
-		
-		
+		}else{
+			return object.toString();
+		}		
 	}
+
+	public static Map<String, Object> extractFromArray(Map<String,Object> source){
+		Map<String, Object> ret = new HashMap<String,Object>();
+		for(String key: source.keySet()){
+			ret.put(key,extractFirstParam( source.get(key)));
+		}
+		return ret;
+	}
+	
 }

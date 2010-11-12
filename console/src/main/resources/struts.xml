@@ -35,6 +35,10 @@
 			<result name="usage" type="freemarker">/WEB-INF/view/licenseBundleUse.ftl
 			</result>
 		</action>
+		
+		<action name="registerLicense" class="br.com.navita.mobile.console.view.LicenseGatewayAction">
+		<result name="success" type="freemarker">/WEB-INF/view/registerLicense.ftl</result>
+		</action>
 
 		<action name="teste" class="br.com.navita.mobile.console.view.TesteAction">
 			<result name="success" type="freemarker">/WEB-INF/view/teste.ftl</result>

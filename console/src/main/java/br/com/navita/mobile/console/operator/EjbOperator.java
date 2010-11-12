@@ -10,6 +10,7 @@ import javax.naming.NamingException;
 
 import br.com.navita.mobile.console.domain.Connector;
 import br.com.navita.mobile.console.domain.EjbConnector;
+import br.com.navita.mobile.console.util.NavitaMobileParamsUtil;
 import br.com.navita.mobile.domain.MobileBean;
 import br.com.navita.mobile.exception.ServiceNotFoundException;
 import br.com.navita.mobile.remote.EjbServiceFactory;
@@ -19,7 +20,7 @@ public class EjbOperator implements ConnectorOperator{
 private static final Logger LOGGER = Logger.getLogger(EjbOperator.class.getName());
 	
 	@Override
-	public MobileBean doConnectorOperation(Connector connector,	Map<String, Object> params) throws NamingException {
+	public MobileBean doConnectorOperation(Connector connector,	Map<String, Object> paramsFromServlet) throws NamingException {
 		EjbConnector ejbConnector = (EjbConnector) connector;
 		SecurityManager oldSecurityManager = System.getSecurityManager();
 
@@ -50,6 +51,7 @@ private static final Logger LOGGER = Logger.getLogger(EjbOperator.class.getName(
 				return bean;
 			}
 			MobileService service = null;
+			Map<String,Object> params = NavitaMobileParamsUtil.extractFromArray(paramsFromServlet);
 			String operation = (String) params.get("operationTag");
 			try{
 				service = factory.getServiceByName(operation);
