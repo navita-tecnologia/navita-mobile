@@ -19,7 +19,6 @@ public abstract class Operation extends BaseEntity {
 	@Column
 	protected String licenseKey;
 	
-	@Column(unique = true)	
 	protected String tag;
 	
 	@ManyToOne
