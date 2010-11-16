@@ -38,14 +38,12 @@
 		</Arg>
 	</New>
 
-	<New id="navitaMobileDataSource" class="org.mortbay.jetty.plus.naming.Resource">
-		<Arg>jdbc/navitaMobileDatasourceDerby</Arg>
+	<New id="navitaMobileDataSource1" class="org.mortbay.jetty.plus.naming.Resource">
+		<Arg>jdbc/navitaMobileDatasource1</Arg>
 		<Arg>
 			<New class="com.atomikos.jdbc.nonxa.NonXADataSourceBean">
-				<Set name="Url">jdbc:derby://127.0.0.1:1527/mobiledb</Set>
-				<Set name="driverClassName">org.apache.derby.jdbc.ClientDriver</Set>
-				<Set name="user">APP</Set>
-				<Set name="password">APP</Set>
+				<Set name="Url">jdbc:derby:mobiledb;create=true</Set>
+				<Set name="driverClassName">org.apache.derby.jdbc.EmbeddedDriver</Set>				
 			</New>
 		</Arg>
 	</New>

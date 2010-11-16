@@ -476,4 +476,6 @@ insert into LicenseBundleType values ('cdf2b0011b0b4fc39490baa776d61449','Entrep
 
 insert into LICENSEBUNDLE values('cdf2b0011b0b4fc39490baa776d61450','Teste Bundle',1,30,'cdf2b0011b0b4fc39490baa776d61444');
         
-create table CONTROLTB (f char(1));       
+create table CONTROLTB (f smallint);
+
+insert into CONTROLTB values(1);
