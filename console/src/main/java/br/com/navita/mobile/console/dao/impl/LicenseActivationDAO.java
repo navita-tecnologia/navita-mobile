@@ -15,9 +15,9 @@ public class LicenseActivationDAO extends GenericJpaDAO<LicenseActivation> imple
 
 	@Override
 	public LicenseActivation findPinOnBundle(String pin, String bundleId) {		
-		String ql = "FROM LicenseActivation WHERE upper(pin) = upper(:pin) and licenseBundle.id = :bundleId";
+		String ql = "FROM LicenseActivation WHERE pin = :pin and licenseBundle.id = :bundleId";
 		Query query = getEntityManager().createQuery(ql);
-		query.setParameter("pin", pin);
+		query.setParameter("pin", pin.toLowerCase());//always lowercase
 		query.setParameter("bundleId", bundleId);
 		try{
 			return (LicenseActivation) query.getSingleResult();

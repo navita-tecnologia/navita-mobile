@@ -72,7 +72,7 @@ public class LicenseServiceImpl implements LicenseService {
 			la.setCarrier(raw.getCarrier());
 			la.setEmail(raw.getEmail());
 			la.setModel(raw.getModel());
-			la.setPin(raw.getPin());
+			la.setPin(raw.getPin().toLowerCase());//sempre lowercase
 			la.setName("");
 			licenseActivationRepository.persist(la);
 		}

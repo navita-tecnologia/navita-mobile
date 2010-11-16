@@ -27,6 +27,11 @@
 								<td>Habilitada</td>
 								<td align="left"><@s.select value="${app.enabled?string}"  name="enabled" 
 								theme="simple" list="# {'true':'Sim','false':'Não'}"/></td>
+							</tr>	
+							<tr valign="middle">
+								<td>Exigir dados anal&iacute;ticos?</td>
+								<td align="left"><@s.select value="${app.usingAnalytics?string}"  name="usingAnalytics" 
+								theme="simple" list="# {'true':'Sim','false':'Não'}"/></td>
 							</tr>							
 							<tr class="active" valign="middle">
 								<td>Pacote de Licen&ccedil;a</td>

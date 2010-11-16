@@ -25,6 +25,9 @@ public class Application extends BaseEntity {
 	
 	@Column
 	private String licenseKey;
+	
+	@Column
+	private boolean usingAnalytics;
 
 	public Set<Connector> getConnectors() {
 		return connectors;
@@ -68,5 +71,16 @@ public class Application extends BaseEntity {
 	public void setLicenseKey(String licenseKey) {
 		this.licenseKey = licenseKey;
 	}
+
+	public boolean isUsingAnalytics() {
+		return usingAnalytics;
+	}
+
+	public void setUsingAnalytics(boolean usingAnalytics) {
+		this.usingAnalytics = usingAnalytics;
+	}
+
+	
+	
 	
 }

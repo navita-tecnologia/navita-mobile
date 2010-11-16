@@ -44,6 +44,7 @@ public class ApplicationService implements br.com.navita.mobile.console.service.
 		app.setEnabled(raw.isEnabled());
 		app.setName(raw.getName());
 		app.setLicenseKey(raw.getLicenseKey());
+		app.setUsingAnalytics(raw.isUsingAnalytics());
 		
 	}
 

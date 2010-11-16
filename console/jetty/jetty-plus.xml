@@ -59,11 +59,11 @@
 					<New class="java.util.Properties">
 						<Call name="setProperty">
 							<Arg>databaseName</Arg>
-							<Arg>navita-mobile</Arg>
+							<Arg>navita-mobile-applications</Arg>
 						</Call>		
 						<Call name="setProperty">
 							<Arg>serverName</Arg>
-							<Arg>192.168.10.20</Arg>
+							<Arg>nvtweb01.navita.com.br</Arg>
 						</Call>	
 						<Call name="setProperty">
 							<Arg>portNumber</Arg>
@@ -71,11 +71,11 @@
 						</Call>	
 						<Call name="setProperty">
 							<Arg>user</Arg>
-							<Arg>sa</Arg>
+							<Arg>nvt-mobile</Arg>
 						</Call>	
 						<Call name="setProperty">
 							<Arg>password</Arg>
-							<Arg>navita</Arg>
+							<Arg>banana01</Arg>
 						</Call>				
 					</New>
 				</Set>

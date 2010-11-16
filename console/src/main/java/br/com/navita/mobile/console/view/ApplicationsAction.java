@@ -18,7 +18,7 @@ public class ApplicationsAction extends LicenseWareActionSupport implements Appl
 
 	private Application app;
 	private boolean enabled;
-	
+	private boolean usingAnalytics;
 	
 	public void setPushServerService(PushServerService pushServerService) {
 		this.pushServerService = pushServerService;
@@ -94,5 +94,17 @@ public class ApplicationsAction extends LicenseWareActionSupport implements Appl
 	public Integer getCountPushServers(String id){
 		return pushServerService.listbyApplicationId(id).size();
 	}
+
+	public boolean isUsingAnalytics() {
+		return usingAnalytics;
+	}
+
+	public void setUsingAnalytics(boolean usingAnalytics) {
+		this.usingAnalytics = usingAnalytics;
+	}
+
+	
+	
+	
 	
 }

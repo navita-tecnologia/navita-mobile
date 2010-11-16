@@ -37,7 +37,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class ProcessorAction extends RawActionSupport implements ParameterAware, ProcessorRaw{
-	
+
 	private static final Logger LOG = Logger.getLogger(ProcessorAction.class.getName());
 
 	private String retType;
@@ -265,8 +265,8 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	public String execute() {		
 		long start = System.currentTimeMillis();
 
-		
-		
+
+
 		if(retType == null || retType.isEmpty() || (! "xml".equals(retType) && ! "json".equals(retType))){
 			serializeBean(failBean(new UnresolvedReturnTypeException("retType must be 'json' or 'xml'")), start);
 			return "json";
@@ -274,9 +274,10 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 
 
 		try {
-			MobileBean obj = new MobileBean();
-			prepareAndCheckParameters();
+			MobileBean obj = new MobileBean();			
 			Connector connector = baseConnectorService.findByTag(connectorTag);
+			prepareAndCheckParameters(connector);
+
 			boolean isExternalOperation = connector.getOperationType() == null;
 			boolean isConnectorLicenseInUse = licenseHelper.isUsingConnectorLicense(connector);
 			String licenseBundleId = "";
@@ -392,7 +393,7 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 			xs.alias("mobile-bean", MobileBean.class);
 			buff = xs.toXML(bean).getBytes();
 		}
-		
+
 		setInStream(new ByteArrayInputStream(buff));		
 	}
 
@@ -434,23 +435,44 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	}
 
 
-	private void prepareAndCheckParameters() throws InvalidDeviceDataException {
+	private void prepareAndCheckParameters(Connector connector) throws InvalidDeviceDataException {
+		boolean usingAnalytics = connector.getApplication().isUsingAnalytics();
 		if(pin == null || pin.isEmpty()){
-			throw new InvalidDeviceDataException("PIN parameter not found");
+			if(usingAnalytics){
+				throw new InvalidDeviceDataException("PIN parameter not found");
+			}else{
+				pin = "unknow";
+			}
 		}
 		if(email == null || email.isEmpty() ){
-			throw new InvalidDeviceDataException("EMAIL parameter not found");
+			if(usingAnalytics){
+				throw new InvalidDeviceDataException("EMAIL parameter not found");
+			}else{
+				email = "unknow";
+			}
 		}
 		if( device == null || device.isEmpty()){
-			throw new InvalidDeviceDataException("DEVICE parameter not found");
+			if(usingAnalytics){
+				throw new InvalidDeviceDataException("DEVICE parameter not found");
+			}else{
+				device = "unknow";
+			}
 		}
 
 		if(brand == null || brand.isEmpty() ){
-			throw new InvalidDeviceDataException("BRAND parameter not found");
+			if(usingAnalytics){
+				throw new InvalidDeviceDataException("BRAND parameter not found");
+			}else{
+				brand = "unknow";
+			}
 		}
 
 		if(carrier == null || carrier.isEmpty()){
-			throw new InvalidDeviceDataException("CARRIER parameter not found");
+			if(usingAnalytics){
+				throw new InvalidDeviceDataException("CARRIER parameter not found");
+			}else{
+				carrier = "unknow";
+			}
 		}
 
 
