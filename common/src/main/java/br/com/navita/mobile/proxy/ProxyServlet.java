@@ -41,7 +41,7 @@ public abstract class ProxyServlet extends HttpServlet {
 	 * @throws UnsupportedEncodingException 
 	 */
 	@SuppressWarnings("unchecked")	
-	protected Map<String, Object> fromProxyParams(HttpServletRequest req) throws UnsupportedEncodingException {
+	private Map<String, Object> fromProxyParams(HttpServletRequest req) throws UnsupportedEncodingException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		for(Enumeration  names = req.getParameterNames();names.hasMoreElements();){
 			String keyName =  names.nextElement().toString();
