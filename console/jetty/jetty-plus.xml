@@ -39,7 +39,7 @@
 	</New>
 
 	<New id="navitaMobileDataSource1" class="org.mortbay.jetty.plus.naming.Resource">
-		<Arg>jdbc/navitaMobileDatasource1</Arg>
+		<Arg>jdbc/navitaMobileDatasource</Arg>
 		<Arg>
 			<New class="com.atomikos.jdbc.nonxa.NonXADataSourceBean">
 				<Set name="Url">jdbc:derby:mobiledb;create=true</Set>
@@ -49,7 +49,7 @@
 	</New>
 
 	<New id="navitaMobileDataSourceId" class="org.mortbay.jetty.plus.naming.Resource">
-		<Arg>jdbc/navitaMobileDatasource</Arg>
+		<Arg>jdbc/navitaMobileDatasource1</Arg>
 		<Arg>
 			<New class="com.atomikos.jdbc.AtomikosDataSourceBean">
 				<Set name="xaDataSourceClassName">net.sourceforge.jtds.jdbcx.JtdsDataSource</Set>

@@ -1,6 +1,8 @@
 package br.com.navita.mobile.console.operator;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -56,11 +58,13 @@ public class ProxyOperator implements ConnectorOperator{
 		return bean;
 	}
 
-	private String extractFirstParam(Object object) {
+	private String extractFirstParam(Object object) throws UnsupportedEncodingException {
 		if(object instanceof String){
 			return (String) object;
 		}else if(object instanceof String[]){
-			return ((String[])object)[0];
+			String value = ((String[])object)[0];
+			value = URLEncoder.encode(value, "utf-8");
+			return value;
 		}
 		
 		return object.toString();
