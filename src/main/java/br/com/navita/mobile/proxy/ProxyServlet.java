@@ -34,16 +34,9 @@ public abstract class ProxyServlet extends HttpServlet {
 
 	protected abstract MobileBean proccessParameters(Map<?, ?> params);
 
-	/**
-	 * Fazer o override deste metodo caso seja necessaria alguma preparacao dos parametros passados ao servico
-	 * @param req
-	 * @return
-	 * @throws UnsupportedEncodingException 
-	 */
-	@SuppressWarnings("unchecked")	
 	private Map<String, Object> fromProxyParams(HttpServletRequest req) throws UnsupportedEncodingException {
 		Map<String, Object> map = new HashMap<String, Object>();
-		for(Enumeration  names = req.getParameterNames();names.hasMoreElements();){
+		for(Enumeration<?>  names = req.getParameterNames();names.hasMoreElements();){
 			String keyName =  names.nextElement().toString();
 			map.put(keyName,URLDecoder.decode(req.getParameter(keyName),"utf-8"));
 		}		
