@@ -1,6 +1,8 @@
 package br.com.navita.mobile.proxy;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +21,8 @@ public abstract class ProxyServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)	throws ServletException, IOException {
 		resp.setContentType("application/json");
-		MobileBean result = proccessParameters(prepareParameters(req));
+		Map<String, Object> params = fromProxyParams(req);
+		MobileBean result = proccessParameters(params);
 		resp.getWriter().print(JSONSerializer.toJSON(result));
 		
 	}
@@ -35,14 +38,14 @@ public abstract class ProxyServlet extends HttpServlet {
 	 * Fazer o override deste metodo caso seja necessaria alguma preparacao dos parametros passados ao servico
 	 * @param req
 	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
 	@SuppressWarnings("unchecked")	
-	protected Map<String, Object> prepareParameters(HttpServletRequest req) {
-		//FIXME: dar uma melhoradinha nisso
+	protected Map<String, Object> fromProxyParams(HttpServletRequest req) throws UnsupportedEncodingException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		for(Enumeration  names = req.getParameterNames();names.hasMoreElements();){
 			String keyName =  names.nextElement().toString();
-			map.put(keyName,req.getParameter(keyName));
+			map.put(keyName,URLDecoder.decode(req.getParameter(keyName),"utf-8"));
 		}		
 		return map;	
 	}	
