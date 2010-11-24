@@ -78,13 +78,30 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-scm</artifactId>
+				<version>1.0-alpha-7-SNAPSHOT</version>
+			</extension>
+			<extension>
+				<groupId>org.apache.maven.scm</groupId>
+				<artifactId>maven-scm-manager-plexus</artifactId>
+				<version>1.0-beta-3-SNAPSHOT</version>
+			</extension>
+			<extension>
+				<groupId>org.apache.maven.scm</groupId>
+				<artifactId>maven-scm-provider-svnexe</artifactId>
+				<version>1.0-beta-3-SNAPSHOT</version>
+			</extension>
+		</extensions>
 
 	</build>
 	<distributionManagement>
 		<repository>
 			<id>repo</id>
 			<name>Repository Name</name>
-			<url>http://janine.navita.com.br/svn/repos</url>
+			<url>http://marcio.guedes@janine.navita.com.br/svn/repos</url>
 		</repository>
 
 	</distributionManagement>
