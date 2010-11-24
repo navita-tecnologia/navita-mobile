@@ -81,18 +81,15 @@
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-scm</artifactId>
-				<version>1.0-alpha-7-SNAPSHOT</version>
+				<artifactId>wagon-scm</artifactId>				
 			</extension>
 			<extension>
 				<groupId>org.apache.maven.scm</groupId>
-				<artifactId>maven-scm-manager-plexus</artifactId>
-				<version>1.0-beta-3-SNAPSHOT</version>
+				<artifactId>maven-scm-manager-plexus</artifactId>				
 			</extension>
 			<extension>
 				<groupId>org.apache.maven.scm</groupId>
-				<artifactId>maven-scm-provider-svnexe</artifactId>
-				<version>1.0-beta-3-SNAPSHOT</version>
+				<artifactId>maven-scm-provider-svnexe</artifactId>				
 			</extension>
 		</extensions>
 
