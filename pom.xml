@@ -5,14 +5,14 @@
 	<groupId>br.com.navita</groupId>
 	<artifactId>navita-mobile</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0</version>
+	<version>1.0.0.1</version>
 	<name>Navita Mobile</name>
 	<url>http://m.navita.com.br</url>
 
 	<scm>
-		<connection>scm:svn:http://janine.navita.com.br/svn/repos/navita/mobile/navita-mobile/tags/1.0.0.1</connection>
-		<developerConnection>scm:svn:http://janine.navita.com.br/svn/repos/navita/mobile/navita-mobile/tags/1.0.0.1</developerConnection>
-		<url>http://janine.navita.com.br/svn/repos/navita/mobile/navita-mobile/tags/1.0.0.1</url>
+		<connection>scm:svn:http://janine.navita.com.br/svn/repos/navita/mobile/navita-mobile/trunk/</connection>
+		<developerConnection>scm:svn:http://janine.navita.com.br/svn/repos/navita/mobile/navita-mobile/trunk/</developerConnection>
+		<url>http://janine.navita.com.br/svn/repos/navita/mobile/navita-mobile/trunk/</url>
 	</scm>
 
 
