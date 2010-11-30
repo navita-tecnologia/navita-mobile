@@ -3,6 +3,7 @@ package br.com.navita.mobile.console.dao.impl;
 import java.util.List;
 
 import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -19,8 +20,11 @@ public class LicenseActivationDAO extends GenericJpaDAO<LicenseActivation> imple
 		Query query = getEntityManager().createQuery(ql);
 		query.setParameter("pin", pin.toLowerCase());//always lowercase
 		query.setParameter("bundleId", bundleId);
+		query.setMaxResults(1);
 		try{
 			return (LicenseActivation) query.getSingleResult();
+		}catch (NonUniqueResultException e) {//como maxResults agora eh 1 nao deveria entrar nunca mais nesta exception
+			return (LicenseActivation) query.getResultList().get(0);
 		}catch (NoResultException e) {
 			return null;
 		}
