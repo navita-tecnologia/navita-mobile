@@ -53,6 +53,15 @@ private static final Logger LOGGER = Logger.getLogger(EjbOperator.class.getName(
 			MobileService service = null;
 			Map<String,Object> params = NavitaMobileParamsUtil.extractFromArray(paramsFromServlet);
 			String operation = (String) params.get("operationTag");
+			if(operation == null){
+				operation = (String) params.get("operation");
+			}
+			if(operation == null){
+				LOGGER.log(Level.SEVERE,"ServiceNotFoundException");
+				bean.setResultCode(1);
+				bean.setMessage("Operacao nao encontrada");
+				return bean;
+			}
 			try{
 				service = factory.getServiceByName(operation);
 			}catch (ServiceNotFoundException e) {

@@ -19,6 +19,7 @@ import br.com.navita.mobile.console.domain.Operation;
 import br.com.navita.mobile.console.domain.SapConnector;
 import br.com.navita.mobile.console.exception.InvalidDeviceDataException;
 import br.com.navita.mobile.console.exception.InvalidLicenseKeyException;
+import br.com.navita.mobile.console.exception.InvalidMobileUrlException;
 import br.com.navita.mobile.console.exception.InvalidResultBeanException;
 import br.com.navita.mobile.console.exception.OperationNotFoundException;
 import br.com.navita.mobile.console.exception.UnresolvedReturnTypeException;
@@ -268,14 +269,17 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 
 
 		if(retType == null || retType.isEmpty() || (! "xml".equals(retType) && ! "json".equals(retType))){
-			serializeBean(failBean(new UnresolvedReturnTypeException("retType must be 'json' or 'xml'")), start);
-			return "json";
+			LOG.log(Level.WARNING,"retType forced to JSON");
+			retType =  "json";
 		}
 
 
 		try {
 			MobileBean obj = new MobileBean();			
 			Connector connector = baseConnectorService.findByTag(connectorTag);
+			if(connector == null){
+				throw new InvalidMobileUrlException("connectorTag not registered: " +  connectorTag);
+			}
 			prepareAndCheckParameters(connector);
 
 			boolean isExternalOperation = connector.getOperationType() == null;
@@ -385,7 +389,7 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 		byte[] buff = null;
 		long total = System.currentTimeMillis() - start;
 		bean.setProcessingTime(total);
-		if("json".equals(retType)){
+		if("json".equals(retType) || retType == null || retType.isEmpty()){
 			buff = JSONSerializer.toJSON(bean).toString().getBytes();
 		}
 		if("xml".equals(retType)){
