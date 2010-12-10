@@ -1,7 +1,6 @@
 package br.com.navita.mobile.console.util;
 
 import java.net.URLDecoder;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;

@@ -163,14 +163,14 @@
 		<action name="processor" 
 			class="br.com.navita.mobile.console.view.processor.ProcessorAction">
 			<result name="json" type="stream">
-				<param name="contentType">application/json</param>
+				<param name="contentType">application/json;charset=utf-8</param>
 				<param name="inputName">inStream</param>
 				<param name="contentDisposition">inline</param>
 				<param name="allowCaching ">false</param>
-				<param name="bufferSize">1024</param>
+				<param name="bufferSize">1024</param>				
 			</result>
 			<result name="xml" type="stream">
-				<param name="contentType">text/xml</param>
+				<param name="contentType">text/xml;charset=utf-8</param>
 				<param name="inputName">inStream</param>
 				<param name="contentDisposition">inline</param>
 				<param name="allowCaching ">false</param>
@@ -181,14 +181,14 @@
 	<action name="gateway" 
 			class="br.com.navita.mobile.console.view.processor.ProcessorAction">
 			<result name="json" type="stream">
-				<param name="contentType">application/json</param>
+				<param name="contentType">application/json;charset=utf-8</param>
 				<param name="inputName">inStream</param>
 				<param name="contentDisposition">inline</param>
 				<param name="allowCaching ">false</param>
 				<param name="bufferSize">1024</param>
 			</result>
 			<result name="xml" type="stream">
-				<param name="contentType">text/xml</param>
+				<param name="contentType">text/xml;charset=utf-8</param>
 				<param name="inputName">inStream</param>
 				<param name="contentDisposition">inline</param>
 				<param name="allowCaching ">false</param>

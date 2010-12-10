@@ -22,7 +22,6 @@ import br.com.navita.mobile.console.exception.InvalidLicenseKeyException;
 import br.com.navita.mobile.console.exception.InvalidMobileUrlException;
 import br.com.navita.mobile.console.exception.InvalidResultBeanException;
 import br.com.navita.mobile.console.exception.OperationNotFoundException;
-import br.com.navita.mobile.console.exception.UnresolvedReturnTypeException;
 import br.com.navita.mobile.console.operator.ConnectorOperator;
 import br.com.navita.mobile.console.operator.Operator;
 import br.com.navita.mobile.console.operator.sap.SapAuthContainer;
