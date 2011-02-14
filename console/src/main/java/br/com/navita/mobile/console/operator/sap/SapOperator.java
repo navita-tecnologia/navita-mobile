@@ -7,12 +7,6 @@ import java.util.Map;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
-
-import com.sap.mw.jco.JCO;
-import com.sap.mw.jco.JCO.Function;
-import com.sap.mw.jco.JCO.ParameterList;
-import com.sap.mw.jco.JCO.Table;
-
 import br.com.navita.mobile.console.domain.Operation;
 import br.com.navita.mobile.console.domain.SapFunctionOperation;
 import br.com.navita.mobile.console.domain.SapParameter;
@@ -22,6 +16,13 @@ import br.com.navita.mobile.console.exception.SapGatewayException;
 import br.com.navita.mobile.console.operator.Operator;
 import br.com.navita.mobile.console.util.NavitaMobileParamsUtil;
 import br.com.navita.mobile.domain.MobileBean;
+
+import com.sap.mw.jco.JCO;
+import com.sap.mw.jco.JCO.Field;
+import com.sap.mw.jco.JCO.Function;
+import com.sap.mw.jco.JCO.ParameterList;
+import com.sap.mw.jco.JCO.Table;
+import com.sap.mw.jco.JCO.Structure;
 
 public class SapOperator implements Operator{
 
@@ -49,6 +50,19 @@ public class SapOperator implements Operator{
 					paramInList.setValue(value, sapParam.getName());				
 				}
 			}
+			
+			ParameterList paramOutList = function.getExportParameterList();
+			if(paramOutList != null){
+				for(SapParameter sapParam : sapFunctionOperation.getOutputParameters()){			
+					String value = null;//sapParam.getValue();
+//					if(value.startsWith("$") || value.startsWith(":")){
+//						value = extractFirstParam( params.get(value.substring(1)));					
+//					}				
+					paramOutList.setValue(value, sapParam.getName());				
+				}
+			}			
+			
+			
 			ParameterList tList = function.getTableParameterList();
 
 			if(sapFunctionOperation.getInputTables() !=null){
@@ -103,6 +117,24 @@ public class SapOperator implements Operator{
 				}
 				outTables.add(wrapTable);
 			}
+			
+			//Retorna como tabelas
+			for(SapParameter sp : sapFunctionOperation.getOutputParameters()){
+				Object ob = paramOutList.getValue(sp.getName());
+				 
+				br.com.navita.mobile.console.operator.sap.wrap.SapTable wrapTable = new br.com.navita.mobile.console.operator.sap.wrap.SapTable();
+				wrapTable.setTableName(sp.getName());
+				Structure sapStructure = paramOutList.getStructure(sp.getName());
+				
+				br.com.navita.mobile.console.operator.sap.wrap.SapRow mapRow = new br.com.navita.mobile.console.operator.sap.wrap.SapRow();
+				for(int row =0;row < sapStructure.getNumFields();row++){
+					Field sapField = sapStructure.getField(row);
+					mapRow.add(new br.com.navita.mobile.console.operator.sap.wrap.SapParameter(sapField.getName(), sapField.getString()));
+				}
+				wrapTable.add(mapRow);
+				outTables.add(wrapTable);
+			}
+			
 			bean.setList(outTables);
 			bean.setMessage("");
 			bean.setResultCode(0);
