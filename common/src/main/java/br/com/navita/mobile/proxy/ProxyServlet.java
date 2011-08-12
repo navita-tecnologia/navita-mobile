@@ -12,19 +12,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSON;
 import net.sf.json.JSONSerializer;
-
 import br.com.navita.mobile.domain.MobileBean;
 
 public abstract class ProxyServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)	throws ServletException, IOException {
-		resp.setContentType("application/json");
+		resp.setContentType("application/json; charset=UTF-8");
 		Map<String, Object> params = fromProxyParams(req);
 		MobileBean result = proccessParameters(params);
-		resp.getWriter().print(JSONSerializer.toJSON(result));
-		
+		JSON json = JSONSerializer.toJSON(result);
+		String parseJson = new String(json.toString().getBytes(), "UTF-8");
+		resp.getWriter().print(parseJson);
 	}
 	
 	@Override
