@@ -1,0 +1,28 @@
+{
+  "id": 1039, -> id do torneio, pode ser encontrado no próprio registro da Match
+  "name": "South America: Copa América" -> nome do torneio, pode ser encontrado no próprio registro da Match
+  "img": "/img/", -> Imagem do torneio, pode ser encontrado no documento das categorias do torneio
+  "detailed": true, -> se eu tenho a informação da tabela de times do torneio
+  "matches": 
+    {
+      "id": 25 , id da match, encontrado na tabela SoccerMatch
+      "date": 	"Sat, 09 Jul 2011 19:00:00 GMT -03:00", -> Data do jogo que está disponível no documento SoccerMatch
+      "localteam": { 
+		id: 231780, -> Econtrado na tabela SoccerMatch
+		name: "Brazil",-> encontrado na tabela SoccerMatch
+		img: "/ss/", -> ainda não se sabe qual estratégia será utilizada para poder carregar a imagem do time
+		goals: 2 , -> tabela soccerMatch
+		winner: false -> se foi vencedor ou não, essa informação deve ser verificada de acordo com os placares, não é persistida.
+	}, -> time da casa, também encontrado na tabela de SoccerMatch
+      "visitorteam": { 
+		id: 13867,-> Econtrado na tabela SoccerMatch
+		name: "Paraguay",-> encontrado na tabela SoccerMatch
+		img: "/ss/", -> ainda não se sabe qual estratégia será utilizada para poder carregar a imagem do time
+		goals: 2 , -> tabela soccerMatch
+		winner: false}, -> time visitante, também encontrado na tabela de SoccerMatch
+      "favorite": true, -> Se foi favoritado ou não, ainda será visto a estratégia de como se favoritará os jogos
+      "pushed": false, -> Se foi pushado pra aquela pessoa, essa informação pode ser verificado na tabela Push, onde tem o id
+do jogo e o codigo do aparelho, ainda será visto o que será usado do android para fazer esse amarramento
+      "status": "Finalizado" -> status da partida que vem na tabela SoccerMatch
+    }
+ }

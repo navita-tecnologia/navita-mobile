@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>br.com.navita</groupId>
@@ -140,7 +141,7 @@
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.1</version>
 		</dependency>
-				
+
 		<dependency>
 			<groupId>org.samba.jcifs</groupId>
 			<artifactId>jcifs</artifactId>
@@ -161,7 +162,15 @@
 			<version>2.1.8</version>
 		</dependency>
 
-		<!--  START Hibernate -->
+		<!-- MONGO DB -->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>2.6.3</version>
+		</dependency>
+
+
+		<!-- START Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
@@ -172,7 +181,7 @@
 			<artifactId>slf4j-jdk14</artifactId>
 			<version>1.5.8</version>
 		</dependency>
-		<!--  END Hibernate -->
+		<!-- END Hibernate -->
 
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -251,23 +260,21 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<configuration>
-					<!--
-						Value da property "hibernate.dialect" para: SQLServer:
-						org.hibernate.dialect.SQLServerDialect Oracle:
-						org.hibernate.dialect.Oracle9Dialect Ex.: mvn compile antrun:run
-						-Dhibernate.dialect=org.hibernate.dialect.Oracle9Dialect (warning:
-						no oracle trocar todos os "long raw" por "blob") 
-						mvn compile antrun:run -Dhibernate.dialect=org.hibernate.dialect.Oracle10gDialect 
-						mvn compile antrun:run -Dhibernate.dialect=org.hibernate.dialect.SQLServerDialect 
-						mvn compile antrun:run -Dhibernate.dialect=org.hibernate.dialect.DerbyDialect
-					-->
+					<!-- Value da property "hibernate.dialect" para: SQLServer: org.hibernate.dialect.SQLServerDialect
+						Oracle: org.hibernate.dialect.Oracle9Dialect Ex.: mvn compile antrun:run
+						-Dhibernate.dialect=org.hibernate.dialect.Oracle9Dialect (warning: no oracle
+						trocar todos os "long raw" por "blob") mvn compile antrun:run -Dhibernate.dialect=org.hibernate.dialect.Oracle10gDialect
+						mvn compile antrun:run -Dhibernate.dialect=org.hibernate.dialect.SQLServerDialect
+						mvn compile antrun:run -Dhibernate.dialect=org.hibernate.dialect.DerbyDialect -->
 					<tasks>
-						<copy file="src/main/resources/META-INF/mobile-persistence.xml" tofile="src/main/resources/META-INF/persistence.xml" />		
+						<copy file="src/main/resources/META-INF/mobile-persistence.xml"
+							tofile="src/main/resources/META-INF/persistence.xml" />
 						<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" />
 						<hibernatetool destdir="${project.build.directory}">
 							<classpath refid="maven.compile.classpath" />
 							<jpaconfiguration persistenceunit="mobiPU" />
-							<hbm2ddl export="false" format="true" drop="true" outputfilename="schema_db_mobile.ddl" haltonerror="false" />
+							<hbm2ddl export="false" format="true" drop="true"
+								outputfilename="schema_db_mobile.ddl" haltonerror="false" />
 						</hibernatetool>
 						<delete file="src/main/resources/META-INF/persistence.xml" />
 					</tasks>
@@ -280,7 +287,7 @@
 	<profiles>
 		<profile>
 			<id>webcontainer</id>
-			<dependencies>				
+			<dependencies>
 				<dependency>
 					<groupId>com.sun.xml.ws</groupId>
 					<artifactId>jaxws-rt</artifactId>
@@ -400,7 +407,7 @@
 			</build>
 		</profile>
 		<profile>
-			<!--  mvn generate-sources jaxws:wsimport -Ppushwsgen -->
+			<!-- mvn generate-sources jaxws:wsimport -Ppushwsgen -->
 			<id>pushwsgen</id>
 			<build>
 				<plugins>
