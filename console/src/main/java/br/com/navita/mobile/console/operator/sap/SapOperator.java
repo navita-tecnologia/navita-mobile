@@ -119,20 +119,28 @@ public class SapOperator implements Operator{
 			}
 			
 			//Retorna como tabelas
+			List<br.com.navita.mobile.console.operator.sap.wrap.SapParameter> outParams = new ArrayList<br.com.navita.mobile.console.operator.sap.wrap.SapParameter>();
 			for(SapParameter sp : sapFunctionOperation.getOutputParameters()){
-				Object ob = paramOutList.getValue(sp.getName());
-				 
-				br.com.navita.mobile.console.operator.sap.wrap.SapTable wrapTable = new br.com.navita.mobile.console.operator.sap.wrap.SapTable();
-				wrapTable.setTableName(sp.getName());
-				Structure sapStructure = paramOutList.getStructure(sp.getName());
-				
-				br.com.navita.mobile.console.operator.sap.wrap.SapRow mapRow = new br.com.navita.mobile.console.operator.sap.wrap.SapRow();
-				for(int row =0;row < sapStructure.getNumFields();row++){
-					Field sapField = sapStructure.getField(row);
-					mapRow.add(new br.com.navita.mobile.console.operator.sap.wrap.SapParameter(sapField.getName(), sapField.getString()));
+				Field field = paramOutList.getField(sp.getName());
+				if (field.getType() == JCO.TYPE_STRUCTURE){
+					br.com.navita.mobile.console.operator.sap.wrap.SapTable wrapTable = new br.com.navita.mobile.console.operator.sap.wrap.SapTable();
+					wrapTable.setTableName(field.getName());
+					Structure sapStructure = field.getStructure();
+					
+					br.com.navita.mobile.console.operator.sap.wrap.SapRow mapRow = new br.com.navita.mobile.console.operator.sap.wrap.SapRow();
+					for(int row =0;row < sapStructure.getNumFields();row++){
+						Field sapField = sapStructure.getField(row);
+						mapRow.add(new br.com.navita.mobile.console.operator.sap.wrap.SapParameter(sapField.getName(), sapField.getString()));
+					}
+					wrapTable.add(mapRow);
+					outTables.add(wrapTable);
+				} else {
+					br.com.navita.mobile.console.operator.sap.wrap.SapParameter paramOut = new br.com.navita.mobile.console.operator.sap.wrap.SapParameter(field.getName(), field.getString());
+					outParams.add(paramOut);
 				}
-				wrapTable.add(mapRow);
-				outTables.add(wrapTable);
+			}
+			if (!outParams.isEmpty()){
+				bean.setObject(outParams);
 			}
 			
 			bean.setList(outTables);
