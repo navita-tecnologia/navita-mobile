@@ -58,7 +58,7 @@ public class PushGatewayImpl extends NavitaAutowiringSupport implements PushGate
 		try {
 			HttpClientUtil http = new HttpClientUtil();
 			String result = http.post(
-					mdsServerUri + "/push?DESTINATION="+pin+"&PORT="+appPort+"&REQUESTURI=/",
+					mdsServerUri + "/push?" + getDestinations(pin) + "PORT="+appPort+"&REQUESTURI=/",
 					params,
 					new NameValuePair[]{
 							new NameValuePair("Content-Location","http://"),
@@ -79,6 +79,22 @@ public class PushGatewayImpl extends NavitaAutowiringSupport implements PushGate
 		} catch (Exception e) {
 			throw new IOException(e);
 		}
+	}
+
+	/**
+	 * O pin deve ser separado por ; .
+	 * Caso um pi nao exista outro eh enviado.
+	 * Ex: 210000a;220000b;
+	 * @param pinEmail
+	 * @return
+	 */
+	private static String getDestinations(String pinEmail){
+		String retorno = "";
+		String[] pins = pinEmail.split(";");
+		for (String pin : pins){
+			retorno += "DESTINATION=" + pin + "&";
+		}
+		return retorno;
 	}
 
 }
