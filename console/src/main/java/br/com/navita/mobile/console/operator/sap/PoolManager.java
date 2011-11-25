@@ -15,15 +15,15 @@ import com.sap.mw.jco.JCO;
 import com.sap.mw.jco.JCO.Function;
 
 public class PoolManager {
-	
+
 	private static final Logger LOG = Logger.getLogger(PoolManager.class.getName());
 
-	
-		
-	public static SapSession createSession(String login, String passwd,SapConnector connector) throws SapGatewayException {
+
+
+	public static SapSession createSession(String login, String passwd, SapConnector connector) throws SapGatewayException {
 		String token = login+"-"+UUID.randomUUID();
 		Properties p = new Properties();
-		
+
 		p.setProperty("jco.client.user", login);
 		p.setProperty("jco.client.passwd", passwd);
 		p.setProperty("jco.client.client", connector.getClient());
@@ -31,9 +31,9 @@ public class PoolManager {
 		p.setProperty("jco.client.ashost", connector.getAsHost());
 		p.setProperty("jco.client.lang", connector.getLang());
 		//sap:///H/200.32.97.5/H/172.16.1.57?client=800&sysnr=IDE
-		
+
 		JCO.addClientPool(token,10,p);
-		JCO.Repository repo = new JCO.Repository(connector.getClient(),token);		
+		JCO.Repository repo = new JCO.Repository(connector.getClient(),token);
 		JCO.Client client = JCO.getClient(token);
 		JCO.Function f = repo.getFunctionTemplate("STFC_CONNECTION").getFunction();
 		f.getImportParameterList().setValue( token ,"REQUTEXT");
@@ -55,9 +55,9 @@ public class PoolManager {
 		return session;
 	}
 	public static JCO.Function createFunction(String name,String token) throws SapGatewayException{
-		SapSession session = getSession(token);		
+		SapSession session = getSession(token);
 		JCO.Repository repo = session.getRepository();
 		LOG.log(Level.WARNING,"Criando function "+name);
 		return (Function) repo.getFunctionTemplate(name).getFunction();
-	}	
+	}
 }
