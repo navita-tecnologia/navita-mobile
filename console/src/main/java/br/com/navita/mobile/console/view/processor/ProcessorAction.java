@@ -295,34 +295,14 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 					obj = doActiveDirectoryLogin(connector);
 				}else{//login do conector
 					obj = doConnectorLogin(connector);
+					
+					if (obj == null){
+						obj = doOperation(isExternalOperation, isConnectorLicenseInUse, licenseBundleId, connector);		
+					}
 				}
-
 
 			} else {
-				if(! isExternalOperation){//Operacao do conector 
-					Operation operation = null;
-					operation = baseOperationService.findByTagAndConnectorId(connector.getId(),operationTag);
-					if(operation == null){
-						throw new OperationNotFoundException(operationTag);
-					}
-					if(!isConnectorLicenseInUse){
-						licenseHelper.checkOperationLicense(operation);
-						licenseBundleId = operation.getLicenseBundle().getId();
-					}else{
-						licenseBundleId = connector.getLicenseBundle().getId();
-					}
-
-					obj = operator.doOperation(operation, (Map<String, Object>) params);
-
-				}else{//Operacao externa
-					if(!isConnectorLicenseInUse){
-						throw new InvalidLicenseKeyException("Connector license bundle not found");
-					}
-					licenseBundleId = connector.getLicenseBundle().getId();
-
-					obj = connectorOperator.doConnectorOperation(connector, (Map<String, Object>) params);
-				}
-
+				obj = doOperation(isExternalOperation, isConnectorLicenseInUse, licenseBundleId, connector);
 			}
 
 			licenseHelper.registerLicense(licenseBundleId,this); 	//license use
@@ -342,6 +322,35 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 		}
 
 		return retType;
+	}
+	
+	private MobileBean doOperation(boolean isExternalOperation, boolean isConnectorLicenseInUse, String licenseBundleId, 
+			Connector connector) throws Exception{
+		
+		if(! isExternalOperation){//Operacao do conector 
+			Operation operation = null;
+			operation = baseOperationService.findByTagAndConnectorId(connector.getId(),operationTag);
+			if(operation == null){
+				throw new OperationNotFoundException(operationTag);
+			}
+			if(!isConnectorLicenseInUse){
+				licenseHelper.checkOperationLicense(operation);
+				licenseBundleId = operation.getLicenseBundle().getId();
+			}else{
+				licenseBundleId = connector.getLicenseBundle().getId();
+			}
+
+			return operator.doOperation(operation, (Map<String, Object>) params);
+
+		}else{//Operacao externa
+			if(!isConnectorLicenseInUse){
+				throw new InvalidLicenseKeyException("Connector license bundle not found");
+			}
+			licenseBundleId = connector.getLicenseBundle().getId();
+
+			return connectorOperator.doConnectorOperation(connector, (Map<String, Object>) params);
+		}
+
 	}
 
 
