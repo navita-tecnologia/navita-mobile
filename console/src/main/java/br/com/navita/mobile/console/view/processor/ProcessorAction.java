@@ -297,6 +297,9 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 					obj = doConnectorLogin(connector);
 					
 					if (obj == null){
+						Map<String, Object> paramsString = (Map<String, Object>) params;
+						paramsString.put("user", user);
+						paramsString.put("password", password);
 						obj = doOperation(isExternalOperation, isConnectorLicenseInUse, licenseBundleId, connector);		
 					}
 				}
