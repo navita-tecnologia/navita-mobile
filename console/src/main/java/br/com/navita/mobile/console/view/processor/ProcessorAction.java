@@ -303,6 +303,7 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 
 			} else {
 				obj = doOperation(isExternalOperation, isConnectorLicenseInUse, licenseBundleId, connector);
+				licenseBundleId = connector.getLicenseBundle().getId();
 			}
 
 			licenseHelper.registerLicense(licenseBundleId,this); 	//license use
