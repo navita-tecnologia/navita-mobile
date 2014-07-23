@@ -2,7 +2,7 @@
 
 HEADER = <<-header
 /*
- * Copyright 2002-2008 the original author or authors.
+ * Copyright #{Time.new.year} Navita Tecnologia.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,8 @@ header
 
 Dir['**/*.java'].each do |java_file|
   original = File.read(java_file)
+  next unless original.scan(HEADER).empty?
+  puts "Including header for: #{java_file}"
   File.open(java_file, 'w') do |f|
     f.write(HEADER)
     f.write(original)
