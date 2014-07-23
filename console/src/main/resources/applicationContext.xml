@@ -191,7 +191,6 @@
 		class="br.com.navita.mobile.console.operator.DataSourceOperator" />
 	<bean id="ejbOperator" class="br.com.navita.mobile.console.operator.EjbOperator" />
 	<bean id="proxyOperator" class="br.com.navita.mobile.console.operator.ProxyOperator" />
-	<bean id="sapOperator" class="br.com.navita.mobile.console.operator.sap.SapOperator" />
 	<bean id="staticOperator" class="br.com.navita.mobile.console.operator.StaticOperator" />
 	<bean id="wsOperator" class="br.com.navita.mobile.console.operator.WsOperator" />
 

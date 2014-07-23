@@ -39,7 +39,6 @@ import br.com.navita.mobile.console.exception.InvalidResultBeanException;
 import br.com.navita.mobile.console.exception.OperationNotFoundException;
 import br.com.navita.mobile.console.operator.ConnectorOperator;
 import br.com.navita.mobile.console.operator.Operator;
-import br.com.navita.mobile.console.operator.sap.SapAuthContainer;
 import br.com.navita.mobile.console.service.BaseConnectorService;
 import br.com.navita.mobile.console.service.BaseOperationService;
 import br.com.navita.mobile.console.util.LicenseHelper;
@@ -51,6 +50,7 @@ import br.com.navita.mobile.domain.MobileBean;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
+@SuppressWarnings("unchecked")
 public class ProcessorAction extends RawActionSupport implements ParameterAware, ProcessorRaw{
 
 	private static final Logger LOG = Logger.getLogger(ProcessorAction.class.getName());
@@ -74,7 +74,7 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	private String app;//compatibilidade com o antigo
 
 
-	private InputStream inStream;	
+	private InputStream inStream;
 	private Map<?,?> params;
 
 
@@ -135,7 +135,7 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	}
 
 	@Override
-	public String getPin() {		
+	public String getPin() {
 		return pin;
 	}
 
@@ -188,7 +188,7 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	}
 
 	@Override
-	public String getConnectorTag() {		
+	public String getConnectorTag() {
 		return connectorTag;
 	}
 
@@ -197,7 +197,7 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	}
 
 	@Override
-	public String getOperationTag() {		
+	public String getOperationTag() {
 		return operationTag;
 	}
 
@@ -206,14 +206,14 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 	}
 
 	@Override
-	public String getRaw() {		
+	public String getRaw() {
 		return raw;
 	}
 
 	public void setRaw(String raw) {
 		this.raw = raw;
 		decodeRaw(raw);
-	}	
+	}
 
 
 
@@ -277,7 +277,7 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public String execute() {		
+	public String execute() {
 		long start = System.currentTimeMillis();
 
 
@@ -289,7 +289,7 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 
 
 		try {
-			MobileBean obj = new MobileBean();			
+			MobileBean obj = new MobileBean();
 			Connector connector = baseConnectorService.findByTag(connectorTag);
 			if(connector == null){
 				throw new InvalidMobileUrlException("connectorTag not registered: " +  connectorTag);
@@ -310,12 +310,12 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 					obj = doActiveDirectoryLogin(connector);
 				}else{//login do conector
 					obj = doConnectorLogin(connector);
-					
+
 					if (obj == null){
 						Map<String, Object> paramsString = (Map<String, Object>) params;
 						paramsString.put("user", user);
 						paramsString.put("password", password);
-						obj = doOperation(isExternalOperation, isConnectorLicenseInUse, licenseBundleId, connector);		
+						obj = doOperation(isExternalOperation, isConnectorLicenseInUse, licenseBundleId, connector);
 					}
 				}
 
@@ -332,21 +332,21 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 			}
 
 
-			serializeBean(obj,start);	
+			serializeBean(obj,start);
 
 		} catch (Throwable t) {
 			LOG.log(Level.SEVERE,"Erro geral",t);
-			serializeBean(failBean(t),start);			
+			serializeBean(failBean(t),start);
 
 		}
 
 		return retType;
 	}
-	
-	private MobileBean doOperation(boolean isExternalOperation, boolean isConnectorLicenseInUse, String licenseBundleId, 
+
+	private MobileBean doOperation(boolean isExternalOperation, boolean isConnectorLicenseInUse, String licenseBundleId,
 			Connector connector) throws Exception{
-		
-		if(! isExternalOperation){//Operacao do conector 
+
+		if(! isExternalOperation){//Operacao do conector
 			Operation operation = null;
 			operation = baseOperationService.findByTagAndConnectorId(connector.getId(),operationTag);
 			if(operation == null){
@@ -374,21 +374,17 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 
 
 	private MobileBean doConnectorLogin(Connector connector) {
-		if(connector instanceof SapConnector){
-			SapAuthContainer sapAuthContainer = new SapAuthContainer((SapConnector) connector);
-			return processLoginContainer(sapAuthContainer);
-		}
 		return null;
 	}
 
 	private MobileBean processLoginContainer(AuthContainer authContainer){
 		MobileBean bean = new MobileBean();
 		String loginToUse = login;
-		if(null == loginToUse){//tenta usar 'user'			
+		if(null == loginToUse){//tenta usar 'user'
 			loginToUse = user;
 		}
 		String passwdToUse = passwd;
-		if(null == passwdToUse){//tenta usar 'password'			
+		if(null == passwdToUse){//tenta usar 'password'
 			passwdToUse = password;
 		}
 
@@ -396,8 +392,8 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 
 		bean.setMessage(result.getMessage());
 		bean.setResultCode(result.isLogged()?0:1);
-		bean.setList(result.getGroups());		
-		bean.setToken(result.getToken());		
+		bean.setList(result.getGroups());
+		bean.setToken(result.getToken());
 		return bean;
 	}
 
@@ -406,7 +402,7 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 		String token = "";
 		if(connector.getTokenConnector() != null){
 			//TODO: resolver a questao do token remoto
-			bean.setToken(token);	
+			bean.setToken(token);
 		}
 
 		return bean;
@@ -425,7 +421,7 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 			buff = xs.toXML(bean).getBytes();
 		}
 
-		setInStream(new ByteArrayInputStream(buff));		
+		setInStream(new ByteArrayInputStream(buff));
 	}
 
 
@@ -505,11 +501,5 @@ public class ProcessorAction extends RawActionSupport implements ParameterAware,
 				carrier = "unknow";
 			}
 		}
-
-
-
-
 	}
-
-
 }
