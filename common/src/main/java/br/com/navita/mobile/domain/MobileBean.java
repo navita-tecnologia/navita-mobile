@@ -3,38 +3,30 @@ package br.com.navita.mobile.domain;
 import java.io.Serializable;
 import java.util.List;
 
-
-
-
 public class MobileBean implements Serializable{
-	
-	
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
-		
+
 	public MobileBean() {
 		resultCode = 0;
 	}
-	
+
 	protected String token;
 	protected Integer resultCode;
 	protected String message;
 	protected List<?> list;
 	protected Object object;
 	protected Long processingTime;
-	
+
 	public Long getProcessingTime() {
 		return processingTime;
 	}
-	
+
 	public void setProcessingTime(Long processingTime) {
 		this.processingTime = processingTime;
 	}
-	
-	
+
+
 	public String getToken() {
 		return token;
 	}
@@ -74,8 +66,4 @@ public class MobileBean implements Serializable{
 	public void setObject(Object object) {
 		this.object = object;
 	}
-
-	
-	
-	
 }
