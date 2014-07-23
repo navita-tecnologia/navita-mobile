@@ -23,6 +23,7 @@
 		<hibernate.em.version>3.3.1.ga</hibernate.em.version>
 		<atomikos.version>3.6.4</atomikos.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>br.com.navita</groupId>
@@ -99,22 +100,17 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${springframework.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>${springframework.version}</version>
 		</dependency>
-
-
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-spring-plugin</artifactId>
 			<version>${struts.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-
-
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
@@ -135,41 +131,34 @@
 			<artifactId>xstream</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-
 		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.1</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.samba.jcifs</groupId>
 			<artifactId>jcifs</artifactId>
 			<version>1.2.19</version>
 		</dependency>
-
 		<dependency>
 			<groupId>javax.ejb</groupId>
 			<artifactId>ejb</artifactId>
 			<version>3.0</version>
 			<scope>provided</scope>
 		</dependency>
-
 		<!-- ERP's -->
 		<dependency>
 			<groupId>com.sap</groupId>
 			<artifactId>jco</artifactId>
 			<version>2.1.8</version>
 		</dependency>
-
 		<!-- MONGO DB -->
 		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>
 			<version>2.6.3</version>
 		</dependency>
-
-
 		<!-- START Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -182,7 +171,6 @@
 			<version>1.5.8</version>
 		</dependency>
 		<!-- END Hibernate -->
-
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
@@ -193,7 +181,6 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.6.8</version>
 		</dependency>
-
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
@@ -220,7 +207,6 @@
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
-
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -254,8 +240,6 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
@@ -280,8 +264,6 @@
 					</tasks>
 				</configuration>
 			</plugin>
-
-
 		</plugins>
 	</build>
 	<profiles>
@@ -314,7 +296,6 @@
 			<id>jetty</id>
 			<build>
 				<plugins>
-
 					<plugin>
 						<groupId>org.mortbay.jetty</groupId>
 						<artifactId>maven-jetty-plugin</artifactId>
@@ -338,16 +319,12 @@
 							</dependency>
 							<dependency>
 								<groupId>com.atomikos</groupId>
-								<artifactId>
-									transactions-api
-								</artifactId>
+								<artifactId>transactions-api</artifactId>
 								<version>${atomikos.version}</version>
 							</dependency>
 							<dependency>
 								<groupId>com.atomikos</groupId>
-								<artifactId>
-									transactions-jta
-								</artifactId>
+								<artifactId>transactions-jta</artifactId>
 								<version>${atomikos.version}</version>
 							</dependency>
 							<dependency>
@@ -355,7 +332,6 @@
 								<artifactId>atomikos-util</artifactId>
 								<version>${atomikos.version}</version>
 							</dependency>
-
 							<dependency>
 								<groupId>org.apache.derby</groupId>
 								<artifactId>derby</artifactId>
@@ -371,7 +347,6 @@
 								<artifactId>jtds</artifactId>
 								<version>1.2.2</version>
 							</dependency>
-
 						</dependencies>
 					</plugin>
 				</plugins>
@@ -446,5 +421,4 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
-
 </project>
