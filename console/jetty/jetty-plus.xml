@@ -38,7 +38,7 @@
 	<New id="navitaMobileDataSource" class="org.mortbay.jetty.plus.naming.Resource">
 		<Arg>jdbc/navitaMobileDatasource</Arg>
 		<Arg>
-			<New class="com.atomikos.jdbc.nonxa.NonXADataSourceBean">
+			<New class="com.atomikos.jdbc.nonxa.AtomikosNonXADataSourceBean">
 				<Set name="minPoolSize">16</Set>
 				<Set name="maxPoolSize">96</Set>
 				<Set name="borrowConnectionTimeout">60</Set>

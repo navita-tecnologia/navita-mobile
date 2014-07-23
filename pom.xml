@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>br.com.navita</groupId>
+	<groupId>br.com.navita.legacy</groupId>
 	<artifactId>navita-mobile</artifactId>
-	<packaging>pom</packaging>
 	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>Navita Mobile</name>
 	<url>http://m.navita.com.br</url>
 
@@ -21,33 +22,32 @@
 		<module>console</module>
 	</modules>
 
-	<repositories>
-		<repository>
-			<id>archiva.internal</id>
-			<name>Archiva Managed Internal Repository</name>
-			<url>http://janine.navita.com.br/archiva/repository/internal</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>archiva.snapshots</id>
-			<name>Archiva Managed Snapshot Repository</name>
-			<url>http://janine.navita.com.br/archiva/repository/snapshots/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
+	<properties>
+		<atomikos.version>3.6.4</atomikos.version>
+		<derby.version>10.4.2.0</derby.version>
+		<console.basedir>${basedir}/console</console.basedir>
+	</properties>
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<downloadJavadocs>true</downloadJavadocs>
+					<downloadSources>true</downloadSources>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-scm-plugin</artifactId>
@@ -63,6 +63,63 @@
 				<configuration>
 					<useReleaseProfile>false</useReleaseProfile>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.10</version>
+				<configuration>
+					<connectors>
+						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+							<port>8080</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
+					<contextPath>/console</contextPath>
+					<webDefaultXml>${console.basedir}/jetty/webdefault.xml</webDefaultXml>
+					<jettyConfig>${console.basedir}/jetty/jetty-plus.xml</jettyConfig>
+					<webAppSourceDirectory>${console.basedir}/src/main/webapp/</webAppSourceDirectory>
+					<classesDirectory>${console.basedir}/target/classes</classesDirectory>
+					<tmpDirectory>${console.basedir}/target/</tmpDirectory>
+					<webApp>${console.basedir}/target/console-1.0-SNAPSHOT.war</webApp>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.atomikos</groupId>
+						<artifactId>transactions</artifactId>
+						<version>${atomikos.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.atomikos</groupId>
+						<artifactId>transactions-api</artifactId>
+						<version>${atomikos.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.atomikos</groupId>
+						<artifactId>transactions-jta</artifactId>
+						<version>${atomikos.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.atomikos</groupId>
+						<artifactId>atomikos-util</artifactId>
+						<version>${atomikos.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.derby</groupId>
+						<artifactId>derby</artifactId>
+						<version>${derby.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.derby</groupId>
+						<artifactId>derbyclient</artifactId>
+						<version>${derby.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>net.sourceforge.jtds</groupId>
+						<artifactId>jtds</artifactId>
+						<version>1.2.2</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 		<extensions>
@@ -85,8 +142,57 @@
 		<repository>
 			<id>repo</id>
 			<name>Repository Name</name>
-			<url>http://marcio.guedes@janine.navita.com.br/svn/repos</url>
+			<url>http://janine.navita.com.br/svn/repos</url>
 		</repository>
 	</distributionManagement>
 
+	<repositories>
+		<repository>
+			<id>archiva.internal</id>
+			<name>Archiva Managed Internal Repository</name>
+			<url>http://janine.navita.com.br/archiva/repository/internal</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>archiva.snapshots</id>
+			<name>Archiva Managed Snapshot Repository</name>
+			<url>http://janine.navita.com.br/archiva/repository/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>archiva.internal</id>
+			<name>Archiva Managed Internal Repository</name>
+			<url>http://janine.navita.com.br/archiva/repository/internal</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>archiva.snapshots</id>
+			<name>Archiva Managed Internal Repository</name>
+			<url>http://janine.navita.com.br/archiva/repository/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 </project>

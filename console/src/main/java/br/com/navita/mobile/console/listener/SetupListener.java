@@ -19,24 +19,21 @@ import javax.sql.DataSource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class SetupListener implements ServletContextListener {
 	private static final Logger LOG = Logger.getLogger(SetupListener.class.getName());
-	private JdbcTemplate jdbcTemplate;
 
-	public SetupListener() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");		
-		jdbcTemplate = new JdbcTemplate((DataSource) context.getBean("dataSource"));
-	}
+	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
-
-
 	}
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
+		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(sce.getServletContext());
+		jdbcTemplate = new JdbcTemplate((DataSource) context.getBean("dataSource"));
 		try {
 			if(!isEmbedded()){
 				LOG.warning("Tabelas do Navita Mobile localizadas em banco de dados externo");
@@ -58,7 +55,7 @@ public class SetupListener implements ServletContextListener {
 	}
 
 	private boolean isEmbedded() throws SQLException {
-		DatabaseMetaData data = jdbcTemplate.getDataSource().getConnection().getMetaData(); 
+		DatabaseMetaData data = jdbcTemplate.getDataSource().getConnection().getMetaData();
 		return data.getDatabaseProductName().contains("Derby");
 	}
 
@@ -113,7 +110,7 @@ public class SetupListener implements ServletContextListener {
 			}
 		}
 		return tbctrl != null &&  tbctrl.equals(1);
-		
+
 	}
 
 }

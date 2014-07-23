@@ -11,7 +11,7 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-<listener>
+	<listener>
 		<listener-class>br.com.navita.mobile.console.listener.SetupListener</listener-class>
 	</listener>
 	<!--
@@ -55,8 +55,8 @@
 		<filter-name>struts</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
-	
+
+
 	<!--
 		<servlet> <servlet-name>PushGatewayPort</servlet-name>
 		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
